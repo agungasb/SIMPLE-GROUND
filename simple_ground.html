@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIMPLE GROUND</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Common styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* General Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #333 url('https://fastly.picsum.photos/id/431/5000/3334.jpg?hmac=T2rL_gBDyJYpcr1Xm8Kv7L6bhwvmZS8nKT5w3ok58kA') no-repeat center center / cover; /* Generic background for debugging */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #fff;
+            padding-bottom: 60px;
+            font-size: 0.85em; /* Approximately 15% smaller */
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(61px);
+            -webkit-backdrop-filter: blur(61px);
+            z-index: 1000;
+            padding: 10px 0;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .nav-button {
+            background: #5a3e2b;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover, .nav-button.active {
+            background: #7a5a42;
+            transform: scale(1.05);
+        }
+
+        /* Container */
+        .container {
+            max-width: 600px;
+            width: 90%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(61px);
+            -webkit-backdrop-filter: blur(61px);
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            margin: 20px auto;
+            font-size: 12px;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 28px;
+            margin: 10px 0;
+            color: #f9e1c0;
+        }
+
+        /* Form Elements */
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 500;
+            flex: 2;
+            text-align: left;
+            color: #f9e1c0;
+        }
+
+        input, select {
+            flex: 1;
+            padding: 6px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+            max-width: 80px;
+        }
+
+        select {
+            width: 100%;
+            max-width: none;
+            margin-bottom: 15px;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Button */
+        button {
+            margin-top: 15px;
+            padding: 12px;
+            background: #5a3e2b;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #7a5a42;
+            transform: scale(1.05);
+        }
+
+        /* Results Section */
+        .result, #output {
+            margin-top: 15px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(61px);
+            -webkit-backdrop-filter: blur(61px);
+            border-radius: 8px;
+            font-size: 13.6px; /* 15% smaller */
+            color: #000000;
+            text-align: left;
+        }
+
+        /* Toggle Switch Styles */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px; /* Original width */
+            height: 24px; /* Original height */
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px; /* Original height */
+            width: 16px; /* Original width */
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #5a3e2b;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #5a3e2b;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(16px); /* Original translateX */
+            -ms-transform: translateX(16px);
+            transform: translateX(16px);
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 6px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            color: #000000;
+        }
+        /* Center align numbers in result table */
+        #result td:not(:first-child) {
+            text-align: center;
+        }
+
+        #result .adjustment-input {
+            width: 60px; /* Adjust width as needed */
+            padding: 4px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+
+        #result .adjustment-input:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(90, 62, 43, 0.5);
+        }
+
+        th {
+            font-weight: 600;
+        }
+        /* Specific styling for Settings page table inputs */
+        #donut-score-inputs table {
+            table-layout: fixed; /* Distribute columns evenly */
+            width: 100%;
+        }
+        #donut-score-inputs table th:first-child,
+        #donut-score-inputs table td:first-child {
+            width: 40%; /* Allocate more width for the product name */
+        }
+        #donut-score-inputs table th:not(:first-child),
+        #donut-score-inputs table td:not(:first-child) {
+            width: 15%; /* Distribute remaining width evenly among outlet columns */
+            text-align: center;
+        }
+        #donut-score-inputs input[type="number"] {
+            width: 80%; /* Ensure inputs take a good portion of their cell */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+            margin: 0 auto; /* Center the input within the cell */
+            display: block; /* Allow margin auto to work */
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 20px;
+            padding: 15px;
+            width: 100%;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(61px);
+            -webkit-backdrop-filter: blur(61px);
+            color: #f9e1c0;
+            font-size: 12px;
+            font-weight: 500;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            position: fixed;
+            bottom: 0;
+        }
+
+        footer a {
+            color: #ffdd99;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease-in-out;
+        }
+
+        footer a:hover {
+            color: #ffbb66;
+            text-decoration: underline;
+        }
+
+        /* Page Container */
+        .page {
+            display: none;
+            margin-top: 60px;
+            width: 100%;
+        }
+
+        .page.active {
+            display: flex;
+            justify-content: center;
+        }
+
+            /* Mobile Optimization */
+            @media screen and (max-width: 480px) {
+                .container {
+                    width: 95%;
+                    padding: 15px;
+                }
+
+                h1 {
+                    font-size: 20.4px; /* 15% smaller */
+                }
+
+                .form-group {
+                    padding: 6px 0;
+                }
+
+                input, select {
+                    font-size: 14px; /* 15% smaller */
+                }
+
+                button {
+                    font-size: 11.9px; /* 15% smaller */
+                    padding: 10px;
+                }
+
+                .result, #output {
+                    font-size: 11.9px; /* 15% smaller */
+                }
+
+                /* Adjustments for Settings page table on small screens */
+                #donut-score-inputs table th:first-child,
+                #donut-score-inputs table td:first-child {
+                    width: 30%; /* Reduce product name width slightly */
+                }
+                #donut-score-inputs table th:not(:first-child),
+                #donut-score-inputs table td:not(:first-child) {
+                    width: 17.5%; /* Increase outlet column width to give more space */
+                }
+                #donut-score-inputs input[type="number"] {
+                    width: 90%; /* Make inputs take more space within their cells */
+                }
+            }
+        </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="nav-buttons">
+            <button class="nav-button" onclick="showPage('calculator')">Production Calculator</button>
+            <button class="nav-button" onclick="showPage('recipe')">Recipe Scaler</button>
+            <button class="nav-button" onclick="showPage('settings')">Settings</button>
+        </div>
+    </div>
+
+    <!-- Calculator Page -->
+    <div id="calculator-page" class="page">
+        <div class="container">
+            <div class="header">
+                <h1>SIMPLE GROUND</h1>
+                <p>coffee.cake.donut</p>
+            </div>
+            <div id="inputFields"></div>
+            <button id="calculate">CALCULATE</button>
+            <div class="result" id="result">Di balik sunyi yang damai, jiwa menemukan bahagia..bukan karena apa yang dimiliki, tapi karena apa yang difahami.</div>
+        </div>
+    </div>
+
+    <!-- Recipe Scaler Page -->
+    <div id="recipe-page" class="page">
+        <div class="container">
+            <h1>Recipe Scaler</h1>
+            <div id="recipe-select">
+                <label for="recipes">Choose a recipe:</label>
+                <select id="recipes"></select>
+            </div>
+            <div id="multiplier-input">
+                <label for="multiplier">Enter multiplier:</label>
+                <input type="number" id="multiplier" min="1" value="1">
+            </div>
+            <button id="scale-button">Scale Recipe</button>
+            <div id="output">
+                <h2 id="recipe-name"></h2>
+                <table id="ingredients-table">
+                    <thead>
+                        <tr>
+                            <th>Ingredient</th>
+                            <th>Amount</th>
+                            <th>Unit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Scaled ingredients will be added here -->
+                    </tbody>
+                </table>
+                <div id="recipe-instructions" class="result" style="margin-top: 20px; display: none;">
+                    <h3>Instructions:</h3>
+                    <ul id="instructions-list" style="list-style-type: decimal; padding-left: 20px;">
+                        <!-- Instructions will be added here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Page -->
+    <div id="settings-page" class="page">
+        <div class="container">
+            <h1>Donut Scores Settings</h1>
+            <p>Assign a score (0-5 or flexible) for each donut product per outlet.</p>
+            <div style="display: flex; justify-content: flex-end; width: 100%;">
+                <div class="form-group" style="border-bottom: none; align-items: center; padding: 0;">
+                    <label for="score-mode-toggle" style="flex: none; margin-right: 10px; font-size: 13.6px; display: inline-block; width: 120px; text-align: right;">Flexible Scoring (0-Infinity):</label>
+                    <label class="switch">
+                        <input type="checkbox" id="score-mode-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div id="donut-score-inputs">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead id="donut-score-table-header">
+                        <!-- Header will be generated by JS -->
+                    </thead>
+                    <tbody id="donut-score-table-body">
+                        <!-- Donut score input fields will be generated here -->
+                    </tbody>
+                </table>
+            </div>
+            <button id="save-donut-scores">Save Scores</button>
+            <div id="settings-message" class="result" style="display: none;"></div>
+            <p id="scoring-explanation" style="margin-top: 20px; font-size: 11.9px; color: #f9e1c0; text-align: left;">
+                <strong>Scoring System (0-5):</strong>
+                <br>0 = No Demand / Not Available
+                <br>1 = Least Popular / Low Demand
+                <br>2 = Below Average Popularity
+                <br>3 = Average Popularity
+                <br>4 = Above Average Popularity
+                <br>5 = Best Seller / High Demand
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        Created For SIMPLE GROUND | <a href="manual_guide.html" target="_blank">Panduan Penggunaan</a> | Follow me: <a href="https://twitter.com/Agung_styb" target="_blank">@Agung_styb</a>
+    </footer>
+
+    <script>
+        // Donut Products and Outlets
+        const donutProducts = [
+            "donut almond", "dunut avocado sparkling", "donut biscoft", "donut biscoft sparkling",
+            "donut cappucino", "donut ceres", "donut ceres chocolate", "donut chocolate",
+            "donut classic ceres", "donut classic sugar", "donut cream avocado", "donut cream strawberry",
+            "donut cream taro", "donut cream tiramisu", "donut greantea", "donut greantea coklat",
+            "donut karakter", "donut ovomaltine", "donut milk avocado", "donut oreo", "donut peanut",
+            "donut caramel", "donut strawberry coklat", "donut strawberry", "donut taro",
+            "donut taro coklat", "donut tiramisu"
+        ];
+
+        const outlets = ["MTC", "BENGKONG", "TIBAN", "PIAYU"];
+        const DONUTS_PER_BOX = 9; // Define donuts per box
+        const WEIGHT_PER_PCS = 45; // grams
+
+        // Your recipes data (moved to global scope)
+        const recipes = {
+            "adonan_donut_simple_ground": {
+                "base_weight": 1585, // Total weight of the recipe in grams
+                "premix": {"amount": 1000, "unit": "grams"},
+                "ragi": {"amount": 15, "unit": "grams"},
+                "telur": {"amount": 1, "unit": "butir"},
+                "margarin": {"amount": 100, "unit": "grams"},
+                "es batu": {"amount": 100, "unit": "grams"},
+                "air": {"amount": 270, "unit": "grams"}
+            },
+            "adonan_donut_simple_ground_instructions": [
+                "Campurkan premix, ragi, dan telur. Aduk hingga rata.",
+                "Masukkan air dan es batu sedikit demi sedikit sambil diuleni hingga kalis.",
+                "Tambahkan margarin hingga adonan elastis.",
+                "Diamkan adonan selama 30-45 menit hingga mengembang dua kali lipat.",
+                "Kempiskan adonan, bagi menjadi beberapa bagian, dan bentuk sesuai selera.",
+                "Diamkan kembali selama 15-20 menit.",
+                "Goreng dalam minyak panas dengan api sedang hingga matang keemasan."
+            ]
+        };
+
+        // Navigation Function
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId + '-page').classList.add('active');
+            
+            // Update nav buttons
+            document.querySelectorAll('.nav-button').forEach(button => {
+                button.classList.remove('active');
+                if (button.textContent.toLowerCase().includes(pageId)) {
+                    button.classList.add('active');
+                }
+            });
+        }
+
+        // Initialize with calculator page
+        document.addEventListener('DOMContentLoaded', function() {
+            showPage('calculator');
+            initializeCalculator();
+            initializeRecipeScaler();
+            initializeSettings();
+        });
+
+        // Calculator Page Script
+        function initializeCalculator() {
+            const items = [
+                "MTC", "BENGKONG", "TIBAN", "PIAYU"
+            ];
+
+            const inputFields = document.getElementById("inputFields");
+
+            // Create input fields for outlets (MTC, BENGKONG, TIBAN, PIAYU)
+            items.forEach(item => {
+                const div = document.createElement("div");
+                div.className = "form-group";
+                div.innerHTML = `
+                    <label for="${item}">${item.replace(/_/g, ' ')} Total Order:</label>
+                    <input type="number" id="${item}" name="${item}" placeholder="0" min="0"/>
+                `;
+                inputFields.appendChild(div);
+            });
+
+            // Add calculate button event listener
+            document.getElementById("calculate").addEventListener("click", function () {
+                let outletTotalOrders = {};
+                outlets.forEach(outlet => {
+                    outletTotalOrders[outlet] = parseFloat(document.getElementById(outlet).value) || 0;
+                });
+
+                const donutScores = JSON.parse(localStorage.getItem('donutScores')) || {};
+                let distributionResults = {};
+                let totalDonutsPerOutlet = {};
+
+                outlets.forEach(outlet => {
+                    distributionResults[outlet] = {};
+                    totalDonutsPerOutlet[outlet] = 0;
+
+                    let totalScoreForOutlet = 0;
+                    donutProducts.forEach(product => {
+                        totalScoreForOutlet += (donutScores[product] && donutScores[product][outlet]) ? donutScores[product][outlet] : 0;
+                    });
+
+                    if (totalScoreForOutlet > 0) {
+                        donutProducts.forEach(product => {
+                            const score = (donutScores[product] && donutScores[product][outlet]) ? donutScores[product][outlet] : 0;
+                            const proportion = score / totalScoreForOutlet;
+                            const distributedPcs = Math.round(outletTotalOrders[outlet] * proportion);
+                            const distributedBoxes = Math.ceil(distributedPcs / DONUTS_PER_BOX); // Convert to boxes, round up
+                            distributionResults[outlet][product] = distributedBoxes;
+                            totalDonutsPerOutlet[outlet] += distributedBoxes; // Sum of boxes
+                        });
+                    } else {
+                        // If no scores are set for an outlet, distribute evenly or as 0
+                        const numDonutProducts = donutProducts.length;
+                        if (numDonutProducts > 0) {
+                            const distributedPcs = Math.round(outletTotalOrders[outlet] / numDonutProducts);
+                            const distributedBoxes = Math.ceil(distributedPcs / DONUTS_PER_BOX); // Convert to boxes, round up
+                            donutProducts.forEach(product => {
+                                distributionResults[outlet][product] = distributedBoxes;
+                                totalDonutsPerOutlet[outlet] += distributedBoxes; // Sum of boxes
+                            });
+                        }
+                    }
+                });
+
+                // Display results
+                let resultHTML = `<h2>Donut Distribution Results (Boxes)</h2>`;
+                resultHTML += `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Donut Product</th>
+                                ${outlets.map(outlet => `<th>${outlet} (Boxes)</th>`).join("")}
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                donutProducts.forEach(product => {
+                    resultHTML += `<tr><td>${product.replace(/_/g, ' ')}</td>`;
+                    outlets.forEach(outlet => {
+                        const value = distributionResults[outlet][product] || 0;
+                        resultHTML += `<td><input type="number" class="adjustment-input" data-product="${product}" data-outlet="${outlet}" value="${value}" min="0"></td>`;
+                    });
+                    resultHTML += `</tr>`;
+                });
+
+                // Calculate Grand Total (in Boxes)
+                const grandTotalDonuts = Object.values(totalDonutsPerOutlet).reduce((sum, total) => sum + total, 0);
+
+                // Add a row for total donuts per outlet (in Boxes)
+                resultHTML += `
+                            <tr style="font-weight: bold;">
+                                <td>Total Boxes</td>
+                                ${outlets.map(outlet => `<td class="total-donuts-outlet" data-outlet="${outlet}">${totalDonutsPerOutlet[outlet]}</td>`).join("")}
+                            </tr>
+                            <tr style="font-weight: bold;">
+                                <td>Total PCS</td>
+                                ${outlets.map(outlet => `<td class="total-pcs-outlet" data-outlet="${outlet}">${totalDonutsPerOutlet[outlet] * DONUTS_PER_BOX}</td>`).join("")}
+                            </tr>
+                            <tr style="font-weight: bold; background: rgba(0, 0, 0, 0.1);">
+                                <td>Grand Total Boxes</td>
+                                <td colspan="${outlets.length}" style="text-align: right;" id="grand-total-donuts">${grandTotalDonuts}</td>
+                            </tr>
+                            <tr style="font-weight: bold; background: rgba(0, 0, 0, 0.1);">
+                                <td>Grand Total PCS</td>
+                                <td colspan="${outlets.length}" style="text-align: right;" id="grand-total-pcs">${grandTotalDonuts * DONUTS_PER_BOX}</td>
+                            </tr>
+                            <tr style="font-weight: bold; background: rgba(0, 0, 0, 0.1);">
+                                <td>Total Adonan</td>
+                                <td colspan="${outlets.length}" style="text-align: right;" id="total-adonan-calculator">0 resep</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `;
+
+                document.getElementById("result").innerHTML = resultHTML;
+
+                // Initial calculation of Total Adonan for calculator
+                const initialGrandTotalPcs = grandTotalDonuts * DONUTS_PER_BOX;
+                const baseWeightCalculator = recipes.adonan_donut_simple_ground.base_weight;
+                let initialTotalAdonan = 0;
+                if (initialGrandTotalPcs > 0 && baseWeightCalculator > 0) {
+                    initialTotalAdonan = (initialGrandTotalPcs * WEIGHT_PER_PCS) / baseWeightCalculator;
+                }
+                document.getElementById("total-adonan-calculator").textContent = `${initialTotalAdonan.toFixed(2)} resep`;
+
+
+                // Add event listeners for dynamic adjustments
+                document.querySelectorAll('.adjustment-input').forEach(input => {
+                    input.addEventListener('input', updateTotals);
+                });
+
+                function updateTotals() {
+                    let newTotalBoxesPerOutlet = {};
+                    let newGrandTotalBoxes = 0;
+                    let newTotalPcsPerOutlet = {};
+                    let newGrandTotalPcs = 0;
+
+                    outlets.forEach(outlet => {
+                        newTotalBoxesPerOutlet[outlet] = 0;
+                        newTotalPcsPerOutlet[outlet] = 0;
+                    });
+
+                    donutProducts.forEach(product => {
+                        outlets.forEach(outlet => {
+                            const inputElement = document.querySelector(`.adjustment-input[data-product="${product}"][data-outlet="${outlet}"]`);
+                            const adjustedBoxes = parseInt(inputElement.value) || 0;
+                            newTotalBoxesPerOutlet[outlet] += Math.max(0, adjustedBoxes);
+                            newTotalPcsPerOutlet[outlet] += Math.max(0, adjustedBoxes) * DONUTS_PER_BOX;
+                        });
+                    });
+
+                    Object.values(newTotalBoxesPerOutlet).forEach(total => {
+                        newGrandTotalBoxes += total;
+                    });
+                    Object.values(newTotalPcsPerOutlet).forEach(total => {
+                        newGrandTotalPcs += total;
+                    });
+
+                    // Calculate and update Total Adonan dynamically
+                    const baseWeightCalculator = recipes.adonan_donut_simple_ground.base_weight;
+                    let newTotalAdonan = 0;
+                    if (newGrandTotalPcs > 0 && baseWeightCalculator > 0) {
+                        newTotalAdonan = (newGrandTotalPcs * WEIGHT_PER_PCS) / baseWeightCalculator;
+                    }
+
+                    // Update displayed totals for boxes
+                    outlets.forEach(outlet => {
+                        document.querySelector(`.total-donuts-outlet[data-outlet="${outlet}"]`).textContent = newTotalBoxesPerOutlet[outlet];
+                    });
+                    document.getElementById("grand-total-donuts").textContent = newGrandTotalBoxes;
+
+                    // Update displayed totals for pcs
+                    outlets.forEach(outlet => {
+                        document.querySelector(`.total-pcs-outlet[data-outlet="${outlet}"]`).textContent = newTotalPcsPerOutlet[outlet];
+                    });
+                    document.getElementById("grand-total-pcs").textContent = newGrandTotalPcs;
+
+                    // Update displayed Total Adonan
+                    document.getElementById("total-adonan-calculator").textContent = `${newTotalAdonan.toFixed(2)} resep`;
+                }
+            });
+        }
+
+        // Recipe Scaler Page Script
+        function initializeRecipeScaler() {
+            const recipeSelect = document.getElementById("recipes");
+            const multiplierInput = document.getElementById("multiplier");
+            const scaleButton = document.getElementById("scale-button");
+            const recipeNameOutput = document.getElementById("recipe-name");
+            const ingredientsTableBody = document.querySelector("#ingredients-table tbody");
+            const recipeInstructionsDiv = document.getElementById("recipe-instructions");
+            const instructionsList = document.getElementById("instructions-list");
+
+            // Populate the recipe dropdown
+            function populateRecipes() {
+                recipeSelect.innerHTML = "";
+                Object.keys(recipes).forEach((recipeKey) => {
+                    // Only add actual recipes to the dropdown, not instruction arrays
+                    if (!recipeKey.endsWith("_instructions")) {
+                        const option = document.createElement("option");
+                        option.value = recipeKey;
+                        option.textContent = recipeKey.replace(/_/g, " "); // Replace underscores with spaces
+                        recipeSelect.appendChild(option);
+                    }
+                });
+            }
+
+            // Scale and display the recipe
+            scaleButton.addEventListener("click", function () {
+                const selectedRecipeKey = recipeSelect.value;
+                const multiplier = parseFloat(multiplierInput.value);
+
+                if (!selectedRecipeKey || isNaN(multiplier) || multiplier <= 0) {
+                    alert("Please select a recipe and enter a valid multiplier.");
+                    return;
+                }
+
+                const recipe = recipes[selectedRecipeKey];
+                recipeNameOutput.textContent = selectedRecipeKey.replace(/_/g, " "); // Replace underscores with spaces
+                ingredientsTableBody.innerHTML = "";
+
+                for (const [ingredient, details] of Object.entries(recipe)) {
+                    // Skip 'base_weight' as it's not an ingredient to be scaled and displayed in the table
+                    if (ingredient === "base_weight") {
+                        continue;
+                    }
+
+                    const row = document.createElement("tr");
+                    const ingredientCell = document.createElement("td");
+                    const amountCell = document.createElement("td");
+                    const unitCell = document.createElement("td");
+
+                    ingredientCell.textContent = ingredient.replace(/_/g, " ");
+                    amountCell.textContent = (details.amount * multiplier).toFixed(2);
+                    unitCell.textContent = details.unit;
+
+                    row.appendChild(ingredientCell);
+                    row.appendChild(amountCell);
+                    row.appendChild(unitCell);
+                    ingredientsTableBody.appendChild(row);
+                }
+
+                // Display instructions
+                const instructionsKey = selectedRecipeKey + "_instructions";
+                const instructions = recipes[instructionsKey];
+                instructionsList.innerHTML = ""; // Clear previous instructions
+
+                if (instructions && instructions.length > 0) {
+                    instructions.forEach(instruction => {
+                        const listItem = document.createElement("li");
+                        listItem.textContent = instruction;
+                        instructionsList.appendChild(listItem);
+                    });
+                    recipeInstructionsDiv.style.display = "block"; // Show instructions div
+                } else {
+                    recipeInstructionsDiv.style.display = "none"; // Hide if no instructions
+                }
+            });
+
+            // Initialize the app
+            populateRecipes();
+            // Trigger scale button click on initial load to display default recipe and instructions
+            scaleButton.click();
+        }
+
+        // Settings Page Script
+        function initializeSettings() {
+            const donutScoreInputsDiv = document.getElementById("donut-score-inputs");
+            const saveDonutScoresButton = document.getElementById("save-donut-scores");
+            const settingsMessageDiv = document.getElementById("settings-message");
+
+            // Load existing scores from localStorage
+            let donutScores = JSON.parse(localStorage.getItem('donutScores')) || {};
+
+            // Generate table header dynamically
+            const donutScoreTableHeader = document.getElementById("donut-score-table-header");
+            let headerRow = `<tr><th style="text-align: left; color: #f9e1c0;">Donut Product</th>`;
+            outlets.forEach(outlet => {
+                let displayOutlet = outlet;
+                if (outlet === "BENGKONG") {
+                    displayOutlet = "BENG<br>KONG";
+                }
+                headerRow += `<th style="text-align: center; color: #f9e1c0;">${displayOutlet}</th>`;
+            });
+            headerRow += `</tr>`;
+            donutScoreTableHeader.innerHTML = headerRow;
+
+            // Generate input fields in a table body
+            const donutScoreTableBody = document.getElementById("donut-score-table-body");
+            const scoreModeToggle = document.getElementById("score-mode-toggle");
+            const scoringExplanation = document.getElementById("scoring-explanation");
+
+            // Load score mode from localStorage
+            let isFlexibleScoreMode = JSON.parse(localStorage.getItem('isFlexibleScoreMode')) || false;
+            scoreModeToggle.checked = isFlexibleScoreMode;
+
+            function updateScoreInputs() {
+                isFlexibleScoreMode = scoreModeToggle.checked;
+                donutProducts.forEach(product => {
+                    outlets.forEach(outlet => {
+                        const inputId = `score-${product.replace(/ /g, '-')}-${outlet}`;
+                        const scoreInput = document.getElementById(inputId);
+                        if (scoreInput) {
+                            scoreInput.min = "0";
+                            scoreInput.max = isFlexibleScoreMode ? "" : "5";
+                        }
+                    });
+                });
+                scoringExplanation.innerHTML = isFlexibleScoreMode ?
+                    `<strong>Scoring System (0-Infinity):</strong><br>Enter any positive numerical value, including 0.` :
+                    `<strong>Scoring System (0-5):</strong><br>0 = No Demand / Not Available<br>1 = Least Popular / Low Demand<br>2 = Below Average Popularity<br>3 = Average Popularity<br>4 = Above Average Popularity<br>5 = Best Seller / High Demand`;
+            }
+
+            donutProducts.forEach(product => {
+                const row = document.createElement("tr");
+                row.style.borderBottom = "1px solid rgba(255, 255, 255, 0.1)";
+
+                const productCell = document.createElement("td");
+                productCell.textContent = product.replace(/_/g, ' ');
+                productCell.style.fontWeight = "500";
+                productCell.style.color = "#f9e1c0";
+                row.appendChild(productCell);
+
+                outlets.forEach(outlet => {
+                    const scoreCell = document.createElement("td");
+                    scoreCell.style.textAlign = "center";
+                    const inputId = `score-${product.replace(/ /g, '-')}-${outlet}`;
+                    const currentScore = donutScores[product] ? (donutScores[product][outlet] || 0) : 0;
+                    scoreCell.innerHTML = `<input type="number" id="${inputId}" min="0" max="${isFlexibleScoreMode ? '' : '5'}" value="${currentScore}" style="width: 100%; text-align: center;"/>`;
+                    row.appendChild(scoreCell);
+                });
+                donutScoreTableBody.appendChild(row);
+            });
+
+            scoreModeToggle.addEventListener('change', function() {
+                localStorage.setItem('isFlexibleScoreMode', JSON.stringify(this.checked));
+                updateScoreInputs();
+            });
+
+            // Initial update of inputs and explanation based on loaded mode
+            updateScoreInputs();
+
+            // Save scores to localStorage
+            saveDonutScoresButton.addEventListener("click", function() {
+                let newDonutScores = {};
+                let hasError = false;
+                donutProducts.forEach(product => {
+                    newDonutScores[product] = {};
+                    outlets.forEach(outlet => {
+                        const inputId = `score-${product.replace(/ /g, '-')}-${outlet}`;
+                        let scoreInput = document.getElementById(inputId);
+                        let score = parseFloat(scoreInput.value); // Use parseFloat for flexible scores
+
+                        if (isFlexibleScoreMode) {
+                            if (isNaN(score) || score < 0) {
+                                hasError = true;
+                                scoreInput.style.border = "2px solid red";
+                                settingsMessageDiv.textContent = "Error: Scores must be 0 or a positive number.";
+                                settingsMessageDiv.style.color = "red";
+                                settingsMessageDiv.style.display = "block";
+                            } else {
+                                scoreInput.style.border = "none";
+                                newDonutScores[product][outlet] = score;
+                            }
+                        } else { // Limited Score Mode (0-5)
+                            if (isNaN(score) || score < 0 || score > 5) {
+                                hasError = true;
+                                scoreInput.style.border = "2px solid red";
+                                settingsMessageDiv.textContent = "Error: Scores must be between 0 and 5.";
+                                settingsMessageDiv.style.color = "red";
+                                settingsMessageDiv.style.display = "block";
+                            } else {
+                                scoreInput.style.border = "none";
+                                newDonutScores[product][outlet] = score;
+                            }
+                        }
+                    });
+                });
+
+                if (!hasError) {
+                    localStorage.setItem('donutScores', JSON.stringify(newDonutScores));
+                    settingsMessageDiv.textContent = "Donut scores saved successfully!";
+                    settingsMessageDiv.style.color = "green";
+                    settingsMessageDiv.style.display = "block";
+                    setTimeout(() => {
+                        settingsMessageDiv.style.display = "none";
+                    }, 3000);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

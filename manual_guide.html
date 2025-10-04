@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Penggunaan Simple Ground</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        /* Basic styles from simple_ground.html for consistency */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #333 url('https://fastly.picsum.photos/id/431/5000/3334.jpg?hmac=T2rL_gBDyJYpcr1Xm8Kv7L6bhwvmZS8nKT5w3ok58kA') no-repeat center center / cover; /* Generic background for debugging */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #fff;
+            padding-bottom: 60px;
+            font-size: 0.85em;
+        }
+        .container {
+            max-width: 800px;
+            width: 90%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(61px);
+            -webkit-backdrop-filter: blur(61px);
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            margin: 20px auto;
+            font-size: 12px;
+        }
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 28px;
+            margin: 10px 0;
+            color: #f9e1c0;
+            text-align: center;
+        }
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 22px;
+            margin-top: 20px;
+            color: #f9e1c0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 5px;
+        }
+        h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            margin-top: 15px;
+            color: #ffdd99;
+        }
+        p, ul, ol {
+            margin-bottom: 10px;
+            line-height: 1.6;
+            color: #e0e0e0;
+        }
+        li {
+            margin-left: 20px;
+            margin-bottom: 5px;
+        }
+        strong {
+            color: #ffdd99;
+        }
+        a {
+            color: #ffdd99;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+        }
+        a:hover {
+            color: #ffbb66;
+            text-decoration: underline;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #5a3e2b;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+        }
+        .back-button:hover {
+            background: #7a5a42;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Panduan Penggunaan Aplikasi Simple Ground</h1>
+        <p>Selamat datang di panduan penggunaan aplikasi Simple Ground. Aplikasi ini dirancang untuk membantu Anda mengelola produksi donat dan resep dengan lebih efisien.</p>
+
+        <h2>1. Production Calculator (Kalkulator Produksi)</h2>
+        <p>Bagian ini membantu Anda mendistribusikan donat ke berbagai outlet berdasarkan total pesanan dan skor popularitas donat yang telah Anda atur.</p>
+        <h3>Cara Menggunakan:</h3>
+        <ol>
+            <li><strong>Masukkan Total Pesanan:</strong> Pada setiap kolom outlet (MTC, BENGKONG, TIBAN, PIAYU), masukkan jumlah total donat yang dipesan untuk outlet tersebut.</li>
+            <li><strong>Klik "CALCULATE":</strong> Setelah memasukkan semua pesanan, klik tombol "CALCULATE".</li>
+            <li><strong>Lihat Hasil Distribusi:</strong>
+                <ul>
+                    <li>Tabel akan menampilkan distribusi donat (dalam kotak) untuk setiap produk donat di setiap outlet.</li>
+                    <li>Anda dapat menyesuaikan jumlah kotak secara manual pada input di tabel hasil. Perubahan akan secara otomatis memperbarui total di bawah.</li>
+                    <li>Bagian bawah tabel akan menunjukkan:
+                        <ul>
+                            <li><strong>Total Boxes:</strong> Total kotak donat per outlet.</li>
+                            <li><strong>Total PCS:</strong> Total donat (dalam satuan pcs) per outlet.</li>
+                            <li><strong>Grand Total Boxes:</strong> Total keseluruhan kotak donat dari semua outlet.</li>
+                            <li><strong>Grand Total PCS:</strong> Total keseluruhan donat (dalam satuan pcs) dari semua outlet.</li>
+                            <li><strong>Total Adonan:</strong> Jumlah resep adonan yang dibutuhkan berdasarkan total PCS dan berat dasar resep.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ol>
+
+        <h2>2. Recipe Scaler (Penskala Resep)</h2>
+        <p>Bagian ini memungkinkan Anda untuk menyesuaikan jumlah bahan dalam resep berdasarkan pengganda (multiplier) yang Anda inginkan.</p>
+        <h3>Cara Menggunakan:</h3>
+        <ol>
+            <li><strong>Pilih Resep:</strong> Pilih resep yang ingin Anda skala dari dropdown "Choose a recipe".</li>
+            <li><strong>Masukkan Pengganda (Multiplier):</strong> Masukkan angka pengganda (misalnya, 2 untuk menggandakan resep, 0.5 untuk setengah resep) pada kolom "Enter multiplier".</li>
+            <li><strong>Klik "Scale Recipe":</strong> Klik tombol ini untuk melihat bahan-bahan yang diskala.</li>
+            <li><strong>Lihat Bahan yang Diskalakan:</strong> Tabel akan menampilkan setiap bahan dengan jumlah dan unit yang telah disesuaikan.</li>
+            <li><strong>Lihat Instruksi Resep:</strong> Di bawah tabel bahan, Anda akan menemukan instruksi langkah demi langkah untuk resep yang dipilih.</li>
+        </ol>
+
+        <h2>3. Settings (Pengaturan)</h2>
+        <p>Bagian ini memungkinkan Anda untuk mengatur skor popularitas untuk setiap produk donat di setiap outlet, yang digunakan oleh Production Calculator untuk distribusi.</p>
+        <h3>Cara Menggunakan:</h3>
+        <ol>
+            <li><strong>Atur Skor Donat:</strong> Untuk setiap produk donat dan setiap outlet, masukkan skor antara 0-5 (atau nilai fleksibel jika diaktifkan).
+                <ul>
+                    <li><strong>Sistem Penilaian (0-5):</strong>
+                        <ul>
+                            <li>0 = Tidak Ada Permintaan / Tidak Tersedia</li>
+                            <li>1 = Paling Tidak Populer / Permintaan Rendah</li>
+                            <li>2 = Popularitas Di Bawah Rata-rata</li>
+                            <li>3 = Popularitas Rata-rata</li>
+                            <li>4 = Popularitas Di Atas Rata-rata</li>
+                            <li>5 = Terlaris / Permintaan Tinggi</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><strong>Mode Penilaian Fleksibel (0-Infinity):</strong>
+                <ul>
+                    <li>Anda dapat mengaktifkan "Flexible Scoring (0-Infinity)" menggunakan tombol toggle.</li>
+                    <li>Jika diaktifkan, Anda dapat memasukkan nilai numerik positif apa pun (termasuk 0) sebagai skor.</li>
+                    <li>Penjelasan sistem penilaian akan berubah sesuai mode yang dipilih.</li>
+                </ul>
+            </li>
+            <li><strong>Klik "Save Scores":</strong> Setelah selesai mengatur skor, klik tombol ini untuk menyimpan perubahan Anda. Pesan konfirmasi akan muncul.</li>
+        </ol>
+
+        <p>Semoga panduan ini membantu Anda dalam menggunakan aplikasi Simple Ground!</p>
+        <a href="simple_ground.html" class="back-button">Kembali ke Aplikasi</a>
+    </div>
+</body>
+</html>
