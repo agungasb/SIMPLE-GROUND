@@ -66,8 +66,8 @@
 
         /* Container */
         .container {
-            max-width: 600px;
-            width: 90%;
+            max-width: 900px;
+            width: 100%;
             padding: 20px;
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(61px);
@@ -222,7 +222,7 @@
 
         th, td {
             padding: 6px;
-            text-align: center;
+            text-align: left;
             border-bottom: 1px solid rgba(255, 255, 255, 0.3);
             color: #000000;
         }
@@ -233,10 +233,11 @@
 
         #result table {
             table-layout: fixed;
+            width: 100%;
         }
 
         #result .adjustment-input {
-            width: 45px; /* Adjust width as needed */
+            width: 100%; /* Adjust width as needed */
             padding: 4px;
             border: 1px solid rgba(0, 0, 0, 0.2);
             border-radius: 4px;
@@ -497,7 +498,7 @@
             "donut taro coklat", "donut tiramisu"
         ];
 
-        const outlets = ["TIBAN", "BENGKONG", "MTC", "PIAYU"];
+        const outlets = ["Tiban", "Bengkong", "MTC", "Piayu"];
         const DONUTS_PER_BOX = 9; // Define donuts per box
         const WEIGHT_PER_PCS = 45; // grams
 
@@ -553,7 +554,7 @@
         // Calculator Page Script
         function initializeCalculator() {
             const items = [
-                "TIBAN", "BENGKONG", "MTC", "PIAYU"
+                "Tiban", "Bengkong", "MTC", "Piayu"
             ];
 
             const inputFields = document.getElementById("inputFields");
