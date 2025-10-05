@@ -99,7 +99,44 @@
 <body>
     <div class="container">
         <h1>Panduan Penggunaan Aplikasi</h1>
-        <p>Aplikasi ini dirancang untuk membantu Anda mengelola produksi donat dan resep dengan lebih efisien.</p>
+        
+        <h2>Tentang Aplikasi Ini</h2>
+        <p>Aplikasi <strong>Simple Ground</strong> dirancang untuk membantu Anda mengelola produksi donat dan penskalaan resep dengan lebih efisien. Aplikasi ini terdiri dari tiga modul utama: Kalkulator Produksi, Penskala Resep, dan Pengaturan Skor Donat.</p>
+
+        <h3>Formula Perhitungan</h3>
+        <h4>1. Production Calculator (Kalkulator Produksi)</h4>
+        <p>Modul ini mendistribusikan total pesanan donat ke berbagai outlet berdasarkan skor popularitas donat yang telah diatur. Berikut adalah formula yang digunakan:</p>
+        <ul>
+            <li><strong>Proporsi Skor Donat per Outlet:</strong>
+                <br><code>Proporsi = Skor Donat Individual / Total Skor Donat untuk Outlet</code>
+                <br>Ini menghitung seberapa populer donat tertentu relatif terhadap semua donat di outlet tersebut.
+            </li>
+            <li><strong>Jumlah Donat (PCS) yang Didistribusikan:</strong>
+                <br><code>Donat Didistribusikan (PCS) = Total Pesanan Outlet * Proporsi</code>
+                <br>Ini adalah jumlah donat dalam satuan 'pcs' yang dialokasikan untuk produk donat tertentu di outlet tersebut.
+            </li>
+            <li><strong>Jumlah Donat (Box) yang Didistribusikan:</strong>
+                <br><code>Donat Didistribusikan (Box) = Ceil(Donat Didistribusikan (PCS) / Donat per Box)</code>
+                <br>Hasil PCS dikonversi ke dalam kotak, dengan pembulatan ke atas untuk memastikan semua donat terdistribusi. (<code>Donat per Box</code> adalah 9).
+            </li>
+            <li><strong>Total Donat (PCS) per Outlet:</strong>
+                <br><code>Total PCS per Outlet = Total Kotak per Outlet * Donat per Box</code>
+                <br>Menghitung total donat dalam satuan 'pcs' untuk setiap outlet.
+            </li>
+            <li><strong>Total Adonan yang Dibutuhkan:</strong>
+                <br><code>Total Adonan (Resep) = (Grand Total PCS * Berat per PCS) / Berat Dasar Resep Adonan</code>
+                <br>Ini menghitung berapa banyak resep adonan dasar yang dibutuhkan berdasarkan total keseluruhan donat (PCS) yang akan diproduksi. (<code>Berat per PCS</code> adalah 45 gram, <code>Berat Dasar Resep Adonan</code> adalah 1585 gram).
+            </li>
+        </ul>
+
+        <h4>2. Recipe Scaler (Penskala Resep)</h4>
+        <p>Modul ini menyesuaikan jumlah bahan dalam resep berdasarkan faktor skala (multiplier) yang Anda masukkan. Formula yang digunakan sangat sederhana:</p>
+        <ul>
+            <li><strong>Jumlah Bahan yang Diskalakan:</strong>
+                <br><code>Jumlah Bahan Baru = Jumlah Bahan Asli * Multiplier</code>
+                <br>Setiap bahan dalam resep akan dikalikan dengan nilai multiplier yang Anda berikan.
+            </li>
+        </ul>
 
         <h2>1. Production Calculator (Kalkulator Produksi)</h2>
         <p>Bagian ini membantu Anda mendistribusikan donat ke berbagai outlet berdasarkan total pesanan dan skor popularitas donat yang telah Anda atur.</p>

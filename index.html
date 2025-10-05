@@ -592,6 +592,7 @@
                             <tr>
                                 <th>Donut Product</th>
                                 ${outlets.map(outlet => `<th>${outlet} (Boxes)</th>`).join("")}
+                                <th>Total (Boxes)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -599,10 +600,13 @@
 
                 donutProducts.forEach(product => {
                     resultHTML += `<tr><td>${product.replace(/_/g, ' ')}</td>`;
+                    let productTotalBoxes = 0;
                     outlets.forEach(outlet => {
                         const value = distributionResults[outlet][product] || 0;
                         resultHTML += `<td><input type="number" class="adjustment-input" data-product="${product}" data-outlet="${outlet}" value="${value}" min="0"></td>`;
+                        productTotalBoxes += value;
                     });
+                    resultHTML += `<td class="product-total-boxes" data-product="${product}">${productTotalBoxes}</td>`;
                     resultHTML += `</tr>`;
                 });
 
@@ -621,15 +625,15 @@
                             </tr>
                             <tr style="font-weight: bold; background: rgba(0, 0, 0, 0.1);">
                                 <td>Grand Total Boxes</td>
-                                <td colspan="${outlets.length}" style="text-align: right;" id="grand-total-donuts">${grandTotalDonuts}</td>
+                                <td colspan="${outlets.length + 1}" style="text-align: right;" id="grand-total-donuts">${grandTotalDonuts}</td>
                             </tr>
                             <tr style="font-weight: bold; background: rgba(0, 0, 0, 0.1);">
                                 <td>Grand Total PCS</td>
-                                <td colspan="${outlets.length}" style="text-align: right;" id="grand-total-pcs">${grandTotalDonuts * DONUTS_PER_BOX}</td>
+                                <td colspan="${outlets.length + 1}" style="text-align: right;" id="grand-total-pcs">${grandTotalDonuts * DONUTS_PER_BOX}</td>
                             </tr>
                             <tr style="font-weight: bold; background: rgba(0, 0, 0, 0.1);">
                                 <td>Total Adonan</td>
-                                <td colspan="${outlets.length}" style="text-align: right;" id="total-adonan-calculator">0 resep</td>
+                                <td colspan="${outlets.length + 1}" style="text-align: right;" id="total-adonan-calculator">0 resep</td>
                             </tr>
                         </tbody>
                     </table>
@@ -677,6 +681,16 @@
                     });
                     Object.values(newTotalPcsPerOutlet).forEach(total => {
                         newGrandTotalPcs += total;
+                    });
+
+                    // Update displayed total boxes for each product
+                    donutProducts.forEach(product => {
+                        let productTotalBoxes = 0;
+                        outlets.forEach(outlet => {
+                            const inputElement = document.querySelector(`.adjustment-input[data-product="${product}"][data-outlet="${outlet}"]`);
+                            productTotalBoxes += parseInt(inputElement.value) || 0;
+                        });
+                        document.querySelector(`.product-total-boxes[data-product="${product}"]`).textContent = productTotalBoxes;
                     });
 
                     // Calculate and update Total Adonan dynamically
@@ -855,13 +869,70 @@
                 donutScoreTableBody.appendChild(row);
             });
 
+            // Add a total row
+            const totalRow = document.createElement("tr");
+            totalRow.style.borderTop = "2px solid rgba(255, 255, 255, 0.5)";
+            totalRow.style.fontWeight = "bold";
+            totalRow.style.color = "#f9e1c0";
+
+            const totalLabelCell = document.createElement("td");
+            totalLabelCell.textContent = "Total";
+            totalLabelCell.style.textAlign = "left";
+            totalRow.appendChild(totalLabelCell);
+
+            outlets.forEach(outlet => {
+                const totalCell = document.createElement("td");
+                totalCell.id = `total-score-${outlet}`;
+                totalCell.style.textAlign = "center";
+                totalCell.textContent = "0"; // Initial total
+                totalRow.appendChild(totalCell);
+            });
+            donutScoreTableBody.appendChild(totalRow);
+
+            function updateTotalScores() {
+                let outletTotals = {};
+                outlets.forEach(outlet => {
+                    outletTotals[outlet] = 0;
+                });
+
+                donutProducts.forEach(product => {
+                    outlets.forEach(outlet => {
+                        const inputId = `score-${product.replace(/ /g, '-')}-${outlet}`;
+                        const scoreInput = document.getElementById(inputId);
+                        if (scoreInput) {
+                            outletTotals[outlet] += parseFloat(scoreInput.value) || 0;
+                        }
+                    });
+                });
+
+                outlets.forEach(outlet => {
+                    const totalCell = document.getElementById(`total-score-${outlet}`);
+                    if (totalCell) {
+                        totalCell.textContent = outletTotals[outlet].toFixed(0); // Display as integer
+                    }
+                });
+            }
+
             scoreModeToggle.addEventListener('change', function() {
                 localStorage.setItem('isFlexibleScoreMode', JSON.stringify(this.checked));
                 updateScoreInputs();
+                updateTotalScores(); // Recalculate totals when mode changes
             });
 
             // Initial update of inputs and explanation based on loaded mode
             updateScoreInputs();
+            updateTotalScores(); // Initial calculation of totals
+
+            // Add event listeners to all score inputs for real-time total updates
+            donutProducts.forEach(product => {
+                outlets.forEach(outlet => {
+                    const inputId = `score-${product.replace(/ /g, '-')}-${outlet}`;
+                    const scoreInput = document.getElementById(inputId);
+                    if (scoreInput) {
+                        scoreInput.addEventListener('input', updateTotalScores);
+                    }
+                });
+            });
 
             // Save scores to localStorage
             saveDonutScoresButton.addEventListener("click", function() {
@@ -908,6 +979,7 @@
                     setTimeout(() => {
                         settingsMessageDiv.style.display = "none";
                     }, 3000);
+                    updateTotalScores(); // Update totals after saving
                 }
             });
         }
