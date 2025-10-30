@@ -623,7 +623,7 @@
                     let productTotalBoxes = 0;
                     outlets.forEach(outlet => {
                         const value = distributionResults[outlet][product] || 0;
-                        resultHTML += `<td><input type="number" class="adjustment-input" data-product="${product}" data-outlet="${outlet}" value="${value.toFixed(1)}" min="0"></td>`;
+                        resultHTML += `<td><input type="number" class="adjustment-input" data-product="${product}" data-outlet="${outlet}" value="${value.toFixed(0)}" min="0"></td>`;
                         productTotalBoxes += value;
                     });
                     resultHTML += `<td class="product-total-boxes" data-product="${product}">${productTotalBoxes.toFixed(1)}</td>`;
