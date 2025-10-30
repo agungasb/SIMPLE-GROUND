@@ -361,15 +361,15 @@
             /* Calculator table specific adjustments for mobile */
             #calculator-page table th:first-child,
             #calculator-page table td:first-child {
-                width: 25%; /* Donut Product */
+                width: 20%; /* Donut Product */
             }
             #calculator-page table th:nth-child(n+2):nth-child(-n+6), /* Target 2nd to 6th child (5 outlets) */
             #calculator-page table td:nth-child(n+2):nth-child(-n+6) {
-                width: 12%; /* Outlets */
+                width: 14%; /* Outlets */
             }
             #calculator-page table th:last-child,
             #calculator-page table td:last-child {
-                width: 15%; /* Total (Boxes) */
+                width: 10%; /* Total (Boxes) */
             }
             #calculator-page table th {
                 padding: 6px 4px; /* Adjust padding for header cells on mobile */
@@ -612,7 +612,7 @@
                             <tr>
                                 <th>Donut Product</th>
                                 ${outlets.map(outlet => `<th>${outlet}</th>`).join("")}
-                                <th>Total</th>
+                                <th>Ttl</th>
                             </tr>
                         </thead>
                         <tbody>
