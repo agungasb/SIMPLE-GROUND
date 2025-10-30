@@ -626,7 +626,7 @@
                         resultHTML += `<td><input type="number" class="adjustment-input" data-product="${product}" data-outlet="${outlet}" value="${value.toFixed(0)}" min="0"></td>`;
                         productTotalBoxes += value;
                     });
-                    resultHTML += `<td class="product-total-boxes" data-product="${product}">${productTotalBoxes.toFixed(1)}</td>`;
+                    resultHTML += `<td class="product-total-boxes" data-product="${product}">${productTotalBoxes.toFixed(0)}</td>`;
                     resultHTML += `</tr>`;
                 });
 
@@ -637,19 +637,19 @@
                 resultHTML += `
                             <tr style="font-weight: bold;">
                                 <td>Total Boxes</td>
-                                ${outlets.map(outlet => `<td class="total-donuts-outlet" data-outlet="${outlet}">${totalDonutsPerOutlet[outlet].toFixed(1)}</td>`).join("")}
+                                ${outlets.map(outlet => `<td class="total-donuts-outlet" data-outlet="${outlet}">${totalDonutsPerOutlet[outlet].toFixed(0)}</td>`).join("")}
                             </tr>
                             <tr style="font-weight: bold;">
                                 <td>Total PCS</td>
-                                ${outlets.map(outlet => `<td class="total-pcs-outlet" data-outlet="${outlet}">${(totalDonutsPerOutlet[outlet] * DONUTS_PER_BOX).toFixed(1)}</td>`).join("")}
+                                ${outlets.map(outlet => `<td class="total-pcs-outlet" data-outlet="${outlet}">${(totalDonutsPerOutlet[outlet] * DONUTS_PER_BOX).toFixed(0)}</td>`).join("")}
                             </tr>
                             <tr style="font-weight: bold; background: rgba(0, 0, 0, 0.1);">
                                 <td>Grand Total Boxes</td>
-                                <td colspan="${outlets.length + 1}" style="text-align: right;" id="grand-total-donuts">${grandTotalDonuts.toFixed(1)}</td>
+                                <td colspan="${outlets.length + 1}" style="text-align: right;" id="grand-total-donuts">${grandTotalDonuts.toFixed(0)}</td>
                             </tr>
                             <tr style="font-weight: bold; background: rgba(0, 0, 0, 0.1);">
                                 <td>Grand Total PCS</td>
-                                <td colspan="${outlets.length + 1}" style="text-align: right;" id="grand-total-pcs">${(grandTotalDonuts * DONUTS_PER_BOX).toFixed(1)}</td>
+                                <td colspan="${outlets.length + 1}" style="text-align: right;" id="grand-total-pcs">${(grandTotalDonuts * DONUTS_PER_BOX).toFixed(0)}</td>
                             </tr>
                             <tr style="font-weight: bold; background: rgba(0, 0, 0, 0.1);">
                                 <td>Total Adonan</td>
@@ -740,7 +740,7 @@
                             const inputElement = document.querySelector(`.adjustment-input[data-product="${product}"][data-outlet="${outlet}"]`);
                             productTotalBoxes += parseFloat(inputElement.value) || 0;
                         });
-                        document.querySelector(`.product-total-boxes[data-product="${product}"]`).textContent = productTotalBoxes.toFixed(1);
+                        document.querySelector(`.product-total-boxes[data-product="${product}"]`).textContent = productTotalBoxes.toFixed(0);
                     });
 
                     // Calculate and update Total Adonan dynamically
@@ -769,15 +769,15 @@
 
                     // Update displayed totals for boxes
                     outlets.forEach(outlet => {
-                        document.querySelector(`.total-donuts-outlet[data-outlet="${outlet}"]`).textContent = newTotalBoxesPerOutlet[outlet].toFixed(1);
+                        document.querySelector(`.total-donuts-outlet[data-outlet="${outlet}"]`).textContent = newTotalBoxesPerOutlet[outlet].toFixed(0);
                     });
-                    document.getElementById("grand-total-donuts").textContent = newGrandTotalBoxes.toFixed(1);
+                    document.getElementById("grand-total-donuts").textContent = newGrandTotalBoxes.toFixed(0);
 
                     // Update displayed totals for pcs
                     outlets.forEach(outlet => {
-                        document.querySelector(`.total-pcs-outlet[data-outlet="${outlet}"]`).textContent = newTotalPcsPerOutlet[outlet].toFixed(1);
+                        document.querySelector(`.total-pcs-outlet[data-outlet="${outlet}"]`).textContent = newTotalPcsPerOutlet[outlet].toFixed(0);
                     });
-                    document.getElementById("grand-total-pcs").textContent = newGrandTotalPcs.toFixed(1);
+                    document.getElementById("grand-total-pcs").textContent = newGrandTotalPcs.toFixed(0);
 
                     // Update displayed Total Adonan
                     document.getElementById("total-adonan-calculator").textContent = `${newTotalAdonan.toFixed(1)} resep`;
