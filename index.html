@@ -363,15 +363,9 @@
             #calculator-page table td:first-child {
                 width: 25%; /* Donut Product */
             }
-            #calculator-page table th:nth-child(2),
-            #calculator-page table td:nth-child(2),
-            #calculator-page table th:nth-child(3),
-            #calculator-page table td:nth-child(3),
-            #calculator-page table th:nth-child(4),
-            #calculator-page table td:nth-child(4),
-            #calculator-page table th:nth-child(5),
-            #calculator-page table td:nth-child(5) {
-                width: 15%; /* Outlets */
+            #calculator-page table th:nth-child(n+2):nth-child(-n+6), /* Target 2nd to 6th child (5 outlets) */
+            #calculator-page table td:nth-child(n+2):nth-child(-n+6) {
+                width: 12%; /* Outlets */
             }
             #calculator-page table th:last-child,
             #calculator-page table td:last-child {
@@ -489,18 +483,13 @@
     <script>
         // Donut Products and Outlets
         const donutProducts = [
-            "donut almond", "dunut avocado sparkling", "donut biscoft", "donut biscoft sparkling",
-            "donut cappucino", "donut ceres", "donut ceres chocolate", "donut chocolate",
-            "donut classic ceres", "donut classic sugar", "donut cream avocado", "donut cream strawberry",
-            "donut cream taro", "donut cream tiramisu", "donut greantea", "donut greantea coklat",
-            "donut karakter", "donut ovomaltine", "donut milk avocado", "donut oreo", "donut peanut",
-            "donut caramel", "donut strawberry coklat", "donut strawberry", "donut taro",
-            "donut taro coklat", "donut tiramisu"
+            "Donut Taro Coklat", "Donut Taro Putih", "Donut Greentea Coklat", "Donut Greentea Batang", "Donut Ovaltine", "Donut Strawberry", "Donut Ice Sugar", "Donut Cappucino", "Donut Classic Cerres", "Donut Coklat Coklat", "Donut Coklat", "Donut Avocado", "Donut Tiramisu", "Donut Peanut", "Donut Oreo", "Donut Almond", "Donut Lotus", "Donut Caramel"
         ];
 
         const outlets = ["Tiban", "SP", "MTC", "Piayu", "BA"];
         const DONUTS_PER_BOX = 9; // Define donuts per box
-        const WEIGHT_PER_PCS = 45; // grams
+        const DONUT_WEIGHT_PER_PCS = 45; // grams
+        const BOMBOLONI_WEIGHT_PER_PCS = 30; // grams
 
         // Your recipes data (moved to global scope)
         const recipes = {
@@ -632,10 +621,10 @@
                     let productTotalBoxes = 0;
                     outlets.forEach(outlet => {
                         const value = distributionResults[outlet][product] || 0;
-                        resultHTML += `<td><input type="number" class="adjustment-input" data-product="${product}" data-outlet="${outlet}" value="${value}" min="0"></td>`;
+                        resultHTML += `<td><input type="number" class="adjustment-input" data-product="${product}" data-outlet="${outlet}" value="${value.toFixed(2)}" min="0"></td>`;
                         productTotalBoxes += value;
                     });
-                    resultHTML += `<td class="product-total-boxes" data-product="${product}">${productTotalBoxes}</td>`;
+                    resultHTML += `<td class="product-total-boxes" data-product="${product}">${productTotalBoxes.toFixed(2)}</td>`;
                     resultHTML += `</tr>`;
                 });
 
@@ -646,19 +635,19 @@
                 resultHTML += `
                             <tr style="font-weight: bold;">
                                 <td>Total Boxes</td>
-                                ${outlets.map(outlet => `<td class="total-donuts-outlet" data-outlet="${outlet}">${totalDonutsPerOutlet[outlet]}</td>`).join("")}
+                                ${outlets.map(outlet => `<td class="total-donuts-outlet" data-outlet="${outlet}">${totalDonutsPerOutlet[outlet].toFixed(2)}</td>`).join("")}
                             </tr>
                             <tr style="font-weight: bold;">
                                 <td>Total PCS</td>
-                                ${outlets.map(outlet => `<td class="total-pcs-outlet" data-outlet="${outlet}">${totalDonutsPerOutlet[outlet] * DONUTS_PER_BOX}</td>`).join("")}
+                                ${outlets.map(outlet => `<td class="total-pcs-outlet" data-outlet="${outlet}">${(totalDonutsPerOutlet[outlet] * DONUTS_PER_BOX).toFixed(2)}</td>`).join("")}
                             </tr>
                             <tr style="font-weight: bold; background: rgba(0, 0, 0, 0.1);">
                                 <td>Grand Total Boxes</td>
-                                <td colspan="${outlets.length + 1}" style="text-align: right;" id="grand-total-donuts">${grandTotalDonuts}</td>
+                                <td colspan="${outlets.length + 1}" style="text-align: right;" id="grand-total-donuts">${grandTotalDonuts.toFixed(2)}</td>
                             </tr>
                             <tr style="font-weight: bold; background: rgba(0, 0, 0, 0.1);">
                                 <td>Grand Total PCS</td>
-                                <td colspan="${outlets.length + 1}" style="text-align: right;" id="grand-total-pcs">${grandTotalDonuts * DONUTS_PER_BOX}</td>
+                                <td colspan="${outlets.length + 1}" style="text-align: right;" id="grand-total-pcs">${(grandTotalDonuts * DONUTS_PER_BOX).toFixed(2)}</td>
                             </tr>
                             <tr style="font-weight: bold; background: rgba(0, 0, 0, 0.1);">
                                 <td>Total Adonan</td>
@@ -671,11 +660,26 @@
                 document.getElementById("result").innerHTML = resultHTML;
 
                 // Initial calculation of Total Adonan for calculator
-                const initialGrandTotalPcs = grandTotalDonuts * DONUTS_PER_BOX;
+                let initialTotalDonutWeight = 0;
+                let initialTotalBomboloniWeight = 0;
+
+                donutProducts.forEach(product => {
+                    const productWeightPerPcs = product.startsWith("Bomboloni") ? BOMBOLONI_WEIGHT_PER_PCS : DONUT_WEIGHT_PER_PCS;
+                    outlets.forEach(outlet => {
+                        const boxes = distributionResults[outlet][product] || 0;
+                        const pcs = boxes * DONUTS_PER_BOX;
+                        if (product.startsWith("Bomboloni")) {
+                            initialTotalBomboloniWeight += pcs * productWeightPerPcs;
+                        } else {
+                            initialTotalDonutWeight += pcs * productWeightPerPcs;
+                        }
+                    });
+                });
+                const initialGrandTotalWeight = initialTotalDonutWeight + initialTotalBomboloniWeight;
                 const baseWeightCalculator = recipes.adonan_donut_simple_ground.base_weight;
                 let initialTotalAdonan = 0;
-                if (initialGrandTotalPcs > 0 && baseWeightCalculator > 0) {
-                    initialTotalAdonan = (initialGrandTotalPcs * WEIGHT_PER_PCS) / baseWeightCalculator;
+                if (initialGrandTotalWeight > 0 && baseWeightCalculator > 0) {
+                    initialTotalAdonan = initialGrandTotalWeight / baseWeightCalculator;
                 }
                 document.getElementById("total-adonan-calculator").textContent = `${initialTotalAdonan.toFixed(2)} resep`;
 
@@ -717,29 +721,46 @@
                         let productTotalBoxes = 0;
                         outlets.forEach(outlet => {
                             const inputElement = document.querySelector(`.adjustment-input[data-product="${product}"][data-outlet="${outlet}"]`);
-                            productTotalBoxes += parseInt(inputElement.value) || 0;
+                            productTotalBoxes += parseFloat(inputElement.value) || 0;
                         });
-                        document.querySelector(`.product-total-boxes[data-product="${product}"]`).textContent = productTotalBoxes;
+                        document.querySelector(`.product-total-boxes[data-product="${product}"]`).textContent = productTotalBoxes.toFixed(2);
                     });
 
                     // Calculate and update Total Adonan dynamically
+                    let currentTotalDonutWeight = 0;
+                    let currentTotalBomboloniWeight = 0;
+
+                    donutProducts.forEach(product => {
+                        const productWeightPerPcs = product.startsWith("Bomboloni") ? BOMBOLONI_WEIGHT_PER_PCS : DONUT_WEIGHT_PER_PCS;
+                        outlets.forEach(outlet => {
+                            const inputElement = document.querySelector(`.adjustment-input[data-product="${product}"][data-outlet="${outlet}"]`);
+                            const boxes = parseFloat(inputElement.value) || 0;
+                            const pcs = boxes * DONUTS_PER_BOX;
+                            if (product.startsWith("Bomboloni")) {
+                                currentTotalBomboloniWeight += pcs * productWeightPerPcs;
+                            } else {
+                                currentTotalDonutWeight += pcs * productWeightPerPcs;
+                            }
+                        });
+                    });
+                    const currentGrandTotalWeight = currentTotalDonutWeight + currentTotalBomboloniWeight;
                     const baseWeightCalculator = recipes.adonan_donut_simple_ground.base_weight;
                     let newTotalAdonan = 0;
-                    if (newGrandTotalPcs > 0 && baseWeightCalculator > 0) {
-                        newTotalAdonan = (newGrandTotalPcs * WEIGHT_PER_PCS) / baseWeightCalculator;
+                    if (currentGrandTotalWeight > 0 && baseWeightCalculator > 0) {
+                        newTotalAdonan = currentGrandTotalWeight / baseWeightCalculator;
                     }
 
                     // Update displayed totals for boxes
                     outlets.forEach(outlet => {
-                        document.querySelector(`.total-donuts-outlet[data-outlet="${outlet}"]`).textContent = newTotalBoxesPerOutlet[outlet];
+                        document.querySelector(`.total-donuts-outlet[data-outlet="${outlet}"]`).textContent = newTotalBoxesPerOutlet[outlet].toFixed(2);
                     });
-                    document.getElementById("grand-total-donuts").textContent = newGrandTotalBoxes;
+                    document.getElementById("grand-total-donuts").textContent = newGrandTotalBoxes.toFixed(2);
 
                     // Update displayed totals for pcs
                     outlets.forEach(outlet => {
-                        document.querySelector(`.total-pcs-outlet[data-outlet="${outlet}"]`).textContent = newTotalPcsPerOutlet[outlet];
+                        document.querySelector(`.total-pcs-outlet[data-outlet="${outlet}"]`).textContent = newTotalPcsPerOutlet[outlet].toFixed(2);
                     });
-                    document.getElementById("grand-total-pcs").textContent = newGrandTotalPcs;
+                    document.getElementById("grand-total-pcs").textContent = newGrandTotalPcs.toFixed(2);
 
                     // Update displayed Total Adonan
                     document.getElementById("total-adonan-calculator").textContent = `${newTotalAdonan.toFixed(2)} resep`;
@@ -937,7 +958,7 @@
                 outlets.forEach(outlet => {
                     const totalCell = document.getElementById(`total-score-${outlet}`);
                     if (totalCell) {
-                        totalCell.textContent = outletTotals[outlet].toFixed(0); // Display as integer
+                        totalCell.textContent = outletTotals[outlet].toFixed(0);
                     }
                 });
             }
