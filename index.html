@@ -488,8 +488,10 @@
 
         const outlets = ["Tiban", "SP", "MTC", "Piayu", "BA"];
         const DONUTS_PER_BOX = 9; // Define donuts per box
-        const DONUT_WEIGHT_PER_PCS = 30; // grams
-        const BOMBOLONI_WEIGHT_PER_PCS = 45; // grams
+        const DONUT_WEIGHT_PER_PCS = 45; // grams
+        const BOMBOLONI_WEIGHT_PER_PCS = 30; // grams
+        const PCS_PER_LOYANG = 15; // pieces per loyang
+        const LOYANG_PER_TROLLEY = 15; // loyang per trolley
 
         // Your recipes data (moved to global scope)
         const recipes = {
@@ -653,13 +655,21 @@
                                 <td>Total Adonan</td>
                                 <td colspan="${outlets.length + 1}" style="text-align: right;" id="total-adonan-calculator">0 resep</td>
                             </tr>
+                            <tr style="font-weight: bold; background: rgba(0, 0, 0, 0.1);">
+                                <td>Total Loyang</td>
+                                <td colspan="${outlets.length + 1}" style="text-align: right;" id="total-loyang-calculator">0 loyang</td>
+                            </tr>
+                            <tr style="font-weight: bold; background: rgba(0, 0, 0, 0.1);">
+                                <td>Total Trolley</td>
+                                <td colspan="${outlets.length + 1}" style="text-align: right;" id="total-trolley-calculator">0 trolley</td>
+                            </tr>
                         </tbody>
                     </table>
                 `;
 
                 document.getElementById("result").innerHTML = resultHTML;
 
-                // Initial calculation of Total Adonan for calculator
+                // Initial calculation of Total Adonan, Loyang, and Trolley for calculator
                 let initialTotalDonutWeight = 0;
                 let initialTotalBomboloniWeight = 0;
 
@@ -682,6 +692,12 @@
                     initialTotalAdonan = initialGrandTotalWeight / baseWeightCalculator;
                 }
                 document.getElementById("total-adonan-calculator").textContent = `${initialTotalAdonan.toFixed(1)} resep`;
+
+                const initialTotalLoyang = initialGrandTotalPcs / PCS_PER_LOYANG;
+                document.getElementById("total-loyang-calculator").textContent = `${initialTotalLoyang.toFixed(1)} loyang`;
+
+                const initialTotalTrolley = initialTotalLoyang / LOYANG_PER_TROLLEY;
+                document.getElementById("total-trolley-calculator").textContent = `${initialTotalTrolley.toFixed(1)} trolley`;
 
 
                 // Add event listeners for dynamic adjustments
@@ -764,6 +780,12 @@
 
                     // Update displayed Total Adonan
                     document.getElementById("total-adonan-calculator").textContent = `${newTotalAdonan.toFixed(1)} resep`;
+
+                    const newTotalLoyang = newGrandTotalPcs / PCS_PER_LOYANG;
+                    document.getElementById("total-loyang-calculator").textContent = `${newTotalLoyang.toFixed(1)} loyang`;
+
+                    const newTotalTrolley = newTotalLoyang / LOYANG_PER_TROLLEY;
+                    document.getElementById("total-trolley-calculator").textContent = `${newTotalTrolley.toFixed(1)} trolley`;
                 }
             });
         }
