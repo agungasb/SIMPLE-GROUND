@@ -621,10 +621,10 @@
                     let productTotalBoxes = 0;
                     outlets.forEach(outlet => {
                         const value = distributionResults[outlet][product] || 0;
-                        resultHTML += `<td><input type="number" class="adjustment-input" data-product="${product}" data-outlet="${outlet}" value="${value.toFixed(2)}" min="0"></td>`;
+                        resultHTML += `<td><input type="number" class="adjustment-input" data-product="${product}" data-outlet="${outlet}" value="${value.toFixed(1)}" min="0"></td>`;
                         productTotalBoxes += value;
                     });
-                    resultHTML += `<td class="product-total-boxes" data-product="${product}">${productTotalBoxes.toFixed(2)}</td>`;
+                    resultHTML += `<td class="product-total-boxes" data-product="${product}">${productTotalBoxes.toFixed(1)}</td>`;
                     resultHTML += `</tr>`;
                 });
 
@@ -635,19 +635,19 @@
                 resultHTML += `
                             <tr style="font-weight: bold;">
                                 <td>Total Boxes</td>
-                                ${outlets.map(outlet => `<td class="total-donuts-outlet" data-outlet="${outlet}">${totalDonutsPerOutlet[outlet].toFixed(2)}</td>`).join("")}
+                                ${outlets.map(outlet => `<td class="total-donuts-outlet" data-outlet="${outlet}">${totalDonutsPerOutlet[outlet].toFixed(1)}</td>`).join("")}
                             </tr>
                             <tr style="font-weight: bold;">
                                 <td>Total PCS</td>
-                                ${outlets.map(outlet => `<td class="total-pcs-outlet" data-outlet="${outlet}">${(totalDonutsPerOutlet[outlet] * DONUTS_PER_BOX).toFixed(2)}</td>`).join("")}
+                                ${outlets.map(outlet => `<td class="total-pcs-outlet" data-outlet="${outlet}">${(totalDonutsPerOutlet[outlet] * DONUTS_PER_BOX).toFixed(1)}</td>`).join("")}
                             </tr>
                             <tr style="font-weight: bold; background: rgba(0, 0, 0, 0.1);">
                                 <td>Grand Total Boxes</td>
-                                <td colspan="${outlets.length + 1}" style="text-align: right;" id="grand-total-donuts">${grandTotalDonuts.toFixed(2)}</td>
+                                <td colspan="${outlets.length + 1}" style="text-align: right;" id="grand-total-donuts">${grandTotalDonuts.toFixed(1)}</td>
                             </tr>
                             <tr style="font-weight: bold; background: rgba(0, 0, 0, 0.1);">
                                 <td>Grand Total PCS</td>
-                                <td colspan="${outlets.length + 1}" style="text-align: right;" id="grand-total-pcs">${(grandTotalDonuts * DONUTS_PER_BOX).toFixed(2)}</td>
+                                <td colspan="${outlets.length + 1}" style="text-align: right;" id="grand-total-pcs">${(grandTotalDonuts * DONUTS_PER_BOX).toFixed(1)}</td>
                             </tr>
                             <tr style="font-weight: bold; background: rgba(0, 0, 0, 0.1);">
                                 <td>Total Adonan</td>
@@ -681,7 +681,7 @@
                 if (initialGrandTotalWeight > 0 && baseWeightCalculator > 0) {
                     initialTotalAdonan = initialGrandTotalWeight / baseWeightCalculator;
                 }
-                document.getElementById("total-adonan-calculator").textContent = `${initialTotalAdonan.toFixed(2)} resep`;
+                document.getElementById("total-adonan-calculator").textContent = `${initialTotalAdonan.toFixed(1)} resep`;
 
 
                 // Add event listeners for dynamic adjustments
@@ -723,7 +723,7 @@
                             const inputElement = document.querySelector(`.adjustment-input[data-product="${product}"][data-outlet="${outlet}"]`);
                             productTotalBoxes += parseFloat(inputElement.value) || 0;
                         });
-                        document.querySelector(`.product-total-boxes[data-product="${product}"]`).textContent = productTotalBoxes.toFixed(2);
+                        document.querySelector(`.product-total-boxes[data-product="${product}"]`).textContent = productTotalBoxes.toFixed(1);
                     });
 
                     // Calculate and update Total Adonan dynamically
@@ -752,18 +752,18 @@
 
                     // Update displayed totals for boxes
                     outlets.forEach(outlet => {
-                        document.querySelector(`.total-donuts-outlet[data-outlet="${outlet}"]`).textContent = newTotalBoxesPerOutlet[outlet].toFixed(2);
+                        document.querySelector(`.total-donuts-outlet[data-outlet="${outlet}"]`).textContent = newTotalBoxesPerOutlet[outlet].toFixed(1);
                     });
-                    document.getElementById("grand-total-donuts").textContent = newGrandTotalBoxes.toFixed(2);
+                    document.getElementById("grand-total-donuts").textContent = newGrandTotalBoxes.toFixed(1);
 
                     // Update displayed totals for pcs
                     outlets.forEach(outlet => {
-                        document.querySelector(`.total-pcs-outlet[data-outlet="${outlet}"]`).textContent = newTotalPcsPerOutlet[outlet].toFixed(2);
+                        document.querySelector(`.total-pcs-outlet[data-outlet="${outlet}"]`).textContent = newTotalPcsPerOutlet[outlet].toFixed(1);
                     });
-                    document.getElementById("grand-total-pcs").textContent = newGrandTotalPcs.toFixed(2);
+                    document.getElementById("grand-total-pcs").textContent = newGrandTotalPcs.toFixed(1);
 
                     // Update displayed Total Adonan
-                    document.getElementById("total-adonan-calculator").textContent = `${newTotalAdonan.toFixed(2)} resep`;
+                    document.getElementById("total-adonan-calculator").textContent = `${newTotalAdonan.toFixed(1)} resep`;
                 }
             });
         }
@@ -818,7 +818,7 @@
                     const unitCell = document.createElement("td");
 
                     ingredientCell.textContent = ingredient.replace(/_/g, " ");
-                    amountCell.textContent = (details.amount * multiplier).toFixed(2);
+                    amountCell.textContent = (details.amount * multiplier).toFixed(1);
                     unitCell.textContent = details.unit;
 
                     row.appendChild(ingredientCell);
