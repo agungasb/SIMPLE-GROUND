@@ -361,7 +361,7 @@
             /* Calculator table specific adjustments for mobile */
             #calculator-page table th:first-child,
             #calculator-page table td:first-child {
-                width: 30%; /* Donut Product */
+                width: 25%; /* Donut Product */
             }
             #calculator-page table th:nth-child(2),
             #calculator-page table td:nth-child(2),
@@ -371,7 +371,7 @@
             #calculator-page table td:nth-child(4),
             #calculator-page table th:nth-child(5),
             #calculator-page table td:nth-child(5) {
-                width: 20%; /* Outlets */
+                width: 15%; /* Outlets */
             }
             #calculator-page table th:last-child,
             #calculator-page table td:last-child {
@@ -498,7 +498,7 @@
             "donut taro coklat", "donut tiramisu"
         ];
 
-        const outlets = ["Tiban", "Bengkong", "MTC", "Piayu"];
+        const outlets = ["Tiban", "SP", "MTC", "Piayu", "BA"];
         const DONUTS_PER_BOX = 9; // Define donuts per box
         const WEIGHT_PER_PCS = 45; // grams
 
@@ -554,7 +554,7 @@
         // Calculator Page Script
         function initializeCalculator() {
             const items = [
-                "Tiban", "Bengkong", "MTC", "Piayu"
+                "Tiban", "SP", "MTC", "Piayu", "BA"
             ];
 
             const inputFields = document.getElementById("inputFields");
@@ -594,8 +594,8 @@
                         donutProducts.forEach(product => {
                             const score = (donutScores[product] && donutScores[product][outlet]) ? donutScores[product][outlet] : 0;
                             const proportion = score / totalScoreForOutlet;
-                            const distributedPcs = Math.round(outletTotalOrders[outlet] * proportion);
-                            const distributedBoxes = Math.ceil(distributedPcs / DONUTS_PER_BOX); // Convert to boxes, round up
+                            const distributedPcs = outletTotalOrders[outlet] * proportion;
+                            const distributedBoxes = distributedPcs / DONUTS_PER_BOX; // Convert to boxes, unrounded
                             distributionResults[outlet][product] = distributedBoxes;
                             totalDonutsPerOutlet[outlet] += distributedBoxes; // Sum of boxes
                         });
@@ -603,8 +603,8 @@
                         // If no scores are set for an outlet, distribute evenly or as 0
                         const numDonutProducts = donutProducts.length;
                         if (numDonutProducts > 0) {
-                            const distributedPcs = Math.round(outletTotalOrders[outlet] / numDonutProducts);
-                            const distributedBoxes = Math.ceil(distributedPcs / DONUTS_PER_BOX); // Convert to boxes, round up
+                            const distributedPcs = outletTotalOrders[outlet] / numDonutProducts;
+                            const distributedBoxes = distributedPcs / DONUTS_PER_BOX; // Convert to boxes, unrounded
                             donutProducts.forEach(product => {
                                 distributionResults[outlet][product] = distributedBoxes;
                                 totalDonutsPerOutlet[outlet] += distributedBoxes; // Sum of boxes
@@ -699,7 +699,7 @@
                     donutProducts.forEach(product => {
                         outlets.forEach(outlet => {
                             const inputElement = document.querySelector(`.adjustment-input[data-product="${product}"][data-outlet="${outlet}"]`);
-                            const adjustedBoxes = parseInt(inputElement.value) || 0;
+                            const adjustedBoxes = parseFloat(inputElement.value) || 0;
                             newTotalBoxesPerOutlet[outlet] += Math.max(0, adjustedBoxes);
                             newTotalPcsPerOutlet[outlet] += Math.max(0, adjustedBoxes) * DONUTS_PER_BOX;
                         });
