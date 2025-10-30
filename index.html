@@ -841,7 +841,7 @@
                     const unitCell = document.createElement("td");
 
                     ingredientCell.textContent = ingredient.replace(/_/g, " ");
-                    amountCell.textContent = (details.amount * multiplier).toFixed(1);
+                    amountCell.textContent = (details.amount * multiplier).toFixed(0);
                     unitCell.textContent = details.unit;
 
                     row.appendChild(ingredientCell);
