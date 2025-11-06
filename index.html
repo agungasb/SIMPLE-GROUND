@@ -482,9 +482,39 @@
 
     <script>
         // Donut Products and Outlets
+        const BOMBOLONI_KARAKTER_PRODUCT_NAME = "Bomboloni Karakter";
         const donutProducts = [
-            "Donut Taro Coklat", "Donut Taro Putih", "Donut Greentea Coklat", "Donut Greentea Batang", "Donut Ovaltine", "Donut Strawberry", "Donut Ice Sugar", "Donut Cappucino", "Donut Classic Cerres", "Donut Ceres", "Donut Ceres Coklat", "Donut Coklat", "Donut Avocado", "Donut Tiramisu", "Donut Peanut", "Donut Oreo", "Donut Almond", "Donut Lotus", "Donut Caramel", "Bomboloni Avocado", "Bomboloni Tiramisu", "Bomboloni Taro", "Bomboloni Strawberry", "Bomboloni Karakter"
+            "Donut Taro Coklat", "Donut Taro Putih", "Donut Greentea Coklat", "Donut Greentea Batang", "Donut Ovaltine", "Donut Strawberry", "Donut Ice Sugar", "Donut Cappucino", "Donut Classic Cerres", "Donut Ceres", "Donut Ceres Coklat", "Donut Coklat", "Donut Avocado", "Donut Tiramisu", "Donut Peanut", "Donut Oreo", "Donut Almond", "Donut Lotus", "Donut Caramel", "Bomboloni Avocado", "Bomboloni Tiramisu", "Bomboloni Taro", "Bomboloni Strawberry", BOMBOLONI_KARAKTER_PRODUCT_NAME
         ];
+            // Products that are distributed based on scores (excluding Bomboloni Karakter)
+            const distributableDonutProducts = donutProducts.filter(product => product !== BOMBOLONI_KARAKTER_PRODUCT_NAME);
+
+            // Default scores for each product and outlet
+            const defaultDonutScores = {
+                "Donut Taro Coklat": { "Tiban": 3, "GP": 4, "MTC": 2, "Piayu": 3, "BA": 5 },
+                "Donut Taro Putih": { "Tiban": 2, "GP": 3, "MTC": 4, "Piayu": 2, "BA": 3 },
+                "Donut Greentea Coklat": { "Tiban": 4, "GP": 2, "MTC": 3, "Piayu": 4, "BA": 2 },
+                "Donut Greentea Batang": { "Tiban": 3, "GP": 3, "MTC": 3, "Piayu": 3, "BA": 3 },
+                "Donut Ovaltine": { "Tiban": 5, "GP": 4, "MTC": 5, "Piayu": 4, "BA": 5 },
+                "Donut Strawberry": { "Tiban": 2, "GP": 2, "MTC": 2, "Piayu": 2, "BA": 2 },
+                "Donut Ice Sugar": { "Tiban": 1, "GP": 1, "MTC": 1, "Piayu": 1, "BA": 1 },
+                "Donut Cappucino": { "Tiban": 4, "GP": 5, "MTC": 4, "Piayu": 5, "BA": 4 },
+                "Donut Classic Cerres": { "Tiban": 3, "GP": 3, "MTC": 3, "Piayu": 3, "BA": 3 },
+                "Donut Ceres": { "Tiban": 2, "GP": 2, "MTC": 2, "Piayu": 2, "BA": 2 },
+                "Donut Ceres Coklat": { "Tiban": 3, "GP": 4, "MTC": 3, "Piayu": 4, "BA": 3 },
+                "Donut Coklat": { "Tiban": 5, "GP": 5, "MTC": 5, "Piayu": 5, "BA": 5 },
+                "Donut Avocado": { "Tiban": 4, "GP": 3, "MTC": 4, "Piayu": 3, "BA": 4 },
+                "Donut Tiramisu": { "Tiban": 3, "GP": 4, "MTC": 3, "Piayu": 4, "BA": 3 },
+                "Donut Peanut": { "Tiban": 2, "GP": 3, "MTC": 2, "Piayu": 3, "BA": 2 },
+                "Donut Oreo": { "Tiban": 4, "GP": 4, "MTC": 4, "Piayu": 4, "BA": 4 },
+                "Donut Almond": { "Tiban": 3, "GP": 2, "MTC": 3, "Piayu": 2, "BA": 3 },
+                "Donut Lotus": { "Tiban": 5, "GP": 5, "MTC": 5, "Piayu": 5, "BA": 5 },
+                "Donut Caramel": { "Tiban": 3, "GP": 3, "MTC": 3, "Piayu": 3, "BA": 3 },
+                "Bomboloni Avocado": { "Tiban": 4, "GP": 3, "MTC": 4, "Piayu": 3, "BA": 4 },
+                "Bomboloni Tiramisu": { "Tiban": 3, "GP": 4, "MTC": 3, "Piayu": 4, "BA": 3 },
+                "Bomboloni Taro": { "Tiban": 2, "GP": 3, "MTC": 4, "Piayu": 2, "BA": 3 },
+                "Bomboloni Strawberry": { "Tiban": 2, "GP": 2, "MTC": 2, "Piayu": 2, "BA": 2 }
+            };
 
         const outlets = ["Tiban", "GP", "MTC", "Piayu", "BA"];
         const DONUTS_PER_BOX = 9; // Define donuts per box
@@ -569,6 +599,7 @@
                 });
 
                 const donutScores = JSON.parse(localStorage.getItem('donutScores')) || {};
+                const bomboloniKarakterFixedAmounts = JSON.parse(localStorage.getItem('bomboloniKarakterFixedAmounts')) || {};
                 let distributionResults = {};
                 let totalDonutsPerOutlet = {};
 
@@ -576,27 +607,36 @@
                     distributionResults[outlet] = {};
                     totalDonutsPerOutlet[outlet] = 0;
 
+                    // 1. Handle Bomboloni Karakter fixed amount first
+                    const bomboloniKarakterPcs = bomboloniKarakterFixedAmounts[outlet] || 0;
+                    const bomboloniKarakterBoxes = bomboloniKarakterPcs / DONUTS_PER_BOX; // NO rounding here
+                    distributionResults[outlet][BOMBOLONI_KARAKTER_PRODUCT_NAME] = bomboloniKarakterBoxes;
+                    totalDonutsPerOutlet[outlet] += bomboloniKarakterBoxes;
+
+                    // 2. Calculate remaining orders for score-based distribution
+                    let remainingOutletOrdersPcs = Math.max(0, outletTotalOrders[outlet] - bomboloniKarakterPcs);
+
                     let totalScoreForOutlet = 0;
-                    donutProducts.forEach(product => {
+                    distributableDonutProducts.forEach(product => {
                         totalScoreForOutlet += (donutScores[product] && donutScores[product][outlet]) ? donutScores[product][outlet] : 0;
                     });
 
                     if (totalScoreForOutlet > 0) {
-                        donutProducts.forEach(product => {
+                        distributableDonutProducts.forEach(product => {
                             const score = (donutScores[product] && donutScores[product][outlet]) ? donutScores[product][outlet] : 0;
                             const proportion = score / totalScoreForOutlet;
-                            const distributedPcs = outletTotalOrders[outlet] * proportion;
-                            const distributedBoxes = distributedPcs / DONUTS_PER_BOX; // Convert to boxes, unrounded
+                            const distributedPcs = remainingOutletOrdersPcs * proportion;
+                            const distributedBoxes = Math.round(distributedPcs / DONUTS_PER_BOX); // Round other donuts
                             distributionResults[outlet][product] = distributedBoxes;
                             totalDonutsPerOutlet[outlet] += distributedBoxes; // Sum of boxes
                         });
                     } else {
-                        // If no scores are set for an outlet, distribute evenly or as 0
-                        const numDonutProducts = donutProducts.length;
-                        if (numDonutProducts > 0) {
-                            const distributedPcs = outletTotalOrders[outlet] / numDonutProducts;
-                            const distributedBoxes = distributedPcs / DONUTS_PER_BOX; // Convert to boxes, unrounded
-                            donutProducts.forEach(product => {
+                        // If no scores are set for an outlet, distribute remaining evenly or as 0
+                        const numDistributableDonutProducts = distributableDonutProducts.length;
+                        if (numDistributableDonutProducts > 0) {
+                            const distributedPcs = remainingOutletOrdersPcs / numDistributableDonutProducts;
+                            const distributedBoxes = Math.round(distributedPcs / DONUTS_PER_BOX); // Round other donuts
+                            distributableDonutProducts.forEach(product => {
                                 distributionResults[outlet][product] = distributedBoxes;
                                 totalDonutsPerOutlet[outlet] += distributedBoxes; // Sum of boxes
                             });
@@ -623,7 +663,15 @@
                     let productTotalBoxes = 0;
                     outlets.forEach(outlet => {
                         const value = distributionResults[outlet][product] || 0;
-                        resultHTML += `<td><input type="number" class="adjustment-input" data-product="${product}" data-outlet="${outlet}" value="${value.toFixed(0)}" min="0"></td>`;
+                        let inputHtml = '';
+                        if (product === BOMBOLONI_KARAKTER_PRODUCT_NAME) {
+                            // Display Bomboloni Karakter in pieces
+                            const fixedPcs = (value * DONUTS_PER_BOX).toFixed(0);
+                            inputHtml = `<input type="number" class="adjustment-input" data-product="${product}" data-outlet="${outlet}" value="${fixedPcs}" min="0" disabled>`;
+                        } else {
+                            inputHtml = `<input type="number" class="adjustment-input" data-product="${product}" data-outlet="${outlet}" value="${value.toFixed(0)}" min="0">`;
+                        }
+                        resultHTML += `<td>${inputHtml}</td>`;
                         productTotalBoxes += value;
                     });
                     resultHTML += `<td class="product-total-boxes" data-product="${product}">${productTotalBoxes.toFixed(0)}</td>`;
@@ -637,19 +685,19 @@
                 resultHTML += `
                             <tr style="font-weight: bold;">
                                 <td>Total Boxes</td>
-                                ${outlets.map(outlet => `<td class="total-donuts-outlet" data-outlet="${outlet}">${totalDonutsPerOutlet[outlet].toFixed(0)}</td>`).join("")}
+                                ${outlets.map(outlet => `<td class="total-donuts-outlet" data-outlet="${outlet}">${totalDonutsPerOutlet[outlet].toFixed(1)}</td>`).join("")}
                             </tr>
                             <tr style="font-weight: bold;">
                                 <td>Total PCS</td>
-                                ${outlets.map(outlet => `<td class="total-pcs-outlet" data-outlet="${outlet}">${(totalDonutsPerOutlet[outlet] * DONUTS_PER_BOX).toFixed(0)}</td>`).join("")}
+                                ${outlets.map(outlet => `<td class="total-pcs-outlet" data-outlet="${outlet}">${Math.round(totalDonutsPerOutlet[outlet] * DONUTS_PER_BOX).toFixed(0)}</td>`).join("")}
                             </tr>
                             <tr style="font-weight: bold; background: rgba(0, 0, 0, 0.1);">
                                 <td>Grand Total Boxes</td>
-                                <td colspan="${outlets.length + 1}" style="text-align: right;" id="grand-total-donuts">${grandTotalDonuts.toFixed(0)}</td>
+                                <td colspan="${outlets.length + 1}" style="text-align: right;" id="grand-total-donuts">${grandTotalDonuts.toFixed(1)}</td>
                             </tr>
                             <tr style="font-weight: bold; background: rgba(0, 0, 0, 0.1);">
                                 <td>Grand Total PCS</td>
-                                <td colspan="${outlets.length + 1}" style="text-align: right;" id="grand-total-pcs">${(grandTotalDonuts * DONUTS_PER_BOX).toFixed(0)}</td>
+                                <td colspan="${outlets.length + 1}" style="text-align: right;" id="grand-total-pcs">${Math.round(grandTotalDonuts * DONUTS_PER_BOX).toFixed(0)}</td>
                             </tr>
                             <tr style="font-weight: bold; background: rgba(0, 0, 0, 0.1);">
                                 <td>Total Adonan</td>
@@ -679,7 +727,9 @@
                     outlets.forEach(outlet => {
                         const boxes = distributionResults[outlet][product] || 0;
                         const pcs = boxes * DONUTS_PER_BOX;
-                        if (product.startsWith("Bomboloni")) {
+                        if (product === BOMBOLONI_KARAKTER_PRODUCT_NAME) {
+                            initialTotalBomboloniWeight += (bomboloniKarakterFixedAmounts[outlet] || 0) * productWeightPerPcs;
+                        } else if (product.startsWith("Bomboloni")) {
                             initialTotalBomboloniWeight += pcs * productWeightPerPcs;
                         } else {
                             initialTotalDonutWeight += pcs * productWeightPerPcs;
@@ -717,10 +767,22 @@
                         newTotalPcsPerOutlet[outlet] = 0;
                     });
 
+                    outlets.forEach(outlet => {
+                        newTotalBoxesPerOutlet[outlet] = 0;
+                        newTotalPcsPerOutlet[outlet] = 0;
+                    });
+
                     donutProducts.forEach(product => {
                         outlets.forEach(outlet => {
                             const inputElement = document.querySelector(`.adjustment-input[data-product="${product}"][data-outlet="${outlet}"]`);
-                            const adjustedBoxes = parseFloat(inputElement.value) || 0;
+                            let adjustedBoxes = 0;
+                            if (product === BOMBOLONI_KARAKTER_PRODUCT_NAME) {
+                                // For Bomboloni Karakter, use the fixed amount from localStorage (converted to boxes)
+                                const bomboloniKarakterFixedAmounts = JSON.parse(localStorage.getItem('bomboloniKarakterFixedAmounts')) || {};
+                                adjustedBoxes = (bomboloniKarakterFixedAmounts[outlet] || 0) / DONUTS_PER_BOX; // NO rounding here
+                            } else {
+                                adjustedBoxes = parseFloat(inputElement.value) || 0;
+                            }
                             newTotalBoxesPerOutlet[outlet] += Math.max(0, adjustedBoxes);
                             newTotalPcsPerOutlet[outlet] += Math.max(0, adjustedBoxes) * DONUTS_PER_BOX;
                         });
@@ -738,7 +800,14 @@
                         let productTotalBoxes = 0;
                         outlets.forEach(outlet => {
                             const inputElement = document.querySelector(`.adjustment-input[data-product="${product}"][data-outlet="${outlet}"]`);
-                            productTotalBoxes += parseFloat(inputElement.value) || 0;
+                            let value = 0;
+                            if (product === BOMBOLONI_KARAKTER_PRODUCT_NAME) {
+                                const bomboloniKarakterFixedAmounts = JSON.parse(localStorage.getItem('bomboloniKarakterFixedAmounts')) || {};
+                                value = (bomboloniKarakterFixedAmounts[outlet] || 0) / DONUTS_PER_BOX; // NO rounding here
+                            } else {
+                                value = parseFloat(inputElement.value) || 0;
+                            }
+                            productTotalBoxes += value;
                         });
                         document.querySelector(`.product-total-boxes[data-product="${product}"]`).textContent = productTotalBoxes.toFixed(0);
                     });
@@ -751,9 +820,17 @@
                         const productWeightPerPcs = product.startsWith("Bomboloni") ? BOMBOLONI_WEIGHT_PER_PCS : DONUT_WEIGHT_PER_PCS;
                         outlets.forEach(outlet => {
                             const inputElement = document.querySelector(`.adjustment-input[data-product="${product}"][data-outlet="${outlet}"]`);
-                            const boxes = parseFloat(inputElement.value) || 0;
+                            let boxes = 0;
+                            if (product === BOMBOLONI_KARAKTER_PRODUCT_NAME) {
+                                const bomboloniKarakterFixedAmounts = JSON.parse(localStorage.getItem('bomboloniKarakterFixedAmounts')) || {};
+                                boxes = (bomboloniKarakterFixedAmounts[outlet] || 0) / DONUTS_PER_BOX; // NO rounding here
+                            } else {
+                                boxes = parseFloat(inputElement.value) || 0;
+                            }
                             const pcs = boxes * DONUTS_PER_BOX;
-                            if (product.startsWith("Bomboloni")) {
+                            if (product === BOMBOLONI_KARAKTER_PRODUCT_NAME) {
+                                currentTotalBomboloniWeight += (bomboloniKarakterFixedAmounts[outlet] || 0) * productWeightPerPcs;
+                            } else if (product.startsWith("Bomboloni")) {
                                 currentTotalBomboloniWeight += pcs * productWeightPerPcs;
                             } else {
                                 currentTotalDonutWeight += pcs * productWeightPerPcs;
@@ -769,15 +846,15 @@
 
                     // Update displayed totals for boxes
                     outlets.forEach(outlet => {
-                        document.querySelector(`.total-donuts-outlet[data-outlet="${outlet}"]`).textContent = newTotalBoxesPerOutlet[outlet].toFixed(0);
+                        document.querySelector(`.total-donuts-outlet[data-outlet="${outlet}"]`).textContent = newTotalBoxesPerOutlet[outlet].toFixed(1);
                     });
-                    document.getElementById("grand-total-donuts").textContent = newGrandTotalBoxes.toFixed(0);
+                    document.getElementById("grand-total-donuts").textContent = newGrandTotalBoxes.toFixed(1);
 
                     // Update displayed totals for pcs
                     outlets.forEach(outlet => {
-                        document.querySelector(`.total-pcs-outlet[data-outlet="${outlet}"]`).textContent = newTotalPcsPerOutlet[outlet].toFixed(0);
+                        document.querySelector(`.total-pcs-outlet[data-outlet="${outlet}"]`).textContent = Math.round(newTotalPcsPerOutlet[outlet]).toFixed(0);
                     });
-                    document.getElementById("grand-total-pcs").textContent = newGrandTotalPcs.toFixed(0);
+                    document.getElementById("grand-total-pcs").textContent = Math.round(newGrandTotalPcs).toFixed(0);
 
                     // Update displayed Total Adonan
                     document.getElementById("total-adonan-calculator").textContent = `${newTotalAdonan.toFixed(1)} resep`;
@@ -882,6 +959,12 @@
             // Load existing scores from localStorage
             let donutScores = JSON.parse(localStorage.getItem('donutScores')) || {};
 
+            // Set default scores if none exist or if they are not fully defined
+            if (Object.keys(donutScores).length === 0 || !distributableDonutProducts.every(product => donutScores[product] && outlets.every(outlet => donutScores[product][outlet] !== undefined))) {
+                donutScores = JSON.parse(JSON.stringify(defaultDonutScores)); // Deep copy default scores
+                localStorage.setItem('donutScores', JSON.stringify(donutScores));
+            }
+
             // Generate table header dynamically
             const donutScoreTableHeader = document.getElementById("donut-score-table-header");
             let headerRow = `<tr><th style="text-align: left; color: #f9e1c0;">Donut Product</th>`;
@@ -901,7 +984,7 @@
             const scoringExplanation = document.getElementById("scoring-explanation");
 
             // Load score mode from localStorage
-            let isFlexibleScoreMode = JSON.parse(localStorage.getItem('isFlexibleScoreMode')) || false;
+            let isFlexibleScoreMode = JSON.parse(localStorage.getItem('isFlexibleScoreMode')) || true; // Default to flexible scoring
             scoreModeToggle.checked = isFlexibleScoreMode;
 
             function updateScoreInputs() {
@@ -921,7 +1004,7 @@
                     `<strong>Scoring System (0-5):</strong><br>0 = No Demand / Not Available<br>1 = Least Popular / Low Demand<br>2 = Below Average Popularity<br>3 = Average Popularity<br>4 = Above Average Popularity<br>5 = Best Seller / High Demand`;
             }
 
-            donutProducts.forEach(product => {
+            distributableDonutProducts.forEach(product => { // Use distributableDonutProducts here
                 const row = document.createElement("tr");
                 row.style.borderBottom = "1px solid rgba(255, 255, 255, 0.1)";
 
@@ -941,6 +1024,29 @@
                 });
                 donutScoreTableBody.appendChild(row);
             });
+
+            // Add a dedicated row for Bomboloni Karakter fixed amounts
+            const bomboloniKarakterRow = document.createElement("tr");
+            bomboloniKarakterRow.style.borderBottom = "1px solid rgba(255, 255, 255, 0.1)";
+
+            const bomboloniKarakterProductCell = document.createElement("td");
+            bomboloniKarakterProductCell.textContent = BOMBOLONI_KARAKTER_PRODUCT_NAME.replace(/_/g, ' ');
+            bomboloniKarakterProductCell.style.fontWeight = "500";
+            bomboloniKarakterProductCell.style.color = "#f9e1c0";
+            bomboloniKarakterRow.appendChild(bomboloniKarakterProductCell);
+
+            let bomboloniKarakterFixedAmounts = JSON.parse(localStorage.getItem('bomboloniKarakterFixedAmounts')) || {};
+
+            outlets.forEach(outlet => {
+                const fixedAmountCell = document.createElement("td");
+                fixedAmountCell.style.textAlign = "center";
+                const inputId = `fixed-pcs-${BOMBOLONI_KARAKTER_PRODUCT_NAME.replace(/ /g, '-')}-${outlet}`;
+                const currentFixedAmount = bomboloniKarakterFixedAmounts[outlet] || 0;
+                fixedAmountCell.innerHTML = `<input type="number" id="${inputId}" min="0" value="${currentFixedAmount}" style="width: 100%; text-align: center;"/>`;
+                bomboloniKarakterRow.appendChild(fixedAmountCell);
+            });
+            donutScoreTableBody.appendChild(bomboloniKarakterRow);
+
 
             // Add a total row
             const totalRow = document.createElement("tr");
@@ -968,7 +1074,7 @@
                     outletTotals[outlet] = 0;
                 });
 
-                donutProducts.forEach(product => {
+                distributableDonutProducts.forEach(product => { // Use distributableDonutProducts here
                     outlets.forEach(outlet => {
                         const inputId = `score-${product.replace(/ /g, '-')}-${outlet}`;
                         const scoreInput = document.getElementById(inputId);
@@ -977,6 +1083,16 @@
                         }
                     });
                 });
+
+                // Add Bomboloni Karakter fixed amounts to the total for display in settings
+                outlets.forEach(outlet => {
+                    const inputId = `fixed-pcs-${BOMBOLONI_KARAKTER_PRODUCT_NAME.replace(/ /g, '-')}-${outlet}`;
+                    const fixedAmountInput = document.getElementById(inputId);
+                    if (fixedAmountInput) {
+                        outletTotals[outlet] += parseFloat(fixedAmountInput.value) || 0;
+                    }
+                });
+
 
                 outlets.forEach(outlet => {
                     const totalCell = document.getElementById(`total-score-${outlet}`);
@@ -997,7 +1113,7 @@
             updateTotalScores(); // Initial calculation of totals
 
             // Add event listeners to all score inputs for real-time total updates
-            donutProducts.forEach(product => {
+            distributableDonutProducts.forEach(product => { // Use distributableDonutProducts here
                 outlets.forEach(outlet => {
                     const inputId = `score-${product.replace(/ /g, '-')}-${outlet}`;
                     const scoreInput = document.getElementById(inputId);
@@ -1007,11 +1123,23 @@
                 });
             });
 
+            // Add event listeners for Bomboloni Karakter fixed amount inputs
+            outlets.forEach(outlet => {
+                const inputId = `fixed-pcs-${BOMBOLONI_KARAKTER_PRODUCT_NAME.replace(/ /g, '-')}-${outlet}`;
+                const fixedAmountInput = document.getElementById(inputId);
+                if (fixedAmountInput) {
+                    fixedAmountInput.addEventListener('input', updateTotalScores);
+                }
+            });
+
+
             // Save scores to localStorage
             saveDonutScoresButton.addEventListener("click", function() {
                 let newDonutScores = {};
+                let newBomboloniKarakterFixedAmounts = {};
                 let hasError = false;
-                donutProducts.forEach(product => {
+
+                distributableDonutProducts.forEach(product => { // Use distributableDonutProducts here
                     newDonutScores[product] = {};
                     outlets.forEach(outlet => {
                         const inputId = `score-${product.replace(/ /g, '-')}-${outlet}`;
@@ -1044,9 +1172,29 @@
                     });
                 });
 
+                // Save Bomboloni Karakter fixed amounts
+                outlets.forEach(outlet => {
+                    const inputId = `fixed-pcs-${BOMBOLONI_KARAKTER_PRODUCT_NAME.replace(/ /g, '-')}-${outlet}`;
+                    let fixedAmountInput = document.getElementById(inputId);
+                    let fixedAmount = parseFloat(fixedAmountInput.value);
+
+                    if (isNaN(fixedAmount) || fixedAmount < 0) {
+                        hasError = true;
+                        fixedAmountInput.style.border = "2px solid red";
+                        settingsMessageDiv.textContent = "Error: Bomboloni Karakter fixed amount must be 0 or a positive number.";
+                        settingsMessageDiv.style.color = "red";
+                        settingsMessageDiv.style.display = "block";
+                    } else {
+                        fixedAmountInput.style.border = "none";
+                        newBomboloniKarakterFixedAmounts[outlet] = fixedAmount;
+                    }
+                });
+
+
                 if (!hasError) {
                     localStorage.setItem('donutScores', JSON.stringify(newDonutScores));
-                    settingsMessageDiv.textContent = "Donut scores saved successfully!";
+                    localStorage.setItem('bomboloniKarakterFixedAmounts', JSON.stringify(newBomboloniKarakterFixedAmounts));
+                    settingsMessageDiv.textContent = "Settings saved successfully!";
                     settingsMessageDiv.style.color = "green";
                     settingsMessageDiv.style.display = "block";
                     setTimeout(() => {
