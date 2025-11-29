@@ -481,7 +481,6 @@
     </footer>
 
     <script>
-<<<<<<< HEAD
         // Global variables to store data from JSON
         let BOMBOLONI_KARAKTER_PRODUCT_NAME;
         let donutProducts;
@@ -494,71 +493,6 @@
         let PCS_PER_LOYANG;
         let LOYANG_PER_TROLLEY;
         let recipes;
-=======
-        // Donut Products and Outlets
-        const BOMBOLONI_KARAKTER_PRODUCT_NAME = "Bomboloni Karakter";
-        const donutProducts = [
-            "Donut Taro Coklat", "Donut Taro Putih", "Donut Greentea Coklat", "Donut Greentea Batang", "Donut Ovaltine", "Donut Strawberry", "Donut Ice Sugar", "Donut Cappucino", "Donut Classic Cerres", "Donut Ceres", "Donut Ceres Coklat", "Donut Coklat", "Donut Avocado", "Donut Tiramisu", "Donut Peanut", "Donut Oreo", "Donut Almond", "Donut Lotus", "Donut Caramel", "Bomboloni Avocado", "Bomboloni Tiramisu", "Bomboloni Taro", "Bomboloni Strawberry", BOMBOLONI_KARAKTER_PRODUCT_NAME
-        ];
-            // Products that are distributed based on scores (excluding Bomboloni Karakter)
-            const distributableDonutProducts = donutProducts.filter(product => product !== BOMBOLONI_KARAKTER_PRODUCT_NAME);
-
-            // Default scores for each product and outlet
-            const defaultDonutScores = {
-                "Donut Taro Coklat": { "Tiban": 2, "GP": 2, "MTC": 2, "Piayu": 3, "BA": 8 },
-                "Donut Taro Putih": { "Tiban": 2, "GP": 1, "MTC": 2, "Piayu": 3, "BA": 8 },
-                "Donut Greentea Coklat": { "Tiban": 2, "GP": 2, "MTC": 2, "Piayu": 3, "BA": 8 },
-                "Donut Greentea Batang": { "Tiban": 2, "GP": 1, "MTC": 2, "Piayu": 3, "BA": 8 },
-                "Donut Ovaltine": { "Tiban": 2, "GP": 1, "MTC": 2, "Piayu": 3, "BA": 8 },
-                "Donut Strawberry": { "Tiban": 2, "GP": 2, "MTC": 2, "Piayu": 3, "BA": 8 },
-                "Donut Ice Sugar": { "Tiban": 2, "GP": 2, "MTC": 2, "Piayu": 3, "BA": 8 },
-                "Donut Cappucino": { "Tiban": 2, "GP": 1, "MTC": 2, "Piayu": 3, "BA": 8 },
-                "Donut Classic Cerres": { "Tiban": 2, "GP": 1, "MTC": 2, "Piayu": 3, "BA": 8 },
-                "Donut Ceres": { "Tiban": 3, "GP": 2, "MTC": 3, "Piayu": 3, "BA": 8 },
-                "Donut Ceres Coklat": { "Tiban": 3, "GP": 2, "MTC": 3, "Piayu": 3, "BA": 8 },
-                "Donut Coklat": { "Tiban": 3, "GP": 2, "MTC": 3, "Piayu": 3, "BA": 9 },
-                "Donut Avocado": { "Tiban": 3, "GP": 2, "MTC": 3, "Piayu": 2, "BA": 8 },
-                "Donut Tiramisu": { "Tiban": 3, "GP": 2, "MTC": 3, "Piayu": 2, "BA": 8 },
-                "Donut Peanut": { "Tiban": 3, "GP": 2, "MTC": 3, "Piayu": 3, "BA": 8 },
-                "Donut Oreo": { "Tiban": 3, "GP": 3, "MTC": 3, "Piayu": 3, "BA": 9 },
-                "Donut Almond": { "Tiban": 3, "GP": 3, "MTC": 3, "Piayu": 3, "BA": 9 },
-                "Donut Lotus": { "Tiban": 3, "GP": 3, "MTC": 3, "Piayu": 3, "BA": 9 },
-                "Donut Caramel": { "Tiban": 0, "GP": 0, "MTC": 0, "Piayu": 0, "BA": 0 },
-                "Bomboloni Avocado": { "Tiban": 2, "GP": 2, "MTC": 2, "Piayu": 1, "BA": 4 },
-                "Bomboloni Tiramisu": { "Tiban": 2, "GP": 2, "MTC": 2, "Piayu": 1, "BA": 4 },
-                "Bomboloni Taro": { "Tiban": 2, "GP": 2, "MTC": 2, "Piayu": 1, "BA": 4 },
-                "Bomboloni Strawberry": { "Tiban": 2, "GP": 2, "MTC": 2, "Piayu": 1, "BA": 4 }
-            };
-
-        const outlets = ["Tiban", "GP", "MTC", "Piayu", "BA"];
-        const DONUTS_PER_BOX = 9; // Define donuts per box
-        const DONUT_WEIGHT_PER_PCS = 30; // grams
-        const BOMBOLONI_WEIGHT_PER_PCS = 50; // grams
-        const PCS_PER_LOYANG = 15; // pieces per loyang
-        const LOYANG_PER_TROLLEY = 15; // loyang per trolley
-
-        // Your recipes data (moved to global scope)
-        const recipes = {
-            "adonan_donut_simple_ground": {
-                "base_weight": 1500, // Total weight of the recipe in grams
-                "premix": {"amount": 1000, "unit": "grams"},
-                "ragi": {"amount": 15, "unit": "grams"},
-                "telur": {"amount": 1, "unit": "butir"},
-                "margarin": {"amount": 100, "unit": "grams"},
-                "es batu": {"amount": 100, "unit": "grams"},
-                "air": {"amount": 270, "unit": "grams"}
-            },
-            "adonan_donut_simple_ground_instructions": [
-                "Campurkan premix, ragi, dan telur. Aduk hingga rata.",
-                "Masukkan air dan es batu sedikit demi sedikit sambil diuleni hingga kalis.",
-                "Tambahkan margarin hingga adonan elastis.",
-                "Diamkan adonan selama 30-45 menit hingga mengembang dua kali lipat.",
-                "Kempiskan adonan, bagi menjadi beberapa bagian, dan bentuk sesuai selera.",
-                "Diamkan kembali selama 15-20 menit.",
-                "Goreng dalam minyak panas dengan api sedang hingga matang keemasan."
-            ]
-        };
->>>>>>> 9797998cd59b90612e02022c32ef44ef36cee12a
 
         // Navigation Function
         function showPage(pageId) {
