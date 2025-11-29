@@ -1,0 +1,190 @@
+Hasil: Plain Croissant (1 pcs)
+Item,Qty,Unit
+Laminasi Original,65,gr
+
+Hasil: Smoked Beef Baker Croissant (1 pcs)
+Item,Qty,Unit
+Laminasi Original,65,gr
+Smoked Beef,1,pcs
+Keju Slice,0.5,pcs
+Saos Sambal,2,gr
+Mayonaise,2,gr
+
+Hasil: Square Croissant (1 pcs)
+Item,Qty,Unit
+Laminasi Original,75,gr
+
+Hasil: Apple Chaussan (1 pcs)
+Item,Qty,Unit
+Laminasi Original,60,gr
+Filling Apple Chaussan,25,gr
+
+Hasil: Brioche (1 pcs)
+Item,Qty,Unit
+Adonan Brioche,1,000,gr
+
+Hasil: Burger Bun (1 pcs)
+Item,Qty,Unit
+Adonan Brioche,80,gr
+
+Hasil: Cinnamon Roll (26 pcs)
+Item,Qty,Unit
+Laminasi Original,200,gr
+Sonton Vanilla,100,gr
+Palm Sugar,50,gr
+Bubuk Cinnamon,100,gr
+Raisin (Kismis),100,gr
+
+Hasil: Cornet Puff (1 pcs)
+Item,Qty,Unit
+Adonan Puff Pastry,40,gr
+
+Hasil: Croissant (Frozen) (1 pcs)
+Item,Qty,Unit
+Laminasi Original,5,gr
+Margarine,5,gr
+Gula Pasir,1,gr
+
+Hasil: Creme Brule (1 pcs)
+Item,Qty,Unit
+Laminasi Original,30,gr
+
+Hasil: Croffin (1 pcs)
+Item,Qty,Unit
+Laminasi Original,65,gr
+
+Hasil: Cromboloni (1 pcs)
+Item,Qty,Unit
+Laminasi Original,65,gr
+
+Hasil: Danish Baker Museum (1 pcs)
+Item,Qty,Unit
+Laminasi Original,70,gr
+
+Hasil: Danish Smith (1 pcs)
+Item,Qty,Unit
+Laminasi Original,40,gr
+
+Hasil: Eggtart Baker Museum (1 pcs)
+Item,Qty,Unit
+Laminasi Original,40,gr
+
+Hasil: Dessert Coffe Tawan (1 pcs)
+Item,Qty,Unit
+Laminasi Original,30,gr
+
+Hasil: Mini Croissant (1 pcs)
+Item,Qty,Unit
+Laminasi Original,65,gr
+
+Hasil: Meat Cheese Smith (1 pcs)
+Item,Qty,Unit
+Laminasi Original,65,gr
+Smoked Beef,1,pcs
+Keju Quick Melt,10,gr
+Butter,5,gr
+
+Hasil: Plie Au / Peppito (24 pcs)
+Item,Qty,Unit
+Laminasi Original,7,300,gr
+Sonton Vanilla,200,gr
+Chocochip/Choco,150,gr
+
+Hasil: Martabak Croissant (1 pcs)
+Item,Qty,Unit
+Laminasi Original,7,300,gr
+Kacang Mede,150,gr
+Keju Parut,150,gr
+Ceres Coklat,150,gr
+Wijen,100,gr
+Sonton Vanilla,150,gr
+Selai Nutella,50,gr
+
+Hasil: Pain Au Charcoal (1 pcs)
+Item,Qty,Unit
+Laminasi Charcoal,65,gr
+Chocolate Stick,3,pcs
+
+Hasil: Pain Au Choco (1 pcs)
+Item,Qty,Unit
+Laminasi Original,65,gr
+Chocolate Stick,3,pcs
+
+Hasil: Pain Au Raisin (1 pcs)
+Item,Qty,Unit
+Laminasi Original,75,gr
+
+Hasil: Pain Au Raisin (28 pcs)
+Item,Qty,Unit
+Laminasi Original,3,000,gr
+
+Hasil: Cream Allmond Croissant (1 pcs)
+Item,Qty,Unit
+Plain Croissant (Cream),1,pcs
+Almond Sice,10,gr
+Aple Jam Blue,5,gr
+
+Hasil: Cream Allmond Baked (1 pcs)
+Item,Qty,Unit
+Plain Croissant,1,pcs
+Filling Baked,200,gr
+Air,3,gr
+
+Hasil: Choco Mouse Croissant (1 pcs)
+Item,Qty,Unit
+Plain Croissant,1,pcs
+Choco Mousse,1,pcs
+Dark Compound,5,gr
+Coklat Powder,1,gr
+
+Hasil: Coffee Croissant (Frozen) (1 pcs)
+Item,Qty,Unit
+Laminasi Original,80,gr
+Tipping Croissant,1,pcs
+
+Hasil: Hokkaido Eggtart B M (1 pcs)
+Item,Qty,Unit
+Eggtart C B M,1,pcs
+
+Hasil: Danish (1 pcs)
+Item,Qty,Unit
+Laminasi Original,30,gr
+Danish Strawberry,1,pcs
+
+Hasil: Hokkaido Eggtart C L (1 pcs)
+Item,Qty,Unit
+Eggtart C L,1,pcs
+
+Hasil: Danish Sweette (1 pcs)
+Item,Qty,Unit
+Laminasi Original,30,gr
+Dutch Pasang,1,pcs
+
+Hasil: Portugese Eggtart B M (1 pcs)
+Item,Qty,Unit
+Eggtart C L,1,pcs
+Filing Portugese,25,gr
+
+Hasil: Hokkaido Eggtart C B M (1 pcs)
+Item,Qty,Unit
+Eggtart B M,1,pcs
+Filling Portugese,45,gr
+
+Hasil: Mozzarella Beef Cheese (1 pcs)
+Item,Qty,Unit
+Square Croissant,1,pcs
+Keju Quick Melt,1.5,pcs
+Smoke Beef,1,pcs
+Mozzarella,25,gr
+Mayonaise,25,gr
+
+Hasil: Mozzarella Smoked Beef (1 pcs)
+Item,Qty,Unit
+Square Croissant,1,pcs
+Keju Quick Melt,1,pcs
+Smoke Beef 1/4,1,pcs
+Saos Sambal,5,gr
+Delicious Sauce,5,gr
+Mayonaise,25,gr
+
+

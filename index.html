@@ -380,16 +380,28 @@
 <body>
     <!-- Navigation -->
     <div class="nav-container">
-        <div class="nav-buttons">
-            <button class="nav-button" onclick="showPage('calculator')">Production Calculator</button>
-            <button class="nav-button" onclick="showPage('recipe')">Recipe Scaler</button>
-            <button class="nav-button" onclick="showPage('settings')">Settings</button>
+        <div class="nav-buttons" id="simple-ground-nav-buttons">
+            <button class="nav-button" onclick="showPage('production-calculator', 'simple-ground')">Production Calculator</button>
+            <button class="nav-button" onclick="showPage('recipe', 'simple-ground')">Recipe Scaler</button>
+            <button class="nav-button" onclick="showPage('settings', 'simple-ground')">Settings</button>
+        </div>
+        <div class="nav-buttons" id="croissant-nav-buttons" style="display: none;">
+            <button class="nav-button" onclick="showPage('production-calculator', 'croissant')">Production Calculator</button>
+            <button class="nav-button" onclick="showPage('recipe', 'croissant')">Recipe Scaler</button>
+            <!-- Add other buttons for Croissant Department here -->
+        </div>
+        <div class="department-selector" style="text-align: center; margin-top: 10px;">
+            <label for="department-select" style="font-size: 14px; color: #f9e1c0; margin-right: 10px;">Select Department:</label>
+            <select id="department-select" style="padding: 6px 10px; border-radius: 6px; border: none; background: rgba(255, 255, 255, 0.8); font-size: 14px; color: #333;">
+                <option value="simple-ground">Simple Ground</option>
+                <option value="croissant">Department Croissant</option>
+            </select>
         </div>
     </div>
 
-    <!-- Calculator Page -->
-    <div id="calculator-page" class="page">
-        <div class="container">
+    <!-- Production Calculator Page -->
+    <div id="production-calculator-page" class="page">
+        <div id="simple-ground-calculator-content" class="container">
             <div class="header">
                 <h1>Simple Ground</h1>
                 <p>coffee.cake.donut</p>
@@ -398,6 +410,23 @@
             <button id="calculate">CALCULATE</button>
             <div class="result" id="result">Pastikan sudah disetting dengan benar sebelum digunakan.</div>
         </div>
+
+        <div id="croissant-calculator-content" class="container" style="display: none;">
+            <div class="header">
+                <h1>Department Croissant Calculator</h1>
+                <p>Calculation logic for croissants will go here.</p>
+            </div>
+            <div id="croissantInputFields"></div>
+            <button id="calculateCroissant">CALCULATE</button>
+            <div class="result" id="croissantCalculationResults" style="margin-top: 20px;">
+                <h2>Calculation Results</h2>
+                <div id="croissantRecipeOutput"></div>
+            </div>
+            <div class="result" id="croissantIngredientSummary" style="margin-top: 20px;">
+                <h2>Ingredient Summary</h2>
+                <div id="croissantIngredientOutput"></div>
+            </div>
+        </div>
     </div>
 
     <!-- Recipe Scaler Page -->
@@ -405,22 +434,31 @@
         <div class="container">
             <h1>Recipe Scaler</h1>
             <div id="recipe-select">
-                <label for="recipes">Choose a recipe:</label>
-                <select id="recipes"></select>
+                <label for="recipes" style="font-size: 14px; font-weight: 500; color: #f9e1c0; flex: 2; text-align: left;">
+                    📖 Choose Recipe:
+                </label>
+                <select id="recipes" style="flex: 1; padding: 6px; border: none; border-radius: 6px; font-size: 14px; text-align: center; background: rgba(255, 255, 255, 0.8); transition: all 0.3s ease; max-width: none; margin-bottom: 15px;">
+                    <option value="">Select a recipe</option>
+                </select>
             </div>
             <div id="multiplier-input">
-                <label for="multiplier">Enter multiplier:</label>
-                <input type="number" id="multiplier" min="1" value="1">
+                <label for="multiplier" style="font-size: 14px; font-weight: 500; color: #f9e1c0; flex: 2; text-align: left;">
+                    ✖ Scale Factor:
+                </label>
+                <input type="number" id="multiplier" min="0.1" value="1" placeholder="e.g. 1.5" style="flex: 1; padding: 6px; border: none; border-radius: 6px; font-size: 14px; text-align: center; background: rgba(255, 255, 255, 0.8); transition: all 0.3s ease; max-width: 80px;">
             </div>
-            <button id="scale-button">Scale Recipe</button>
-            <div id="output">
-                <h2 id="recipe-name"></h2>
-                <table id="ingredients-table">
+            <button id="scale-button" style="margin-top: 15px; padding: 12px; background: #5a3e2b; color: white; border: none; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s ease; width: 100%;">
+                ⚖ Scale Recipe
+            </button>
+            <div id="output" class="result">
+                <p id="initial-output-message" style="font-style: italic; color: #f9e1c0;">Select a recipe and click 'Scale' to see results.</p>
+                <h2 id="recipe-name" style="color: #f9e1c0;"></h2>
+                <table id="ingredients-table" style="display: none;">
                     <thead>
                         <tr>
-                            <th>Ingredient</th>
-                            <th>Amount</th>
-                            <th>Unit</th>
+                            <th style="color: #f9e1c0;">Ingredient</th>
+                            <th style="color: #f9e1c0;">Amount</th>
+                            <th style="color: #f9e1c0;">Unit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -428,8 +466,8 @@
                     </tbody>
                 </table>
                 <div id="recipe-instructions" class="result" style="margin-top: 20px; display: none;">
-                    <h3>Instructions:</h3>
-                    <ul id="instructions-list" style="list-style-type: decimal; padding-left: 20px;">
+                    <h3 style="color: #f9e1c0;">Instructions:</h3>
+                    <ul id="instructions-list" style="list-style-type: decimal; padding-left: 20px; color: #f9e1c0;">
                         <!-- Instructions will be added here -->
                     </ul>
                 </div>
@@ -491,26 +529,87 @@
         let DONUT_WEIGHT_PER_PCS;
         let BOMBOLONI_WEIGHT_PER_PCS;
         let PCS_PER_LOYANG;
-        let LOYANG_PER_TROLLEY;
-        let recipes;
+                let LOYANG_PER_TROLLEY;
+                let recipes;
+                let croissantProductsList = []; // New global variable for croissant products, initialize as empty array
+                let croissantRecipes = {};     // New global variable for croissant recipes, initialize as empty object
 
-        // Navigation Function
-        function showPage(pageId) {
+                // Global variable to keep track of the active department
+                let activeDepartment = 'simple-ground'; // Default active department
+
+        // Department Selection Function
+        function selectDepartment(departmentId) {
+            activeDepartment = departmentId;
+
+            // Hide all department navigation buttons
+            document.getElementById('simple-ground-nav-buttons').style.display = 'none';
+            document.getElementById('croissant-nav-buttons').style.display = 'none';
+
+            // Show relevant navigation buttons for the selected department
+            document.getElementById(departmentId + '-nav-buttons').style.display = 'flex';
+
+            // Determine the currently active main page (not the department-specific sub-pages)
+            let currentActiveMainPageId = 'production-calculator'; // Default to production calculator
+            const activePage = document.querySelector('.page.active');
+            if (activePage) {
+                if (activePage.id === 'production-calculator-page') {
+                    currentActiveMainPageId = 'production-calculator';
+                } else {
+                    currentActiveMainPageId = activePage.id.replace('-page', '');
+                }
+            }
+
+            // Now show the current active main page, but with the new department context
+            showPage(currentActiveMainPageId, departmentId);
+
+            // Immediately re-populate recipes when department changes, if recipe scaler is active
+            if (document.getElementById('recipe-page').classList.contains('active')) {
+                refreshRecipeScalerContent();
+            }
+        }
+
+        // Page Navigation Function
+        function showPage(pageId, department) {
             // Hide all pages
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
             });
             
-            // Show selected page
-            document.getElementById(pageId + '-page').classList.add('active');
+            // Handle the specific production calculator page
+            if (pageId === 'production-calculator') {
+                document.getElementById('production-calculator-page').classList.add('active');
+                
+                // Hide all internal calculator contents
+                document.getElementById('simple-ground-calculator-content').style.display = 'none';
+                document.getElementById('croissant-calculator-content').style.display = 'none';
+
+                // Show the specific calculator content based on the selected department
+                if (department === 'simple-ground') {
+                    document.getElementById('simple-ground-calculator-content').style.display = 'block';
+                } else if (department === 'croissant') {
+                    document.getElementById('croissant-calculator-content').style.display = 'block';
+                }
+            } else {
+                // Show other pages
+                document.getElementById(pageId + '-page').classList.add('active');
+            }
             
-            // Update nav buttons
-            document.querySelectorAll('.nav-button').forEach(button => {
+            // Update nav buttons for the current department
+            document.querySelectorAll(`.nav-buttons .nav-button`).forEach(button => {
                 button.classList.remove('active');
-                if (button.textContent.toLowerCase().includes(pageId)) {
-                    button.classList.add('active');
+                const onclickAttr = button.getAttribute('onclick');
+                if (onclickAttr) {
+                    const match = onclickAttr.match(/showPage\('([^']+)',\s*'([^']+)'\)/);
+                    if (match && match[1] === pageId && match[2] === department) {
+                        button.classList.add('active');
+                    }
                 }
             });
+
+            // If navigating to the recipe scaler page, re-populate recipes and trigger a scale
+            if (pageId === 'recipe') {
+                refreshRecipeScalerContent();
+            }
         }
 
         // Fetch data and initialize the application
@@ -530,44 +629,65 @@
                 BOMBOLONI_WEIGHT_PER_PCS = data.constants.BOMBOLONI_WEIGHT_PER_PCS;
                 PCS_PER_LOYANG = data.constants.PCS_PER_LOYANG;
                 LOYANG_PER_TROLLEY = data.constants.LOYANG_PER_TROLLEY;
-                recipes = data.recipes;
+                recipes = data.recipes; // Top-level recipes
+
+                console.log('Data loaded:', data); // Debugging: log full data
+                
+                // Assign department-specific data to global variables
+                croissantProductsList = data.croissant_department.product_management.croissantProducts;
+                croissantRecipes = data.croissant_department.recipe_management;
+                
+                console.log('Croissant Products List:', croissantProductsList); // Debugging
+                console.log('Croissant Recipes:', croissantRecipes);           // Debugging
 
                 // Initialize all parts of the application
-                showPage('calculator');
+                selectDepartment('simple-ground'); // Ensure a default department is selected
+                showPage('production-calculator', 'simple-ground'); // Explicitly show the default calculator page for simple-ground
                 initializeCalculator();
                 initializeRecipeScaler();
                 initializeSettings();
+                initializeCroissantCalculator(); // Initialize the croissant calculator
             } catch (error) {
                 console.error('Error loading application data:', error);
                 // Display an error message to the user
                 const container = document.querySelector('.container');
                 if (container) {
-                    container.innerHTML = '<h1>Error</h1><p>Could not load application data. Please try again later.</p>';
+                    container.innerHTML = '<h1>Error</h1><p>Could not load application data. Please try again later. Check console for details.</p>';
                 }
             }
         }
 
         // Initialize with calculator page
-        document.addEventListener('DOMContentLoaded', initializeApp);
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
 
-        // Calculator Page Script
-        function initializeCalculator() {
-            const items = [
-                "Tiban", "GP", "MTC", "Piayu", "BA"
-            ];
+            // Add event listener for the new department dropdown
+            const departmentSelect = document.getElementById('department-select');
+            if (departmentSelect) {
+                departmentSelect.addEventListener('change', function() {
+                    selectDepartment(this.value);
+                });
+            }
+        });
 
-            const inputFields = document.getElementById("inputFields");
+            // Calculator Page Script
+            function initializeCalculator() {
+                const items = [
+                    "Tiban", "GP", "MTC", "Piayu", "BA"
+                ];
 
-            // Create input fields for outlets (MTC, BENGKONG, TIBAN, PIAYU)
-            items.forEach(item => {
-                const div = document.createElement("div");
-                div.className = "form-group";
-                div.innerHTML = `
-                    <label for="${item}">${item.replace(/_/g, ' ')} Outlet:</label>
-                    <input type="number" id="${item}" name="${item}" placeholder="0" min="0"/>
-                `;
-                inputFields.appendChild(div);
-            });
+                const inputFields = document.getElementById("inputFields");
+
+                // Create input fields for outlets (MTC, BENGKONG, TIBAN, PIAYU)
+                items.forEach(item => {
+                    const div = document.createElement("div");
+                    div.className = "form-group";
+                    div.innerHTML = `
+                        <label for="${item}">${item.replace(/_/g, ' ')} Outlet:</label>
+                        <input type="number" id="${item}" name="${item}" placeholder="0" min="0"/>
+                    `;
+                    inputFields.appendChild(div);
+                });
 
             // Add calculate button event listener
             document.getElementById("calculate").addEventListener("click", function () {
@@ -846,6 +966,206 @@
             });
         }
 
+        // Croissant Calculator Page Script (New Function)
+        function initializeCroissantCalculator() {
+            const croissantInputFieldsDiv = document.getElementById('croissantInputFields');
+            const calculateCroissantButton = document.getElementById('calculateCroissant');
+            const croissantRecipeOutputDiv = document.getElementById('croissantRecipeOutput');
+            const croissantIngredientOutputDiv = document.getElementById('croissantIngredientOutput');
+
+            console.log('Initializing Croissant Calculator...'); // Debugging
+            console.log('Croissant Products for inputs:', croissantProductsList); // Debugging
+            console.log('Outlets for inputs:', outlets); // Debugging
+
+            // Generate input fields for each croissant product and outlet
+            croissantInputFieldsDiv.innerHTML = ''; // Clear existing content
+            outlets.forEach(outlet => {
+                const outletHeader = document.createElement('h3');
+                outletHeader.textContent = `${outlet} Outlet`;
+                outletHeader.style.textAlign = 'left';
+                outletHeader.style.marginTop = '15px';
+                outletHeader.style.color = '#f9e1c0';
+                croissantInputFieldsDiv.appendChild(outletHeader);
+
+                croissantProductsList.forEach(product => {
+                    const div = document.createElement('div');
+                    div.className = 'form-group';
+                    div.innerHTML = `
+                        <label for="croissant-${product.replace(/ /g, '-')}-${outlet}">${product.replace(/_/g, ' ')}:</label>
+                        <input type="number" id="croissant-${product.replace(/ /g, '-')}-${outlet}" name="croissant-${product.replace(/ /g, '-')}-${outlet}" placeholder="0" min="0"/>
+                    `;
+                    croissantInputFieldsDiv.appendChild(div);
+                });
+            });
+
+            calculateCroissantButton.addEventListener('click', function() {
+                let totalProductQuantities = {};
+
+                // Initialize total product quantities
+                croissantProductsList.forEach(product => {
+                    totalProductQuantities[product] = 0;
+                });
+
+                // Gather input for each product per outlet
+                outlets.forEach(outlet => {
+                    croissantProductsList.forEach(product => {
+                        const inputId = `croissant-${product.replace(/ /g, '-')}-${outlet}`;
+                        const inputElement = document.getElementById(inputId);
+                        const quantity = parseFloat(inputElement.value) || 0;
+                        totalProductQuantities[product] += quantity;
+                    });
+                });
+
+                // Map to store total resep needed for each unique recipe (main or sub-recipe)
+                let totalResepMap = {};
+
+                // Function to recursively calculate total resep needed for a recipe and its sub-recipes
+                function calculateTotalRecipeResep(recipeName, resepMultiplier) {
+                    const recipe = croissantRecipes[recipeName];
+                    if (!recipe) {
+                        console.warn(`Recipe "${recipeName}" not found in croissantRecipes.`);
+                        return;
+                    }
+
+                    if (!totalResepMap[recipeName]) {
+                        totalResepMap[recipeName] = 0;
+                    }
+                    totalResepMap[recipeName] += resepMultiplier;
+
+                    if (recipe.ingredients) {
+                        for (const ingredientRaw in recipe.ingredients) {
+                            const details = recipe.ingredients[ingredientRaw];
+                            const ingredientKey = ingredientRaw.replace(/ /g, '_').toLowerCase();
+                            
+                            if (croissantRecipes[ingredientKey]) { // Check if it's a sub-recipe
+                                const subRecipe = croissantRecipes[ingredientKey];
+                                const amountNeededInParentRecipe = details.amount;
+                                const subRecipeBaseWeight = subRecipe.base_weight;
+
+                                if (subRecipeBaseWeight && subRecipeBaseWeight > 0) {
+                                    // Calculate how many resep of the sub-recipe are needed for this particular path
+                                    const subRecipeResep = (amountNeededInParentRecipe / subRecipeBaseWeight) * resepMultiplier;
+                                    calculateTotalRecipeResep(ingredientKey, subRecipeResep);
+                                } else {
+                                    console.warn(`Sub-recipe "${ingredientKey}" found without base_weight. Cannot calculate resep.`);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Start calculation for each product
+                totalResepMap = {}; // Reset for each calculation
+                for (const product in totalProductQuantities) {
+                    const quantity = totalProductQuantities[product];
+                    if (quantity > 0) {
+                        const mainRecipeName = product.replace(/ /g, '_').toLowerCase();
+                        const mainRecipe = croissantRecipes[mainRecipeName];
+
+                        if (mainRecipe) {
+                            // Sum up total grams per unit for the main product, if it has ingredients
+                            let totalGramsPerUnit = 0;
+                            if (mainRecipe.ingredients) {
+                                for (const ing in mainRecipe.ingredients) {
+                                    totalGramsPerUnit += mainRecipe.ingredients[ing].amount;
+                                }
+                            } else {
+                                // If a product doesn't have ingredients, its base_weight is its per unit weight.
+                                // For products like "Classic Croissant" which directly correspond to a dough recipe,
+                                // the base_weight of the recipe is the weight of one 'resep'.
+                                // We need to figure out how much 'resep' is needed for `quantity` units of product.
+                                // Assuming `base_weight` of "Classic Croissant" recipe is for 1 unit of croissant.
+                                // If base_weight represents 1 resep, and a product has a `product_weight_per_unit` (not in data.json currently),
+                                // then `quantity * product_weight_per_unit / mainRecipe.base_weight` could be used.
+                                // For now, let's assume `base_weight` for top-level products represents 1 finished product unit.
+                                // If it's a simple product that is directly a recipe like 'adonan_croissant_classic',
+                                // we need to define how many finished items come from 1 'resep'.
+                                // For 'apple_chausson' it has ingredients and `base_weight: 100` means 100g is one unit.
+                                // So totalGramsNeeded = quantity * mainRecipe.base_weight.
+                                // Let's check `data.json` again for `adonan_croissant_classic`.
+                                // It seems like "adonan_croissant_classic" is a recipe for dough, not a finished product unit directly.
+                                // The issue is that the product "Classic Croissant" might not have a direct `base_weight` as a finished item.
+                                // I need to assume that `base_weight` in `apple_chausson` is the weight of one finished product.
+                                // For "Classic Croissant", which maps to "adonan_croissant_classic",
+                                // it's more likely that 1 'resep' of 'adonan_croissant_classic' yields multiple croissants.
+                                // The problem description is about "apple_chausson" which seems to have a `base_weight` per unit.
+                                // Let's stick to the log's original logic which appears to be using `totalGramsPerUnit` from ingredients.
+                                // For 'Classic Croissant', if `adonan_croissant_classic` is its main recipe, and it has no `ingredients` in `data.json` for the product itself.
+                                // This suggests 'adonan_croissant_classic' is a base dough.
+
+                                // Re-evaluating based on the provided log for `apple_chausson`:
+                                // `Aggregating apple_chausson with 1 resep`
+                                // This implies that 1 unit of `apple_chausson` product is treated as "1 resep" of its own recipe.
+                                // Then it breaks down its ingredients.
+                                // So, `numberOfResep` for a product's main recipe should be `quantity`.
+                                totalGramsPerUnit = mainRecipe.base_weight; // Treat the product's base_weight as its per-unit weight
+                            }
+                            
+                            // Calculate total grams needed
+                            const totalGramsNeeded = totalGramsPerUnit * quantity;
+                            
+                            // Convert to resep units for the main recipe (using its own base_weight)
+                            const numberOfResep = totalGramsNeeded / mainRecipe.base_weight;
+                            calculateTotalRecipeResep(mainRecipeName, numberOfResep);
+                        } else {
+                            console.warn(`Main recipe for product "${product}" (${mainRecipeName}) not found.`);
+                        }
+                    }
+                }
+
+                // Display Recipe Calculation Results (in resep units)
+                let recipeOutputHTML = `<table><thead><tr><th>Recipe</th><th>Amount (resep)</th></tr></thead><tbody>`;
+                for (const recipeName in totalResepMap) {
+                    recipeOutputHTML += `<tr><td>${recipeName.replace(/_/g, ' ')}</td><td>${totalResepMap[recipeName].toFixed(2)}</td></tr>`;
+                }
+                recipeOutputHTML += `</tbody></table>`;
+                croissantRecipeOutputDiv.innerHTML = recipeOutputHTML;
+
+                // Aggregate Ingredients from the accumulated totalResepMap
+                let aggregatedIngredients = {};
+
+                // This function now takes a recipe and its *total* resep and adds its base ingredients
+                function aggregateBaseIngredients(recipeName, totalNumberOfResep) {
+                    const recipe = croissantRecipes[recipeName];
+                    if (!recipe || !recipe.ingredients) return;
+
+                    // Iterate through ingredients, only adding base ingredients to the final list
+                    for (const ingredientRaw in recipe.ingredients) {
+                        const details = recipe.ingredients[ingredientRaw];
+                        const ingredientKey = ingredientRaw.replace(/ /g, '_').toLowerCase();
+                        
+                        if (!croissantRecipes[ingredientKey]) { // If it's NOT a sub-recipe, it's a base ingredient
+                            const gramsNeeded = details.amount * totalNumberOfResep;
+                            if (!aggregatedIngredients[ingredientRaw]) {
+                                aggregatedIngredients[ingredientRaw] = { amount: 0, unit: details.unit };
+                            }
+                            aggregatedIngredients[ingredientRaw].amount += gramsNeeded;
+                        }
+                        // Sub-recipes are handled by their own entry in totalResepMap, no need to recurse here
+                    }
+                }
+
+                // Now, iterate through the totalResepMap to aggregate ingredients
+                for (const recipeName in totalResepMap) {
+                    // Only call aggregateBaseIngredients for recipes that have ingredients defined
+                    // Recipes like 'adonan_original' which are actually a collection of base ingredients.
+                    const recipe = croissantRecipes[recipeName];
+                    if (recipe && recipe.ingredients) {
+                        aggregateBaseIngredients(recipeName, totalResepMap[recipeName]);
+                    }
+                }
+
+                // Display Ingredient Summary Results
+                let ingredientOutputHTML = `<table><thead><tr><th>Ingredient</th><th>Total Amount</th><th>Unit</th></tr></thead><tbody>`;
+                for (const ingredient in aggregatedIngredients) {
+                    ingredientOutputHTML += `<tr><td>${ingredient.replace(/_/g, ' ')}</td><td>${aggregatedIngredients[ingredient].amount.toFixed(2)}</td><td>${aggregatedIngredients[ingredient].unit}</td></tr>`;
+                }
+                ingredientOutputHTML += `</tbody></table>`;
+                croissantIngredientOutputDiv.innerHTML = ingredientOutputHTML;
+            });
+            console.log('Croissant Calculator initialized successfully.'); // Debugging
+        }
+
         // Recipe Scaler Page Script
         function initializeRecipeScaler() {
             const recipeSelect = document.getElementById("recipes");
@@ -858,16 +1178,69 @@
 
             // Populate the recipe dropdown
             function populateRecipes() {
-                recipeSelect.innerHTML = "";
+                recipeSelect.innerHTML = "<option value=\"\">Select a recipe</option>"; // Always start with a default option
+
+                // Add Simple Ground recipes
                 Object.keys(recipes).forEach((recipeKey) => {
                     // Only add actual recipes to the dropdown, not instruction arrays
                     if (!recipeKey.endsWith("_instructions")) {
                         const option = document.createElement("option");
                         option.value = recipeKey;
-                        option.textContent = recipeKey.replace(/_/g, " "); // Replace underscores with spaces
+                        option.textContent = `[Simple Ground] ${recipeKey.replace(/_/g, " ")}`;
+                        option.dataset.department = 'simple-ground';
                         recipeSelect.appendChild(option);
                     }
                 });
+
+                // Add Croissant recipes
+                Object.keys(croissantRecipes).forEach(recipeKey => {
+                    // Exclude instruction keys and any other non-recipe entries
+                    if (!recipeKey.endsWith("_instructions") && typeof croissantRecipes[recipeKey] === 'object' && croissantRecipes[recipeKey] !== null) {
+                        const option = document.createElement("option");
+                        option.value = recipeKey;
+                        // Determine display name: use product name if available, otherwise format recipe key
+                        let displayName = recipeKey.replace(/_/g, " ");
+                        const correspondingProduct = croissantProductsList.find(product => product.toLowerCase().replace(/ /g, '_') === recipeKey);
+                        if (correspondingProduct) {
+                            displayName = correspondingProduct;
+                        } else if (recipeKey === "adonan_croissant_classic") {
+                            // Special case for "adonan_croissant_classic" which is a base recipe not directly a product name in the list
+                            displayName = "Classic Croissant Dough (Base)";
+                        }
+                        
+                        option.textContent = `[Croissant] ${displayName}`;
+                        option.dataset.department = 'croissant';
+                        recipeSelect.appendChild(option);
+                    }
+                });
+            }
+
+            // Centralize the logic to refresh the recipe scaler content
+            function refreshRecipeScalerContent() {
+                populateRecipes();
+                
+                // Reset output display
+                document.getElementById('initial-output-message').style.display = 'block';
+                recipeNameOutput.style.display = 'none';
+                document.getElementById('ingredients-table').style.display = 'none';
+                ingredientsTableBody.innerHTML = "";
+                recipeInstructionsDiv.style.display = "none";
+                instructionsList.innerHTML = "";
+
+                // Select the "Select a recipe" option by default, or the first valid recipe if none
+                if (recipeSelect.options.length > 0) {
+                    const selectARecipeOption = Array.from(recipeSelect.options).find(option => option.value === "");
+                    if (selectARecipeOption) {
+                        recipeSelect.value = ""; // Select "Select a recipe" option
+                    } else {
+                        // Attempt to select the first non-empty option
+                        const firstValidOption = Array.from(recipeSelect.options).find(option => option.value !== "");
+                        if (firstValidOption) {
+                            recipeSelect.value = firstValidOption.value;
+                            scaleButton.click(); // Automatically scale the first recipe
+                        }
+                    }
+                }
             }
 
             // Scale and display the recipe
@@ -877,37 +1250,83 @@
 
                 if (!selectedRecipeKey || isNaN(multiplier) || multiplier <= 0) {
                     alert("Please select a recipe and enter a valid multiplier.");
+                    // Reset output when validation fails
+                    document.getElementById('initial-output-message').style.display = 'block';
+                    recipeNameOutput.style.display = 'none';
+                    document.getElementById('ingredients-table').style.display = 'none';
+                    ingredientsTableBody.innerHTML = "";
+                    recipeInstructionsDiv.style.display = "none";
+                    instructionsList.innerHTML = "";
                     return;
                 }
 
-                const recipe = recipes[selectedRecipeKey];
-                recipeNameOutput.textContent = selectedRecipeKey.replace(/_/g, " "); // Replace underscores with spaces
+                document.getElementById('initial-output-message').style.display = 'none'; // Hide initial message
+                recipeNameOutput.style.display = 'block'; // Show recipe name
+                document.getElementById('ingredients-table').style.display = 'table'; // Show ingredients table
+
+                const selectedOption = recipeSelect.options[recipeSelect.selectedIndex];
+                const selectedDepartment = selectedOption.dataset.department;
+                
+                let currentRecipesContext = {};
+                if (selectedDepartment === 'simple-ground') {
+                    currentRecipesContext = recipes;
+                } else if (selectedDepartment === 'croissant') {
+                    currentRecipesContext = croissantRecipes;
+                }
+
+                const recipe = currentRecipesContext[selectedRecipeKey];
+                // Display the text content of the selected option (product name)
+                recipeNameOutput.textContent = selectedOption.textContent;
                 ingredientsTableBody.innerHTML = "";
 
-                for (const [ingredient, details] of Object.entries(recipe)) {
-                    // Skip 'base_weight' as it's not an ingredient to be scaled and displayed in the table
-                    if (ingredient === "base_weight") {
-                        continue;
+                if (!recipe) {
+                    console.error(`Recipe "${selectedRecipeKey}" not found in current department's recipes.`);
+                    ingredientsTableBody.innerHTML = `<tr><td colspan="3">Recipe not found.</td></tr>`;
+                    recipeInstructionsDiv.style.display = "none";
+                    document.getElementById('ingredients-table').style.display = 'table'; // Keep table visible to show error message
+                    return;
+                }
+
+                if (recipe.ingredients) { // Check if the recipe has a sub-object 'ingredients'
+                    for (const [ingredient, details] of Object.entries(recipe.ingredients)) {
+                        const row = document.createElement("tr");
+                        const ingredientCell = document.createElement("td");
+                        const amountCell = document.createElement("td");
+                        const unitCell = document.createElement("td");
+
+                        ingredientCell.textContent = ingredient.replace(/_/g, " ");
+                        amountCell.textContent = (details.amount * multiplier).toFixed(0);
+                        unitCell.textContent = details.unit;
+
+                        row.appendChild(ingredientCell);
+                        row.appendChild(amountCell);
+                        row.appendChild(unitCell);
+                        ingredientsTableBody.appendChild(row);
                     }
+                } else { // Handle recipes that directly list ingredients (like adonan_donut_simple_ground) and might not have a separate 'ingredients' object
+                    for (const [key, value] of Object.entries(recipe)) {
+                        // Ensure it's an ingredient entry and not a metadata field like 'base_weight'
+                        if (key !== "base_weight" && typeof value === 'object' && value !== null && 'amount' in value && 'unit' in value) {
+                            const row = document.createElement("tr");
+                            const ingredientCell = document.createElement("td");
+                            const amountCell = document.createElement("td");
+                            const unitCell = document.createElement("td");
 
-                    const row = document.createElement("tr");
-                    const ingredientCell = document.createElement("td");
-                    const amountCell = document.createElement("td");
-                    const unitCell = document.createElement("td");
+                            ingredientCell.textContent = key.replace(/_/g, " ");
+                            amountCell.textContent = (value.amount * multiplier).toFixed(0);
+                            unitCell.textContent = value.unit;
 
-                    ingredientCell.textContent = ingredient.replace(/_/g, " ");
-                    amountCell.textContent = (details.amount * multiplier).toFixed(0);
-                    unitCell.textContent = details.unit;
-
-                    row.appendChild(ingredientCell);
-                    row.appendChild(amountCell);
-                    row.appendChild(unitCell);
-                    ingredientsTableBody.appendChild(row);
+                            row.appendChild(ingredientCell);
+                            row.appendChild(amountCell);
+                            row.appendChild(unitCell);
+                            ingredientsTableBody.appendChild(row);
+                        }
+                    }
                 }
 
                 // Display instructions
                 const instructionsKey = selectedRecipeKey + "_instructions";
-                const instructions = recipes[instructionsKey];
+                const instructions = currentRecipesContext[instructionsKey]; // Use currentRecipesContext for instructions
                 instructionsList.innerHTML = ""; // Clear previous instructions
 
                 if (instructions && instructions.length > 0) {
@@ -922,10 +1341,8 @@
                 }
             });
 
-            // Initialize the app
-            populateRecipes();
-            // Trigger scale button click on initial load to display default recipe and instructions
-            scaleButton.click();
+            // Initial call to refresh content
+            refreshRecipeScalerContent();
         }
 
         // Settings Page Script

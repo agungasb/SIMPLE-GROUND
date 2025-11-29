@@ -1,0 +1,308 @@
+## RECIPE INGREDIENT LISTS
+
+---
+### Hasil: Adonan Original (1,953 gr)
+Item,Qty,Unit
+Tepung Cakra,1000,gr
+Gula Pasir,130,gr
+Garam,18,gr
+Pelembut,5,gr
+Ragi,25,gr
+Butter Orchid,100,gr
+Fresh Milk,210,gr
+Telur,50,gr
+Air Es,210,gr
+Sisa Trimingan,200,gr
+
+---
+### Hasil: Adonan Charcoal (1,953 gr)
+Item,Qty,Unit
+Tepung Cakra,980,gr
+Gula Pasir,980,gr
+Garam,18,gr
+Pelembut,5,gr
+Ragi,25,gr
+Butter Orchid,100,gr
+Fresh Milk,210,gr
+Telur,50,gr
+Air Es,200,gr
+Sisa Trimingan,200,gr
+Bubuk Charcoal,20,gr
+
+---
+### Hasil: Adonan Brioche (1,313 gr)
+Item,Qty,Unit
+Kuning Telur,150,gr
+Ragi,17,gr
+Gula Pasir,65,gr
+Susu bubuk,20,gr
+Garam,11,gr
+tepung cakra,600,gr
+Fresh Milk,130,gr
+Butter Orchid,150,gr
+Air Es,300,gr
+
+---
+### Hasil: Adonan Puff Pastry (1,660 gr)
+Item,Qty,Unit
+Tepung Cakra,700,gr
+Tepung Segitiga,300,gr
+Garam,20,gr
+Butter Orchid,140,gr
+Air,500,gr
+
+---
+### Hasil: Laminasi Original (2,300 gr)
+Item,Qty,Unit
+Adonan Original,1,600,gr
+Butter Sheet,500,gr
+Adonan Original,200,gr
+
+---
+### Hasil: Laminasi Charcoal (2,300 gr)
+Item,Qty,Unit
+Adonan Charcoal,1,600,gr
+Butter Sheet,500,gr
+Adonan Charcoal,200,gr
+
+---
+### Hasil: Laminasi Kouign Amann (3,000 gr)
+Item,Qty,Unit
+Adonan Original,1,800,gr
+Butter Sheet,800,gr
+Gula Pasir,400,gr
+
+---
+### Hasil: Laminasi Puff Pastry (2,160 gr)
+Item,Qty,Unit
+Adonan Puff Pastry,1,660,gr
+Butter Sheet,500,gr
+
+---
+### Hasil: Filling Crème Brulee (1,190 gr)
+Item,Qty,Unit
+Gula Pasir,200,gr
+Kuning Telur,16,pcs
+Cooking Cream Pleasure,500,gr
+Fresh Milk,700,gr
+Essence Vanilla,10,gr
+
+---
+### Hasil: Filling Danish Pastry (320 gr)
+Item,Qty,Unit
+Fresh Milk,250,gr
+Kuning Telur,1,pcs
+Essence Vanilla,1,gr
+Gula Pasir,35,gr
+Butter Orchid,20,gr
+
+---
+### Hasil: Filling Ferrero (850 gr)
+Item,Qty,Unit
+Couverture white,300,gr
+Couverture Chocolate,200,gr
+Minyak,175,gr
+Kacang Morin,175,gr
+
+---
+### Hasil: Filling Lotus Biscoff (700 gr)
+Item,Qty,Unit
+Millac Gold,500,gr
+Selai Lotus Biscoff,200,gr
+
+---
+### Hasil: Filling Nutella (675 gr)
+Item,Qty,Unit
+Selai Nutella,500,gr
+Minyak,175,gr
+
+---
+### Hasil: Filling Pistachio B.M (1,110 gr)
+Item,Qty,Unit
+Telur,1,pcs
+Kuning Telur,100,gr
+fresh milk,750,gr
+Gula Pasir,70,gr
+Pistachio Paste,80,gr
+Tepung Maizena,65,gr
+
+---
+### Hasil: Filling Raisin (390 gr)
+Item,Qty,Unit
+Kuning Telur,3,pcs
+Fresh Milk,250,gr
+Tepung Maizena,20,gr
+Essence Vanilla,1,gr
+Butter Orchid,30,gr
+Buah Lemon,1,pcs
+Gula Pasir,45,gr
+
+---
+### Hasil: Topping Coffee Croissant (430 gr)
+Item,Qty,Unit
+Margarine,100,gr
+Tepung Segitiga,120,gr
+Gula Halus,100,gr
+Bubuk Kopi,15,gr
+Putih Telur,100,gr
+
+---
+### Hasil: Filling Almond Cream (515 gr)
+Item,Qty,Unit
+Butter Orchid,125,gr
+Almond Powder,110,gr
+Telur,3,pcs
+Gula Halus,100,gr
+tepung segitiga,35,gr
+
+---
+### Hasil: Filling Choco mousse (1100 pcs)
+Item,Qty,Unit
+cooking cream pleasure,240,gr
+dark couverture,240,gr
+gelatine,6,gr
+air,36,gr
+millac gold,480,gr
+gula halus, 120,gr
+
+---
+### Hasil: Filling Cream Cheese (smith) (790 gr)
+Item,Qty,Unit
+Gula Halus,100,gr
+Cream Cheese,200,gr
+Millac Gold,500,gr
+
+---
+### Hasil: Topping Creme au bullion (350 gr)
+Item,Qty,Unit
+Gula Pasir,35,gr
+kuning telur,4,gr
+Millac Gold,250,gr
+essence vanilla,1,gr
+
+---
+### Hasil: Filling Crokies (540 gr)
+Item,Qty,Unit
+butter orchid,120,gr
+gula pasir,60,gr
+tepung segitiga,150,gr
+dark couverture,100,gr
+baking powder,3,gr
+soda kue,3,gr
+garam,2,gr
+palm sugar,60,gr
+
+---
+###Hasil: Filling Cromboloni Chocolate (640 gr)
+Item,Qty,Unit
+Chocolate Tulip,75,gr
+Gula Halus,75,gr
+Essence Vanilla,200,gr
+Millac Gold,300,gr
+
+---
+###Hasil: Filling Cromboloni Matcha (580 gr)
+Item,Qty,Unit
+Matcha Powder,25,gr
+Millac Gold,300,gr
+sonton Vanilla,200,gr
+Gula Halus,75,gr
+
+---
+###Hasil: Filling Cromboloni Strawberry (575 gr)
+Item,Qty,Unit
+Selai Strawberry,75,gr
+Millac Gold,300,gr
+sonton Vanilla,200,gr
+Pasta Strawberry,5,gr
+
+---
+###Hasil: Filling Frosting (595 gr)
+Item,Qty,Unit
+Gula Halus,100,gr
+Millac Gold,500,gr
+
+---
+###Hasil: Filling Fruity (695 gr)
+Item,Qty,Unit
+Cream Cheese,100,gr
+Millac Gold,500,gr
+Gula Halus,100,gr
+
+---
+###Hasil: Filling Hokkaido (1,950 gr)
+Item,Qty,Unit
+Cream Cheese,1000,gr
+Butter Orchid,110,gr
+Keju Martabak,55,gr
+Keju Mozzarella,113,gr
+Gula Pasir,213,gr
+Yogurt,300,gr
+Putih Telur,173,gr
+
+---
+###Hasil: Filling Portuguese (1,300 gr)
+Item,Qty,Unit
+Telur,2,pcs
+Kuning Telur,8,pcs
+Gula Pasir,40,gr
+Susu Bubuk,20,gr
+Millac Roselle,1000,gr
+
+---
+###Hasil: Filling Danish Strawberry (380 gr)
+Item,Qty,Unit
+Telur,1,pcs
+Fresh Milk,250,gr
+Gula Pasir,35,gr
+Butter Orchid,20,gr
+Tepung Maizena,30,gr
+
+---
+###Hasil: Filling Apple Chauson (1,520 gr)
+Item,Qty,Unit
+Buah Apple,1000,gr
+Butter Orchid,100,gr
+palm sugar,70,gr
+Tepung Maizena,30,gr
+Raisin,100,gr
+Garam,6,gr
+Cinnamon Powder,15,gr
+
+---
+###Hasil: Filling Brulle Danish (480 gr)
+Item,Qty,Unit
+Kuning Telur,100,gr
+Tepung Maizena,44,gr
+Gula Pasir,100,gr
+Fresh Milk,164,gr
+Cooking Cream Pleasure,110,gr
+
+---
+###Hasil: Filling Cheese Melt (466 gr)
+Item,Qty,Unit
+Cream Cheese,250,gr
+Butter Orchid,100,gr
+Gula Halus,25,gr
+Gula Pasir,50,gr
+Fresh Milk,25,gr
+Garam,2,gr
+Essence Vanilla,1,gr
+
+---
+###Hasil: Filling Choco Cornet (395 gr)
+Item,Qty,Unit
+Filling Vanilla Cornet,200,gr
+Millac Gold,100,gr
+Gula Halus,25,gr
+Selai Nutella,80,gr
+
+---
+###Hasil: Filling Vanilla Cornet (230 gr)
+Item,Qty,Unit
+Fresh Milk,125,gr
+Essence Vanilla,3,gr
+Gula Pasir,25,gr
+Tepung Maizena,13,gr
+Telur,1,pcs
+Butter Orchid,15,gr

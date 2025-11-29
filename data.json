@@ -1,4 +1,5 @@
 {
+  "department": "simple ground",
   "BOMBOLONI_KARAKTER_PRODUCT_NAME": "Bomboloni Karakter",
   "donutProducts": [
     "Donut Taro Coklat", "Donut Taro Putih", "Donut Greentea Coklat", "Donut Greentea Batang", "Donut Ovaltine", "Donut Strawberry", "Donut Ice Sugar", "Donut Cappucino", "Donut Classic Cerres", "Donut Ceres", "Donut Ceres Coklat", "Donut Coklat", "Donut Avocado", "Donut Tiramisu", "Donut Peanut", "Donut Oreo", "Donut Almond", "Donut Lotus", "Donut Caramel", "Bomboloni Avocado", "Bomboloni Tiramisu", "Bomboloni Taro", "Bomboloni Strawberry", "Bomboloni Karakter"
@@ -55,5 +56,73 @@
       "Diamkan kembali selama 15-20 menit.",
       "Goreng dalam minyak panas dengan api sedang hingga matang keemasan."
     ]
+  },
+  "croissant_department": {
+    "product_management": {
+      "croissantProducts": ["Classic Croissant", "apple chausson"]
+    },
+    "recipe_management": {
+      "adonan_croissant_classic": {
+        "base_weight": 2000,
+        "flour": {"amount": 1000, "unit": "grams"},
+        "water": {"amount": 400, "unit": "ml"},
+        "butter": {"amount": 500, "unit": "grams"},
+        "sugar": {"amount": 100, "unit": "grams"},
+        "salt": {"amount": 20, "unit": "grams"},
+        "yeast": {"amount": 15, "unit": "grams"}
+      },
+      "adonan_croissant_classic_instructions": [
+        "Campurkan tepung, gula, garam, dan ragi. Aduk rata.",
+        "Tambahkan air sedikit demi sedikit sambil diuleni hingga adonan kalis.",
+        "Masukkan mentega dingin, uleni hingga adonan elastis dan tidak lengket.",
+        "Diamkan adonan selama 1-2 jam hingga mengembang dua kali lipat.",
+        "Kempiskan adonan, pipihkan, dan lipat beberapa kali untuk menciptakan lapisan.",
+        "Istirahatkan adonan di kulkas selama 30 menit.",
+        "Ulangi proses melipat dan istirahatkan adonan 2-3 kali.",
+        "Bentuk adonan menjadi croissant dan diamkan kembali selama 30-45 menit.",
+        "Panggang dalam oven panas hingga matang keemasan."
+      ],
+      "apple_chausson": {
+        "base_weight": 100,
+        "ingredients": {
+          "laminasi original": {"amount": 75, "unit": "grams"},
+          "filling apple chausson": {"amount": 25, "unit": "grams"}
+        }
+      },
+      "laminasi_original": {
+        "base_weight": 2300,
+        "ingredients": {
+          "adonan original": {"amount": 1800, "unit": "grams"},
+          "butter sheet": {"amount": 200, "unit": "grams"}
+        }
+      },
+      "adonan_original": {
+        "base_weight": 1953,
+        "ingredients": {
+          "tepung cakra": {"amount": 1000, "unit": "grams"},
+          "gula pasir": {"amount": 130, "unit": "grams"},
+          "garam": {"amount": 18, "unit": "grams"},
+          "pelembut": {"amount": 5, "unit": "grams"},
+          "ragi": {"amount": 25, "unit": "grams"},
+          "butter orchid": {"amount": 100, "unit": "grams"},
+          "fresh milk": {"amount": 210, "unit": "grams"},
+          "telur": {"amount": 50, "unit": "grams"},
+          "air es": {"amount": 210, "unit": "grams"},
+          "sisa trimmingan": {"amount": 200, "unit": "grams"}
+        }
+      },
+      "filling_apple_chausson": {
+        "base_weight": 1520,
+        "ingredients": {
+          "buah apple": {"amount": 1000, "unit": "grams"},
+          "butter orchid": {"amount": 100, "unit": "grams"},
+          "palm sugar": {"amount": 70, "unit": "grams"},
+          "tepung maizena": {"amount": 30, "unit": "grams"},
+          "raisin": {"amount": 100, "unit": "grams"},
+          "garam": {"amount": 6, "unit": "grams"},
+          "cinnamon powder": {"amount": 15, "unit": "grams"}
+        }
+      }
+    }
   }
 }
