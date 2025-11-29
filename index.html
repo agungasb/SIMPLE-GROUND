@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coffee Town Bakery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Pacifico&display=swap" rel="stylesheet">
     <style>
         /* Reset and Common styles */
@@ -388,17 +389,17 @@
     <!-- Navigation -->
     <div class="nav-container">
         <div class="nav-buttons" id="simple-ground-nav-buttons">
-            <button class="nav-button" onclick="showPage('production-calculator', 'simple-ground')">Production Calculator</button>
-            <button class="nav-button" onclick="showPage('recipe', 'simple-ground')">Recipe Scaler</button>
-            <button class="nav-button" onclick="showPage('settings', 'simple-ground')">Settings</button>
+            <button class="nav-button" onclick="showPage('production-calculator', 'simple-ground')"><i class="fas fa-calculator"></i> Production Calculator</button>
+            <button class="nav-button" onclick="showPage('recipe', 'simple-ground')"><i class="fas fa-book-open"></i> Recipe Scaler</button>
+            <button class="nav-button" onclick="showPage('settings', 'simple-ground')"><i class="fas fa-cog"></i> Settings</button>
         </div>
         <div class="nav-buttons" id="croissant-nav-buttons" style="display: none;">
-            <button class="nav-button" onclick="showPage('production-calculator', 'croissant')">Production Calculator</button>
-            <button class="nav-button" onclick="showPage('recipe', 'croissant')">Recipe Scaler</button>
+            <button class="nav-button" onclick="showPage('production-calculator', 'croissant')"><i class="fas fa-calculator"></i> Production Calculator</button>
+            <button class="nav-button" onclick="showPage('recipe', 'croissant')"><i class="fas fa-book-open"></i> Recipe Scaler</button>
             <!-- Add other buttons for Croissant Department here -->
         </div>
         <div class="department-selector" style="text-align: center; margin-top: 10px;">
-            <label for="department-select" style="font-size: 14px; color: #f9e1c0; margin-right: 10px;">Select Department:</label>
+            <label for="department-select" style="font-size: 14px; color: #f9e1c0; margin-right: 10px;"><i class="fas fa-building"></i> Select Department:</label>
             <select id="department-select" style="padding: 6px 10px; border-radius: 6px; border: none; background: rgba(255, 255, 255, 0.8); font-size: 14px; color: #333;">
                 <option value="simple-ground">Simple Ground</option>
                 <option value="croissant">Department Croissant</option>
@@ -442,7 +443,7 @@
             <h1>Recipe Scaler</h1>
             <div id="recipe-select">
                 <label for="recipes" style="font-size: 14px; font-weight: 500; color: #f9e1c0; flex: 2; text-align: left;">
-                    📖 Choose Recipe:
+                    <i class="fas fa-book"></i> Choose Recipe:
                 </label>
                 <select id="recipes" style="flex: 1; padding: 6px; border: none; border-radius: 6px; font-size: 14px; text-align: center; background: rgba(255, 255, 255, 0.8); transition: all 0.3s ease; max-width: none; margin-bottom: 15px;">
                     <option value="">Select a recipe</option>
@@ -450,7 +451,7 @@
             </div>
             <div id="multiplier-input">
                 <label for="multiplier" style="font-size: 14px; font-weight: 500; color: #f9e1c0; flex: 2; text-align: left;">
-                    ✖ Scale Factor:
+                    <i class="fas fa-magnifying-glass-chart"></i> Scale Factor:
                 </label>
                 <input type="number" id="multiplier" min="0.1" value="1" placeholder="e.g. 1.5" style="flex: 1; padding: 6px; border: none; border-radius: 6px; font-size: 14px; text-align: center; background: rgba(255, 255, 255, 0.8); transition: all 0.3s ease; max-width: 80px;">
             </div>
@@ -473,7 +474,7 @@
                     </tbody>
                 </table>
                 <div id="recipe-instructions" class="result" style="margin-top: 20px; display: none;">
-                    <h3 style="color: #f9e1c0;">Instructions:</h3>
+                <h3 style="color: #f9e1c0;"><i class="fas fa-list-ol"></i> Instructions:</h3>
                     <ul id="instructions-list" style="list-style-type: decimal; padding-left: 20px; color: #000000;">
                         <!-- Instructions will be added here -->
                     </ul>
