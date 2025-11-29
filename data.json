@@ -122,7 +122,549 @@
           "garam": {"amount": 6, "unit": "grams"},
           "cinnamon powder": {"amount": 15, "unit": "grams"}
         }
-      }
+      },
+      "adonan_charcoal": {
+        "base_weight": 1953,
+        "ingredients": {
+          "tepung cakra": {"amount": 980, "unit": "grams"},
+          "gula pasir": {"amount": 980, "unit": "grams"},
+          "garam": {"amount": 18, "unit": "grams"},
+          "pelembut": {"amount": 5, "unit": "grams"},
+          "ragi": {"amount": 25, "unit": "grams"},
+          "butter orchid": {"amount": 100, "unit": "grams"},
+          "fresh milk": {"amount": 210, "unit": "grams"},
+          "telur": {"amount": 50, "unit": "grams"},
+          "air es": {"amount": 200, "unit": "grams"},
+          "sisa trimmingan": {"amount": 200, "unit": "grams"},
+          "bubuk charcoal": {"amount": 20, "unit": "grams"}
+        }
+      },
+      "adonan_brioche": {
+        "base_weight": 1313,
+        "ingredients": {
+          "kuning telur": {"amount": 150, "unit": "grams"},
+          "ragi": {"amount": 17, "unit": "grams"},
+          "gula pasir": {"amount": 65, "unit": "grams"},
+          "susu bubuk": {"amount": 20, "unit": "grams"},
+          "garam": {"amount": 11, "unit": "grams"},
+          "tepung cakra": {"amount": 600, "unit": "grams"},
+          "fresh milk": {"amount": 130, "unit": "grams"},
+          "butter orchid": {"amount": 150, "unit": "grams"},
+          "air es": {"amount": 300, "unit": "grams"}
+        }
+      },
+      "adonan_brioche_instructions": [
+        "Campurkan kuning telur, ragi, gula pasir, susu bubuk, garam, dan tepung cakra. Aduk rata.",
+        "Tambahkan fresh milk dan air es sedikit demi sedikit sambil diuleni hingga kalis.",
+        "Masukkan butter orchid, uleni hingga adonan elastis dan lembut.",
+        "Diamkan adonan di tempat hangat hingga mengembang dua kali lipat.",
+        "Kempiskan adonan dan bentuk sesuai selera."
+      ],
+      "adonan_puff_pastry": {
+        "base_weight": 1660,
+        "ingredients": {
+          "tepung cakra": {"amount": 700, "unit": "grams"},
+          "tepung segitiga": {"amount": 300, "unit": "grams"},
+          "garam": {"amount": 20, "unit": "grams"},
+          "butter orchid": {"amount": 140, "unit": "grams"},
+          "air": {"amount": 500, "unit": "grams"}
+        }
+      },
+      "adonan_puff_pastry_instructions": [
+        "Campurkan tepung cakra, tepung segitiga, dan garam. Aduk rata.",
+        "Tambahkan air sedikit demi sedikit hingga adonan menyatu.",
+        "Pipihkan adonan dan letakkan butter orchid di tengahnya.",
+        "Lipat adonan untuk membungkus butter, kemudian pipihkan dan lipat beberapa kali (teknik laminasi).",
+        "Istirahatkan adonan di kulkas setiap setelah melipat.",
+        "Ulangi proses melipat dan istirahatkan adonan 3-4 kali."
+      ],
+      "laminasi_original_2": {
+        "base_weight": 2300,
+        "ingredients": {
+          "adonan original": {"amount": 1600, "unit": "grams"},
+          "butter sheet": {"amount": 500, "unit": "grams"},
+          "adonan original_2": {"amount": 200, "unit": "grams"}
+        }
+      },
+      "laminasi_original_2_instructions": [
+        "Pipihkan adonan original hingga cukup besar untuk membungkus butter sheet.",
+        "Letakkan butter sheet di tengah adonan, kemudian lipat adonan untuk membungkusnya.",
+        "Pipihkan kembali adonan yang sudah terbungkus butter, kemudian lipat (single atau double fold).",
+        "Istirahatkan di kulkas selama 30 menit.",
+        "Ulangi proses melipat dan istirahatkan adonan sebanyak 2-3 kali.",
+        "Tambahkan sisa adonan original (trimingan) pada tahap pelipatan terakhir jika diperlukan."
+      ],
+      "laminasi_charcoal": {
+        "base_weight": 2300,
+        "ingredients": {
+          "adonan charcoal": {"amount": 1600, "unit": "grams"},
+          "butter sheet": {"amount": 500, "unit": "grams"},
+          "adonan charcoal_2": {"amount": 200, "unit": "grams"}
+        }
+      },
+      "laminasi_charcoal_instructions": [
+        "Pipihkan adonan charcoal hingga cukup besar untuk membungkus butter sheet.",
+        "Letakkan butter sheet di tengah adonan, kemudian lipat adonan untuk membungkusnya.",
+        "Pipihkan kembali adonan yang sudah terbungkus butter, kemudian lipat (single atau double fold).",
+        "Istirahatkan di kulkas selama 30 menit.",
+        "Ulangi proses melipat dan istirahatkan adonan sebanyak 2-3 kali.",
+        "Tambahkan sisa adonan charcoal (trimingan) pada tahap pelipatan terakhir jika diperlukan."
+      ],
+      "laminasi_kouign_amann": {
+        "base_weight": 3000,
+        "ingredients": {
+          "adonan original": {"amount": 1800, "unit": "grams"},
+          "butter sheet": {"amount": 800, "unit": "grams"},
+          "gula pasir": {"amount": 400, "unit": "grams"}
+        }
+      },
+      "laminasi_kouign_amann_instructions": [
+        "Pipihkan adonan original, taburi dengan gula pasir secara merata.",
+        "Letakkan butter sheet di atas adonan, lalu lipat adonan untuk membungkus butter.",
+        "Pipihkan dan lipat adonan beberapa kali, pastikan gula pasir tercampur rata di setiap lapisan.",
+        "Istirahatkan adonan di kulkas setelah setiap lipatan.",
+        "Setelah proses laminasi selesai, bentuk adonan sesuai keinginan untuk kouign amann."
+      ],
+      "laminasi_puff_pastry": {
+        "base_weight": 2160,
+        "ingredients": {
+          "adonan puff pastry": {"amount": 1660, "unit": "grams"},
+          "butter sheet": {"amount": 500, "unit": "grams"}
+        }
+      },
+      "laminasi_puff_pastry_instructions": [
+        "Pipihkan adonan puff pastry dan letakkan butter sheet di tengahnya.",
+        "Lipat adonan untuk membungkus butter sheet dengan rapat.",
+        "Pipihkan adonan yang sudah terbungkus butter, kemudian lakukan lipatan tunggal atau ganda.",
+        "Istirahatkan adonan di kulkas selama 30 menit setelah setiap lipatan.",
+        "Ulangi proses melipat dan istirahatkan adonan sebanyak 3-4 kali untuk membentuk lapisan."
+      ],
+      "filling_creme_brulee": {
+        "base_weight": 1190,
+        "ingredients": {
+          "gula pasir": {"amount": 200, "unit": "grams"},
+          "kuning telur": {"amount": 16, "unit": "pcs"},
+          "cooking cream pleasure": {"amount": 500, "unit": "grams"},
+          "fresh milk": {"amount": 700, "unit": "grams"},
+          "essence vanilla": {"amount": 10, "unit": "grams"}
+        }
+      },
+      "filling_creme_brulee_instructions": [
+        "Panaskan fresh milk dan cooking cream pleasure hingga hampir mendidih.",
+        "Dalam wadah terpisah, kocok kuning telur dan gula pasir hingga rata.",
+        "Tuang sedikit campuran susu panas ke dalam adonan telur sambil terus diaduk.",
+        "Masukkan campuran telur kembali ke panci berisi sisa susu, aduk rata.",
+        "Masak dengan api kecil sambil terus diaduk hingga mengental.",
+        "Angkat dari api, tambahkan essence vanilla, aduk rata.",
+        "Saring adonan untuk mendapatkan tekstur yang halus. Dinginkan sebelum digunakan sebagai isian."
+      ],
+      "filling_danish_pastry": {
+        "base_weight": 320,
+        "ingredients": {
+          "fresh milk": {"amount": 250, "unit": "grams"},
+          "kuning telur": {"amount": 1, "unit": "pcs"},
+          "essence vanilla": {"amount": 1, "unit": "grams"},
+          "gula pasir": {"amount": 35, "unit": "grams"},
+          "butter orchid": {"amount": 20, "unit": "grams"}
+        }
+      },
+      "filling_danish_pastry_instructions": [
+        "Panaskan fresh milk hingga hangat.",
+        "Dalam wadah, kocok kuning telur dan gula pasir hingga sedikit pucat.",
+        "Campurkan sedikit susu hangat ke adonan telur, aduk rata, lalu masukkan kembali ke sisa susu.",
+        "Masak dengan api kecil sambil terus diaduk hingga mengental.",
+        "Angkat, tambahkan essence vanilla dan butter orchid, aduk hingga butter meleleh dan tercampur rata.",
+        "Dinginkan sepenuhnya sebelum digunakan."
+      ],
+      "filling_ferrero": {
+        "base_weight": 850,
+        "ingredients": {
+          "couverture white": {"amount": 300, "unit": "grams"},
+          "couverture chocolate": {"amount": 200, "unit": "grams"},
+          "minyak": {"amount": 175, "unit": "grams"},
+          "kacang morin": {"amount": 175, "unit": "grams"}
+        }
+      },
+      "filling_ferrero_instructions": [
+        "Lelehkan couverture white dan couverture chocolate secara terpisah menggunakan metode double boiler atau microwave.",
+        "Campurkan kedua lelehan cokelat, aduk rata.",
+        "Tambahkan minyak, aduk hingga adonan menjadi halus dan mengkilap.",
+        "Masukkan kacang morin (kacang cincang), aduk rata.",
+        "Dinginkan sedikit hingga mencapai konsistensi yang dapat dioles sebelum digunakan sebagai isian."
+      ],
+      "filling_lotus_biscoff": {
+        "base_weight": 700,
+        "ingredients": {
+          "millac gold": {"amount": 500, "unit": "grams"},
+          "selai lotus biscoff": {"amount": 200, "unit": "grams"}
+        }
+      },
+      "filling_lotus_biscoff_instructions": [
+        "Kocok millac gold hingga mengembang dan kaku.",
+        "Secara perlahan, campurkan selai lotus biscoff ke dalam millac gold yang sudah dikocok.",
+        "Aduk hingga kedua bahan tercampur rata dan membentuk filling yang lembut.",
+        "Dinginkan sebelum digunakan untuk mendapatkan tekstur yang lebih padat."
+      ],
+      "filling_nutella": {
+        "base_weight": 675,
+        "ingredients": {
+          "selai nutella": {"amount": 500, "unit": "grams"},
+          "minyak": {"amount": 175, "unit": "grams"}
+        }
+      },
+      "filling_nutella_instructions": [
+        "Campurkan selai nutella dan minyak dalam sebuah wadah.",
+        "Aduk rata hingga minyak tercampur sempurna dan tekstur nutella menjadi lebih cair dan mudah dioles.",
+        "Gunakan sebagai isian atau topping."
+      ],
+      "filling_pistachio_b.m": {
+        "base_weight": 1110,
+        "ingredients": {
+          "telur": {"amount": 1, "unit": "pcs"},
+          "kuning telur": {"amount": 100, "unit": "grams"},
+          "fresh milk": {"amount": 750, "unit": "grams"},
+          "gula pasir": {"amount": 70, "unit": "grams"},
+          "pistachio paste": {"amount": 80, "unit": "grams"},
+          "tepung maizena": {"amount": 65, "unit": "grams"}
+        }
+      },
+      "filling_pistachio_b.m_instructions": [
+        "Kocok telur, kuning telur, gula pasir, dan tepung maizena hingga rata.",
+        "Panaskan fresh milk hingga hampir mendidih, lalu tuang sedikit demi sedikit ke adonan telur sambil terus diaduk.",
+        "Masukkan kembali semua adonan ke dalam panci, masak dengan api kecil sambil terus diaduk hingga mengental.",
+        "Angkat dari api, tambahkan pistachio paste, aduk rata.",
+        "Dinginkan sepenuhnya, tutup permukaan dengan plastic wrap agar tidak terbentuk kulit."
+      ],
+      "filling_raisin": {
+        "base_weight": 390,
+        "ingredients": {
+          "kuning telur": {"amount": 3, "unit": "pcs"},
+          "fresh milk": {"amount": 250, "unit": "grams"},
+          "tepung maizena": {"amount": 20, "unit": "grams"},
+          "essence vanilla": {"amount": 1, "unit": "grams"},
+          "butter orchid": {"amount": 30, "unit": "grams"},
+          "buah lemon": {"amount": 1, "unit": "pcs"},
+          "gula pasir": {"amount": 45, "unit": "grams"}
+        }
+      },
+      "filling_raisin_instructions": [
+        "Parut kulit buah lemon untuk mendapatkan zest, sisihkan.",
+        "Campurkan kuning telur, gula pasir, dan tepung maizena hingga rata.",
+        "Panaskan fresh milk hingga hangat, lalu tuang sedikit demi sedikit ke adonan telur sambil terus diaduk.",
+        "Masukkan kembali semua adonan ke dalam panci, masak dengan api kecil sambil terus diaduk hingga mengental.",
+        "Angkat dari api, tambahkan essence vanilla, butter orchid, dan parutan kulit lemon.",
+        "Masukkan raisin, aduk rata. Dinginkan sepenuhnya sebelum digunakan."
+      ],
+      "topping_coffee_croissant": {
+        "base_weight": 430,
+        "ingredients": {
+          "margarine": {"amount": 100, "unit": "grams"},
+          "tepung segitiga": {"amount": 120, "unit": "grams"},
+          "gula halus": {"amount": 100, "unit": "grams"},
+          "bubuk kopi": {"amount": 15, "unit": "grams"},
+          "putih telur": {"amount": 100, "unit": "grams"}
+        }
+      },
+      "topping_coffee_croissant_instructions": [
+        "Kocok margarine dan gula halus hingga lembut dan pucat.",
+        "Masukkan putih telur sedikit demi sedikit sambil terus dikocok hingga rata.",
+        "Tambahkan tepung segitiga dan bubuk kopi, aduk perlahan hingga tercampur rata.",
+        "Siap digunakan sebagai topping croissant."
+      ],
+      "filling_almond_cream": {
+        "base_weight": 515,
+        "ingredients": {
+          "butter orchid": {"amount": 125, "unit": "grams"},
+          "almond powder": {"amount": 110, "unit": "grams"},
+          "telur": {"amount": 3, "unit": "pcs"},
+          "gula halus": {"amount": 100, "unit": "grams"},
+          "tepung segitiga": {"amount": 35, "unit": "grams"}
+        }
+      },
+      "filling_almond_cream_instructions": [
+        "Kocok butter orchid dan gula halus hingga lembut dan mengembang.",
+        "Masukkan telur satu per satu sambil terus dikocok hingga rata.",
+        "Tambahkan almond powder dan tepung segitiga, aduk perlahan hingga tercampur sempurna.",
+        "Dinginkan sebentar sebelum digunakan sebagai isian."
+      ],
+      "filling_choco_mousse": {
+        "base_weight": 1100,
+        "ingredients": {
+          "cooking cream pleasure": {"amount": 240, "unit": "grams"},
+          "dark couverture": {"amount": 240, "unit": "grams"},
+          "gelatine": {"amount": 6, "unit": "grams"},
+          "air": {"amount": 36, "unit": "grams"},
+          "millac gold": {"amount": 480, "unit": "grams"},
+          "gula halus": {"amount": 120, "unit": "grams"}
+        }
+      },
+      "filling_choco_mousse_instructions": [
+        "Lelehkan dark couverture menggunakan metode double boiler atau microwave.",
+        "Campurkan gelatine dengan air dingin, biarkan mengembang.",
+        "Panaskan cooking cream pleasure, masukkan gelatine yang sudah mengembang, aduk hingga larut.",
+        "Tuang campuran cream dan gelatine ke dalam lelehan cokelat, aduk rata.",
+        "Kocok millac gold dan gula halus hingga mengembang.",
+        "Campurkan adonan cokelat ke dalam millac gold yang sudah dikocok secara bertahap, aduk perlahan hingga rata.",
+        "Dinginkan hingga set sebelum digunakan."
+      ],
+      "filling_cream_cheese_smith": {
+        "base_weight": 790,
+        "ingredients": {
+          "gula halus": {"amount": 100, "unit": "grams"},
+          "cream cheese": {"amount": 200, "unit": "grams"},
+          "millac gold": {"amount": 500, "unit": "grams"}
+        }
+      },
+      "filling_cream_cheese_smith_instructions": [
+        "Kocok cream cheese hingga lembut.",
+        "Tambahkan gula halus, kocok hingga tercampur rata dan tidak bergerindil.",
+        "Secara terpisah, kocok millac gold hingga mengembang dan kaku.",
+        "Campurkan millac gold ke dalam adonan cream cheese secara bertahap, aduk perlahan hingga homogen.",
+        "Dinginkan sebelum digunakan."
+      ],
+      "topping_creme_au_bullion": {
+        "base_weight": 350,
+        "ingredients": {
+          "gula pasir": {"amount": 35, "unit": "grams"},
+          "kuning telur": {"amount": 4, "unit": "grams"},
+          "millac gold": {"amount": 250, "unit": "grams"},
+          "essence vanilla": {"amount": 1, "unit": "grams"}
+        }
+      },
+      "topping_creme_au_bullion_instructions": [
+        "Kocok kuning telur dan gula pasir hingga sedikit pucat.",
+        "Panaskan millac gold hingga hangat, tuang sedikit demi sedikit ke adonan telur sambil terus diaduk.",
+        "Masukkan kembali semua adonan ke dalam panci, masak dengan api kecil sambil terus diaduk hingga mengental.",
+        "Angkat dari api, tambahkan essence vanilla, aduk rata.",
+        "Dinginkan sepenuhnya sebelum digunakan sebagai topping."
+      ],
+      "filling_crokies": {
+        "base_weight": 540,
+        "ingredients": {
+          "butter orchid": {"amount": 120, "unit": "grams"},
+          "gula pasir": {"amount": 60, "unit": "grams"},
+          "tepung segitiga": {"amount": 150, "unit": "grams"},
+          "dark couverture": {"amount": 100, "unit": "grams"},
+          "baking powder": {"amount": 3, "unit": "grams"},
+          "soda kue": {"amount": 3, "unit": "grams"},
+          "garam": {"amount": 2, "unit": "grams"},
+          "palm sugar": {"amount": 60, "unit": "grams"}
+        }
+      },
+      "filling_crokies_instructions": [
+        "Kocok butter orchid, gula pasir, dan palm sugar hingga lembut dan tercampur rata.",
+        "Masukkan tepung segitiga, baking powder, soda kue, dan garam, aduk hingga membentuk adonan.",
+        "Cincang dark couverture menjadi potongan kecil, masukkan ke dalam adonan, aduk rata.",
+        "Bentuk adonan menjadi bola-bola kecil atau sesuai selera, kemudian panggang hingga matang dan renyah.",
+        "Hancurkan sebagian atau gunakan utuh sebagai isian."
+      ],
+      "filling_cromboloni_chocolate": {
+        "base_weight": 640,
+        "ingredients": {
+          "chocolate tulip": {"amount": 75, "unit": "grams"},
+          "gula halus": {"amount": 75, "unit": "grams"},
+          "essence vanilla": {"amount": 200, "unit": "grams"},
+          "millac gold": {"amount": 300, "unit": "grams"}
+        }
+      },
+      "filling_cromboloni_chocolate_instructions": [
+        "Lelehkan chocolate tulip menggunakan metode double boiler.",
+        "Kocok millac gold dan gula halus hingga mengembang dan kaku.",
+        "Campurkan lelehan cokelat ke dalam millac gold yang sudah dikocok, aduk perlahan hingga rata.",
+        "Tambahkan essence vanilla, aduk kembali hingga homogen.",
+        "Dinginkan sebelum digunakan sebagai isian cromboloni."
+      ],
+      "filling_cromboloni_matcha": {
+        "base_weight": 580,
+        "ingredients": {
+          "matcha powder": {"amount": 25, "unit": "grams"},
+          "millac gold": {"amount": 300, "unit": "grams"},
+          "sonton vanilla": {"amount": 200, "unit": "grams"},
+          "gula halus": {"amount": 75, "unit": "grams"}
+        }
+      },
+      "filling_cromboloni_matcha_instructions": [
+        "Kocok millac gold, sonton vanilla, dan gula halus hingga mengembang dan kaku.",
+        "Campurkan matcha powder, aduk perlahan hingga tercampur rata dan warnanya homogen.",
+        "Dinginkan sebelum digunakan sebagai isian cromboloni."
+      ],
+      "filling_cromboloni_strawberry": {
+        "base_weight": 575,
+        "ingredients": {
+          "selai strawberry": {"amount": 75, "unit": "grams"},
+          "millac gold": {"amount": 300, "unit": "grams"},
+          "sonton vanilla": {"amount": 200, "unit": "grams"},
+          "pasta strawberry": {"amount": 5, "unit": "grams"}
+        }
+      },
+      "filling_cromboloni_strawberry_instructions": [
+        "Kocok millac gold dan sonton vanilla hingga mengembang dan kaku.",
+        "Tambahkan selai strawberry dan pasta strawberry, aduk perlahan hingga tercampur rata dan warnanya homogen.",
+        "Dinginkan sebelum digunakan sebagai isian cromboloni."
+      ],
+      "filling_frosting": {
+        "base_weight": 595,
+        "ingredients": {
+          "gula halus": {"amount": 100, "unit": "grams"},
+          "millac gold": {"amount": 500, "unit": "grams"}
+        }
+      },
+      "filling_frosting_instructions": [
+        "Kocok millac gold hingga mengembang dan kaku.",
+        "Tambahkan gula halus secara bertahap sambil terus dikocok hingga tercampur rata dan tekstur frosting menjadi lembut.",
+        "Siap digunakan sebagai topping atau isian."
+      ],
+      "filling_fruity": {
+        "base_weight": 695,
+        "ingredients": {
+          "cream cheese": {"amount": 100, "unit": "grams"},
+          "millac gold": {"amount": 500, "unit": "grams"},
+          "gula halus": {"amount": 100, "unit": "grams"}
+        }
+      },
+      "filling_fruity_instructions": [
+        "Kocok cream cheese hingga lembut.",
+        "Tambahkan gula halus, kocok hingga rata.",
+        "Secara terpisah, kocok millac gold hingga mengembang dan kaku.",
+        "Campurkan millac gold ke dalam adonan cream cheese secara bertahap, aduk perlahan hingga homogen.",
+        "Dinginkan sebelum digunakan, bisa ditambahkan potongan buah segar saat aplikasi."
+      ],
+      "filling_hokkaido": {
+        "base_weight": 1950,
+        "ingredients": {
+          "cream cheese": {"amount": 1000, "unit": "grams"},
+          "butter orchid": {"amount": 110, "unit": "grams"},
+          "keju martabak": {"amount": 55, "unit": "grams"},
+          "keju mozzarella": {"amount": 113, "unit": "grams"},
+          "gula pasir": {"amount": 213, "unit": "grams"},
+          "yogurt": {"amount": 300, "unit": "grams"},
+          "putih telur": {"amount": 173, "unit": "grams"}
+        }
+      },
+      "filling_hokkaido_instructions": [
+        "Kocok cream cheese, butter orchid, gula pasir, yogurt hingga lembut dan tercampur rata.",
+        "Masukkan keju martabak dan keju mozzarella, aduk hingga homogen.",
+        "Secara terpisah, kocok putih telur hingga mengembang kaku.",
+        "Campurkan putih telur ke dalam adonan keju secara bertahap, aduk perlahan hingga rata.",
+        "Dinginkan sebelum digunakan."
+      ],
+      "filling_portuguese": {
+        "base_weight": 1300,
+        "ingredients": {
+          "telur": {"amount": 2, "unit": "pcs"},
+          "kuning telur": {"amount": 8, "unit": "pcs"},
+          "gula pasir": {"amount": 40, "unit": "grams"},
+          "susu bubuk": {"amount": 20, "unit": "grams"},
+          "millac roselle": {"amount": 1000, "unit": "grams"}
+        }
+      },
+      "filling_portuguese_instructions": [
+        "Kocok telur, kuning telur, gula pasir, dan susu bubuk hingga rata.",
+        "Panaskan millac roselle hingga hangat, tuang sedikit demi sedikit ke adonan telur sambil terus diaduk.",
+        "Masukkan kembali semua adonan ke dalam panci, masak dengan api kecil sambil terus diaduk hingga mengental.",
+        "Dinginkan sepenuhnya sebelum digunakan."
+      ],
+      "filling_danish_strawberry": {
+        "base_weight": 380,
+        "ingredients": {
+          "telur": {"amount": 1, "unit": "pcs"},
+          "fresh milk": {"amount": 250, "unit": "grams"},
+          "gula pasir": {"amount": 35, "unit": "grams"},
+          "butter orchid": {"amount": 20, "unit": "grams"},
+          "tepung maizena": {"amount": 30, "unit": "grams"}
+        }
+      },
+      "filling_danish_strawberry_instructions": [
+        "Kocok telur, gula pasir, dan tepung maizena hingga rata.",
+        "Panaskan fresh milk hingga hangat, lalu tuang sedikit demi sedikit ke adonan telur sambil terus diaduk.",
+        "Masukkan kembali semua adonan ke dalam panci, masak dengan api kecil sambil terus diaduk hingga mengental.",
+        "Angkat dari api, tambahkan butter orchid, aduk hingga meleleh dan tercampur rata.",
+        "Dinginkan sepenuhnya sebelum digunakan."
+      ],
+      "filling_apple_chauson": {
+        "base_weight": 1520,
+        "ingredients": {
+          "buah apple": {"amount": 1000, "unit": "grams"},
+          "butter orchid": {"amount": 100, "unit": "grams"},
+          "palm sugar": {"amount": 70, "unit": "grams"},
+          "tepung maizena": {"amount": 30, "unit": "grams"},
+          "raisin": {"amount": 100, "unit": "grams"},
+          "garam": {"amount": 6, "unit": "grams"},
+          "cinnamon powder": {"amount": 15, "unit": "grams"}
+        }
+      },
+      "filling_apple_chauson_instructions": [
+        "Potong buah apple menjadi dadu kecil.",
+        "Lelehkan butter orchid dalam wajan, masukkan potongan apple, palm sugar, garam, dan cinnamon powder.",
+        "Masak hingga apple melunak. Tambahkan raisin dan tepung maizena yang sudah dilarutkan sedikit air, aduk hingga mengental.",
+        "Dinginkan sepenuhnya sebelum digunakan sebagai isian."
+      ],
+      "filling_brulle_danish": {
+        "base_weight": 480,
+        "ingredients": {
+          "kuning telur": {"amount": 100, "unit": "grams"},
+          "tepung maizena": {"amount": 44, "unit": "grams"},
+          "gula pasir": {"amount": 100, "unit": "grams"},
+          "fresh milk": {"amount": 164, "unit": "grams"},
+          "cooking cream pleasure": {"amount": 110, "unit": "grams"}
+        }
+      },
+      "filling_brulle_danish_instructions": [
+        "Kocok kuning telur, gula pasir, dan tepung maizena hingga rata.",
+        "Panaskan fresh milk dan cooking cream pleasure hingga hangat, lalu tuang sedikit demi sedikit ke adonan telur sambil terus diaduk.",
+        "Masukkan kembali semua adonan ke dalam panci, masak dengan api kecil sambil terus diaduk hingga mengental.",
+        "Dinginkan sepenuhnya sebelum digunakan."
+      ],
+      "filling_cheese_melt": {
+        "base_weight": 466,
+        "ingredients": {
+          "cream cheese": {"amount": 250, "unit": "grams"},
+          "butter orchid": {"amount": 100, "unit": "grams"},
+          "gula halus": {"amount": 25, "unit": "grams"},
+          "gula pasir": {"amount": 50, "unit": "grams"},
+          "fresh milk": {"amount": 25, "unit": "grams"},
+          "garam": {"amount": 2, "unit": "grams"},
+          "essence vanilla": {"amount": 1, "unit": "grams"}
+        }
+      },
+      "filling_cheese_melt_instructions": [
+        "Kocok cream cheese, butter orchid, gula halus, gula pasir, garam, dan essence vanilla hingga lembut dan rata.",
+        "Tambahkan fresh milk, aduk hingga homogen.",
+        "Dinginkan sebentar agar filling lebih padat sebelum digunakan."
+      ],
+      "filling_choco_cornet": {
+        "base_weight": 395,
+        "ingredients": {
+          "filling vanilla cornet": {"amount": 200, "unit": "grams"},
+          "millac gold": {"amount": 100, "unit": "grams"},
+          "gula halus": {"amount": 25, "unit": "grams"},
+          "selai nutella": {"amount": 80, "unit": "grams"}
+        }
+      },
+      "filling_choco_cornet_instructions": [
+        "Kocok millac gold dan gula halus hingga mengembang.",
+        "Campurkan filling vanilla cornet dan selai nutella, aduk rata.",
+        "Secara bertahap, masukkan campuran millac gold ke dalam adonan vanilla cornet dan nutella, aduk perlahan hingga homogen.",
+        "Dinginkan sebelum digunakan untuk mengisi cornet."
+      ],
+      "filling_vanilla_cornet": {
+        "base_weight": 230,
+        "ingredients": {
+          "fresh milk": {"amount": 125, "unit": "grams"},
+          "essence vanilla": {"amount": 3, "unit": "grams"},
+          "gula pasir": {"amount": 25, "unit": "grams"},
+          "tepung maizena": {"amount": 13, "unit": "grams"},
+          "telur": {"amount": 1, "unit": "pcs"},
+          "butter orchid": {"amount": 15, "unit": "grams"}
+        }
+      },
+      "filling_vanilla_cornet_instructions": [
+        "Kocok telur, gula pasir, dan tepung maizena hingga rata.",
+        "Panaskan fresh milk hingga hangat, lalu tuang sedikit demi sedikit ke adonan telur sambil terus diaduk.",
+        "Masukkan kembali semua adonan ke dalam panci, masak dengan api kecil sambil terus diaduk hingga mengental.",
+        "Angkat dari api, tambahkan essence vanilla dan butter orchid, aduk hingga meleleh dan tercampur rata.",
+        "Dinginkan sepenuhnya sebelum digunakan untuk mengisi cornet."
+      ]
     }
   }
 }

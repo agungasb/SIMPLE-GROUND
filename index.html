@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Production Calculator</title>
+    <title>Coffee Town Bakery</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Pacifico&display=swap" rel="stylesheet">
     <style>
         /* Reset and Common styles */
@@ -84,7 +84,7 @@
             font-family: 'Pacifico', cursive;
             font-size: 28px;
             margin: 10px 0;
-            color: #f9e1c0;
+            color: #000000;
         }
 
         /* Form Elements */
@@ -101,7 +101,7 @@
             font-weight: 500;
             flex: 2;
             text-align: left;
-            color: #f9e1c0;
+            color: #000000;
         }
 
         input, select {
@@ -122,6 +122,13 @@
             margin-bottom: 15px;
         }
 
+        /* Specific styling for department selector */
+        .department-selector select {
+            max-width: 180px; /* Adjust this value as needed */
+            display: inline-block; /* Ensure width is respected */
+            vertical-align: middle; /* Align with label */
+            margin-bottom: 0; /* Remove extra margin */
+        }
         input:focus, select:focus {
             outline: none;
             box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
@@ -284,7 +291,7 @@
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(61px);
             -webkit-backdrop-filter: blur(61px);
-            color: #f9e1c0;
+            color: #000000;
             font-size: 10px;
             font-weight: 500;
             border-top: 1px solid rgba(255, 255, 255, 0.3);
@@ -293,14 +300,14 @@
         }
 
         footer a {
-            color: #ffdd99;
+            color: #000000;
             text-decoration: none;
             font-weight: 600;
             transition: color 0.3s ease-in-out;
         }
 
         footer a:hover {
-            color: #ffbb66;
+            color: #000000;
             text-decoration: underline;
         }
 
@@ -467,7 +474,7 @@
                 </table>
                 <div id="recipe-instructions" class="result" style="margin-top: 20px; display: none;">
                     <h3 style="color: #f9e1c0;">Instructions:</h3>
-                    <ul id="instructions-list" style="list-style-type: decimal; padding-left: 20px; color: #f9e1c0;">
+                    <ul id="instructions-list" style="list-style-type: decimal; padding-left: 20px; color: #000000;">
                         <!-- Instructions will be added here -->
                     </ul>
                 </div>
@@ -515,7 +522,7 @@
 
     <!-- Footer -->
     <footer>
-        Created For SIMPLE GROUND | <a href="manual_guide.html" target="_blank">About</a> | Follow me: <a href="https://twitter.com/Agung_styb" target="_blank">@Agung_styb</a>
+        Created For Coffee Town Bakery | <a href="manual_guide.html" target="_blank">About</a> | Follow me: <a href="https://twitter.com/Agung_styb" target="_blank">@Agung_styb</a>
     </footer>
 
     <script>
@@ -635,6 +642,12 @@
                 
                 // Assign department-specific data to global variables
                 croissantProductsList = data.croissant_department.product_management.croissantProducts;
+                // Add base doughs to croissantProductsList for dropdown visibility if they are distinct
+                if (!croissantProductsList.includes("Adonan Original")) croissantProductsList.push("Adonan Original");
+                if (!croissantProductsList.includes("Adonan Charcoal")) croissantProductsList.push("Adonan Charcoal");
+                if (!croissantProductsList.includes("Adonan Brioche")) croissantProductsList.push("Adonan Brioche");
+                if (!croissantProductsList.includes("Adonan Puff Pastry")) croissantProductsList.push("Adonan Puff Pastry");
+
                 croissantRecipes = data.croissant_department.recipe_management;
                 
                 console.log('Croissant Products List:', croissantProductsList); // Debugging
@@ -1198,14 +1211,11 @@
                     if (!recipeKey.endsWith("_instructions") && typeof croissantRecipes[recipeKey] === 'object' && croissantRecipes[recipeKey] !== null) {
                         const option = document.createElement("option");
                         option.value = recipeKey;
-                        // Determine display name: use product name if available, otherwise format recipe key
+                        // Determine display name: use product name from croissantProductsList if it matches a key, otherwise format recipe key
                         let displayName = recipeKey.replace(/_/g, " ");
                         const correspondingProduct = croissantProductsList.find(product => product.toLowerCase().replace(/ /g, '_') === recipeKey);
                         if (correspondingProduct) {
                             displayName = correspondingProduct;
-                        } else if (recipeKey === "adonan_croissant_classic") {
-                            // Special case for "adonan_croissant_classic" which is a base recipe not directly a product name in the list
-                            displayName = "Classic Croissant Dough (Base)";
                         }
                         
                         option.textContent = `[Croissant] ${displayName}`;
