@@ -291,14 +291,14 @@
         "base_weight": 46,
         "ingredients": {
           "eggtart c t": {"amount": 1, "unit": "pcs"},
-          "filing portuguese": {"amount": 45, "unit": "grams"}
+          "filing portuguesse": {"amount": 45, "unit": "grams"}
         }
       },
       "portuguesse_eggtart_c_t": {
         "base_weight": 26,
         "ingredients": {
           "eggtart b m": {"amount": 1, "unit": "pcs"},
-          "filling portugese": {"amount": 25, "unit": "grams"}
+          "filling portuguesse": {"amount": 25, "unit": "grams"}
         }
       },
       "mozzarella_melt_cheese": {
