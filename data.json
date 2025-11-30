@@ -287,11 +287,11 @@
           "filling hokkaido": {"amount": 35, "unit": "grams"}
         }
       },
-      "portuguese_eggtart_b_m": {
+      "portuguesse_eggtart_b_m": {
         "base_weight": 46,
         "ingredients": {
           "eggtart c t": {"amount": 1, "unit": "pcs"},
-          "filing portuguesse": {"amount": 45, "unit": "grams"}
+          "filling portuguesse": {"amount": 45, "unit": "grams"}
         }
       },
       "portuguesse_eggtart_c_t": {
