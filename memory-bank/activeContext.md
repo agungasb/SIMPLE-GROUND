@@ -1,33 +1,25 @@
 # Active Context
 
 ## Current Work Focus
-- Further simplified the Croissant Calculator input layout by moving "Baked" and "Frozen" labels to a single header row and removing individual labels from each input line.
-- Updated CSS in `index.html` to match the new layout for the Croissant Calculator inputs.
+- Filtered the Croissant Calculator input fields to only display final products, excluding intermediate products like "Adonan" and "Laminasi".
+- Updated `index.html` to implement the filtering logic for `croissantProductsList`.
 
 ## Recent Changes
-- Read `index.html` to understand the current Croissant Calculator input structure.
-- Read `data.json` to understand the croissant product data structure.
-- Modified `index.html` to remove "outlet" and add "baked" and "frozen" input fields.
-- Updated JavaScript logic in `index.html` to reflect new input fields.
-- Refactored HTML structure and CSS in `index.html` to achieve a single horizontal line for each croissant product, displaying the product name, baked input, and frozen input side-by-side. New classes `croissant-product-input-line`, `croissant-product-label`, and `croissant-input-group` were introduced for this purpose.
-- Modified `index.html` to move "Baked" and "Frozen" labels to a single header row and removed individual "Baked" and "Frozen" labels from each input line for a cleaner, more consolidated layout.
-- Updated CSS in `index.html` to correctly style and align the new header and input fields.
+- Read `data.json` to identify final and intermediate croissant products.
+- Modified JavaScript logic in `index.html` to filter `croissantProductsList` based on a predefined `intermediateProducts` array. This ensures that only final, saleable products are presented as inputs in the Croissant Calculator.
 
 ## Next Steps
-- None (Active Context updated).
+- Update `progress.md` to reflect the completed task.
+- Verify the updated calculator's functionality.
 
 ## Active Decisions and Considerations
-- The Croissant Calculator inputs now distinguish between "baked" and "frozen" croissants instead of a generic "outlet" quantity.
-- The JavaScript logic has been adapted to handle the new input fields, ensuring proper data collection and display for both baked and frozen quantities.
-- The layout of the croissant input fields has been further refined to present the product name, baked quantity, and frozen quantity on a single horizontal line, enhancing clarity and usability as per user feedback. CSS Flexbox is used for this alignment.
-- The input interface has been simplified by using a single header row for "Baked" and "Frozen" labels, reducing visual clutter and improving the overall user experience.
+- The Croissant Calculator now aligns with the user's request to only input final products for calculation, simplifying the user interface and focusing on end-product demand.
+- The `intermediateProducts` array can be easily updated in the future if new intermediate products are introduced or existing ones change their classification.
 
 ## Important Patterns and Preferences
-- Use of a structured `data.json` for all product and recipe information.
-- Dynamic population of UI elements based on loaded data.
-- Croissant calculation logic needs to account for baked vs. frozen quantities.
-- Prioritizing user experience by ensuring input fields are logically grouped and easily scannable.
+- Continual refinement of UI/UX based on user feedback to enhance usability and relevance.
+- Maintaining clear distinction between final products and intermediate components in the application logic.
 
 ## Learnings and Project Insights
-- The input structure for the Croissant Calculator needed to be refined to better reflect the different states of croissants (baked vs. frozen) for more accurate inventory and production planning.
-- Effective use of CSS Flexbox is crucial for responsive and intuitive form layouts. Iterative refinement of CSS can significantly improve user interface.
+- Explicitly defining intermediate products is crucial for tailoring user interfaces to specific operational needs (e.g., direct sales calculation vs. internal production planning).
+- The `data.json` structure, combined with code-based filtering, provides a flexible way to manage product categorization.

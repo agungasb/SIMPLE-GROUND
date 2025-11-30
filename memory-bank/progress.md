@@ -11,12 +11,13 @@
 - The Croissant Calculator's input layout has been further simplified by using a single header row for "Baked" and "Frozen" labels and removing individual labels from each input line.
 - The CSS has been updated to correctly style the new Croissant Calculator input layout.
 - The Recipe Scaler now correctly lists all defined Simple Ground and Croissant department recipes from `data.json`.
+- The Croissant Calculator input fields now only display final products, excluding intermediate products like "Adonan" and "Laminasi", based on user feedback.
 
 ## What's Left to Build
-- The Croissant Calculator's calculation logic for recipes and ingredient aggregation needs further development and testing, now accounting for baked and frozen quantities.
+- The Croissant Calculator's calculation logic for recipes and ingredient aggregation needs further development and testing, now accounting for baked and frozen quantities and specifically for final products.
 
 ## Current Status
-- The Croissant Calculator's input fields and associated JavaScript logic has been successfully updated to accommodate "baked" and "frozen" croissant quantities.
+- The Croissant Calculator's input fields have been successfully filtered to only show final products, improving the user experience as per user's request.
 - The layout has been further simplified with a single header row for "Baked" and "Frozen" labels, and the CSS has been adjusted to match this new, cleaner layout.
 - Documentation for `activeContext.md` and `progress.md` has been updated to reflect these changes.
 
@@ -28,3 +29,4 @@
 - Decided to distinguish between `croissantProductsList` (for calculator inputs) and `croissantRecipes` (for scaler functionality) to ensure comprehensive recipe listing.
 - Iteratively refined the CSS and HTML to align product names and their corresponding baked/frozen input fields on a single horizontal line, improving the user interface based on direct feedback.
 - Further simplified the input interface by consolidating "Baked" and "Frozen" labels into a single header, reducing visual clutter and enhancing user experience.
+- Implemented filtering of `croissantProductsList` to show only final products in the Croissant Calculator inputs, directly addressing user feedback for a more focused interface.

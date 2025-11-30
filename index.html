@@ -709,15 +709,31 @@
                 
                 // Assign department-specific data to global variables
                 croissantProductsList = data.croissant_department.product_management.croissantProducts;
-                // Add base doughs to croissantProductsList for dropdown visibility if they are distinct
-                if (!croissantProductsList.includes("Adonan Original")) croissantProductsList.push("Adonan Original");
-                if (!croissantProductsList.includes("Adonan Charcoal")) croissantProductsList.push("Adonan Charcoal");
-                if (!croissantProductsList.includes("Adonan Brioche")) croissantProductsList.push("Adonan Brioche");
-                if (!croissantProductsList.includes("Adonan Puff Pastry")) croissantProductsList.push("Adonan Puff Pastry");
-
                 croissantRecipes = data.croissant_department.recipe_management;
                 
-                console.log('Croissant Products List:', croissantProductsList); // Debugging
+                // Define a list of intermediate product names to exclude from the calculator inputs
+                const intermediateProducts = [
+                    "Adonan Original", "Adonan Charcoal", "Adonan Brioche", "Adonan Puff Pastry",
+                    "Laminasi Original", "Laminasi Charcoal", "Laminasi Kouign Amann", "Laminasi Puff Pastry",
+                    "Plain Croissant", "Square Croissant", "Danish Smith",
+                    "Eggtart Baker Museum", "Eggtart Coffee Town", "Eggtart C L", "Eggtart B T", // Assuming C L and B T are variants of Eggtart bases
+                    "Coffee Croissant (Frozen)"
+                ];
+
+                // Filter croissantProductsList to only include final products
+                croissantProductsList = data.croissant_department.product_management.croissantProducts.filter(product => {
+                    // Check if the product name or its lowercased/underscore-separated version is in the intermediate list
+                    const lowercasedProduct = product.toLowerCase();
+                    const underscoredProduct = product.replace(/ /g, '_').toLowerCase();
+                    
+                    return !intermediateProducts.some(intermediate => {
+                        const lowercasedIntermediate = intermediate.toLowerCase();
+                        const underscoredIntermediate = intermediate.replace(/ /g, '_').toLowerCase();
+                        return lowercasedProduct === lowercasedIntermediate || underscoredProduct === underscoredIntermediate;
+                    });
+                });
+                
+                console.log('Filtered Croissant Products List (Final Products):', croissantProductsList); // Debugging
                 console.log('Croissant Recipes:', croissantRecipes);           // Debugging
 
                 // Initialize all parts of the application
