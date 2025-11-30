@@ -138,7 +138,7 @@
           "laminasi original": {"amount": 65, "unit": "grams"}
         }
       },
-      "danish_baker_museum": {
+      "danish_b_m": {
         "base_weight": 70,
         "ingredients": {
           "laminasi original": {"amount": 70, "unit": "grams"}
@@ -150,13 +150,13 @@
           "laminasi original": {"amount": 40, "unit": "grams"}
         }
       },
-      "eggtart_baker_museum": {
+      "eggtart_b_m": {
         "base_weight": 40,
         "ingredients": {
           "laminasi original": {"amount": 40, "unit": "grams"}
         }
       },
-      "eggtart_coffee_town": {
+      "eggtart_c_t": {
         "base_weight": 30,
         "ingredients": {
           "laminasi original": {"amount": 30, "unit": "grams"}

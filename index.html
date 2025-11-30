@@ -492,8 +492,12 @@
             </div>
             <div id="croissantInputFields"></div>
             <button id="calculateCroissant">CALCULATE</button>
+            <div class="result" id="croissantProductSummary" style="margin-top: 20px;">
+                <h2>Product Input Summary (pcs)</h2>
+                <div id="croissantProductOutput"></div>
+            </div>
             <div class="result" id="croissantCalculationResults" style="margin-top: 20px;">
-                <h2>Calculation Results</h2>
+                <h2>Recipe Calculation Results</h2>
                 <div id="croissantRecipeOutput"></div>
             </div>
             <div class="result" id="croissantIngredientSummary" style="margin-top: 20px;">
@@ -1102,12 +1106,8 @@
             });
 
             calculateCroissantButton.addEventListener('click', function() {
-                let totalProductQuantities = {};
-
-                // Initialize total product quantities
-                croissantProductsList.forEach(product => {
-                    totalProductQuantities[product] = 0;
-                });
+                const croissantProductOutputDiv = document.getElementById('croissantProductOutput');
+                let totalProductQuantities = {}; // Stores total (baked + frozen) for each product
 
                 // Gather input for each product (baked and frozen)
                 croissantProductsList.forEach(product => {
@@ -1122,6 +1122,17 @@
                     
                     totalProductQuantities[product] = quantityBaked + quantityFrozen;
                 });
+
+                // Display Product Input Summary (pcs)
+                let productOutputHTML = `<table><thead><tr><th>Product</th><th>Total (pcs)</th></tr></thead><tbody>`;
+                for (const product in totalProductQuantities) {
+                    if (totalProductQuantities[product] > 0) { // Only show products with input
+                        productOutputHTML += `<tr><td>${product.replace(/_/g, ' ')}</td><td>${totalProductQuantities[product].toFixed(0)}</td></tr>`;
+                    }
+                }
+                productOutputHTML += `</tbody></table>`;
+                croissantProductOutputDiv.innerHTML = productOutputHTML;
+
 
                 // Map to store total resep needed for each unique recipe (main or sub-recipe)
                 let totalResepMap = {};
@@ -1178,33 +1189,6 @@
                                 }
                             } else {
                                 // If a product doesn't have ingredients, its base_weight is its per unit weight.
-                                // For products like "Classic Croissant" which directly correspond to a dough recipe,
-                                // the base_weight of the recipe is the weight of one 'resep'.
-                                // We need to figure out how much 'resep' is needed for `quantity` units of product.
-                                // Assuming `base_weight` of "Classic Croissant" recipe is for 1 unit of croissant.
-                                // If base_weight represents 1 resep, and a product has a `product_weight_per_unit` (not in data.json currently),
-                                // then `quantity * product_weight_per_unit / mainRecipe.base_weight` could be used.
-                                // For now, let's assume `base_weight` for top-level products represents 1 finished product unit.
-                                // If it's a simple product that is directly a recipe like 'adonan_croissant_classic',
-                                // we need to define how many finished items come from 1 'resep'.
-                                // For 'apple_chausson' it has ingredients and `base_weight: 100` means 100g is one unit.
-                                // So totalGramsNeeded = quantity * mainRecipe.base_weight.
-                                // Let's check `data.json` again for `adonan_croissant_classic`.
-                                // It seems like "adonan_croissant_classic" is a recipe for dough, not a finished product unit directly.
-                                // The issue is that the product "Classic Croissant" might not have a direct `base_weight` as a finished item.
-                                // I need to assume that `base_weight` in `apple_chausson` is the weight of one finished product.
-                                // For "Classic Croissant", which maps to "adonan_croissant_classic",
-                                // it's more likely that 1 'resep' of 'adonan_croissant_classic' yields multiple croissants.
-                                // The problem description is about "apple_chausson" which seems to have a `base_weight` per unit.
-                                // Let's stick to the log's original logic which appears to be using `totalGramsPerUnit` from ingredients.
-                                // For 'Classic Croissant', if `adonan_croissant_classic` is its main recipe, and it has no `ingredients` in `data.json` for the product itself.
-                                // This suggests 'adonan_croissant_classic' is a base dough.
-
-                                // Re-evaluating based on the provided log for `apple_chausson`:
-                                // `Aggregating apple_chausson with 1 resep`
-                                // This implies that 1 unit of `apple_chausson` product is treated as "1 resep" of its own recipe.
-                                // Then it breaks down its ingredients.
-                                // So, `numberOfResep` for a product's main recipe should be `quantity`.
                                 totalGramsPerUnit = mainRecipe.base_weight; // Treat the product's base_weight as its per-unit weight
                             }
                             
@@ -1223,7 +1207,9 @@
                 // Display Recipe Calculation Results (in resep units)
                 let recipeOutputHTML = `<table><thead><tr><th>Recipe</th><th>Amount (resep)</th></tr></thead><tbody>`;
                 for (const recipeName in totalResepMap) {
-                    recipeOutputHTML += `<tr><td>${recipeName.replace(/_/g, ' ')}</td><td>${totalResepMap[recipeName].toFixed(2)}</td></tr>`;
+                    if (totalResepMap[recipeName] > 0) { // Only show recipes with a calculated amount
+                        recipeOutputHTML += `<tr><td>${recipeName.replace(/_/g, ' ')}</td><td>${totalResepMap[recipeName].toFixed(2)}</td></tr>`;
+                    }
                 }
                 recipeOutputHTML += `</tbody></table>`;
                 croissantRecipeOutputDiv.innerHTML = recipeOutputHTML;
