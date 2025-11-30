@@ -59,9 +59,268 @@
   },
   "croissant_department": {
     "product_management": {
-      "croissantProducts": ["Classic Croissant", "apple chausson"]
+      "croissantProducts": ["Classic Croissant", "apple chausson", "Plain Croissant", "Smoked Beef Baker museum", "Square Croissant", "Brioche", "Burger Bun", "Cinnamon Roll", "Cornet Puff", "Coffee Croissant (Frozen)", "Creme Brule", "Croffin", "Cromboloni", "Danish Baker Museum", "Danish Smith", "Eggtart Baker Museum", "Eggtart Coffee Town", "Half Moon Croissant", "Ham & Cheese Smith", "Plie Au / Peppito", "Martabak Croissant", "Pain Au Charcoal", "Pain Au Choco", "Kouign Amman", "Pain Au Raisin", "Almond Croissant", "Choco Mousse Croissant", "Coffee Croissant (Baked)", "Creme Au Bullion", "Danish Strawberry", "Danish Suzette", "Hokkaido Eggtart B M", "Hokkaido Eggtart C T", "Portuguese Eggtart B M", "Portuguesse Eggtart C T", "Mozzarella Melt Cheese", "Mozzarella Smoked Beef"]
     },
     "recipe_management": {
+      "plain_croissant": {
+        "base_weight": 65,
+        "ingredients": {
+          "laminasi original": {"amount": 65, "unit": "gr"}
+        }
+      },
+      "smoked_beef_baker_museum": {
+        "base_weight": 110.5,
+        "ingredients": {
+          "laminasi original": {"amount": 75, "unit": "gr"},
+          "smoked beef": {"amount": 0.5, "unit": "pcs"},
+          "keju slice": {"amount": 0.5, "unit": "pcs"},
+          "saos sambal": {"amount": 2, "unit": "gr"},
+          "mayonaise": {"amount": 2, "unit": "gr"}
+        }
+      },
+      "square_croissant": {
+        "base_weight": 75,
+        "ingredients": {
+          "laminasi original": {"amount": 75, "unit": "gr"}
+        }
+      },
+      "brioche": {
+        "base_weight": 1000,
+        "ingredients": {
+          "adonan brioche": {"amount": 1000, "unit": "gr"}
+        }
+      },
+      "burger_bun": {
+        "base_weight": 80,
+        "ingredients": {
+          "adonan brioche": {"amount": 80, "unit": "gr"}
+        }
+      },
+      "cinnamon_roll": {
+        "base_weight": 2750,
+        "ingredients": {
+          "laminasi original": {"amount": 2300, "unit": "gr"},
+          "sonton vanilla": {"amount": 200, "unit": "gr"},
+          "palm sugar": {"amount": 100, "unit": "gr"},
+          "bubuk cinnamon": {"amount": 50, "unit": "gr"},
+          "raisin (kismis)": {"amount": 100, "unit": "gr"}
+        }
+      },
+      "cornet_puff": {
+        "base_weight": 40,
+        "ingredients": {
+          "adonan puff pastry": {"amount": 40, "unit": "gr"}
+        }
+      },
+      "coffee_croissant_frozen": {
+        "base_weight": 75,
+        "ingredients": {
+          "laminasi original": {"amount": 65, "unit": "gr"},
+          "margarine": {"amount": 5, "unit": "gr"},
+          "gula pasir": {"amount": 5, "unit": "gr"}
+        }
+      },
+      "creme_brule": {
+        "base_weight": 85,
+        "ingredients": {
+          "laminasi original": {"amount": 85, "unit": "gr"}
+        }
+      },
+      "croffin": {
+        "base_weight": 65,
+        "ingredients": {
+          "laminasi original": {"amount": 65, "unit": "gr"}
+        }
+      },
+      "cromboloni": {
+        "base_weight": 65,
+        "ingredients": {
+          "laminasi original": {"amount": 65, "unit": "gr"}
+        }
+      },
+      "danish_baker_museum": {
+        "base_weight": 70,
+        "ingredients": {
+          "laminasi original": {"amount": 70, "unit": "gr"}
+        }
+      },
+      "danish_smith": {
+        "base_weight": 40,
+        "ingredients": {
+          "laminasi original": {"amount": 40, "unit": "gr"}
+        }
+      },
+      "eggtart_baker_museum": {
+        "base_weight": 40,
+        "ingredients": {
+          "laminasi original": {"amount": 40, "unit": "gr"}
+        }
+      },
+      "eggtart_coffee_town": {
+        "base_weight": 30,
+        "ingredients": {
+          "laminasi original": {"amount": 30, "unit": "gr"}
+        }
+      },
+      "half_moon_croissant": {
+        "base_weight": 65,
+        "ingredients": {
+          "laminasi original": {"amount": 65, "unit": "gr"}
+        }
+      },
+      "ham_cheese_smith": {
+        "base_weight": 81,
+        "ingredients": {
+          "laminasi original": {"amount": 65, "unit": "gr"},
+          "smoked beef": {"amount": 1, "unit": "pcs"},
+          "keju quick melt": {"amount": 10, "unit": "gr"},
+          "butter sheet": {"amount": 6, "unit": "gr"}
+        }
+      },
+      "plie_au_peppito": {
+        "base_weight": 2650,
+        "ingredients": {
+          "laminasi original": {"amount": 2300, "unit": "gr"},
+          "sonton vanilla": {"amount": 200, "unit": "gr"},
+          "chocochip choco": {"amount": 150, "unit": "gr"}
+        }
+      },
+      "martabak_croissant": {
+        "base_weight": 3080,
+        "ingredients": {
+          "laminasi original": {"amount": 2300, "unit": "gr"},
+          "kacang mede": {"amount": 150, "unit": "gr"},
+          "keju martabak": {"amount": 150, "unit": "gr"},
+          "ceres coklat": {"amount": 150, "unit": "gr"},
+          "skm": {"amount": 30, "unit": "gr"},
+          "sonton vanilla": {"amount": 150, "unit": "gr"},
+          "selai nutella": {"amount": 50, "unit": "gr"}
+        }
+      },
+      "pain_au_charcoal": {
+        "base_weight": 83,
+        "ingredients": {
+          "laminasi charcoal": {"amount": 80, "unit": "gr"},
+          "chocolate stick": {"amount": 3, "unit": "pcs"}
+        }
+      },
+      "pain_au_choco": {
+        "base_weight": 83,
+        "ingredients": {
+          "laminasi original": {"amount": 80, "unit": "gr"},
+          "chocolate stick": {"amount": 3, "unit": "pcs"}
+        }
+      },
+      "kouign_amman": {
+        "base_weight": 3000,
+        "ingredients": {
+          "laminasi kouign amman": {"amount": 3000, "unit": "gr"}
+        }
+      },
+      "pain_au_raisin": {
+        "base_weight": 75,
+        "ingredients": {
+          "laminasi original": {"amount": 75, "unit": "gr"}
+        }
+      },
+      "almond_croissant": {
+        "base_weight": 54,
+        "ingredients": {
+          "plain croissant": {"amount": 1, "unit": "pcs"},
+          "filling almond cream": {"amount": 35, "unit": "grams"},
+          "almond sice": {"amount": 10, "unit": "gr"},
+          "gula dusting": {"amount": 8, "unit": "gr"}
+        }
+      },
+      "choco_mousse_croissant": {
+        "base_weight": 63,
+        "ingredients": {
+          "plain croissant": {"amount": 1, "unit": "pcs"},
+          "filling choco mousse": {"amount": 30, "unit": "grams"},
+          "dark compound": {"amount": 30, "unit": "gr"},
+          "chocochip": {"amount": 3, "unit": "gr"}
+        }
+      },
+      "coffee_croissant_baked": {
+        "base_weight": 111,
+        "ingredients": {
+          "coffee croissant (frozen)": {"amount": 1, "unit": "pcs"},
+          "topping coffee": {"amount": 30, "unit": "grams"}
+        }
+      },
+      "creme_au_bullion": {
+        "base_weight": 203,
+        "ingredients": {
+          "trimmingan baked": {"amount": 0, "unit": "gr"},
+          "filling bullion": {"amount": 200, "unit": "gr"},
+          "raisin": {"amount": 3, "unit": "gr"}
+        }
+      },
+      "danish_strawberry": {
+        "base_weight": 61,
+        "ingredients": {
+          "danish smith": {"amount": 1, "unit": "pcs"},
+          "buah strawberry": {"amount": 30, "unit": "gr"},
+          "f danish strawberry": {"amount": 30, "unit": "gr"}
+        }
+      },
+      "danish_suzette": {
+        "base_weight": 69,
+        "ingredients": {
+          "danish smith": {"amount": 1, "unit": "pcs"},
+          "selai nutella": {"amount": 35, "unit": "gr"},
+          "buah pisang": {"amount": 30, "unit": "gr"},
+          "gula pasir": {"amount": 3, "unit": "gr"}
+        }
+      },
+      "hokkaido_eggtart_b_m": {
+        "base_weight": 51,
+        "ingredients": {
+          "eggtart b m": {"amount": 1, "unit": "pcs"},
+          "filling hokkaido": {"amount": 50, "unit": "gr"}
+        }
+      },
+      "hokkaido_eggtart_c_t": {
+        "base_weight": 36,
+        "ingredients": {
+          "eggtart c t": {"amount": 1, "unit": "pcs"},
+          "filling hokkaido": {"amount": 35, "unit": "gr"}
+        }
+      },
+      "portuguese_eggtart_b_m": {
+        "base_weight": 46,
+        "ingredients": {
+          "eggtart c l": {"amount": 1, "unit": "pcs"},
+          "filing portuguese": {"amount": 45, "unit": "gr"}
+        }
+      },
+      "portuguesse_eggtart_c_t": {
+        "base_weight": 26,
+        "ingredients": {
+          "eggtart b t": {"amount": 1, "unit": "pcs"},
+          "filling portugese": {"amount": 25, "unit": "gr"}
+        }
+      },
+      "mozzarella_melt_cheese": {
+        "base_weight": 56.5,
+        "ingredients": {
+          "square croissant": {"amount": 1, "unit": "pcs"},
+          "keju slice": {"amount": 1.5, "unit": "pcs"},
+          "keju mozzarella": {"amount": 30, "unit": "gr"},
+          "mayonaise": {"amount": 25, "unit": "gr"}
+        }
+      },
+      "mozzarella_smoked_beef": {
+        "base_weight": 81,
+        "ingredients": {
+          "square croissant": {"amount": 1, "unit": "pcs"},
+          "keju mozzarella": {"amount": 30, "unit": "gr"},
+          "smoke beef": {"amount": 1, "unit": "pcs"},
+          "saos sambal": {"amount": 25, "unit": "gr"},
+          "daun bawang": {"amount": 0, "unit": "gr"},
+          "mayonaise": {"amount": 25, "unit": "gr"}
+        }
+      },
       "adonan_croissant_classic": {
         "base_weight": 2000,
         "flour": {"amount": 1000, "unit": "grams"},

@@ -97,6 +97,58 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }
 
+        /* New styles for horizontal alignment of baked/frozen inputs */
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Styles for horizontal alignment of product name and input fields in Croissant Calculator */
+        .croissant-product-input-line {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        .croissant-product-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #f9e1c0; /* Match product header color */
+            flex: 2; /* Give more space to the label */
+            text-align: left;
+            margin-right: 10px; /* Space between label and first input group */
+            min-width: 100px; /* Ensure label doesn't get too small */
+        }
+
+        .croissant-input-group {
+            display: flex;
+            align-items: center;
+            width: 30%; /* Allocate width for each input group */
+            justify-content: flex-end; /* Align label/input to the right within its group */
+        }
+
+        .croissant-input-group label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #000000;
+            margin-right: 5px; /* Space between "Baked/Frozen" label and input */
+            flex: none; /* Do not let the label grow */
+            text-align: right;
+        }
+
+        .croissant-input-group input {
+            flex: none; /* Do not let the input grow */
+            width: 60px; /* Fixed width for the input field */
+            text-align: center;
+        }
+        
+        /* General label style, overridden by specific classes where needed */
         label {
             font-size: 14px;
             font-weight: 500;
@@ -989,27 +1041,25 @@
 
             console.log('Initializing Croissant Calculator...'); // Debugging
             console.log('Croissant Products for inputs:', croissantProductsList); // Debugging
-            console.log('Outlets for inputs:', outlets); // Debugging
 
-            // Generate input fields for each croissant product and outlet
+            // Generate input fields for each croissant product
             croissantInputFieldsDiv.innerHTML = ''; // Clear existing content
-            outlets.forEach(outlet => {
-                const outletHeader = document.createElement('h3');
-                outletHeader.textContent = `${outlet} Outlet`;
-                outletHeader.style.textAlign = 'left';
-                outletHeader.style.marginTop = '15px';
-                outletHeader.style.color = '#f9e1c0';
-                croissantInputFieldsDiv.appendChild(outletHeader);
-
-                croissantProductsList.forEach(product => {
-                    const div = document.createElement('div');
-                    div.className = 'form-group';
-                    div.innerHTML = `
-                        <label for="croissant-${product.replace(/ /g, '-')}-${outlet}">${product.replace(/_/g, ' ')}:</label>
-                        <input type="number" id="croissant-${product.replace(/ /g, '-')}-${outlet}" name="croissant-${product.replace(/ /g, '-')}-${outlet}" placeholder="0" min="0"/>
-                    `;
-                    croissantInputFieldsDiv.appendChild(div);
-                });
+            croissantProductsList.forEach(product => {
+                const productContainer = document.createElement('div');
+                productContainer.className = 'croissant-product-input-line'; // New class for horizontal product line
+                
+                productContainer.innerHTML = `
+                    <label class="croissant-product-label">${product.replace(/_/g, ' ')}:</label>
+                    <div class="croissant-input-group">
+                        <label for="croissant-${product.replace(/ /g, '-')}-baked">Baked:</label>
+                        <input type="number" id="croissant-${product.replace(/ /g, '-')}-baked" name="croissant-${product.replace(/ /g, '-')}-baked" placeholder="0" min="0"/>
+                    </div>
+                    <div class="croissant-input-group">
+                        <label for="croissant-${product.replace(/ /g, '-')}-frozen">Frozen:</label>
+                        <input type="number" id="croissant-${product.replace(/ /g, '-')}-frozen" name="croissant-${product.replace(/ /g, '-')}-frozen" placeholder="0" min="0"/>
+                    </div>
+                `;
+                croissantInputFieldsDiv.appendChild(productContainer);
             });
 
             calculateCroissantButton.addEventListener('click', function() {
@@ -1020,14 +1070,18 @@
                     totalProductQuantities[product] = 0;
                 });
 
-                // Gather input for each product per outlet
-                outlets.forEach(outlet => {
-                    croissantProductsList.forEach(product => {
-                        const inputId = `croissant-${product.replace(/ /g, '-')}-${outlet}`;
-                        const inputElement = document.getElementById(inputId);
-                        const quantity = parseFloat(inputElement.value) || 0;
-                        totalProductQuantities[product] += quantity;
-                    });
+                // Gather input for each product (baked and frozen)
+                croissantProductsList.forEach(product => {
+                    const inputBakedId = `croissant-${product.replace(/ /g, '-')}-baked`;
+                    const inputFrozenId = `croissant-${product.replace(/ /g, '-')}-frozen`;
+                    
+                    const inputBakedElement = document.getElementById(inputBakedId);
+                    const inputFrozenElement = document.getElementById(inputFrozenId);
+
+                    const quantityBaked = parseFloat(inputBakedElement.value) || 0;
+                    const quantityFrozen = parseFloat(inputFrozenElement.value) || 0;
+                    
+                    totalProductQuantities[product] = quantityBaked + quantityFrozen;
                 });
 
                 // Map to store total resep needed for each unique recipe (main or sub-recipe)
