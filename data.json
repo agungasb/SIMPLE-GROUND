@@ -59,7 +59,7 @@
   },
   "croissant_department": {
     "product_management": {
-      "croissantProducts": ["Classic Croissant", "apple chausson", "Plain Croissant", "Smoked Beef Baker museum", "Square Croissant", "Brioche", "Burger Bun", "Cinnamon Roll", "Cornet Puff", "Coffee Croissant (Frozen)", "Creme Brule", "Croffin", "Cromboloni", "Danish Baker Museum", "Danish Smith", "Eggtart Baker Museum", "Eggtart Coffee Town", "Half Moon Croissant", "Ham & Cheese Smith", "Plie Au / Peppito", "Martabak Croissant", "Pain Au Charcoal", "Pain Au Choco", "Kouign Amman", "Pain Au Raisin", "Almond Croissant", "Choco Mousse Croissant", "Coffee Croissant (Baked)", "Creme Au Bullion", "Danish Strawberry", "Danish Suzette", "Hokkaido Eggtart B M", "Hokkaido Eggtart C T", "Portuguese Eggtart B M", "Portuguesse Eggtart C T", "Mozzarella Melt Cheese", "Mozzarella Smoked Beef"]
+      "croissantProducts": ["Classic Croissant", "apple chausson", "Plain Croissant", "Smoked Beef Baker museum", "Square Croissant", "Brioche", "Burger Bun", "Cinnamon Roll", "Cornet Puff", "Coffee Croissant (Frozen)", "Creme Brule", "Croffin", "Cromboloni", "Danish Baker Museum", "Danish Smith", "Eggtart Baker Museum", "Eggtart Coffee Town", "Half Moon Croissant", "Ham & Cheese Smith", "Plie Au / Peppito", "Martabak Croissant", "Pain Au Charcoal", "Pain Au Choco", "Kouign Amman", "Pain Au Raisin", "Almond Croissant", "Choco Mousse Croissant", "Coffee Croissant (Baked)", "Creme Au Bullion", "Danish Strawberry", "Danish Suzette", "Hokkaido Eggtart B M", "Hokkaido Eggtart C T", "Portuguesse Eggtart B M", "Portuguesse Eggtart C T", "Mozzarella Melt Cheese", "Mozzarella Smoked Beef"]
     },
     "recipe_management": {
       "plain_croissant": {
@@ -817,7 +817,7 @@
           "millac roselle": {"amount": 1000, "unit": "grams"}
         }
       },
-      "filling_portuguese_instructions": [
+      "filling_portuguesse_instructions": [
         "Kocok telur, kuning telur, gula pasir, dan susu bubuk hingga rata.",
         "Panaskan millac roselle hingga hangat, tuang sedikit demi sedikit ke adonan telur sambil terus diaduk.",
         "Masukkan kembali semua adonan ke dalam panci, masak dengan api kecil sambil terus diaduk hingga mengental.",
