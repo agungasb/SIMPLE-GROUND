@@ -1,7 +1,8 @@
 # Active Context
 
 ## Current Work Focus
-- Adjusted CSS and HTML in `index.html` to align product name, "baked" input, and "frozen" input horizontally for the Croissant Calculator.
+- Further simplified the Croissant Calculator input layout by moving "Baked" and "Frozen" labels to a single header row and removing individual labels from each input line.
+- Updated CSS in `index.html` to match the new layout for the Croissant Calculator inputs.
 
 ## Recent Changes
 - Read `index.html` to understand the current Croissant Calculator input structure.
@@ -9,14 +10,17 @@
 - Modified `index.html` to remove "outlet" and add "baked" and "frozen" input fields.
 - Updated JavaScript logic in `index.html` to reflect new input fields.
 - Refactored HTML structure and CSS in `index.html` to achieve a single horizontal line for each croissant product, displaying the product name, baked input, and frozen input side-by-side. New classes `croissant-product-input-line`, `croissant-product-label`, and `croissant-input-group` were introduced for this purpose.
+- Modified `index.html` to move "Baked" and "Frozen" labels to a single header row and removed individual "Baked" and "Frozen" labels from each input line for a cleaner, more consolidated layout.
+- Updated CSS in `index.html` to correctly style and align the new header and input fields.
 
 ## Next Steps
-- Update `activeContext.md` and `progress.md`.
+- None (Active Context updated).
 
 ## Active Decisions and Considerations
 - The Croissant Calculator inputs now distinguish between "baked" and "frozen" croissants instead of a generic "outlet" quantity.
 - The JavaScript logic has been adapted to handle the new input fields, ensuring proper data collection and display for both baked and frozen quantities.
 - The layout of the croissant input fields has been further refined to present the product name, baked quantity, and frozen quantity on a single horizontal line, enhancing clarity and usability as per user feedback. CSS Flexbox is used for this alignment.
+- The input interface has been simplified by using a single header row for "Baked" and "Frozen" labels, reducing visual clutter and improving the overall user experience.
 
 ## Important Patterns and Preferences
 - Use of a structured `data.json` for all product and recipe information.

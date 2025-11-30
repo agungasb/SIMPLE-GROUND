@@ -107,6 +107,29 @@
         }
 
         /* Styles for horizontal alignment of product name and input fields in Croissant Calculator */
+        .croissant-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: bold;
+            color: #f9e1c0;
+            margin-bottom: 10px;
+        }
+
+        .croissant-product-label-header {
+            flex: 2;
+            text-align: left;
+            margin-right: 10px;
+            min-width: 100px;
+        }
+
+        .croissant-input-group-header {
+            width: 30%;
+            text-align: center;
+        }
+
         .croissant-product-input-line {
             display: flex;
             align-items: center;
@@ -130,16 +153,7 @@
             display: flex;
             align-items: center;
             width: 30%; /* Allocate width for each input group */
-            justify-content: flex-end; /* Align label/input to the right within its group */
-        }
-
-        .croissant-input-group label {
-            font-size: 14px;
-            font-weight: 500;
-            color: #000000;
-            margin-right: 5px; /* Space between "Baked/Frozen" label and input */
-            flex: none; /* Do not let the label grow */
-            text-align: right;
+            justify-content: flex-end; /* Align input to the right within its group */
         }
 
         .croissant-input-group input {
@@ -1044,18 +1058,27 @@
 
             // Generate input fields for each croissant product
             croissantInputFieldsDiv.innerHTML = ''; // Clear existing content
+
+            // Add a header row for "Baked" and "Frozen"
+            const headerRow = document.createElement('div');
+            headerRow.className = 'croissant-header-row';
+            headerRow.innerHTML = `
+                <div class="croissant-product-label-header">Product</div>
+                <div class="croissant-input-group-header">Baked</div>
+                <div class="croissant-input-group-header">Frozen</div>
+            `;
+            croissantInputFieldsDiv.appendChild(headerRow);
+
             croissantProductsList.forEach(product => {
                 const productContainer = document.createElement('div');
-                productContainer.className = 'croissant-product-input-line'; // New class for horizontal product line
+                productContainer.className = 'croissant-product-input-line';
                 
                 productContainer.innerHTML = `
                     <label class="croissant-product-label">${product.replace(/_/g, ' ')}:</label>
                     <div class="croissant-input-group">
-                        <label for="croissant-${product.replace(/ /g, '-')}-baked">Baked:</label>
                         <input type="number" id="croissant-${product.replace(/ /g, '-')}-baked" name="croissant-${product.replace(/ /g, '-')}-baked" placeholder="0" min="0"/>
                     </div>
                     <div class="croissant-input-group">
-                        <label for="croissant-${product.replace(/ /g, '-')}-frozen">Frozen:</label>
                         <input type="number" id="croissant-${product.replace(/ /g, '-')}-frozen" name="croissant-${product.replace(/ /g, '-')}-frozen" placeholder="0" min="0"/>
                     </div>
                 `;
