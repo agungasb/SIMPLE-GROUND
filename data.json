@@ -59,7 +59,287 @@
   },
   "croissant_department": {
     "product_management": {
-      "croissantProducts": ["apple chausson", "Plain Croissant", "Smoked Beef Baker museum", "Square Croissant", "Brioche", "Burger Bun", "Cinnamon Roll", "Cornet Puff", "Creme Brule", "Croffin", "Cromboloni", "Danish Baker Museum", "Danish Smith", "Eggtart Baker Museum", "Eggtart Coffee Town", "Half Moon Croissant", "Ham & Cheese Smith", "Plie Au / Peppito", "Martabak Croissant", "Pain Au Charcoal", "Pain Au Choco", "Kouign Amman", "Pain Au Raisin", "Almond Croissant", "Choco Mousse Croissant", "Coffee Croissant", "Creme Au Bullion", "Danish Strawberry", "Danish Suzette", "Hokkaido Eggtart B M", "Hokkaido Eggtart C T", "Portuguesse Eggtart B M", "Portuguesse Eggtart C T", "Mozzarella Melt Cheese", "Mozzarella Smoked Beef"]
+      "croissantProducts": [
+        {
+          "name": "Apple Chausson",
+          "recipe_key_baked": "apple_chausson_baked",
+          "recipe_key_frozen": "apple_chausson_frozen",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Plain Croissant",
+          "recipe_key": "plain_croissant",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Smoked Beef Baker museum",
+          "recipe_key": "smoked_beef_baker_museum",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Square Croissant",
+          "recipe_key": "square_croissant",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Brioche",
+          "recipe_key": "brioche",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Burger Bun",
+          "recipe_key": "burger_bun",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Cinnamon Roll",
+          "recipe_key": "cinnamon_roll",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Cornet Puff",
+          "recipe_key": "cornet_puff",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Creme Brule",
+          "recipe_key": "creme_brule",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Croffin",
+          "recipe_key": "croffin",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Cromboloni",
+          "recipe_key": "cromboloni",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Danish B M",
+          "recipe_key": "danish_b_m",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Danish Smith",
+          "recipe_key": "danish_smith",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Eggtart Baker Museum",
+          "recipe_key": "eggtart_b_m",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Eggtart Coffee Town",
+          "recipe_key": "eggtart_c_t",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Half Moon Croissant",
+          "recipe_key": "half_moon_croissant",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Ham & Cheese Smith",
+          "recipe_key": "ham_&_cheese_smith",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Plie Au / Peppito",
+          "recipe_key": "plie_au_/_peppito",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Martabak Croissant",
+          "recipe_key": "martabak_croissant",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Pain Au Charcoal",
+          "recipe_key": "pain_au_charcoal",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Pain Au Choco",
+          "recipe_key": "pain_au_choco",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Kouign Amman",
+          "recipe_key": "kouign_amman",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Pain Au Raisin",
+          "recipe_key": "pain_au_raisin",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Almond Croissant",
+          "recipe_key": "almond_croissant",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Choco Mousse Croissant",
+          "recipe_key": "choco_mousse_croissant",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Coffee Croissant",
+          "recipe_key_baked": "coffee_croissant",
+          "recipe_key_frozen": "coffee_croissant_frozen"
+        },
+        {
+          "name": "Creme Au Bullion",
+          "recipe_key": "creme_au_bullion",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Danish Strawberry",
+          "recipe_key": "danish_strawberry",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Danish Suzette",
+          "recipe_key": "danish_suzette",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Hokkaido Eggtart B M",
+          "recipe_key": "hokkaido_eggtart_b_m",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Hokkaido Eggtart C T",
+          "recipe_key": "hokkaido_eggtart_c_t",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Portuguesse Eggtart B M",
+          "recipe_key": "portuguesse_eggtart_b_m",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Portuguesse Eggtart C T",
+          "recipe_key": "portuguesse_eggtart_c_t",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Mozzarella Melt Cheese",
+          "recipe_key": "mozzarella_melt_cheese",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        },
+        {
+          "name": "Mozzarella Smoked Beef",
+          "recipe_key_baked": "mozzarella_smoked_beef_baked",
+          "recipe_key_frozen": "mozzarella_smoked_beef_frozen",
+          "variants": {
+            "baked": { "base_weight_factor": 1.0 },
+            "frozen": { "base_weight_factor": 1.0 }
+          }
+        }
+      ]
     },
     "recipe_management": {
       "plain_croissant": {
@@ -177,7 +457,7 @@
           "butter sheet": {"amount": 6, "unit": "grams"}
         }
       },
-      "plie_au_peppito": {
+      "plie_au_/_peppito": {
         "base_weight": 2650,
         "ingredients": {
           "laminasi original": {"amount": 2300, "unit": "grams"},
@@ -312,7 +592,7 @@
           "mayonaise": {"amount": 25, "unit": "grams"}
         }
       },
-      "mozzarella_smoked_beef": {
+      "mozzarella_smoked_beef_baked": {
         "base_weight": 81,
         "ingredients": {
           "square croissant": {"amount": 1, "unit": "pcs"},
@@ -323,11 +603,23 @@
           "mayonaise": {"amount": 25, "unit": "grams"}
         }
       },
-      "apple_chausson": {
+      "mozzarella_smoked_beef_frozen": {
+        "base_weight": 81,
+        "ingredients": {
+          "square croissant": {"amount": 1, "unit": "pcs"}
+        }
+      },
+      "apple_chausson_baked": {
         "base_weight": 100,
         "ingredients": {
           "laminasi original": {"amount": 75, "unit": "grams"},
           "filling apple chausson": {"amount": 25, "unit": "grams"}
+        }
+      },
+      "apple_chausson_frozen": {
+        "base_weight": 100,
+        "ingredients": {
+          "laminasi original": {"amount": 75, "unit": "grams"}
         }
       },
       "laminasi_original": {
@@ -451,7 +743,7 @@
         "Ulangi proses melipat dan istirahatkan adonan sebanyak 2-3 kali.",
         "Tambahkan sisa adonan charcoal (trimingan) pada tahap pelipatan terakhir jika diperlukan."
       ],
-      "laminasi_kouign_amann": {
+      "laminasi_kouign_amman": {
         "base_weight": 3000,
         "ingredients": {
           "adonan original": {"amount": 1800, "unit": "grams"},
@@ -459,7 +751,7 @@
           "gula pasir": {"amount": 400, "unit": "grams"}
         }
       },
-      "laminasi_kouign_amann_instructions": [
+      "laminasi_kouign_amman_instructions": [
         "Pipihkan adonan original, taburi dengan gula pasir secara merata.",
         "Letakkan butter sheet di atas adonan, lalu lipat adonan untuk membungkus butter.",
         "Pipihkan dan lipat adonan beberapa kali, pastikan gula pasir tercampur rata di setiap lapisan.",
@@ -640,11 +932,11 @@
         }
       },
       "filling_choco_mousse_instructions": [
-        "Lelehkan dark couverture menggunakan metode double boiler atau microwave.",
-        "Campurkan gelatine dengan air dingin, biarkan mengembang.",
+        "Lelehkan dark couverture using metode double boiler or microwave.",
+        "Campurkan gelatine with air dingin, biarkan mengembang.",
         "Panaskan cooking cream pleasure, masukkan gelatine yang sudah mengembang, aduk hingga larut.",
         "Tuang campuran cream dan gelatine ke dalam lelehan cokelat, aduk rata.",
-        "Kocok millac gold dan gula halus hingga mengembang.",
+        "Kocok millac gold and gula halus hingga mengembang.",
         "Campurkan adonan cokelat ke dalam millac gold yang sudah dikocok secara bertahap, aduk perlahan hingga rata.",
         "Dinginkan hingga set sebelum digunakan."
       ],

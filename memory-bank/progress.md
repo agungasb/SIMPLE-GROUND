@@ -14,6 +14,9 @@
 - The Croissant Calculator input fields now only display final products, excluding intermediate products like "Adonan" and "Laminasi", based on user feedback.
 - The Croissant Calculator now displays a "Product Input Summary (pcs)" section, showing the total quantity in pieces for each product input.
 - The Croissant Calculator's "Recipe Calculation Results" now explicitly label amounts in "resep".
+- The "Plain Croissant" is now appearing in the Croissant Production Calculator input fields after removing its exclusion from the `intermediateRecipeKeys` array in `index.html`.
+- The Recipe Scaler now excludes specified intermediate products and base recipes from its dropdown using a new `intermediateRecipeKeysForScaler` array.
+- **The `Uncaught ReferenceError: refreshRecipeScalerContent is not defined` has been resolved by moving the `refreshRecipeScalerContent` function to the global scope in `index.html`.**
 
 ## What's Left to Build
 - The Croissant Calculator's calculation logic for recipes and ingredient aggregation needs further development and testing, now accounting for baked and frozen quantities and specifically for final products. The calculation logic has been further refined to accurately handle "pcs" based ingredients in sub-recipes, directly translating "pcs" amounts to "resep" for sub-recipes.
@@ -24,6 +27,9 @@
 - The display units for product inputs ("pcs") and recipe calculations ("resep") have been clarified in the Croissant Calculator results.
 - The recipe calculation for sub-recipes measured in "pcs" has been corrected to directly translate to "resep", improving accuracy.
 - Documentation for `activeContext.md` and `progress.md` has been updated to reflect these changes.
+- "Plain Croissant" is now included in the Croissant Production Calculator inputs.
+- Intermediate recipes are now properly filtered out from the Recipe Scaler dropdown, providing a cleaner and more relevant selection for users. This now specifically excludes all Croissant Product-Associated Recipes, while including Simple Ground recipes and Croissant Standalone Recipes as per user clarification.
+- **The `refreshRecipeScalerContent` function is now globally accessible, resolving the `ReferenceError` encountered in the console.**
 
 ## Known Issues
 - None.
@@ -35,3 +41,5 @@
 - Further simplified the input interface by consolidating "Baked" and "Frozen" labels into a single header, reducing visual clutter and enhancing user experience.
 - Implemented filtering of `croissantProductsList` to show only final products in the Croissant Calculator inputs, directly addressing user feedback for a more focused interface.
 - Clarified display units for product inputs ("pcs") and recipe calculations ("resep") in the Croissant Calculator results to improve user understanding.
+- Introduced `intermediateRecipeKeysForScaler` to specifically filter out recipes not intended for direct scaling by users, enhancing the usability of the Recipe Scaler.
+- **Moved `refreshRecipeScalerContent` to the global scope to ensure proper function access and eliminate `ReferenceError`s.**

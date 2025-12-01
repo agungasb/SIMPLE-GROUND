@@ -40,7 +40,7 @@
             backdrop-filter: blur(61px);
             -webkit-backdrop-filter: blur(61px);
             z-index: 1000;
-            padding: 10px 0;
+            padding: 20px 0;
         }
 
         .nav-buttons {
@@ -76,7 +76,7 @@
             border-radius: 12px;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
             text-align: center;
-            margin: 20px auto;
+            margin: 40px auto;
             font-size: 12px;
         }
 
@@ -381,7 +381,7 @@
         /* Page Container */
         .page {
             display: none;
-            margin-top: 60px;
+            margin-top: 100px;
             width: 100%;
         }
 
@@ -645,6 +645,8 @@
                 let recipes;
                 let croissantProductsList = []; // New global variable for croissant products, initialize as empty array
                 let croissantRecipes = {};     // New global variable for croissant recipes, initialize as empty object
+                let intermediateRecipeKeysForScaler = []; // Global variable for scaler exclusions
+                let rawCroissantProducts = []; // Global variable for raw croissant products
 
                 // Global variable to keep track of the active department
                 let activeDepartment = 'simple-ground'; // Default active department
@@ -674,7 +676,8 @@
             // Now show the current active main page, but with the new department context
             showPage(currentActiveMainPageId, departmentId);
 
-            // Immediately re-populate recipes when department changes, if recipe scaler is active
+            // Immediately re-populate recipes when department changes
+            populateRecipes(departmentId);
             if (document.getElementById('recipe-page').classList.contains('active')) {
                 refreshRecipeScalerContent();
             }
@@ -746,41 +749,54 @@
                 console.log('Data loaded:', data); // Debugging: log full data
                 
                 // Assign department-specific data to global variables
-                croissantProductsList = data.croissant_department.product_management.croissantProducts;
+                rawCroissantProducts = data.croissant_department.product_management.croissantProducts; // Assign to global variable
                 croissantRecipes = data.croissant_department.recipe_management;
                 
-                // Define a list of intermediate product names to exclude from the calculator inputs
-                const intermediateProducts = [
-                    "Adonan Original", "Adonan Charcoal", "Adonan Brioche", "Adonan Puff Pastry",
-                    "Laminasi Original", "Laminasi Charcoal", "Laminasi Kouign Amann", "Laminasi Puff Pastry",
-                    "Plain Croissant", "Square Croissant", "Danish Smith",
-                    "Eggtart Baker Museum", "Eggtart Coffee Town", "Eggtart C L", "Eggtart B T", // Assuming C L and B T are variants of Eggtart bases
-                    "Coffee Croissant (Frozen)"
+                // Define a list of recipe keys that correspond to intermediate products to exclude from the calculator inputs
+                const intermediateRecipeKeys = [
+                    "adonan_original", "adonan_charcoal", "adonan_brioche", "adonan_puff_pastry",
+                    "laminasi_original", "laminasi_charcoal", "laminasi_kouign_amann", "laminasi_puff_pastry",
+                    "square_croissant", "danish_smith",
+                    "eggtart_b_m", "eggtart_c_t", // Using recipe keys for eggtart bases
+                    "coffee_croissant_frozen" // The frozen variant might also be considered intermediate if only the baked is a final product for direct sale
+                ];
+                
+                // Define a list of recipe keys that correspond to items to EXCLUDE from the recipe scaler dropdown.
+                intermediateRecipeKeysForScaler = [ // Assign to global variable
+                    // Only include true intermediate recipes here
                 ];
 
-                // Filter croissantProductsList to only include final products
-                croissantProductsList = data.croissant_department.product_management.croissantProducts.filter(product => {
-                    // Check if the product name or its lowercased/underscore-separated version is in the intermediate list
-                    const lowercasedProduct = product.toLowerCase();
-                    const underscoredProduct = product.replace(/ /g, '_').toLowerCase();
-                    
-                    return !intermediateProducts.some(intermediate => {
-                        const lowercasedIntermediate = intermediate.toLowerCase();
-                        const underscoredIntermediate = intermediate.replace(/ /g, '_').toLowerCase();
-                        return lowercasedProduct === lowercasedIntermediate || underscoredProduct === underscoredIntermediate;
-                    });
+                // Filter croissantProductsList to only include final products (objects) for the calculator
+                croissantProductsList = rawCroissantProducts.filter(productObj => {
+                    // Check if the product's primary recipe_key (or baked/frozen recipe_keys if applicable) is in the intermediate list
+                    const recipeKeysToCheck = [];
+                    if (productObj.recipe_key) {
+                        recipeKeysToCheck.push(productObj.recipe_key);
+                    }
+                    if (productObj.recipe_key_baked) {
+                        recipeKeysToCheck.push(productObj.recipe_key_baked);
+                    }
+                    if (productObj.recipe_key_frozen) {
+                        recipeKeysToCheck.push(productObj.recipe_key_frozen);
+                    }
+
+                    // A product is intermediate if any of its associated recipe keys are in the intermediateRecipeKeys list.
+                    return !recipeKeysToCheck.some(key => intermediateRecipeKeys.includes(key));
                 });
                 
                 console.log('Filtered Croissant Products List (Final Products):', croissantProductsList); // Debugging
                 console.log('Croissant Recipes:', croissantRecipes);           // Debugging
+                console.log('Intermediate Recipe Keys for Scaler:', intermediateRecipeKeysForScaler); // Debugging
 
                 // Initialize all parts of the application
-                selectDepartment('simple-ground'); // Ensure a default department is selected
-                showPage('production-calculator', 'simple-ground'); // Explicitly show the default calculator page for simple-ground
                 initializeCalculator();
                 initializeRecipeScaler();
                 initializeSettings();
                 initializeCroissantCalculator(); // Initialize the croissant calculator
+                
+                // Set default department and page after initializations
+                selectDepartment('simple-ground'); 
+                showPage('production-calculator', 'simple-ground');
             } catch (error) {
                 console.error('Error loading application data:', error);
                 // Display an error message to the user
@@ -1123,17 +1139,22 @@
             `;
             croissantInputFieldsDiv.appendChild(headerRow);
 
-            croissantProductsList.forEach(product => {
+            // Utility to format product names into valid HTML IDs
+            const formatProductNameForId = (name) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+
+            croissantProductsList.forEach(productObj => {
                 const productContainer = document.createElement('div');
                 productContainer.className = 'croissant-product-input-line';
                 
+                const formattedName = formatProductNameForId(productObj.name);
+
                 productContainer.innerHTML = `
-                    <label class="croissant-product-label">${product.replace(/_/g, ' ')}:</label>
+                    <label class="croissant-product-label">${productObj.name}:</label>
                     <div class="croissant-input-group">
-                        <input type="number" id="croissant-${product.replace(/ /g, '-')}-baked" name="croissant-${product.replace(/ /g, '-')}-baked" placeholder="0" min="0"/>
+                        <input type="number" id="croissant-${formattedName}-baked" name="croissant-${formattedName}-baked" placeholder="0" min="0"/>
                     </div>
                     <div class="croissant-input-group">
-                        <input type="number" id="croissant-${product.replace(/ /g, '-')}-frozen" name="croissant-${product.replace(/ /g, '-')}-frozen" placeholder="0" min="0"/>
+                        <input type="number" id="croissant-${formattedName}-frozen" name="croissant-${formattedName}-frozen" placeholder="0" min="0"/>
                     </div>
                 `;
                 croissantInputFieldsDiv.appendChild(productContainer);
@@ -1141,12 +1162,13 @@
 
             calculateCroissantButton.addEventListener('click', function() {
                 const croissantProductOutputDiv = document.getElementById('croissantProductOutput');
-                let totalProductQuantities = {}; // Stores total (baked + frozen) for each product
+                let productInputSummary = {}; // Stores total baked and frozen quantities per product
 
                 // Gather input for each product (baked and frozen)
-                croissantProductsList.forEach(product => {
-                    const inputBakedId = `croissant-${product.replace(/ /g, '-')}-baked`;
-                    const inputFrozenId = `croissant-${product.replace(/ /g, '-')}-frozen`;
+                croissantProductsList.forEach(productObj => {
+                    const formattedName = formatProductNameForId(productObj.name);
+                    const inputBakedId = `croissant-${formattedName}-baked`;
+                    const inputFrozenId = `croissant-${formattedName}-frozen`;
                     
                     const inputBakedElement = document.getElementById(inputBakedId);
                     const inputFrozenElement = document.getElementById(inputFrozenId);
@@ -1154,35 +1176,39 @@
                     const quantityBaked = parseFloat(inputBakedElement.value) || 0;
                     const quantityFrozen = parseFloat(inputFrozenElement.value) || 0;
                     
-                    totalProductQuantities[product] = quantityBaked + quantityFrozen;
+                    if (quantityBaked > 0 || quantityFrozen > 0) {
+                        productInputSummary[productObj.name] = {
+                            baked: quantityBaked,
+                            frozen: quantityFrozen,
+                            total: quantityBaked + quantityFrozen
+                        };
+                    }
                 });
 
                 // Display Product Input Summary (pcs)
-                let productOutputHTML = `<table><thead><tr><th>Product</th><th>Total (pcs)</th></tr></thead><tbody>`;
-                for (const product in totalProductQuantities) {
-                    if (totalProductQuantities[product] > 0) { // Only show products with input
-                        productOutputHTML += `<tr><td>${product.replace(/_/g, ' ')}</td><td>${totalProductQuantities[product].toFixed(0)}</td></tr>`;
-                    }
+                let productOutputHTML = `<table><thead><tr><th>Product</th><th>Baked (pcs)</th><th>Frozen (pcs)</th><th>Total (pcs)</th></tr></thead><tbody>`;
+                for (const productName in productInputSummary) {
+                    const summary = productInputSummary[productName];
+                    productOutputHTML += `<tr><td>${productName.replace(/_/g, ' ')}</td><td>${summary.baked.toFixed(0)}</td><td>${summary.frozen.toFixed(0)}</td><td>${summary.total.toFixed(0)}</td></tr>`;
                 }
                 productOutputHTML += `</tbody></table>`;
                 croissantProductOutputDiv.innerHTML = productOutputHTML;
-
 
                 // Map to store total resep needed for each unique recipe (main or sub-recipe)
                 let totalResepMap = {};
 
                 // Function to recursively calculate total resep needed for a recipe and its sub-recipes
-                function calculateTotalRecipeResep(recipeName, resepMultiplier) {
-                    const recipe = croissantRecipes[recipeName];
+                function calculateTotalRecipeResep(recipeKey, resepMultiplier, variantFactor = 1.0) {
+                    const recipe = croissantRecipes[recipeKey];
                     if (!recipe) {
-                        console.warn(`Recipe "${recipeName}" not found in croissantRecipes.`);
+                        console.warn(`Recipe "${recipeKey}" not found in croissantRecipes.`);
                         return;
                     }
 
-                    if (!totalResepMap[recipeName]) {
-                        totalResepMap[recipeName] = 0;
+                    if (!totalResepMap[recipeKey]) {
+                        totalResepMap[recipeKey] = 0;
                     }
-                    totalResepMap[recipeName] += resepMultiplier;
+                    totalResepMap[recipeKey] += resepMultiplier;
 
                     if (recipe.ingredients) {
                         for (const ingredientRaw in recipe.ingredients) {
@@ -1196,7 +1222,9 @@
 
                                 if (details.unit === "pcs") {
                                     // If a sub-recipe ingredient is in "pcs", its amount directly represents its "resep" count
-                                    const subRecipeResep = amountNeededInParentRecipe * resepMultiplier; // Multiplier from parent context still applies
+                                    // Apply variantFactor to the amount if it's a direct piece count for a sub-recipe that represents a final product
+                                    const effectiveAmount = amountNeededInParentRecipe * (subRecipe.variants ? subRecipe.variants.baked.base_weight_factor : 1.0); // Assuming baked for sub-recipe if not specified
+                                    const subRecipeResep = effectiveAmount * resepMultiplier; // Multiplier from parent context still applies
                                     calculateTotalRecipeResep(ingredientKey, subRecipeResep);
                                 } else if (subRecipeBaseWeight && subRecipeBaseWeight > 0) {
                                     // Otherwise (e.g., in grams), calculate based on base_weight
@@ -1210,56 +1238,63 @@
                     }
                 }
 
-                // Start calculation for each product
+                // Start calculation for each product variant
                 totalResepMap = {}; // Reset for each calculation
-                for (const product in totalProductQuantities) {
-                    const quantity = totalProductQuantities[product];
-                    if (quantity > 0) {
-                        const mainRecipeName = product.replace(/ /g, '_').toLowerCase();
-                        const mainRecipe = croissantRecipes[mainRecipeName];
+                for (const productName in productInputSummary) {
+                    const productSummary = productInputSummary[productName];
+                    const productObj = croissantProductsList.find(p => p.name === productName);
 
-                        if (mainRecipe) {
-                            // Calculate total grams needed for the product quantity
-                            let totalGramsNeededForProduct = 0;
-                            if (mainRecipe.ingredients) {
-                                for (const ingredientName in mainRecipe.ingredients) {
-                                    const details = mainRecipe.ingredients[ingredientName];
-                                    const ingredientKey = ingredientName.replace(/ /g, '_').toLowerCase();
+                    if (!productObj) {
+                        console.warn(`Product object for "${productName}" not found.`);
+                        continue;
+                    }
 
-                                    if (details.unit === "pcs" && croissantRecipes[ingredientKey]) {
-                                        // If ingredient is a sub-recipe measured in pcs, use its base_weight
-                                        const subRecipe = croissantRecipes[ingredientKey];
-                                        if (subRecipe && subRecipe.base_weight) {
-                                            totalGramsNeededForProduct += details.amount * subRecipe.base_weight * quantity;
-                                        } else {
-                                            console.warn(`Sub-recipe "${ingredientKey}" found as PCS ingredient without base_weight. Assuming 1pc = 1g for calculation.`);
-                                            totalGramsNeededForProduct += details.amount * quantity; // Fallback
-                                        }
-                                    } else {
-                                        // Otherwise, assume it's grams or other direct amount
-                                        totalGramsNeededForProduct += details.amount * quantity;
-                                    }
-                                }
-                            } else {
-                                // If a product has no ingredients list, its base_weight is its per-unit weight
-                                totalGramsNeededForProduct = mainRecipe.base_weight * quantity;
-                            }
-                            
+                    // Handle Baked variant
+                    if (productSummary.baked > 0) {
+                        let recipeKeyBaked = productObj.recipe_key_baked || productObj.recipe_key;
+                        const baseWeightFactorBaked = productObj.variants?.baked?.base_weight_factor || 1.0;
+                        
+                        if (recipeKeyBaked) {
                             // The quantity of the final product directly translates to its own 'resep' count.
-                            // Sub-recipes' resep will be derived from their proportional usage in *grams*.
-                            const numberOfResepForMainProduct = quantity; // 1 piece of product X = 1 resep of recipe X
-                            calculateTotalRecipeResep(mainRecipeName, numberOfResepForMainProduct);
+                            // The base_weight_factor modifies the effective 'resep' multiplier for the recipe.
+                            const numberOfResepForBakedProduct = productSummary.baked * baseWeightFactorBaked;
+                            calculateTotalRecipeResep(recipeKeyBaked, numberOfResepForBakedProduct, baseWeightFactorBaked);
                         } else {
-                            console.warn(`Main recipe for product "${product}" (${mainRecipeName}) not found.`);
+                            console.warn(`Baked recipe key for product "${productName}" not found.`);
+                        }
+                    }
+
+                    // Handle Frozen variant
+                    if (productSummary.frozen > 0) {
+                        let recipeKeyFrozen = productObj.recipe_key_frozen || productObj.recipe_key;
+                        const baseWeightFactorFrozen = productObj.variants?.frozen?.base_weight_factor || 1.0;
+
+                        if (recipeKeyFrozen) {
+                            const numberOfResepForFrozenProduct = productSummary.frozen * baseWeightFactorFrozen;
+                            calculateTotalRecipeResep(recipeKeyFrozen, numberOfResepForFrozenProduct, baseWeightFactorFrozen);
+                        } else {
+                            console.warn(`Frozen recipe key for product "${productName}" not found.`);
                         }
                     }
                 }
 
                 // Display Recipe Calculation Results (in resep units)
                 let recipeOutputHTML = `<table><thead><tr><th>Recipe</th><th>Amount (resep)</th></tr></thead><tbody>`;
-                for (const recipeName in totalResepMap) {
-                    if (totalResepMap[recipeName] > 0) { // Only show recipes with a calculated amount
-                        recipeOutputHTML += `<tr><td>${recipeName.replace(/_/g, ' ')}</td><td>${totalResepMap[recipeName].toFixed(4)}</td></tr>`;
+                for (const recipeKey in totalResepMap) {
+                    if (totalResepMap[recipeKey] > 0) { // Only show recipes with a calculated amount
+                        // Find the corresponding product name for display if available
+                        const product = croissantProductsList.find(p => p.recipe_key === recipeKey || p.recipe_key_baked === recipeKey || p.recipe_key_frozen === recipeKey);
+                        let displayName = recipeKey.replace(/_/g, ' ');
+                        if (product) {
+                            if (product.recipe_key_baked === recipeKey) {
+                                displayName = `${product.name} (Baked)`;
+                            } else if (product.recipe_key_frozen === recipeKey) {
+                                displayName = `${product.name} (Frozen)`;
+                            } else {
+                                displayName = product.name; // Generic recipe key for a product
+                            }
+                        }
+                        recipeOutputHTML += `<tr><td>${displayName}</td><td>${totalResepMap[recipeKey].toFixed(4)}</td></tr>`;
                     }
                 }
                 recipeOutputHTML += `</tbody></table>`;
@@ -1269,33 +1304,37 @@
                 let aggregatedIngredients = {};
 
                 // This function now takes a recipe and its *total* resep and adds its base ingredients
-                function aggregateBaseIngredients(recipeName, totalNumberOfResep) {
-                    const recipe = croissantRecipes[recipeName];
-                    if (!recipe || !recipe.ingredients) return;
+                function aggregateBaseIngredients(recipeKey, totalNumberOfResep) {
+                    const recipe = croissantRecipes[recipeKey];
+                    if (!recipe || !recipe.ingredients) {
+                        // Handle recipes that might not have an 'ingredients' property but are base ingredients themselves (e.g., raw doughs)
+                        // This case is typically handled by direct ingredients in the calling recipe, but good to be explicit.
+                        return;
+                    }
 
-                    // Iterate through ingredients, only adding base ingredients to the final list
+                    // Iterate through ingredients, only adding truly base ingredients to the final list
                     for (const ingredientRaw in recipe.ingredients) {
                         const details = recipe.ingredients[ingredientRaw];
                         const ingredientKey = ingredientRaw.replace(/ /g, '_').toLowerCase();
                         
-                        if (!croissantRecipes[ingredientKey]) { // If it's NOT a sub-recipe, it's a base ingredient
-                            const gramsNeeded = details.amount * totalNumberOfResep;
+                        // If the ingredient is NOT itself a recipe (i.e., it's a raw material), aggregate it.
+                        // Sub-recipes will have their base ingredients aggregated when their own entry in totalResepMap is processed.
+                        if (!croissantRecipes[ingredientKey]) {
+                            const amountForCurrentRecipe = details.amount * totalNumberOfResep;
                             if (!aggregatedIngredients[ingredientRaw]) {
                                 aggregatedIngredients[ingredientRaw] = { amount: 0, unit: details.unit };
                             }
-                            aggregatedIngredients[ingredientRaw].amount += gramsNeeded;
+                            aggregatedIngredients[ingredientRaw].amount += amountForCurrentRecipe;
                         }
-                        // Sub-recipes are handled by their own entry in totalResepMap, no need to recurse here
                     }
                 }
 
                 // Now, iterate through the totalResepMap to aggregate ingredients
-                for (const recipeName in totalResepMap) {
-                    // Only call aggregateBaseIngredients for recipes that have ingredients defined
-                    // Recipes like 'adonan_original' which are actually a collection of base ingredients.
-                    const recipe = croissantRecipes[recipeName];
-                    if (recipe && recipe.ingredients) {
-                        aggregateBaseIngredients(recipeName, totalResepMap[recipeName]);
+                // This ensures that all recipes (main products and sub-recipes) for which we have a total 'resep' count
+                // have their base ingredients aggregated into the final list.
+                for (const recipeKey in totalResepMap) {
+                    if (totalResepMap[recipeKey] > 0) {
+                        aggregateBaseIngredients(recipeKey, totalResepMap[recipeKey]);
                     }
                 }
 
@@ -1310,180 +1349,168 @@
             console.log('Croissant Calculator initialized successfully.'); // Debugging
         }
 
+        // Global variables for Recipe Scaler
+        let recipeSelect;
+        let multiplierInput;
+        let ingredientsTableBody;
+        let recipeNameOutput;
+        let recipeInstructionsDiv;
+        let instructionsList;
+        let scaleButton;
+
         // Recipe Scaler Page Script
         function initializeRecipeScaler() {
-            const recipeSelect = document.getElementById("recipes");
-            const multiplierInput = document.getElementById("multiplier");
-            const scaleButton = document.getElementById("scale-button");
-            const recipeNameOutput = document.getElementById("recipe-name");
-            const ingredientsTableBody = document.querySelector("#ingredients-table tbody");
-            const recipeInstructionsDiv = document.getElementById("recipe-instructions");
-            const instructionsList = document.getElementById("instructions-list");
+            recipeSelect = document.getElementById("recipes");
+            multiplierInput = document.getElementById("multiplier");
+            ingredientsTableBody = document.querySelector("#ingredients-table tbody");
+            recipeNameOutput = document.getElementById("recipe-name");
+            recipeInstructionsDiv = document.getElementById("recipe-instructions");
+            instructionsList = document.getElementById("instructions-list");
+            scaleButton = document.getElementById("scale-button");
 
-            // Populate the recipe dropdown
-            function populateRecipes() {
-                recipeSelect.innerHTML = "<option value=\"\">Select a recipe</option>"; // Always start with a default option
+            // Populate recipes for the initial department
+            populateRecipes(activeDepartment);
 
-                // Add Simple Ground recipes
-                Object.keys(recipes).forEach((recipeKey) => {
-                    // Only add actual recipes to the dropdown, not instruction arrays
-                    if (!recipeKey.endsWith("_instructions")) {
-                        const option = document.createElement("option");
-                        option.value = recipeKey;
-                        option.textContent = `[Simple Ground] ${recipeKey.replace(/_/g, " ")}`;
-                        option.dataset.department = 'simple-ground';
-                        recipeSelect.appendChild(option);
-                    }
-                });
+            // Add event listener for the scale button
+            scaleButton.addEventListener("click", refreshRecipeScalerContent);
 
-                // Add Croissant recipes
-                Object.keys(croissantRecipes).forEach(recipeKey => {
-                    // Exclude instruction keys and any other non-recipe entries
-                    if (!recipeKey.endsWith("_instructions") && typeof croissantRecipes[recipeKey] === 'object' && croissantRecipes[recipeKey] !== null) {
-                        const option = document.createElement("option");
-                        option.value = recipeKey;
-                        // Determine display name: use product name from croissantProductsList if it matches a key, otherwise format recipe key
-                        let displayName = recipeKey.replace(/_/g, " ");
-                        const correspondingProduct = croissantProductsList.find(product => product.toLowerCase().replace(/ /g, '_') === recipeKey);
-                        if (correspondingProduct) {
-                            displayName = correspondingProduct;
-                        }
-                        
-                        option.textContent = `[Croissant] ${displayName}`;
-                        option.dataset.department = 'croissant';
-                        recipeSelect.appendChild(option);
-                    }
-                });
-            }
-
-            // Centralize the logic to refresh the recipe scaler content
-            function refreshRecipeScalerContent() {
-                populateRecipes();
-                
-                // Reset output display
+            // Add a change listener to the recipe select to clear previous results for better UX
+            recipeSelect.addEventListener("change", () => {
                 document.getElementById('initial-output-message').style.display = 'block';
                 recipeNameOutput.style.display = 'none';
                 document.getElementById('ingredients-table').style.display = 'none';
                 ingredientsTableBody.innerHTML = "";
                 recipeInstructionsDiv.style.display = "none";
                 instructionsList.innerHTML = "";
+            });
 
-                // Select the "Select a recipe" option by default, or the first valid recipe if none
-                if (recipeSelect.options.length > 0) {
-                    const selectARecipeOption = Array.from(recipeSelect.options).find(option => option.value === "");
-                    if (selectARecipeOption) {
-                        recipeSelect.value = ""; // Select "Select a recipe" option
-                    } else {
-                        // Attempt to select the first non-empty option
-                        const firstValidOption = Array.from(recipeSelect.options).find(option => option.value !== "");
-                        if (firstValidOption) {
-                            recipeSelect.value = firstValidOption.value;
-                            scaleButton.click(); // Automatically scale the first recipe
-                        }
-                    }
-                }
+            // Initial call to refresh content to ensure it's in a clean state
+            const initialSelectedRecipeKey = recipeSelect.value;
+            if (!initialSelectedRecipeKey) {
+                document.getElementById('initial-output-message').style.display = 'block';
+                recipeNameOutput.style.display = 'none';
+                document.getElementById('ingredients-table').style.display = 'none';
+                ingredientsTableBody.innerHTML = "";
+                recipeInstructionsDiv.style.display = "none";
+                instructionsList.innerHTML = "";
+            }
+        }
+
+        function populateRecipes(department) {
+            recipeSelect.innerHTML = '<option value="">Select a recipe</option>'; // Clear existing options
+
+            let currentRecipes = {};
+            if (department === 'simple-ground') {
+                currentRecipes = recipes;
+            } else if (department === 'croissant') {
+                currentRecipes = croissantRecipes;
             }
 
-            // Scale and display the recipe
-            scaleButton.addEventListener("click", function () {
-                const selectedRecipeKey = recipeSelect.value;
-                const multiplier = parseFloat(multiplierInput.value);
-
-                if (!selectedRecipeKey || isNaN(multiplier) || multiplier <= 0) {
-                    alert("Please select a recipe and enter a valid multiplier.");
-                    // Reset output when validation fails
-                    document.getElementById('initial-output-message').style.display = 'block';
-                    recipeNameOutput.style.display = 'none';
-                    document.getElementById('ingredients-table').style.display = 'none';
-                    ingredientsTableBody.innerHTML = "";
-                    recipeInstructionsDiv.style.display = "none";
-                    instructionsList.innerHTML = "";
-                    return;
+            for (const key in currentRecipes) {
+                // Exclude instructions and intermediate keys from the dropdown
+                if (!key.endsWith('_instructions') && !intermediateRecipeKeysForScaler.includes(key)) {
+                    const option = document.createElement("option");
+                    option.value = key;
+                    option.textContent = key.replace(/_/g, ' '); // Format for display
+                    option.dataset.department = department; // Store department info
+                    recipeSelect.appendChild(option);
                 }
+            }
+        }
 
-                document.getElementById('initial-output-message').style.display = 'none'; // Hide initial message
-                recipeNameOutput.style.display = 'block'; // Show recipe name
-                document.getElementById('ingredients-table').style.display = 'table'; // Show ingredients table
+        function refreshRecipeScalerContent() {
+            const selectedRecipeKey = recipeSelect.value;
+            const multiplier = parseFloat(multiplierInput.value);
 
-                const selectedOption = recipeSelect.options[recipeSelect.selectedIndex];
-                const selectedDepartment = selectedOption.dataset.department;
-                
-                let currentRecipesContext = {};
-                if (selectedDepartment === 'simple-ground') {
-                    currentRecipesContext = recipes;
-                } else if (selectedDepartment === 'croissant') {
-                    currentRecipesContext = croissantRecipes;
-                }
-
-                const recipe = currentRecipesContext[selectedRecipeKey];
-                // Display the text content of the selected option (product name)
-                recipeNameOutput.textContent = selectedOption.textContent;
+            if (!selectedRecipeKey || isNaN(multiplier) || multiplier <= 0) {
+                document.getElementById('initial-output-message').style.display = 'block';
+                recipeNameOutput.style.display = 'none';
+                document.getElementById('ingredients-table').style.display = 'none';
                 ingredientsTableBody.innerHTML = "";
+                recipeInstructionsDiv.style.display = "none";
+                instructionsList.innerHTML = "";
+                return;
+            }
 
-                if (!recipe) {
-                    console.error(`Recipe "${selectedRecipeKey}" not found in current department's recipes.`);
-                    ingredientsTableBody.innerHTML = `<tr><td colspan="3">Recipe not found.</td></tr>`;
-                    recipeInstructionsDiv.style.display = "none";
-                    document.getElementById('ingredients-table').style.display = 'table'; // Keep table visible to show error message
-                    return;
+            document.getElementById('initial-output-message').style.display = 'none'; // Hide initial message
+            recipeNameOutput.style.display = 'block'; // Show recipe name
+            document.getElementById('ingredients-table').style.display = 'table'; // Show ingredients table
+
+            const selectedOption = recipeSelect.options[recipeSelect.selectedIndex];
+            const selectedDepartment = selectedOption.dataset.department;
+            
+            let currentRecipesContext = {};
+            if (selectedDepartment === 'simple-ground') {
+                currentRecipesContext = recipes;
+            } else if (selectedDepartment === 'croissant') {
+                currentRecipesContext = croissantRecipes;
+            }
+
+            const recipe = currentRecipesContext[selectedRecipeKey];
+            // Display the text content of the selected option (product name)
+            recipeNameOutput.textContent = selectedOption.textContent;
+            ingredientsTableBody.innerHTML = "";
+
+            if (!recipe) {
+                console.error(`Recipe "${selectedRecipeKey}" not found in current department's recipes.`);
+                ingredientsTableBody.innerHTML = `<tr><td colspan="3">Recipe not found.</td></tr>`;
+                recipeInstructionsDiv.style.display = "none";
+                document.getElementById('ingredients-table').style.display = 'table'; // Keep table visible to show error message
+                return;
+            }
+
+            if (recipe.ingredients) { // Check if the recipe has a sub-object 'ingredients'
+                for (const [ingredient, details] of Object.entries(recipe.ingredients)) {
+                    const row = document.createElement("tr");
+                    const ingredientCell = document.createElement("td");
+                    const amountCell = document.createElement("td");
+                    const unitCell = document.createElement("td");
+
+                    ingredientCell.textContent = ingredient.replace(/_/g, " ");
+                    amountCell.textContent = (details.amount * multiplier).toFixed(0);
+                    unitCell.textContent = details.unit;
+
+                    row.appendChild(ingredientCell);
+                    row.appendChild(amountCell);
+                    row.appendChild(unitCell);
+                    ingredientsTableBody.appendChild(row);
                 }
-
-                if (recipe.ingredients) { // Check if the recipe has a sub-object 'ingredients'
-                    for (const [ingredient, details] of Object.entries(recipe.ingredients)) {
+            } else { // Handle recipes that directly list ingredients (like adonan_donut_simple_ground) and might not have a separate 'ingredients' object
+                for (const [key, value] of Object.entries(recipe)) {
+                    // Ensure it's an ingredient entry and not a metadata field like 'base_weight'
+                    if (key !== "base_weight" && typeof value === 'object' && value !== null && 'amount' in value && 'unit' in value) {
                         const row = document.createElement("tr");
                         const ingredientCell = document.createElement("td");
                         const amountCell = document.createElement("td");
                         const unitCell = document.createElement("td");
 
-                        ingredientCell.textContent = ingredient.replace(/_/g, " ");
-                        amountCell.textContent = (details.amount * multiplier).toFixed(0);
-                        unitCell.textContent = details.unit;
+                        ingredientCell.textContent = key.replace(/_/g, " ");
+                        amountCell.textContent = (value.amount * multiplier).toFixed(0);
+                        unitCell.textContent = value.unit;
 
                         row.appendChild(ingredientCell);
                         row.appendChild(amountCell);
                         row.appendChild(unitCell);
                         ingredientsTableBody.appendChild(row);
                     }
-                } else { // Handle recipes that directly list ingredients (like adonan_donut_simple_ground) and might not have a separate 'ingredients' object
-                    for (const [key, value] of Object.entries(recipe)) {
-                        // Ensure it's an ingredient entry and not a metadata field like 'base_weight'
-                        if (key !== "base_weight" && typeof value === 'object' && value !== null && 'amount' in value && 'unit' in value) {
-                            const row = document.createElement("tr");
-                            const ingredientCell = document.createElement("td");
-                            const amountCell = document.createElement("td");
-                            const unitCell = document.createElement("td");
-
-                            ingredientCell.textContent = key.replace(/_/g, " ");
-                            amountCell.textContent = (value.amount * multiplier).toFixed(0);
-                            unitCell.textContent = value.unit;
-
-                            row.appendChild(ingredientCell);
-                            row.appendChild(amountCell);
-                            row.appendChild(unitCell);
-                            ingredientsTableBody.appendChild(row);
-                        }
-                    }
                 }
+            }
 
-                // Display instructions
-                const instructionsKey = selectedRecipeKey + "_instructions";
-                const instructions = currentRecipesContext[instructionsKey]; // Use currentRecipesContext for instructions
-                instructionsList.innerHTML = ""; // Clear previous instructions
+            // Display instructions
+            const instructionsKey = selectedRecipeKey + "_instructions";
+            const instructions = currentRecipesContext[instructionsKey]; // Use currentRecipesContext for instructions
+            instructionsList.innerHTML = ""; // Clear previous instructions
 
-                if (instructions && instructions.length > 0) {
-                    instructions.forEach(instruction => {
-                        const listItem = document.createElement("li");
-                        listItem.textContent = instruction;
-                        instructionsList.appendChild(listItem);
-                    });
-                    recipeInstructionsDiv.style.display = "block"; // Show instructions div
-                } else {
-                    recipeInstructionsDiv.style.display = "none"; // Hide if no instructions
-                }
-            });
-
-            // Initial call to refresh content
-            refreshRecipeScalerContent();
+            if (instructions && instructions.length > 0) {
+                instructions.forEach(instruction => {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = instruction;
+                    instructionsList.appendChild(listItem);
+                });
+                recipeInstructionsDiv.style.display = "block"; // Show instructions div
+            } else {
+                recipeInstructionsDiv.style.display = "none"; // Hide if no instructions
+            }
         }
 
         // Settings Page Script
