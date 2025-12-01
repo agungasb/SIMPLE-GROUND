@@ -449,6 +449,40 @@
                 padding: 6px 4px; /* Adjust padding for header cells on mobile */
                 word-break: break-word; /* Allow long words to break */
             }
+
+            /* Collapsible sections styles */
+            .collapsible-header {
+                cursor: pointer;
+                user-select: none; /* Prevent text selection on click */
+                display: flex;
+                align-items: center;
+                gap: 8px; /* Space between icon and text */
+                font-size: 16px;
+                color: #f9e1c0; /* Match existing header colors */
+                padding: 5px 0;
+            }
+
+            .collapsible-header .fas {
+                transition: transform 0.3s ease;
+            }
+
+            .collapsible-header.collapsed .fas {
+                transform: rotate(-90deg);
+            }
+
+            .collapsible-content {
+                max-height: 1000px; /* Large enough to show all content */
+                overflow: hidden;
+                transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+                opacity: 1;
+                padding-top: 10px;
+            }
+
+            .collapsible-content.collapsed {
+                max-height: 0;
+                opacity: 0;
+                padding-top: 0;
+            }
         </style>
 </head>
 <body>
@@ -493,16 +527,16 @@
             <div id="croissantInputFields"></div>
             <button id="calculateCroissant">CALCULATE</button>
             <div class="result" id="croissantProductSummary" style="margin-top: 20px;">
-                <h2>Product Input Summary (pcs)</h2>
-                <div id="croissantProductOutput"></div>
+                <h2 class="collapsible-header" onclick="toggleCollapse(this)"><i class="fas fa-chevron-down"></i> Product Input Summary (pcs)</h2>
+                <div class="collapsible-content active" id="croissantProductOutput"></div>
             </div>
             <div class="result" id="croissantCalculationResults" style="margin-top: 20px;">
-                <h2>Recipe Calculation Results</h2>
-                <div id="croissantRecipeOutput"></div>
+                <h2 class="collapsible-header" onclick="toggleCollapse(this)"><i class="fas fa-chevron-down"></i> Recipe Calculation Results</h2>
+                <div class="collapsible-content active" id="croissantRecipeOutput"></div>
             </div>
             <div class="result" id="croissantIngredientSummary" style="margin-top: 20px;">
-                <h2>Ingredient Summary</h2>
-                <div id="croissantIngredientOutput"></div>
+                <h2 class="collapsible-header" onclick="toggleCollapse(this)"><i class="fas fa-chevron-down"></i> Ingredient Summary</h2>
+                <div class="collapsible-content active" id="croissantIngredientOutput"></div>
             </div>
         </div>
     </div>
@@ -1705,6 +1739,25 @@
                     updateTotalScores(); // Update totals after saving
                 }
             });
+        }
+
+        // Toggle Collapse Function
+        function toggleCollapse(headerElement) {
+            headerElement.classList.toggle('collapsed');
+            const content = headerElement.nextElementSibling; // The content div is the next sibling
+            content.classList.toggle('collapsed');
+            
+            // Update the icon
+            const icon = headerElement.querySelector('.fas');
+            if (icon) {
+                if (headerElement.classList.contains('collapsed')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-right');
+                } else {
+                    icon.classList.remove('fa-chevron-right');
+                    icon.classList.add('fa-chevron-down');
+                }
+            }
         }
     </script>
 </body>
