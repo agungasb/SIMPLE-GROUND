@@ -1160,12 +1160,16 @@
                                 const amountNeededInParentRecipe = details.amount;
                                 const subRecipeBaseWeight = subRecipe.base_weight;
 
-                                if (subRecipeBaseWeight && subRecipeBaseWeight > 0) {
-                                    // Calculate how many resep of the sub-recipe are needed for this particular path
+                                if (details.unit === "pcs") {
+                                    // If a sub-recipe ingredient is in "pcs", its amount directly represents its "resep" count
+                                    const subRecipeResep = amountNeededInParentRecipe * resepMultiplier; // Multiplier from parent context still applies
+                                    calculateTotalRecipeResep(ingredientKey, subRecipeResep);
+                                } else if (subRecipeBaseWeight && subRecipeBaseWeight > 0) {
+                                    // Otherwise (e.g., in grams), calculate based on base_weight
                                     const subRecipeResep = (amountNeededInParentRecipe / subRecipeBaseWeight) * resepMultiplier;
                                     calculateTotalRecipeResep(ingredientKey, subRecipeResep);
                                 } else {
-                                    console.warn(`Sub-recipe "${ingredientKey}" found without base_weight. Cannot calculate resep.`);
+                                    console.warn(`Sub-recipe "${ingredientKey}" found without base_weight and not in pcs. Cannot calculate resep.`);
                                 }
                             }
                         }
@@ -1181,23 +1185,36 @@
                         const mainRecipe = croissantRecipes[mainRecipeName];
 
                         if (mainRecipe) {
-                            // Sum up total grams per unit for the main product, if it has ingredients
-                            let totalGramsPerUnit = 0;
+                            // Calculate total grams needed for the product quantity
+                            let totalGramsNeededForProduct = 0;
                             if (mainRecipe.ingredients) {
-                                for (const ing in mainRecipe.ingredients) {
-                                    totalGramsPerUnit += mainRecipe.ingredients[ing].amount;
+                                for (const ingredientName in mainRecipe.ingredients) {
+                                    const details = mainRecipe.ingredients[ingredientName];
+                                    const ingredientKey = ingredientName.replace(/ /g, '_').toLowerCase();
+
+                                    if (details.unit === "pcs" && croissantRecipes[ingredientKey]) {
+                                        // If ingredient is a sub-recipe measured in pcs, use its base_weight
+                                        const subRecipe = croissantRecipes[ingredientKey];
+                                        if (subRecipe && subRecipe.base_weight) {
+                                            totalGramsNeededForProduct += details.amount * subRecipe.base_weight * quantity;
+                                        } else {
+                                            console.warn(`Sub-recipe "${ingredientKey}" found as PCS ingredient without base_weight. Assuming 1pc = 1g for calculation.`);
+                                            totalGramsNeededForProduct += details.amount * quantity; // Fallback
+                                        }
+                                    } else {
+                                        // Otherwise, assume it's grams or other direct amount
+                                        totalGramsNeededForProduct += details.amount * quantity;
+                                    }
                                 }
                             } else {
-                                // If a product doesn't have ingredients, its base_weight is its per unit weight.
-                                totalGramsPerUnit = mainRecipe.base_weight; // Treat the product's base_weight as its per-unit weight
+                                // If a product has no ingredients list, its base_weight is its per-unit weight
+                                totalGramsNeededForProduct = mainRecipe.base_weight * quantity;
                             }
                             
-                            // Calculate total grams needed
-                            const totalGramsNeeded = totalGramsPerUnit * quantity;
-                            
-                            // Convert to resep units for the main recipe (using its own base_weight)
-                            const numberOfResep = totalGramsNeeded / mainRecipe.base_weight;
-                            calculateTotalRecipeResep(mainRecipeName, numberOfResep);
+                            // The quantity of the final product directly translates to its own 'resep' count.
+                            // Sub-recipes' resep will be derived from their proportional usage in *grams*.
+                            const numberOfResepForMainProduct = quantity; // 1 piece of product X = 1 resep of recipe X
+                            calculateTotalRecipeResep(mainRecipeName, numberOfResepForMainProduct);
                         } else {
                             console.warn(`Main recipe for product "${product}" (${mainRecipeName}) not found.`);
                         }
@@ -1208,7 +1225,7 @@
                 let recipeOutputHTML = `<table><thead><tr><th>Recipe</th><th>Amount (resep)</th></tr></thead><tbody>`;
                 for (const recipeName in totalResepMap) {
                     if (totalResepMap[recipeName] > 0) { // Only show recipes with a calculated amount
-                        recipeOutputHTML += `<tr><td>${recipeName.replace(/_/g, ' ')}</td><td>${totalResepMap[recipeName].toFixed(2)}</td></tr>`;
+                        recipeOutputHTML += `<tr><td>${recipeName.replace(/_/g, ' ')}</td><td>${totalResepMap[recipeName].toFixed(4)}</td></tr>`;
                     }
                 }
                 recipeOutputHTML += `</tbody></table>`;
@@ -1251,7 +1268,7 @@
                 // Display Ingredient Summary Results
                 let ingredientOutputHTML = `<table><thead><tr><th>Ingredient</th><th>Total Amount</th><th>Unit</th></tr></thead><tbody>`;
                 for (const ingredient in aggregatedIngredients) {
-                    ingredientOutputHTML += `<tr><td>${ingredient.replace(/_/g, ' ')}</td><td>${aggregatedIngredients[ingredient].amount.toFixed(2)}</td><td>${aggregatedIngredients[ingredient].unit}</td></tr>`;
+                    ingredientOutputHTML += `<tr><td>${ingredient.replace(/_/g, ' ')}</td><td>${aggregatedIngredients[ingredient].amount.toFixed(4)}</td><td>${aggregatedIngredients[ingredient].unit}</td></tr>`;
                 }
                 ingredientOutputHTML += `</tbody></table>`;
                 croissantIngredientOutputDiv.innerHTML = ingredientOutputHTML;

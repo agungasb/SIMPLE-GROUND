@@ -59,7 +59,7 @@
   },
   "croissant_department": {
     "product_management": {
-      "croissantProducts": ["Classic Croissant", "apple chausson", "Plain Croissant", "Smoked Beef Baker museum", "Square Croissant", "Brioche", "Burger Bun", "Cinnamon Roll", "Cornet Puff", "Coffee Croissant (Frozen)", "Creme Brule", "Croffin", "Cromboloni", "Danish Baker Museum", "Danish Smith", "Eggtart Baker Museum", "Eggtart Coffee Town", "Half Moon Croissant", "Ham & Cheese Smith", "Plie Au / Peppito", "Martabak Croissant", "Pain Au Charcoal", "Pain Au Choco", "Kouign Amman", "Pain Au Raisin", "Almond Croissant", "Choco Mousse Croissant", "Coffee Croissant (Baked)", "Creme Au Bullion", "Danish Strawberry", "Danish Suzette", "Hokkaido Eggtart B M", "Hokkaido Eggtart C T", "Portuguesse Eggtart B M", "Portuguesse Eggtart C T", "Mozzarella Melt Cheese", "Mozzarella Smoked Beef"]
+      "croissantProducts": ["apple chausson", "Plain Croissant", "Smoked Beef Baker museum", "Square Croissant", "Brioche", "Burger Bun", "Cinnamon Roll", "Cornet Puff", "Creme Brule", "Croffin", "Cromboloni", "Danish Baker Museum", "Danish Smith", "Eggtart Baker Museum", "Eggtart Coffee Town", "Half Moon Croissant", "Ham & Cheese Smith", "Plie Au / Peppito", "Martabak Croissant", "Pain Au Charcoal", "Pain Au Choco", "Kouign Amman", "Pain Au Raisin", "Almond Croissant", "Choco Mousse Croissant", "Coffee Croissant", "Creme Au Bullion", "Danish Strawberry", "Danish Suzette", "Hokkaido Eggtart B M", "Hokkaido Eggtart C T", "Portuguesse Eggtart B M", "Portuguesse Eggtart C T", "Mozzarella Melt Cheese", "Mozzarella Smoked Beef"]
     },
     "recipe_management": {
       "plain_croissant": {
@@ -241,11 +241,13 @@
           "chocochip": {"amount": 3, "unit": "grams"}
         }
       },
-      "coffee_croissant_baked": {
-        "base_weight": 111,
+      "coffee_croissant": {
+        "base_weight": 105,
         "ingredients": {
-          "coffee croissant (frozen)": {"amount": 1, "unit": "pcs"},
-          "topping coffee": {"amount": 30, "unit": "grams"}
+          "laminasi original": {"amount": 65, "unit": "grams"},
+          "margarine": {"amount": 5, "unit": "grams"},
+          "gula pasir": {"amount": 5, "unit": "grams"},
+          "topping coffee croissant": {"amount": 30, "unit": "grams"}
         }
       },
       "creme_au_bullion": {
@@ -321,26 +323,6 @@
           "mayonaise": {"amount": 25, "unit": "grams"}
         }
       },
-      "adonan_croissant_classic": {
-        "base_weight": 2000,
-        "flour": {"amount": 1000, "unit": "grams"},
-        "water": {"amount": 400, "unit": "ml"},
-        "butter": {"amount": 500, "unit": "grams"},
-        "sugar": {"amount": 100, "unit": "grams"},
-        "salt": {"amount": 20, "unit": "grams"},
-        "yeast": {"amount": 15, "unit": "grams"}
-      },
-      "adonan_croissant_classic_instructions": [
-        "Campurkan tepung, gula, garam, dan ragi. Aduk rata.",
-        "Tambahkan air sedikit demi sedikit sambil diuleni hingga adonan kalis.",
-        "Masukkan mentega dingin, uleni hingga adonan elastis dan tidak lengket.",
-        "Diamkan adonan selama 1-2 jam hingga mengembang dua kali lipat.",
-        "Kempiskan adonan, pipihkan, dan lipat beberapa kali untuk menciptakan lapisan.",
-        "Istirahatkan adonan di kulkas selama 30 menit.",
-        "Ulangi proses melipat dan istirahatkan adonan 2-3 kali.",
-        "Bentuk adonan menjadi croissant dan diamkan kembali selama 30-45 menit.",
-        "Panggang dalam oven panas hingga matang keemasan."
-      ],
       "apple_chausson": {
         "base_weight": 100,
         "ingredients": {
@@ -349,14 +331,14 @@
         }
       },
       "laminasi_original": {
-        "base_weight": 2300,
+        "base_weight": 2000,
         "ingredients": {
           "adonan original": {"amount": 1800, "unit": "grams"},
           "butter sheet": {"amount": 200, "unit": "grams"}
         }
       },
       "adonan_original": {
-        "base_weight": 1953,
+        "base_weight": 1948,
         "ingredients": {
           "tepung cakra": {"amount": 1000, "unit": "grams"},
           "gula pasir": {"amount": 130, "unit": "grams"},
@@ -399,7 +381,7 @@
         }
       },
       "adonan_brioche": {
-        "base_weight": 1313,
+        "base_weight": 1443,
         "ingredients": {
           "kuning telur": {"amount": 150, "unit": "grams"},
           "ragi": {"amount": 17, "unit": "grams"},

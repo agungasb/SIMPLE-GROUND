@@ -16,12 +16,13 @@
 - The Croissant Calculator's "Recipe Calculation Results" now explicitly label amounts in "resep".
 
 ## What's Left to Build
-- The Croissant Calculator's calculation logic for recipes and ingredient aggregation needs further development and testing, now accounting for baked and frozen quantities and specifically for final products.
+- The Croissant Calculator's calculation logic for recipes and ingredient aggregation needs further development and testing, now accounting for baked and frozen quantities and specifically for final products. The calculation logic has been further refined to accurately handle "pcs" based ingredients in sub-recipes, directly translating "pcs" amounts to "resep" for sub-recipes.
 
 ## Current Status
 - The Croissant Calculator's input fields have been successfully filtered to only show final products, improving the user experience as per user's request.
 - The layout has been further simplified with a single header row for "Baked" and "Frozen" labels, and the CSS has been adjusted to match this new, cleaner layout.
 - The display units for product inputs ("pcs") and recipe calculations ("resep") have been clarified in the Croissant Calculator results.
+- The recipe calculation for sub-recipes measured in "pcs" has been corrected to directly translate to "resep", improving accuracy.
 - Documentation for `activeContext.md` and `progress.md` has been updated to reflect these changes.
 
 ## Known Issues
