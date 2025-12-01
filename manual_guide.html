@@ -103,8 +103,13 @@
         <h2>Tentang Aplikasi Ini</h2>
         <p>Aplikasi <strong>Simple Ground</strong> dirancang untuk membantu Anda mengelola produksi donat dan penskalaan resep dengan lebih efisien. Aplikasi ini terdiri dari tiga modul utama: Kalkulator Produksi, Penskala Resep, dan Pengaturan Skor Donat.</p>
 
+        <h2>Navigasi Utama</h2>
+        <h3>Pemilihan Departemen</h3>
+        <p>Di bagian atas aplikasi, Anda akan menemukan dropdown <strong>"Select Department"</strong>. Gunakan ini untuk beralih antara departemen yang berbeda, seperti "Simple Ground" (untuk produk donat) dan "Department Croissant". Setiap departemen memiliki set kalkulator dan resepnya sendiri.</p>
+
         <h3>Formula Perhitungan</h3>
         <h4>1. Production Calculator (Kalkulator Produksi)</h4>
+        <h5>Departemen Simple Ground (Donat)</h5>
         <p>Modul ini mendistribusikan total pesanan donat ke berbagai outlet berdasarkan skor popularitas donat yang telah diatur. Berikut adalah formula yang digunakan:</p>
         <ul>
             <li><strong>Proporsi Skor Donat per Outlet:</strong>
@@ -129,6 +134,17 @@
             </li>
         </ul>
 
+        <h5>Departemen Croissant</h5>
+        <p>Kalkulator untuk departemen croissant bekerja secara berbeda. Ini menghitung total resep dan bahan baku yang dibutuhkan berdasarkan jumlah produk jadi (Baked dan Frozen) yang Anda masukkan.</p>
+        <ul>
+            <li><strong>Perhitungan Resep:</strong>
+                <br>Aplikasi secara rekursif menghitung berapa banyak "resep" dari setiap komponen (misalnya, adonan, laminasi) yang diperlukan untuk menghasilkan jumlah produk akhir yang dimasukkan.
+            </li>
+            <li><strong>Agregasi Bahan:</strong>
+                <br>Setelah mengetahui jumlah total untuk setiap resep (termasuk resep perantara), aplikasi menjumlahkan semua bahan dasar (seperti tepung, mentega, dll.) untuk memberikan ringkasan total bahan yang dibutuhkan.
+            </li>
+        </ul>
+
         <h4>2. Recipe Scaler (Penskala Resep)</h4>
         <p>Modul ini menyesuaikan jumlah bahan dalam resep berdasarkan faktor skala (multiplier) yang Anda masukkan. Formula yang digunakan sangat sederhana:</p>
         <ul>
@@ -139,8 +155,8 @@
         </ul>
 
         <h2>1. Production Calculator (Kalkulator Produksi)</h2>
+        <h3>Departemen Simple Ground (Donat)</h3>
         <p>Bagian ini membantu Anda mendistribusikan donat ke berbagai outlet berdasarkan total pesanan dan skor popularitas donat yang telah Anda atur.</p>
-        <h3>Cara Menggunakan:</h3>
         <ol>
             <li><strong>Masukkan Total Pesanan:</strong> Pada setiap kolom outlet (Tiban, GP, MTC, Piayu, BA), masukkan jumlah total donat yang dipesan untuk outlet tersebut.</li>
             <li><strong>Klik "CALCULATE":</strong> Setelah memasukkan semua pesanan, klik tombol "CALCULATE".</li>
@@ -157,6 +173,20 @@
                             <li><strong>Total Adonan:</strong> Jumlah resep adonan yang dibutuhkan berdasarkan total PCS dan berat dasar resep.</li>
                         </ul>
                     </li>
+                </ul>
+            </li>
+        </ol>
+
+        <h3>Departemen Croissant</h3>
+        <p>Kalkulator ini membantu Anda merencanakan produksi croissant dengan menghitung total bahan yang dibutuhkan.</p>
+        <ol>
+            <li><strong>Masukkan Jumlah Produk:</strong> Untuk setiap produk croissant, masukkan jumlah yang ingin Anda produksi di kolom "Baked" (matang) dan "Frozen" (beku).</li>
+            <li><strong>Klik "CALCULATE":</strong> Tombol ini akan memproses semua input Anda.</li>
+            <li><strong>Lihat Hasil Perhitungan:</strong> Hasilnya akan ditampilkan dalam tiga bagian yang dapat diperluas/diciutkan:
+                <ul>
+                    <li><strong>Product Input Summary:</strong> Menampilkan ringkasan jumlah produk (dalam pcs) yang Anda masukkan.</li>
+                    <li><strong>Recipe Calculation Results:</strong> Merinci jumlah "resep" yang dibutuhkan untuk setiap komponen (misalnya, adonan, laminasi, dll.).</li>
+                    <li><strong>Ingredient Summary:</strong> Memberikan daftar total semua bahan baku yang diperlukan (misalnya, tepung, mentega) untuk seluruh produksi.</li>
                 </ul>
             </li>
         </ol>
