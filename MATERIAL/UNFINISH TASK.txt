@@ -1,0 +1,12 @@
+martabak_croissant
+pain_au_charcoal
+almond_croissant
+choco_mousse_croissant
+creme_au_bullion
+danish_strawberry
+danish_suzette
+hokkaido_eggtart_b_m
+hokkaido_eggtart_c_t
+portuguesse_eggtart_b_m
+portuguesse_eggtart_c_t
+mozarella_melt_cheese

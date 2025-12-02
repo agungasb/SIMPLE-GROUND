@@ -79,7 +79,8 @@
         },
         {
           "name": "Smoked Beef Baker museum",
-          "recipe_key": "smoked_beef_baker_museum",
+          "recipe_key_baked": "smoked_beef_baker_museum_baked",
+          "recipe_key_frozen": "smoked_beef_baker_museum_frozen",
           "variants": {
             "baked": { "base_weight_factor": 1.0 },
             "frozen": { "base_weight_factor": 1.0 }
@@ -111,7 +112,8 @@
         },
         {
           "name": "Cinnamon Roll",
-          "recipe_key": "cinnamon_roll",
+          "recipe_key_baked": "cinnamon_roll_baked",
+          "recipe_key_frozen": "cinnamon_roll_frozen",
           "variants": {
             "baked": { "base_weight_factor": 1.0 },
             "frozen": { "base_weight_factor": 1.0 }
@@ -191,7 +193,8 @@
         },
         {
           "name": "Ham & Cheese Smith",
-          "recipe_key": "ham_&_cheese_smith",
+          "recipe_key_baked": "ham_&_cheese_smith_baked",
+          "recipe_key_frozen": "ham_&_cheese_smith_frozen",
           "variants": {
             "baked": { "base_weight_factor": 1.0 },
             "frozen": { "base_weight_factor": 1.0 }
@@ -199,7 +202,8 @@
         },
         {
           "name": "Plie Au / Peppito",
-          "recipe_key": "plie_au_/_peppito",
+          "recipe_key_baked": "plie_au_/_peppito_baked",
+          "recipe_key_frozen": "plie_au_/_peppito_frozen",
           "variants": {
             "baked": { "base_weight_factor": 1.0 },
             "frozen": { "base_weight_factor": 1.0 }
@@ -207,7 +211,8 @@
         },
         {
           "name": "Martabak Croissant",
-          "recipe_key": "martabak_croissant",
+          "recipe_key_baked": "martabak_croissant_baked",
+          "recipe_key_frozen": "martabak_croissant_frozen",
           "variants": {
             "baked": { "base_weight_factor": 1.0 },
             "frozen": { "base_weight_factor": 1.0 }
@@ -215,7 +220,8 @@
         },
         {
           "name": "Pain Au Charcoal",
-          "recipe_key": "pain_au_charcoal",
+          "recipe_key_baked": "pain_au_charcoal_baked",
+          "recipe_key_frozen": "pain_au_charcoal_frozen",
           "variants": {
             "baked": { "base_weight_factor": 1.0 },
             "frozen": { "base_weight_factor": 1.0 }
@@ -223,7 +229,8 @@
         },
         {
           "name": "Pain Au Choco",
-          "recipe_key": "pain_au_choco",
+          "recipe_key-baked": "ain_au_choco_baked",
+          "recipe_key-frozen": "pain_au_choco_frozen",
           "variants": {
             "baked": { "base_weight_factor": 1.0 },
             "frozen": { "base_weight_factor": 1.0 }
@@ -247,7 +254,8 @@
         },
         {
           "name": "Almond Croissant",
-          "recipe_key": "almond_croissant",
+          "recipe_key-baked": "almond_croissant_baked",
+          "recipe_key-frozen": "almond_croissant_frozen",
           "variants": {
             "baked": { "base_weight_factor": 1.0 },
             "frozen": { "base_weight_factor": 1.0 }
@@ -255,7 +263,8 @@
         },
         {
           "name": "Choco Mousse Croissant",
-          "recipe_key": "choco_mousse_croissant",
+          "recipe_key_baked": "choco_mousse_croissant_baked",
+          "recipe_key_frozen": "choco_mousse_croissant_frozen",
           "variants": {
             "baked": { "base_weight_factor": 1.0 },
             "frozen": { "base_weight_factor": 1.0 }
@@ -263,12 +272,13 @@
         },
         {
           "name": "Coffee Croissant",
-          "recipe_key_baked": "coffee_croissant",
+          "recipe_key_baked": "coffee_croissant_baked",
           "recipe_key_frozen": "coffee_croissant_frozen"
         },
         {
           "name": "Creme Au Bullion",
-          "recipe_key": "creme_au_bullion",
+          "recipe_key_baked": "creme_au_bullion_baked",
+          "recipe_key_frozen": "creme_au_bullion_frozen",
           "variants": {
             "baked": { "base_weight_factor": 1.0 },
             "frozen": { "base_weight_factor": 1.0 }
@@ -276,7 +286,8 @@
         },
         {
           "name": "Danish Strawberry",
-          "recipe_key": "danish_strawberry",
+          "recipe_key_baked": "danish_strawberry_baked",
+          "recipe_key_frozen": "danish_strawberry_frozen",
           "variants": {
             "baked": { "base_weight_factor": 1.0 },
             "frozen": { "base_weight_factor": 1.0 }
@@ -284,7 +295,8 @@
         },
         {
           "name": "Danish Suzette",
-          "recipe_key": "danish_suzette",
+          "recipe_key_baked": "danish_suzette_baked",
+          "recipe_key_frozen": "danish_suzette_frozen",
           "variants": {
             "baked": { "base_weight_factor": 1.0 },
             "frozen": { "base_weight_factor": 1.0 }
@@ -292,7 +304,8 @@
         },
         {
           "name": "Hokkaido Eggtart B M",
-          "recipe_key": "hokkaido_eggtart_b_m",
+          "recipe_key_baked": "hokkaido_eggtart_b_m_baked",
+          "recipe_key_frozen": "hokkaido_eggtart_b_m_frozen",
           "variants": {
             "baked": { "base_weight_factor": 1.0 },
             "frozen": { "base_weight_factor": 1.0 }
@@ -300,7 +313,8 @@
         },
         {
           "name": "Hokkaido Eggtart C T",
-          "recipe_key": "hokkaido_eggtart_c_t",
+          "recipe_key_baked": "hokkaido_eggtart_c_t_baked",
+          "recipe_key_frozen": "hokkaido_eggtart_c_t_frozen",
           "variants": {
             "baked": { "base_weight_factor": 1.0 },
             "frozen": { "base_weight_factor": 1.0 }
@@ -308,7 +322,8 @@
         },
         {
           "name": "Portuguesse Eggtart B M",
-          "recipe_key": "portuguesse_eggtart_b_m",
+          "recipe_key_baked": "portuguesse_eggtart_b_m_baked",
+          "recipe_key_frozen": "portuguesse_eggtart_b_m_frozen",
           "variants": {
             "baked": { "base_weight_factor": 1.0 },
             "frozen": { "base_weight_factor": 1.0 }
@@ -316,7 +331,8 @@
         },
         {
           "name": "Portuguesse Eggtart C T",
-          "recipe_key": "portuguesse_eggtart_c_t",
+          "recipe_key_baked": "portuguesse_eggtart_c_t_baked",
+          "recipe_key_frozen": "portuguesse_eggtart_c_t_frozen",
           "variants": {
             "baked": { "base_weight_factor": 1.0 },
             "frozen": { "base_weight_factor": 1.0 }
@@ -324,7 +340,8 @@
         },
         {
           "name": "Mozzarella Melt Cheese",
-          "recipe_key": "mozzarella_melt_cheese",
+          "recipe_key_baked": "mozzarella_melt_cheese_baked",
+          "recipe_key_frozen": "mozzarella_melt_cheese_frozen",
           "variants": {
             "baked": { "base_weight_factor": 1.0 },
             "frozen": { "base_weight_factor": 1.0 }
@@ -341,6 +358,7 @@
         }
       ]
     },
+
     "recipe_management": {
       "plain_croissant": {
         "base_weight": 65,
@@ -348,7 +366,7 @@
           "laminasi original": {"amount": 65, "unit": "grams"}
         }
       },
-      "smoked_beef_baker_museum": {
+      "smoked_beef_baker_museum_baked": {
         "base_weight": 110.5,
         "ingredients": {
           "laminasi original": {"amount": 75, "unit": "grams"},
@@ -356,6 +374,12 @@
           "keju slice": {"amount": 0.5, "unit": "pcs"},
           "saos sambal": {"amount": 2, "unit": "grams"},
           "mayonaise": {"amount": 2, "unit": "grams"}
+        }
+      },
+      "smoked_beef_baker_museum_frozen": {
+        "base_weight": 110.5,
+        "ingredients": {
+          "laminasi original": {"amount": 75, "unit": "grams"}
         }
       },
       "square_croissant": {
@@ -376,7 +400,7 @@
           "adonan brioche": {"amount": 80, "unit": "grams"}
         }
       },
-      "cinnamon_roll": {
+      "cinnamon_roll_baked": {
         "base_weight": 2750,
         "ingredients": {
           "laminasi original": {"amount": 2300, "unit": "grams"},
@@ -384,6 +408,12 @@
           "palm sugar": {"amount": 100, "unit": "grams"},
           "bubuk cinnamon": {"amount": 50, "unit": "grams"},
           "raisin (kismis)": {"amount": 100, "unit": "grams"}
+        }
+      },
+      "cinnamon_roll_frozen": {
+        "base_weight": 2300,
+        "ingredients": {
+          "laminasi original": {"amount": 2300, "unit": "grams"}
         }
       },
       "cornet_puff": {
@@ -448,7 +478,7 @@
           "laminasi original": {"amount": 65, "unit": "grams"}
         }
       },
-      "ham_&_cheese_smith": {
+      "ham_&_cheese_smith_baked": {
         "base_weight": 81,
         "ingredients": {
           "laminasi original": {"amount": 65, "unit": "grams"},
@@ -457,7 +487,13 @@
           "butter sheet": {"amount": 6, "unit": "grams"}
         }
       },
-      "plie_au_/_peppito": {
+      "ham_&_cheese_smith_frozen": {
+        "base_weight": 81,
+        "ingredients": {
+          "laminasi original": {"amount": 65, "unit": "grams"}
+        }
+      },
+      "plie_au_/_peppito_baked": {
         "base_weight": 2650,
         "ingredients": {
           "laminasi original": {"amount": 2300, "unit": "grams"},
@@ -465,7 +501,13 @@
           "chocochip choco": {"amount": 150, "unit": "grams"}
         }
       },
-      "martabak_croissant": {
+      "plie_au_/_peppito_frozen": {
+        "base_weight": 2650,
+        "ingredients": {
+          "laminasi original": {"amount": 2300, "unit": "grams"}
+        }
+      },
+      "martabak_croissant_baked": {
         "base_weight": 3080,
         "ingredients": {
           "laminasi original": {"amount": 2300, "unit": "grams"},
@@ -477,18 +519,36 @@
           "selai nutella": {"amount": 50, "unit": "grams"}
         }
       },
-      "pain_au_charcoal": {
+      "martabak_croissant_frozen": {
+        "base_weight": 3080,
+        "ingredients": {
+          "laminasi original": {"amount": 2300, "unit": "grams"}
+        }
+      },
+      "pain_au_charcoal_baked": {
         "base_weight": 83,
         "ingredients": {
           "laminasi charcoal": {"amount": 80, "unit": "grams"},
           "chocolate stick": {"amount": 3, "unit": "pcs"}
         }
       },
-      "pain_au_choco": {
+      "pain_au_charcoal_frozen": {
+        "base_weight": 83,
+        "ingredients": {
+          "laminasi charcoal": {"amount": 80, "unit": "grams"}
+        }
+      },
+      "pain_au_choco_baked": {
         "base_weight": 83,
         "ingredients": {
           "laminasi original": {"amount": 80, "unit": "grams"},
           "chocolate stick": {"amount": 3, "unit": "pcs"}
+        }
+      },
+      "pain_au_choco_frozen": {
+        "base_weight": 83,
+        "ingredients": {
+          "laminasi original": {"amount": 80, "unit": "grams"}
         }
       },
       "kouign_amman": {
@@ -503,7 +563,7 @@
           "laminasi original": {"amount": 75, "unit": "grams"}
         }
       },
-      "almond_croissant": {
+      "almond_croissant_baked": {
         "base_weight": 54,
         "ingredients": {
           "plain croissant": {"amount": 1, "unit": "pcs"},
@@ -512,7 +572,13 @@
           "gula dusting": {"amount": 8, "unit": "grams"}
         }
       },
-      "choco_mousse_croissant": {
+      "almond_croissant_frozen": {
+        "base_weight": 54,
+        "ingredients": {
+          "plain croissant": {"amount": 1, "unit": "pcs"}
+        }
+      },
+      "choco_mousse_croissant_baked": {
         "base_weight": 63,
         "ingredients": {
           "plain croissant": {"amount": 1, "unit": "pcs"},
@@ -521,7 +587,13 @@
           "chocochip": {"amount": 3, "unit": "grams"}
         }
       },
-      "coffee_croissant": {
+      "choco_mousse_croissant_frozen": {
+        "base_weight": 63,
+        "ingredients": {
+          "plain croissant": {"amount": 1, "unit": "pcs"}
+        }
+      },
+      "coffee_croissant_baked": {
         "base_weight": 105,
         "ingredients": {
           "laminasi original": {"amount": 65, "unit": "grams"},
@@ -530,7 +602,7 @@
           "topping coffee croissant": {"amount": 30, "unit": "grams"}
         }
       },
-      "creme_au_bullion": {
+      "creme_au_bullion_baked": {
         "base_weight": 203,
         "ingredients": {
           "trimmingan baked": {"amount": 0, "unit": "grams"},
@@ -538,7 +610,13 @@
           "raisin": {"amount": 3, "unit": "grams"}
         }
       },
-      "danish_strawberry": {
+      "creme_au_bullion_frozen": {
+        "base_weight": 203,
+        "ingredients": {
+          "trimmingan baked": {"amount": 0, "unit": "grams"}
+        }
+      },
+      "danish_strawberry_baked": {
         "base_weight": 61,
         "ingredients": {
           "danish smith": {"amount": 1, "unit": "pcs"},
@@ -546,7 +624,13 @@
           "f danish strawberry": {"amount": 30, "unit": "grams"}
         }
       },
-      "danish_suzette": {
+      "danish_strawberry_frozen": {
+        "base_weight": 61,
+        "ingredients": {
+          "danish smith": {"amount": 1, "unit": "pcs"}
+        }
+      },
+      "danish_suzette_baked": {
         "base_weight": 69,
         "ingredients": {
           "danish smith": {"amount": 1, "unit": "pcs"},
@@ -555,41 +639,77 @@
           "gula pasir": {"amount": 3, "unit": "grams"}
         }
       },
-      "hokkaido_eggtart_b_m": {
+      "danish_suzette_frozen": {
+        "base_weight": 69,
+        "ingredients": {
+          "danish smith": {"amount": 1, "unit": "pcs"}
+        }
+      },
+      "hokkaido_eggtart_b_m_baked": {
         "base_weight": 51,
         "ingredients": {
           "eggtart b m": {"amount": 1, "unit": "pcs"},
           "filling hokkaido": {"amount": 50, "unit": "grams"}
         }
       },
-      "hokkaido_eggtart_c_t": {
+      "hokkaido_eggtart_b_m_frozen": {
+        "base_weight": 51,
+        "ingredients": {
+          "eggtart b m": {"amount": 1, "unit": "pcs"}
+        }
+      },
+      "hokkaido_eggtart_c_t_baked": {
         "base_weight": 36,
         "ingredients": {
           "eggtart c t": {"amount": 1, "unit": "pcs"},
           "filling hokkaido": {"amount": 35, "unit": "grams"}
         }
       },
-      "portuguesse_eggtart_b_m": {
+      "hokkaido_eggtart_c_t_frozen": {
+        "base_weight": 36,
+        "ingredients": {
+          "eggtart c t": {"amount": 1, "unit": "pcs"}
+        }
+      },
+      "portuguesse_eggtart_b_m_baked": {
         "base_weight": 46,
         "ingredients": {
           "eggtart c t": {"amount": 1, "unit": "pcs"},
           "filling portuguesse": {"amount": 45, "unit": "grams"}
         }
       },
-      "portuguesse_eggtart_c_t": {
+      "portuguesse_eggtart_b_m_frozen": {
+        "base_weight": 46,
+        "ingredients": {
+          "eggtart c t": {"amount": 1, "unit": "pcs"}
+        }
+      },
+      "portuguesse_eggtart_c_t_baked": {
         "base_weight": 26,
         "ingredients": {
           "eggtart b m": {"amount": 1, "unit": "pcs"},
           "filling portuguesse": {"amount": 25, "unit": "grams"}
         }
       },
-      "mozzarella_melt_cheese": {
+      "portuguesse_eggtart_c_t_frozen": {
+        "base_weight": 26,
+        "ingredients": {
+          "eggtart b m": {"amount": 1, "unit": "pcs"}
+        }
+      },
+      "mozzarella_melt_cheese_baked": {
         "base_weight": 56.5,
         "ingredients": {
           "square croissant": {"amount": 1, "unit": "pcs"},
           "keju slice": {"amount": 1.5, "unit": "pcs"},
           "keju mozzarella": {"amount": 30, "unit": "grams"},
           "mayonaise": {"amount": 25, "unit": "grams"}
+        }
+      },
+      "mozzarella_melt_cheese_frozen": {
+        "base_weight": 56.5,
+        "ingredients": {
+          "square croissant": {"amount": 1, "unit": "pcs"}
         }
       },
       "mozzarella_smoked_beef_baked": {
@@ -617,7 +737,7 @@
         }
       },
       "apple_chausson_frozen": {
-        "base_weight": 100,
+        "base_weight": 75,
         "ingredients": {
           "laminasi original": {"amount": 75, "unit": "grams"}
         }

@@ -1,6 +1,7 @@
 - there is eggtart b m in agregate ingredient summary that need to be separate as raw ingredient also eggtart c t also filling portuguesse
 - Do total test to see if some of the product are missing recipe.
 - Maybe remove irrelevant product from the recipe scaler.
+- Adding sourdough and simple ground product and recipe that not yet recived.
 
 
 FEATURE TO CONSIDERATE
