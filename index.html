@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coffee Town Bakery</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Pacifico&display=swap"
+        rel="stylesheet">
     <style>
         /* Reset and Common styles */
         * {
@@ -19,7 +21,8 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: #333 url('https://fastly.picsum.photos/id/431/5000/3334.jpg?hmac=T2rL_gBDyJYpcr1Xm8Kv7L6bhwvmZS8nKT5w3ok58kA') no-repeat center center / cover; /* Generic background for debugging */
+            background: #333 url('https://fastly.picsum.photos/id/431/5000/3334.jpg?hmac=T2rL_gBDyJYpcr1Xm8Kv7L6bhwvmZS8nKT5w3ok58kA') no-repeat center center / cover;
+            /* Generic background for debugging */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -27,7 +30,8 @@
             min-height: 100vh;
             color: #fff;
             padding-bottom: 60px;
-            font-size: 0.85em; /* Approximately 15% smaller */
+            font-size: 0.85em;
+            /* Approximately 15% smaller */
         }
 
         /* Navigation */
@@ -60,7 +64,8 @@
             transition: all 0.3s ease;
         }
 
-        .nav-button:hover, .nav-button.active {
+        .nav-button:hover,
+        .nav-button.active {
             background: #7a5a42;
             transform: scale(1.05);
         }
@@ -136,32 +141,41 @@
             justify-content: space-between;
             padding: 8px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            flex-wrap: wrap;
+            /* Allow wrapping on smaller screens */
         }
 
         .croissant-product-label {
             font-size: 14px;
             font-weight: 500;
-            color: #f9e1c0; /* Match product header color */
-            flex: 2; /* Give more space to the label */
+            color: #f9e1c0;
+            /* Match product header color */
+            flex: 2;
+            /* Give more space to the label */
             text-align: left;
-            margin-right: 10px; /* Space between label and first input group */
-            min-width: 100px; /* Ensure label doesn't get too small */
+            margin-right: 10px;
+            /* Space between label and first input group */
+            min-width: 100px;
+            /* Ensure label doesn't get too small */
         }
 
         .croissant-input-group {
             display: flex;
             align-items: center;
-            width: 30%; /* Allocate width for each input group */
-            justify-content: flex-end; /* Align input to the right within its group */
+            width: 30%;
+            /* Allocate width for each input group */
+            justify-content: flex-end;
+            /* Align input to the right within its group */
         }
 
         .croissant-input-group input {
-            flex: none; /* Do not let the input grow */
-            width: 60px; /* Fixed width for the input field */
+            flex: none;
+            /* Do not let the input grow */
+            width: 60px;
+            /* Fixed width for the input field */
             text-align: center;
         }
-        
+
         /* General label style, overridden by specific classes where needed */
         label {
             font-size: 14px;
@@ -171,7 +185,8 @@
             color: #000000;
         }
 
-        input, select {
+        input,
+        select {
             flex: 1;
             padding: 6px;
             border: none;
@@ -191,12 +206,18 @@
 
         /* Specific styling for department selector */
         .department-selector select {
-            max-width: 180px; /* Adjust this value as needed */
-            display: inline-block; /* Ensure width is respected */
-            vertical-align: middle; /* Align with label */
-            margin-bottom: 0; /* Remove extra margin */
+            max-width: 180px;
+            /* Adjust this value as needed */
+            display: inline-block;
+            /* Ensure width is respected */
+            vertical-align: middle;
+            /* Align with label */
+            margin-bottom: 0;
+            /* Remove extra margin */
         }
-        input:focus, select:focus {
+
+        input:focus,
+        select:focus {
             outline: none;
             box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
         }
@@ -222,14 +243,16 @@
         }
 
         /* Results Section */
-        .result, #output {
+        .result,
+        #output {
             margin-top: 15px;
             padding: 12px;
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(61px);
             -webkit-backdrop-filter: blur(61px);
             border-radius: 8px;
-            font-size: 13.6px; /* 15% smaller */
+            font-size: 13.6px;
+            /* 15% smaller */
             color: #000000;
             text-align: left;
         }
@@ -238,8 +261,10 @@
         .switch {
             position: relative;
             display: inline-block;
-            width: 40px; /* Original width */
-            height: 24px; /* Original height */
+            width: 40px;
+            /* Original width */
+            height: 24px;
+            /* Original height */
         }
 
         .switch input {
@@ -264,8 +289,10 @@
         .slider:before {
             position: absolute;
             content: "";
-            height: 16px; /* Original height */
-            width: 16px; /* Original width */
+            height: 16px;
+            /* Original height */
+            width: 16px;
+            /* Original width */
             left: 4px;
             bottom: 4px;
             background-color: white;
@@ -274,16 +301,17 @@
             border-radius: 50%;
         }
 
-        input:checked + .slider {
+        input:checked+.slider {
             background-color: #5a3e2b;
         }
 
-        input:focus + .slider {
+        input:focus+.slider {
             box-shadow: 0 0 1px #5a3e2b;
         }
 
-        input:checked + .slider:before {
-            -webkit-transform: translateX(16px); /* Original translateX */
+        input:checked+.slider:before {
+            -webkit-transform: translateX(16px);
+            /* Original translateX */
             -ms-transform: translateX(16px);
             transform: translateX(16px);
         }
@@ -294,12 +322,14 @@
             border-collapse: collapse;
         }
 
-        th, td {
+        th,
+        td {
             padding: 6px;
             text-align: left;
             border-bottom: 1px solid rgba(255, 255, 255, 0.3);
             color: #000000;
         }
+
         /* Center align numbers in result table */
         #result td:not(:first-child) {
             text-align: center;
@@ -311,7 +341,8 @@
         }
 
         #result .adjustment-input {
-            width: 100%; /* Adjust width as needed */
+            width: 100%;
+            /* Adjust width as needed */
             padding: 4px;
             border: 1px solid rgba(0, 0, 0, 0.2);
             border-radius: 4px;
@@ -328,25 +359,36 @@
         th {
             font-weight: 600;
         }
+
         /* Specific styling for Settings page table inputs */
         #donut-score-inputs table {
-            table-layout: fixed; /* Distribute columns evenly */
+            table-layout: fixed;
+            /* Distribute columns evenly */
             width: 100%;
         }
+
         #donut-score-inputs table th:first-child,
         #donut-score-inputs table td:first-child {
-            width: 40%; /* Allocate more width for the product name */
+            width: 40%;
+            /* Allocate more width for the product name */
         }
+
         #donut-score-inputs table th:not(:first-child),
         #donut-score-inputs table td:not(:first-child) {
-            width: 15%; /* Distribute remaining width evenly among outlet columns */
+            width: 15%;
+            /* Distribute remaining width evenly among outlet columns */
             text-align: center;
         }
+
         #donut-score-inputs input[type="number"] {
-            width: 80%; /* Ensure inputs take a good portion of their cell */
-            box-sizing: border-box; /* Include padding and border in the element's total width and height */
-            margin: 0 auto; /* Center the input within the cell */
-            display: block; /* Allow margin auto to work */
+            width: 80%;
+            /* Ensure inputs take a good portion of their cell */
+            box-sizing: border-box;
+            /* Include padding and border in the element's total width and height */
+            margin: 0 auto;
+            /* Center the input within the cell */
+            display: block;
+            /* Allow margin auto to work */
         }
 
         /* Footer */
@@ -390,117 +432,149 @@
             justify-content: center;
         }
 
-            /* Mobile Optimization */
-            @media screen and (max-width: 480px) {
-                .container {
-                    width: 95%;
-                    padding: 15px;
-                }
-
-                h1 {
-                    font-size: 20.4px; /* 15% smaller */
-                }
-
-                .form-group {
-                    padding: 6px 0;
-                }
-
-                input, select {
-                    font-size: 14px; /* 15% smaller */
-                }
-
-                button {
-                    font-size: 11.9px; /* 15% smaller */
-                    padding: 10px;
-                }
-
-                .result, #output {
-                    font-size: 11.9px; /* 15% smaller */
-                }
-
-                /* Adjustments for Settings page table on small screens */
-                #donut-score-inputs table th:first-child,
-                #donut-score-inputs table td:first-child {
-                    width: 30%; /* Reduce product name width slightly */
-                }
-                #donut-score-inputs table th:not(:first-child),
-                #donut-score-inputs table td:not(:first-child) {
-                    width: 17.5%; /* Increase outlet column width to give more space */
-                }
-                #donut-score-inputs input[type="number"] {
-                    width: 90%; /* Make inputs take more space within their cells */
-                }
+        /* Mobile Optimization */
+        @media screen and (max-width: 480px) {
+            .container {
+                width: 95%;
+                padding: 15px;
             }
 
-            /* Calculator table specific adjustments for mobile */
-            #calculator-page table th:first-child,
-            #calculator-page table td:first-child {
-                width: 20%; /* Donut Product */
-            }
-            #calculator-page table th:nth-child(n+2):nth-child(-n+6), /* Target 2nd to 6th child (5 outlets) */
-            #calculator-page table td:nth-child(n+2):nth-child(-n+6) {
-                width: 14%; /* Outlets */
-            }
-            #calculator-page table th:last-child,
-            #calculator-page table td:last-child {
-                width: 10%; /* Total (Boxes) */
-            }
-            #calculator-page table th {
-                padding: 6px 4px; /* Adjust padding for header cells on mobile */
-                word-break: break-word; /* Allow long words to break */
+            h1 {
+                font-size: 20.4px;
+                /* 15% smaller */
             }
 
-            /* Collapsible sections styles */
-            .collapsible-header {
-                cursor: pointer;
-                user-select: none; /* Prevent text selection on click */
-                display: flex;
-                align-items: center;
-                gap: 8px; /* Space between icon and text */
-                font-size: 16px;
-                color: #f9e1c0; /* Match existing header colors */
-                padding: 5px 0;
+            .form-group {
+                padding: 6px 0;
             }
 
-            .collapsible-header .fas {
-                transition: transform 0.3s ease;
+            input,
+            select {
+                font-size: 14px;
+                /* 15% smaller */
             }
 
-            .collapsible-header.collapsed .fas {
-                transform: rotate(-90deg);
+            button {
+                font-size: 11.9px;
+                /* 15% smaller */
+                padding: 10px;
             }
 
-            .collapsible-content {
-                max-height: 1000px; /* Large enough to show all content */
-                overflow: hidden;
-                transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
-                opacity: 1;
-                padding-top: 10px;
+            .result,
+            #output {
+                font-size: 11.9px;
+                /* 15% smaller */
             }
 
-            .collapsible-content.collapsed {
-                max-height: 0;
-                opacity: 0;
-                padding-top: 0;
+            /* Adjustments for Settings page table on small screens */
+            #donut-score-inputs table th:first-child,
+            #donut-score-inputs table td:first-child {
+                width: 30%;
+                /* Reduce product name width slightly */
             }
-        </style>
+
+            #donut-score-inputs table th:not(:first-child),
+            #donut-score-inputs table td:not(:first-child) {
+                width: 17.5%;
+                /* Increase outlet column width to give more space */
+            }
+
+            #donut-score-inputs input[type="number"] {
+                width: 90%;
+                /* Make inputs take more space within their cells */
+            }
+        }
+
+        /* Calculator table specific adjustments for mobile */
+        #calculator-page table th:first-child,
+        #calculator-page table td:first-child {
+            width: 20%;
+            /* Donut Product */
+        }
+
+        #calculator-page table th:nth-child(n+2):nth-child(-n+6),
+        /* Target 2nd to 6th child (5 outlets) */
+        #calculator-page table td:nth-child(n+2):nth-child(-n+6) {
+            width: 14%;
+            /* Outlets */
+        }
+
+        #calculator-page table th:last-child,
+        #calculator-page table td:last-child {
+            width: 10%;
+            /* Total (Boxes) */
+        }
+
+        #calculator-page table th {
+            padding: 6px 4px;
+            /* Adjust padding for header cells on mobile */
+            word-break: break-word;
+            /* Allow long words to break */
+        }
+
+        /* Collapsible sections styles */
+        .collapsible-header {
+            cursor: pointer;
+            user-select: none;
+            /* Prevent text selection on click */
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            /* Space between icon and text */
+            font-size: 16px;
+            color: #f9e1c0;
+            /* Match existing header colors */
+            padding: 5px 0;
+        }
+
+        .collapsible-header .fas {
+            transition: transform 0.3s ease;
+        }
+
+        .collapsible-header.collapsed .fas {
+            transform: rotate(-90deg);
+        }
+
+        .collapsible-content {
+            max-height: 1000px;
+            /* Large enough to show all content */
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            opacity: 1;
+            padding-top: 10px;
+        }
+
+        .collapsible-content.collapsed {
+            max-height: 0;
+            opacity: 0;
+            padding-top: 0;
+        }
+    </style>
 </head>
+
 <body>
     <!-- Navigation -->
     <div class="nav-container">
         <div class="nav-buttons" id="simple-ground-nav-buttons">
-            <button class="nav-button" onclick="showPage('production-calculator', 'simple-ground')"><i class="fas fa-calculator"></i> Production Calculator</button>
-            <button class="nav-button" onclick="showPage('recipe', 'simple-ground')"><i class="fas fa-book-open"></i> Recipe Scaler</button>
-            <button class="nav-button" onclick="showPage('settings', 'simple-ground')"><i class="fas fa-cog"></i> Settings</button>
+            <button class="nav-button" onclick="showPage('production-calculator', 'simple-ground')"><i
+                    class="fas fa-calculator"></i> Production Calculator</button>
+            <button class="nav-button" onclick="showPage('recipe', 'simple-ground')"><i class="fas fa-book-open"></i>
+                Recipe Scaler</button>
+            <button class="nav-button" onclick="showPage('settings', 'simple-ground')"><i class="fas fa-cog"></i>
+                Settings</button>
         </div>
         <div class="nav-buttons" id="croissant-nav-buttons" style="display: none;">
-            <button class="nav-button" onclick="showPage('production-calculator', 'croissant')"><i class="fas fa-calculator"></i> Production Calculator</button>
-            <button class="nav-button" onclick="showPage('recipe', 'croissant')"><i class="fas fa-book-open"></i> Recipe Scaler</button>
+            <button class="nav-button" onclick="showPage('production-calculator', 'croissant')"><i
+                    class="fas fa-calculator"></i> Production Calculator</button>
+            <button class="nav-button" onclick="showPage('recipe', 'croissant')"><i class="fas fa-book-open"></i> Recipe
+                Scaler</button>
             <!-- Add other buttons for Croissant Department here -->
         </div>
         <div class="department-selector" style="text-align: center; margin-top: 10px;">
-            <label for="department-select" style="font-size: 14px; color: #f9e1c0; margin-right: 10px;"><i class="fas fa-building"></i> Select Department:</label>
-            <select id="department-select" style="padding: 6px 10px; border-radius: 6px; border: none; background: rgba(255, 255, 255, 0.8); font-size: 14px; color: #333;">
+            <label for="department-select" style="font-size: 14px; color: #f9e1c0; margin-right: 10px;"><i
+                    class="fas fa-building"></i> Select Department:</label>
+            <select id="department-select"
+                style="padding: 6px 10px; border-radius: 6px; border: none; background: rgba(255, 255, 255, 0.8); font-size: 14px; color: #333;">
                 <option value="simple-ground">Simple Ground</option>
                 <option value="croissant">Department Croissant</option>
             </select>
@@ -527,15 +601,18 @@
             <div id="croissantInputFields"></div>
             <button id="calculateCroissant">CALCULATE</button>
             <div class="result" id="croissantProductSummary" style="margin-top: 20px;">
-                <h2 class="collapsible-header" onclick="toggleCollapse(this)"><i class="fas fa-chevron-down"></i> Product Input Summary (pcs)</h2>
+                <h2 class="collapsible-header" onclick="toggleCollapse(this)"><i class="fas fa-chevron-down"></i>
+                    Product Input Summary (pcs)</h2>
                 <div class="collapsible-content active" id="croissantProductOutput"></div>
             </div>
             <div class="result" id="croissantCalculationResults" style="margin-top: 20px;">
-                <h2 class="collapsible-header" onclick="toggleCollapse(this)"><i class="fas fa-chevron-down"></i> Recipe Calculation Results</h2>
+                <h2 class="collapsible-header" onclick="toggleCollapse(this)"><i class="fas fa-chevron-down"></i> Recipe
+                    Calculation Results</h2>
                 <div class="collapsible-content active" id="croissantRecipeOutput"></div>
             </div>
             <div class="result" id="croissantIngredientSummary" style="margin-top: 20px;">
-                <h2 class="collapsible-header" onclick="toggleCollapse(this)"><i class="fas fa-chevron-down"></i> Ingredient Summary</h2>
+                <h2 class="collapsible-header" onclick="toggleCollapse(this)"><i class="fas fa-chevron-down"></i>
+                    Ingredient Summary</h2>
                 <div class="collapsible-content active" id="croissantIngredientOutput"></div>
             </div>
         </div>
@@ -546,24 +623,30 @@
         <div class="container">
             <h1>Recipe Scaler</h1>
             <div id="recipe-select">
-                <label for="recipes" style="font-size: 14px; font-weight: 500; color: #f9e1c0; flex: 2; text-align: left;">
+                <label for="recipes"
+                    style="font-size: 14px; font-weight: 500; color: #f9e1c0; flex: 2; text-align: left;">
                     <i class="fas fa-book"></i> Choose Recipe:
                 </label>
-                <select id="recipes" style="flex: 1; padding: 6px; border: none; border-radius: 6px; font-size: 14px; text-align: center; background: rgba(255, 255, 255, 0.8); transition: all 0.3s ease; max-width: none; margin-bottom: 15px;">
+                <select id="recipes"
+                    style="flex: 1; padding: 6px; border: none; border-radius: 6px; font-size: 14px; text-align: center; background: rgba(255, 255, 255, 0.8); transition: all 0.3s ease; max-width: none; margin-bottom: 15px;">
                     <option value="">Select a recipe</option>
                 </select>
             </div>
             <div id="multiplier-input">
-                <label for="multiplier" style="font-size: 14px; font-weight: 500; color: #f9e1c0; flex: 2; text-align: left;">
+                <label for="multiplier"
+                    style="font-size: 14px; font-weight: 500; color: #f9e1c0; flex: 2; text-align: left;">
                     <i class="fas fa-magnifying-glass-chart"></i> Scale Factor:
                 </label>
-                <input type="number" id="multiplier" min="0.1" value="1" placeholder="e.g. 1.5" style="flex: 1; padding: 6px; border: none; border-radius: 6px; font-size: 14px; text-align: center; background: rgba(255, 255, 255, 0.8); transition: all 0.3s ease; max-width: 80px;">
+                <input type="number" id="multiplier" min="0.1" value="1" placeholder="e.g. 1.5"
+                    style="flex: 1; padding: 6px; border: none; border-radius: 6px; font-size: 14px; text-align: center; background: rgba(255, 255, 255, 0.8); transition: all 0.3s ease; max-width: 80px;">
             </div>
-            <button id="scale-button" style="margin-top: 15px; padding: 12px; background: #5a3e2b; color: white; border: none; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s ease; width: 100%;">
+            <button id="scale-button"
+                style="margin-top: 15px; padding: 12px; background: #5a3e2b; color: white; border: none; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s ease; width: 100%;">
                 ⚖ Scale Recipe
             </button>
             <div id="output" class="result">
-                <p id="initial-output-message" style="font-style: italic; color: #f9e1c0;">Select a recipe and click 'Scale' to see results.</p>
+                <p id="initial-output-message" style="font-style: italic; color: #f9e1c0;">Select a recipe and click
+                    'Scale' to see results.</p>
                 <h2 id="recipe-name" style="color: #f9e1c0;"></h2>
                 <table id="ingredients-table" style="display: none;">
                     <thead>
@@ -578,7 +661,7 @@
                     </tbody>
                 </table>
                 <div id="recipe-instructions" class="result" style="margin-top: 20px; display: none;">
-                <h3 style="color: #f9e1c0;"><i class="fas fa-list-ol"></i> Instructions:</h3>
+                    <h3 style="color: #f9e1c0;"><i class="fas fa-list-ol"></i> Instructions:</h3>
                     <ul id="instructions-list" style="list-style-type: decimal; padding-left: 20px; color: #000000;">
                         <!-- Instructions will be added here -->
                     </ul>
@@ -594,7 +677,9 @@
             <p>Assign a score (0-5 or flexible) for each donut product per outlet.</p>
             <div style="display: flex; justify-content: flex-end; width: 100%;">
                 <div class="form-group" style="border-bottom: none; align-items: center; padding: 0;">
-                    <label for="score-mode-toggle" style="flex: none; margin-right: 10px; font-size: 13.6px; display: inline-block; width: 120px; text-align: right;">Flexible Scoring (0-Infinity):</label>
+                    <label for="score-mode-toggle"
+                        style="flex: none; margin-right: 10px; font-size: 13.6px; display: inline-block; width: 120px; text-align: right;">Flexible
+                        Scoring (0-Infinity):</label>
                     <label class="switch">
                         <input type="checkbox" id="score-mode-toggle">
                         <span class="slider round"></span>
@@ -627,7 +712,8 @@
 
     <!-- Footer -->
     <footer>
-        Created For Coffee Town Bakery | <a href="manual_guide.html" target="_blank">About</a> | Follow me: <a href="https://twitter.com/Agung_styb" target="_blank">@Agung_styb</a>
+        Created For Coffee Town Bakery | <a href="manual_guide.html" target="_blank">About</a> | Follow me: <a
+            href="https://twitter.com/Agung_styb" target="_blank">@Agung_styb</a>
     </footer>
 
     <script>
@@ -641,15 +727,15 @@
         let DONUT_WEIGHT_PER_PCS;
         let BOMBOLONI_WEIGHT_PER_PCS;
         let PCS_PER_LOYANG;
-                let LOYANG_PER_TROLLEY;
-                let recipes;
-                let croissantProductsList = []; // New global variable for croissant products, initialize as empty array
-                let croissantRecipes = {};     // New global variable for croissant recipes, initialize as empty object
-                let intermediateRecipeKeysForScaler = []; // Global variable for scaler exclusions
-                let rawCroissantProducts = []; // Global variable for raw croissant products
+        let LOYANG_PER_TROLLEY;
+        let recipes;
+        let croissantProductsList = []; // New global variable for croissant products, initialize as empty array
+        let croissantRecipes = {};     // New global variable for croissant recipes, initialize as empty object
+        let intermediateRecipeKeysForScaler = []; // Global variable for scaler exclusions
+        let rawCroissantProducts = []; // Global variable for raw croissant products
 
-                // Global variable to keep track of the active department
-                let activeDepartment = 'simple-ground'; // Default active department
+        // Global variable to keep track of the active department
+        let activeDepartment = 'simple-ground'; // Default active department
 
         // Department Selection Function
         function selectDepartment(departmentId) {
@@ -689,11 +775,11 @@
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
             });
-            
+
             // Handle the specific production calculator page
             if (pageId === 'production-calculator') {
                 document.getElementById('production-calculator-page').classList.add('active');
-                
+
                 // Hide all internal calculator contents
                 document.getElementById('simple-ground-calculator-content').style.display = 'none';
                 document.getElementById('croissant-calculator-content').style.display = 'none';
@@ -708,7 +794,7 @@
                 // Show other pages
                 document.getElementById(pageId + '-page').classList.add('active');
             }
-            
+
             // Update nav buttons for the current department
             document.querySelectorAll(`.nav-buttons .nav-button`).forEach(button => {
                 button.classList.remove('active');
@@ -747,11 +833,11 @@
                 recipes = data.recipes; // Top-level recipes
 
                 console.log('Data loaded:', data); // Debugging: log full data
-                
+
                 // Assign department-specific data to global variables
                 rawCroissantProducts = data.croissant_department.product_management.croissantProducts; // Assign to global variable
                 croissantRecipes = data.croissant_department.recipe_management;
-                
+
                 // Define a list of recipe keys that correspond to intermediate products to exclude from the calculator inputs
                 const intermediateRecipeKeys = [
                     "adonan_original", "adonan_charcoal", "adonan_brioche", "adonan_puff_pastry",
@@ -760,7 +846,7 @@
                     "eggtart_b_m", "eggtart_c_t", // Using recipe keys for eggtart bases
                     "coffee_croissant_frozen" // The frozen variant might also be considered intermediate if only the baked is a final product for direct sale
                 ];
-                
+
                 // Define a list of recipe keys that correspond to items to EXCLUDE from the recipe scaler dropdown.
                 intermediateRecipeKeysForScaler = [ // Assign to global variable
                     // Only include true intermediate recipes here
@@ -783,7 +869,7 @@
                     // A product is intermediate if any of its associated recipe keys are in the intermediateRecipeKeys list.
                     return !recipeKeysToCheck.some(key => intermediateRecipeKeys.includes(key));
                 });
-                
+
                 console.log('Filtered Croissant Products List (Final Products):', croissantProductsList); // Debugging
                 console.log('Croissant Recipes:', croissantRecipes);           // Debugging
                 console.log('Intermediate Recipe Keys for Scaler:', intermediateRecipeKeysForScaler); // Debugging
@@ -793,9 +879,9 @@
                 initializeRecipeScaler();
                 initializeSettings();
                 initializeCroissantCalculator(); // Initialize the croissant calculator
-                
+
                 // Set default department and page after initializations
-                selectDepartment('simple-ground'); 
+                selectDepartment('simple-ground');
                 showPage('production-calculator', 'simple-ground');
             } catch (error) {
                 console.error('Error loading application data:', error);
@@ -808,36 +894,36 @@
         }
 
         // Initialize with calculator page
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             initializeApp();
 
             // Add event listener for the new department dropdown
             const departmentSelect = document.getElementById('department-select');
             if (departmentSelect) {
-                departmentSelect.addEventListener('change', function() {
+                departmentSelect.addEventListener('change', function () {
                     selectDepartment(this.value);
                 });
             }
         });
 
-            // Calculator Page Script
-            function initializeCalculator() {
-                const items = [
-                    "Tiban", "GP", "MTC", "Piayu", "BA"
-                ];
+        // Calculator Page Script
+        function initializeCalculator() {
+            const items = [
+                "Tiban", "GP", "MTC", "Piayu", "BA"
+            ];
 
-                const inputFields = document.getElementById("inputFields");
+            const inputFields = document.getElementById("inputFields");
 
-                // Create input fields for outlets (MTC, BENGKONG, TIBAN, PIAYU)
-                items.forEach(item => {
-                    const div = document.createElement("div");
-                    div.className = "form-group";
-                    div.innerHTML = `
+            // Create input fields for outlets (MTC, BENGKONG, TIBAN, PIAYU)
+            items.forEach(item => {
+                const div = document.createElement("div");
+                div.className = "form-group";
+                div.innerHTML = `
                         <label for="${item}">${item.replace(/_/g, ' ')} Outlet:</label>
                         <input type="number" id="${item}" name="${item}" placeholder="0" min="0"/>
                     `;
-                    inputFields.appendChild(div);
-                });
+                inputFields.appendChild(div);
+            });
 
             // Add calculate button event listener
             document.getElementById("calculate").addEventListener("click", function () {
@@ -1145,7 +1231,7 @@
             croissantProductsList.forEach(productObj => {
                 const productContainer = document.createElement('div');
                 productContainer.className = 'croissant-product-input-line';
-                
+
                 const formattedName = formatProductNameForId(productObj.name);
 
                 productContainer.innerHTML = `
@@ -1160,7 +1246,7 @@
                 croissantInputFieldsDiv.appendChild(productContainer);
             });
 
-            calculateCroissantButton.addEventListener('click', function() {
+            calculateCroissantButton.addEventListener('click', function () {
                 const croissantProductOutputDiv = document.getElementById('croissantProductOutput');
                 let productInputSummary = {}; // Stores total baked and frozen quantities per product
 
@@ -1169,13 +1255,13 @@
                     const formattedName = formatProductNameForId(productObj.name);
                     const inputBakedId = `croissant-${formattedName}-baked`;
                     const inputFrozenId = `croissant-${formattedName}-frozen`;
-                    
+
                     const inputBakedElement = document.getElementById(inputBakedId);
                     const inputFrozenElement = document.getElementById(inputFrozenId);
 
                     const quantityBaked = parseFloat(inputBakedElement.value) || 0;
                     const quantityFrozen = parseFloat(inputFrozenElement.value) || 0;
-                    
+
                     if (quantityBaked > 0 || quantityFrozen > 0) {
                         productInputSummary[productObj.name] = {
                             baked: quantityBaked,
@@ -1214,7 +1300,7 @@
                         for (const ingredientRaw in recipe.ingredients) {
                             const details = recipe.ingredients[ingredientRaw];
                             const ingredientKey = ingredientRaw.replace(/ /g, '_').toLowerCase();
-                            
+
                             if (croissantRecipes[ingredientKey]) { // Check if it's a sub-recipe
                                 const subRecipe = croissantRecipes[ingredientKey];
                                 const amountNeededInParentRecipe = details.amount;
@@ -1253,7 +1339,7 @@
                     if (productSummary.baked > 0) {
                         let recipeKeyBaked = productObj.recipe_key_baked || productObj.recipe_key;
                         const baseWeightFactorBaked = productObj.variants?.baked?.base_weight_factor || 1.0;
-                        
+
                         if (recipeKeyBaked) {
                             // The quantity of the final product directly translates to its own 'resep' count.
                             // The base_weight_factor modifies the effective 'resep' multiplier for the recipe.
@@ -1278,9 +1364,28 @@
                     }
                 }
 
+                // Sort the recipe keys based on the desired order: Product -> Filling -> Laminasi -> Adonan
+                const sortedRecipeKeys = Object.keys(totalResepMap).sort((a, b) => {
+                    const getCategoryPriority = (key) => {
+                        const lowerKey = key.toLowerCase();
+                        if (lowerKey.includes('adonan')) return 4;
+                        if (lowerKey.includes('laminasi')) return 3;
+                        if (lowerKey.includes('filling') || lowerKey.includes('topping') || lowerKey.includes('sauce') || lowerKey.includes('cream')) return 2;
+                        return 1; // Product (default)
+                    };
+
+                    const priorityA = getCategoryPriority(a);
+                    const priorityB = getCategoryPriority(b);
+
+                    if (priorityA !== priorityB) {
+                        return priorityA - priorityB; // Ascending order of priority value (1 -> 2 -> 3 -> 4)
+                    }
+                    return a.localeCompare(b); // Alphabetical tie-breaker within same category
+                });
+
                 // Display Recipe Calculation Results (in resep units)
                 let recipeOutputHTML = `<table><thead><tr><th>Recipe</th><th>Amount (resep)</th></tr></thead><tbody>`;
-                for (const recipeKey in totalResepMap) {
+                for (const recipeKey of sortedRecipeKeys) {
                     if (totalResepMap[recipeKey] > 0) { // Only show recipes with a calculated amount
                         // Find the corresponding product name for display if available
                         const product = croissantProductsList.find(p => p.recipe_key === recipeKey || p.recipe_key_baked === recipeKey || p.recipe_key_frozen === recipeKey);
@@ -1316,7 +1421,7 @@
                     for (const ingredientRaw in recipe.ingredients) {
                         const details = recipe.ingredients[ingredientRaw];
                         const ingredientKey = ingredientRaw.replace(/ /g, '_').toLowerCase();
-                        
+
                         // If the ingredient is NOT itself a recipe (i.e., it's a raw material), aggregate it.
                         // Sub-recipes will have their base ingredients aggregated when their own entry in totalResepMap is processed.
                         if (!croissantRecipes[ingredientKey]) {
@@ -1438,7 +1543,7 @@
 
             const selectedOption = recipeSelect.options[recipeSelect.selectedIndex];
             const selectedDepartment = selectedOption.dataset.department;
-            
+
             let currentRecipesContext = {};
             if (selectedDepartment === 'simple-ground') {
                 currentRecipesContext = recipes;
@@ -1665,7 +1770,7 @@
                 });
             }
 
-            scoreModeToggle.addEventListener('change', function() {
+            scoreModeToggle.addEventListener('change', function () {
                 localStorage.setItem('isFlexibleScoreMode', JSON.stringify(this.checked));
                 updateScoreInputs();
                 updateTotalScores(); // Recalculate totals when mode changes
@@ -1697,7 +1802,7 @@
 
 
             // Save scores to localStorage
-            saveDonutScoresButton.addEventListener("click", function() {
+            saveDonutScoresButton.addEventListener("click", function () {
                 let newDonutScores = {};
                 let newBomboloniKarakterFixedAmounts = {};
                 let hasError = false;
@@ -1773,7 +1878,7 @@
             headerElement.classList.toggle('collapsed');
             const content = headerElement.nextElementSibling; // The content div is the next sibling
             content.classList.toggle('collapsed');
-            
+
             // Update the icon
             const icon = headerElement.querySelector('.fas');
             if (icon) {
@@ -1788,4 +1893,5 @@
         }
     </script>
 </body>
+
 </html>

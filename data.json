@@ -229,8 +229,8 @@
         },
         {
           "name": "Pain Au Choco",
-          "recipe_key-baked": "ain_au_choco_baked",
-          "recipe_key-frozen": "pain_au_choco_frozen",
+          "recipe_key_baked": "pain_au_choco_baked",
+          "recipe_key_frozen": "pain_au_choco_frozen",
           "variants": {
             "baked": { "base_weight_factor": 1.0 },
             "frozen": { "base_weight_factor": 1.0 }
@@ -254,8 +254,8 @@
         },
         {
           "name": "Almond Croissant",
-          "recipe_key-baked": "almond_croissant_baked",
-          "recipe_key-frozen": "almond_croissant_frozen",
+          "recipe_key_baked": "almond_croissant_baked",
+          "recipe_key_frozen": "almond_croissant_frozen",
           "variants": {
             "baked": { "base_weight_factor": 1.0 },
             "frozen": { "base_weight_factor": 1.0 }
@@ -568,7 +568,7 @@
         "ingredients": {
           "plain croissant": {"amount": 1, "unit": "pcs"},
           "filling almond cream": {"amount": 35, "unit": "grams"},
-          "almond sice": {"amount": 10, "unit": "grams"},
+          "almond slice": {"amount": 10, "unit": "grams"},
           "gula dusting": {"amount": 8, "unit": "grams"}
         }
       },
