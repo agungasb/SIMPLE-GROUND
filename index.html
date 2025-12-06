@@ -598,7 +598,26 @@
                 <h1>Department Croissant</h1>
                 <p>Jer Basuki Mawa Beya.</p>
             </div>
+            <!-- WhatsApp Order Parser Section -->
+            <div id="whatsapp-parser-section"
+                style="margin-top: 20px; padding: 15px; background: rgba(255, 255, 255, 0.15); border-radius: 8px;">
+                <h3 style="color: #f9e1c0; margin-bottom: 10px;"><i class="fab fa-whatsapp"></i> Paste WhatsApp Order
+                </h3>
+                <textarea id="whatsappOrderInput" rows="6" placeholder="Paste order text here..."
+                    style="width: 100%; padding: 10px; border-radius: 6px; border: none; font-family: inherit; font-size: 13px; margin-bottom: 10px; resize: vertical;"></textarea>
+                <div style="display: flex; gap: 10px;">
+                    <button id="parseOrderButton" style="margin-top: 0; background: #25D366; color: white;"><i
+                            class="fas fa-magic"></i> Parse & Fill</button>
+                    <button id="clearOrderButton" style="margin-top: 0; background: #d9534f; color: white; width: auto;"
+                        onclick="document.getElementById('whatsappOrderInput').value = ''"><i class="fas fa-trash"></i>
+                        Clear</button>
+                </div>
+                <div id="parseStatus" style="margin-top: 10px; font-size: 12px; color: #f9e1c0; white-space: pre-wrap;">
+                </div>
+            </div>
+
             <div id="croissantInputFields"></div>
+
             <button id="calculateCroissant">CALCULATE</button>
             <div class="result" id="croissantProductSummary" style="margin-top: 20px;">
                 <h2 class="collapsible-header" onclick="toggleCollapse(this)"><i class="fas fa-chevron-down"></i>
@@ -841,10 +860,7 @@
                 // Define a list of recipe keys that correspond to intermediate products to exclude from the calculator inputs
                 const intermediateRecipeKeys = [
                     "adonan_original", "adonan_charcoal", "adonan_brioche", "adonan_puff_pastry",
-                    "laminasi_original", "laminasi_charcoal", "laminasi_kouign_amann", "laminasi_puff_pastry",
-                    "square_croissant", "danish_smith",
-                    "eggtart_b_m", "eggtart_c_t", // Using recipe keys for eggtart bases
-                    "coffee_croissant_frozen" // The frozen variant might also be considered intermediate if only the baked is a final product for direct sale
+                    "laminasi_original", "laminasi_charcoal", "laminasi_kouign_amann", "laminasi_puff_pastry"
                 ];
 
                 // Define a list of recipe keys that correspond to items to EXCLUDE from the recipe scaler dropdown.
@@ -1452,6 +1468,266 @@
                 croissantIngredientOutputDiv.innerHTML = ingredientOutputHTML;
             });
             console.log('Croissant Calculator initialized successfully.'); // Debugging
+
+            // WhatsApp Order Parser Logic
+            const parseOrderButton = document.getElementById('parseOrderButton');
+            const whatsappOrderInput = document.getElementById('whatsappOrderInput');
+            const parseStatus = document.getElementById('parseStatus');
+
+            // Product Aliases Map (Lowercase alias -> Standard Product Name)
+            const productAliases = {
+                "plain": "Plain Croissant",
+                "croissant plain": "Plain Croissant",
+                "flat croissan": "Plain Croissant", // Assumption based on "Flat"
+                "cromboloni": "Cromboloni",
+                "stroberi danish": "Danish Strawberry",
+                "strawberry danish": "Danish Strawberry",
+                "half moon": "Half Moon Croissant",
+                "half moon croissant": "Half Moon Croissant",
+                "apple chausson": "Apple Chausson",
+                "apple chauson": "Apple Chausson",
+                "chausson": "Apple Chausson",
+                "chaoson": "Apple Chausson",
+                "charcoal pain au": "Pain Au Charcoal",
+                "pain au charcoal": "Pain Au Charcoal",
+                "pain aux charcoal": "Pain Au Charcoal",
+                "egg tart": "Eggtart Coffee Town", // Default to CT, logic below might override based on context
+                "portuguese egg tart": "Portuguesse Eggtart C T", // Assuming CT default
+                "portugis egg tart": "Portuguesse Eggtart C T",
+                "hokkaido egg tart": "Hokkaido Eggtart C T",
+                "hokkaido": "Hokkaido Eggtart C T",
+                "pain au chocolate": "Pain Au Choco",
+                "pain aux chocolate": "Pain Au Choco",
+                "pain au choco": "Pain Au Choco",
+                "pain au": "Pain Au Choco", // Ambiguous, often refers to choco
+                "pai au": "Pain Au Choco",
+                "ham and cheese": "Ham & Cheese Smith",
+                "ham and cheese croissant": "Ham & Cheese Smith",
+                "ham & chese": "Ham & Cheese Smith",
+                "ham chese": "Ham & Cheese Smith",
+                "hamchese": "Ham & Cheese Smith",
+                "hamandcheese croissant": "Ham & Cheese Smith",
+                "cinamon roll": "Cinnamon Roll",
+                "cinamon": "Cinnamon Roll",
+                "plie au": "Plie Au / Peppito",
+                "pliau": "Plie Au / Peppito",
+                "peppito": "Plie Au / Peppito",
+                "crofin": "Croffin",
+                "martabak": "Martabak Croissant",
+                "martabak croisant": "Martabak Croissant",
+                "cream aubulliong": "Creme Au Bullion",
+                "creambrule": "Creme Brule",
+                "suzateh danish": "Danish Suzette",
+                "minicroipop cinamon": "Cinnamon Roll", // Unknown, mapping to Cinnamon Roll for now or warn? Let's check logic. Actually I'll skip unknown.
+                "kouign aman": "Kouign Amman",
+                "croisant petak": "Square Croissant",
+                "smoke beef and cheese": "Mozzarella Smoked Beef", // or Smoked Beef Baker Museum? Ambiguous.
+                "smoke beef": "Smoked Beef Baker museum",
+                "cheese": "Croissant Petak ( Baked) Chess", // From example "CROISSANT PETAK ( BAKED) CHESS" -> Square Croissant? "CROISANT PETAK (BAKED) SMOKE BEEF"
+                "coffe croissant": "Coffee Croissant",
+                "danis c. brulle": "Creme Brule", // or Danish?
+                "chocolate  mouse": "Choco Mousse Croissant",
+                "chocolate mouse": "Choco Mousse Croissant",
+                "croissant almond": "Almond Croissant",
+                "sourdough choco": "Sourdough Choco", // Not in product list?
+                "sourdough ori": "Sourdough Ori",
+                "sourdough cheese": "Sourdough Cheese",
+                "cheesetart": "Cheesetart", // Maybe Eggtart?
+                "ovaltine croisan": "Ovaltine Croissant", // Not in list
+                "lotus c": "Lotus Croissant", // Not in list
+                "egg curry c": "Egg Curry Croissant", // Not in list
+                "melted chese tomat": "Mozzarella Melt Cheese", // Guess
+                "melted chese mashrom": "Mozzarella Melt Cheese", // Guess
+                "almond croisan": "Almond Croissant",
+                "ham & cheese croissant": "Ham & Cheese Smith",
+            };
+
+            parseOrderButton.addEventListener('click', function () {
+                const text = whatsappOrderInput.value;
+                if (!text.trim()) {
+                    parseStatus.textContent = "Please paste text first.";
+                    return;
+                }
+
+                const lines = text.split('\n');
+                let currentMode = 'baked'; // Default mode
+                let currentOutlet = null; // Context for outlet (Simple Ground, Coffee Town, Baker Museum, etc) - though calculator just sums all.
+                let parsedItems = {}; // { "Product Name": { baked: 0, frozen: 0 } }
+                let unknownLines = [];
+
+                // Helper to add quantity
+                const addQuantity = (productName, quantity, mode) => {
+                    if (!parsedItems[productName]) parsedItems[productName] = { baked: 0, frozen: 0 };
+                    parsedItems[productName][mode] += quantity;
+                };
+
+                // Clear valid inputs first? Maybe user wants to accumulate.
+                // Resetting inputs to 0 before filling matches "Auto-fill" expectation usually.
+                document.querySelectorAll('#croissantInputFields input').forEach(input => input.value = '');
+
+                lines.forEach(line => {
+                    // Normalize whitespace: Replace non-breaking spaces and multiple spaces with a single space
+                    const cleanLine = line.replace(/\s+/g, ' ').trim();
+                    if (!cleanLine) return;
+
+                    const lowerLine = cleanLine.toLowerCase();
+
+                    // 1. Detect Context Switches
+                    if (lowerLine.includes('baked')) {
+                        currentMode = 'baked';
+                        // Don't skip line, might contain product
+                    } else if (lowerLine.includes('frozen')) { // 'frozen' word triggers frozen mode
+                        currentMode = 'frozen';
+                        // But if line is ONLY "Croissant frozen", skip it.
+                        if (cleanLine.match(/^croissant frozen$/i)) return;
+                    }
+
+                    // Outlet Context (Heuristics) - Mainly to distinguish Egg Tart types if needed
+                    if (lowerLine.includes('baker museum')) currentOutlet = 'baker_museum';
+                    if (lowerLine.includes('coffee town')) currentOutlet = 'coffee_town';
+                    if (lowerLine.includes('simple ground')) currentOutlet = 'simple_ground';
+
+
+                    // 2. Parse Quantity and Product text
+                    // Regex: Look for digits at the END of line.
+                    // Handles: "1. Product Name 50" or "Product Name 50 pcs"
+                    // Also need to handle "Product Name" (no quantity -> 0)
+                    let quantity = 0;
+                    let productText = cleanLine;
+
+                    // Remove leading numbering (e.g. "1. ", "12. ")
+                    productText = productText.replace(/^\d+[\.\)]\s*/, '');
+
+                    // Extract quantity at end
+                    const qtyMatch = productText.match(/(?:^|\s)(\d+(?:\.\d+)?)\s*(?:pcs|pc|box|bx|pack|pck)?$/i);
+                    if (qtyMatch) {
+                        quantity = parseFloat(qtyMatch[1]);
+                        // Remove the quantity part from product text
+                        productText = productText.substring(0, qtyMatch.index).trim();
+                    } else {
+                        // Special case: "HAM AND CHEESE CROISSANT4" -> invalid format in user example
+                        const attachedQtyMatch = productText.match(/(\d+)$/);
+                        if (attachedQtyMatch) {
+                            quantity = parseFloat(attachedQtyMatch[1]);
+                            productText = productText.substring(0, attachedQtyMatch.index).trim();
+                        } else {
+                            quantity = 0; // Default if no number found
+                        }
+                    }
+
+                    // Remove "(BAKED)" or "(FROZEN)" from product text if present (captured by context mode usually, but redundant text)
+                    if (productText.toLowerCase().includes('(baked)')) {
+                        currentMode = 'baked';
+                        productText = productText.replace(/\(baked\)/i, '').trim();
+                    }
+                    if (productText.toLowerCase().includes('(frozen)')) {
+                        currentMode = 'frozen'; // Explicit frozen label
+                        productText = productText.replace(/\(frozen\)/i, '').trim();
+                    }
+
+                    // Clean up trailing/leading punctuation
+                    productText = productText.replace(/[,.-]+$/, '').trim();
+
+                    if (!productText) return;
+
+                    // 3. Match Product
+                    let matchedProductName = null;
+                    const lowerProductText = productText.toLowerCase();
+
+                    // A. Direct Alias Match
+                    if (productAliases[lowerProductText]) {
+                        matchedProductName = productAliases[lowerProductText];
+                    }
+                    // B. Includes Check (Fuzzy)
+                    else {
+                        // Try to find if any alias is contained in the text
+                        let bestMatchLength = 0;
+                        for (const [alias, realName] of Object.entries(productAliases)) {
+                            if (lowerProductText.includes(alias) && alias.length > bestMatchLength) {
+                                matchedProductName = realName;
+                                bestMatchLength = alias.length;
+                            }
+                        }
+                    }
+
+                    // Handling Ambiguities (Egg Tart)
+                    if (matchedProductName === 'Eggtart Coffee Town' || matchedProductName === 'Eggtart Baker Museum') {
+                        if (currentOutlet === 'baker_museum') matchedProductName = 'Eggtart Baker Museum';
+                        else if (currentOutlet === 'coffee_town') matchedProductName = 'Eggtart Coffee Town';
+                    }
+                    if (matchedProductName === 'Portuguesse Eggtart C T' || matchedProductName === 'Portuguesse Eggtart B M') {
+                        if (currentOutlet === 'baker_museum') matchedProductName = 'Portuguesse Eggtart B M';
+                    }
+                    if (matchedProductName === 'Hokkaido Eggtart C T' || matchedProductName === 'Hokkaido Eggtart B M') {
+                        if (currentOutlet === 'baker_museum') matchedProductName = 'Hokkaido Eggtart B M';
+                    }
+
+
+                    // C. Fallback: Exact name match from existing products
+                    if (!matchedProductName) {
+                        const exactMatch = croissantProductsList.find(p => p.name.toLowerCase() === lowerProductText);
+                        if (exactMatch) matchedProductName = exactMatch.name;
+                    }
+
+
+                    if (matchedProductName) {
+                        // Check valid variants
+                        const validProduct = croissantProductsList.find(p => p.name === matchedProductName);
+                        if (validProduct) {
+                            // Correct Mode if product only has one? (Optional)
+                            addQuantity(matchedProductName, quantity, currentMode);
+                        } else {
+                            unknownLines.push(`${cleanLine} (Mapped to ${matchedProductName} but not in list)`);
+                        }
+                    } else {
+                        // Ignore headers like "TANGGAL", "ORDERAN", "BAKER MUSEUM", names
+                        const ignoredKeywords = ["tanggal", "orderan", "baker museum", "coffee town", "simple ground", "smith", "2bakers", "bread social"];
+                        if (!ignoredKeywords.some(k => lowerProductText.includes(k))) {
+                            unknownLines.push(cleanLine);
+                        }
+                    }
+                });
+
+                // 4. Fill Inputs
+                let filledCount = 0;
+                let foundTotal = 0;
+
+                const formatProductNameForId = (name) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+
+                for (const [productName, quantities] of Object.entries(parsedItems)) {
+                    const formattedName = formatProductNameForId(productName);
+
+                    if (quantities.baked > 0) {
+                        const inputId = `croissant-${formattedName}-baked`;
+                        const input = document.getElementById(inputId);
+                        if (input) {
+                            input.value = (parseFloat(input.value) || 0) + quantities.baked;
+                            filledCount++;
+                            foundTotal += quantities.baked;
+                        }
+                    }
+                    if (quantities.frozen > 0) {
+                        const inputId = `croissant-${formattedName}-frozen`;
+                        const input = document.getElementById(inputId);
+                        if (input) {
+                            input.value = (parseFloat(input.value) || 0) + quantities.frozen;
+                            filledCount++;
+                            foundTotal += quantities.frozen;
+                        }
+                    }
+                }
+
+                // Feedback
+                let statusMsg = `✅ Parsed ${filledCount} product lines (Total Qty: ${foundTotal}).\n`;
+                if (unknownLines.length > 0) {
+                    statusMsg += `⚠️ ${unknownLines.length} lines could not be matched:\n- ${unknownLines.join('\n- ')}`;
+                }
+                parseStatus.textContent = statusMsg;
+
+                // Auto-Calculate?
+                // document.getElementById('calculateCroissant').click();
+            });
+
         }
 
         // Global variables for Recipe Scaler

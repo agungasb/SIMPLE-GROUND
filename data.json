@@ -2,34 +2,201 @@
   "department": "simple ground",
   "BOMBOLONI_KARAKTER_PRODUCT_NAME": "Bomboloni Karakter",
   "donutProducts": [
-    "Donut Taro Coklat", "Donut Taro Putih", "Donut Greentea Coklat", "Donut Greentea Batang", "Donut Ovaltine", "Donut Strawberry", "Donut Ice Sugar", "Donut Cappucino", "Donut Classic Cerres", "Donut Ceres", "Donut Ceres Coklat", "Donut Coklat", "Donut Avocado", "Donut Tiramisu", "Donut Peanut", "Donut Oreo", "Donut Almond", "Donut Lotus", "Donut Caramel", "Bomboloni Avocado", "Bomboloni Tiramisu", "Bomboloni Taro", "Bomboloni Strawberry", "Bomboloni Karakter"
+    "Donut Taro Coklat",
+    "Donut Taro Putih",
+    "Donut Greentea Coklat",
+    "Donut Greentea Batang",
+    "Donut Ovaltine",
+    "Donut Strawberry",
+    "Donut Ice Sugar",
+    "Donut Cappucino",
+    "Donut Classic Cerres",
+    "Donut Ceres",
+    "Donut Ceres Coklat",
+    "Donut Coklat",
+    "Donut Avocado",
+    "Donut Tiramisu",
+    "Donut Peanut",
+    "Donut Oreo",
+    "Donut Almond",
+    "Donut Lotus",
+    "Donut Caramel",
+    "Bomboloni Avocado",
+    "Bomboloni Tiramisu",
+    "Bomboloni Taro",
+    "Bomboloni Strawberry",
+    "Bomboloni Karakter"
   ],
   "defaultDonutScores": {
-    "Donut Taro Coklat": { "Tiban": 3, "GP": 4, "MTC": 2, "Piayu": 3, "BA": 5 },
-    "Donut Taro Putih": { "Tiban": 2, "GP": 3, "MTC": 4, "Piayu": 2, "BA": 3 },
-    "Donut Greentea Coklat": { "Tiban": 4, "GP": 2, "MTC": 3, "Piayu": 4, "BA": 2 },
-    "Donut Greentea Batang": { "Tiban": 3, "GP": 3, "MTC": 3, "Piayu": 3, "BA": 3 },
-    "Donut Ovaltine": { "Tiban": 5, "GP": 4, "MTC": 5, "Piayu": 4, "BA": 5 },
-    "Donut Strawberry": { "Tiban": 2, "GP": 2, "MTC": 2, "Piayu": 2, "BA": 2 },
-    "Donut Ice Sugar": { "Tiban": 1, "GP": 1, "MTC": 1, "Piayu": 1, "BA": 1 },
-    "Donut Cappucino": { "Tiban": 4, "GP": 5, "MTC": 4, "Piayu": 5, "BA": 4 },
-    "Donut Classic Cerres": { "Tiban": 3, "GP": 3, "MTC": 3, "Piayu": 3, "BA": 3 },
-    "Donut Ceres": { "Tiban": 2, "GP": 2, "MTC": 2, "Piayu": 2, "BA": 2 },
-    "Donut Ceres Coklat": { "Tiban": 3, "GP": 4, "MTC": 3, "Piayu": 4, "BA": 3 },
-    "Donut Coklat": { "Tiban": 5, "GP": 5, "MTC": 5, "Piayu": 5, "BA": 5 },
-    "Donut Avocado": { "Tiban": 4, "GP": 3, "MTC": 4, "Piayu": 3, "BA": 4 },
-    "Donut Tiramisu": { "Tiban": 3, "GP": 4, "MTC": 3, "Piayu": 4, "BA": 3 },
-    "Donut Peanut": { "Tiban": 2, "GP": 3, "MTC": 2, "Piayu": 3, "BA": 2 },
-    "Donut Oreo": { "Tiban": 4, "GP": 4, "MTC": 4, "Piayu": 4, "BA": 4 },
-    "Donut Almond": { "Tiban": 3, "GP": 2, "MTC": 3, "Piayu": 2, "BA": 3 },
-    "Donut Lotus": { "Tiban": 5, "GP": 5, "MTC": 5, "Piayu": 5, "BA": 5 },
-    "Donut Caramel": { "Tiban": 3, "GP": 3, "MTC": 3, "Piayu": 3, "BA": 3 },
-    "Bomboloni Avocado": { "Tiban": 4, "GP": 3, "MTC": 4, "Piayu": 3, "BA": 4 },
-    "Bomboloni Tiramisu": { "Tiban": 3, "GP": 4, "MTC": 3, "Piayu": 4, "BA": 3 },
-    "Bomboloni Taro": { "Tiban": 2, "GP": 3, "MTC": 4, "Piayu": 2, "BA": 3 },
-    "Bomboloni Strawberry": { "Tiban": 2, "GP": 2, "MTC": 2, "Piayu": 2, "BA": 2 }
+    "Donut Taro Coklat": {
+      "Tiban": 3,
+      "GP": 4,
+      "MTC": 2,
+      "Piayu": 3,
+      "BA": 5
+    },
+    "Donut Taro Putih": {
+      "Tiban": 2,
+      "GP": 3,
+      "MTC": 4,
+      "Piayu": 2,
+      "BA": 3
+    },
+    "Donut Greentea Coklat": {
+      "Tiban": 4,
+      "GP": 2,
+      "MTC": 3,
+      "Piayu": 4,
+      "BA": 2
+    },
+    "Donut Greentea Batang": {
+      "Tiban": 3,
+      "GP": 3,
+      "MTC": 3,
+      "Piayu": 3,
+      "BA": 3
+    },
+    "Donut Ovaltine": {
+      "Tiban": 5,
+      "GP": 4,
+      "MTC": 5,
+      "Piayu": 4,
+      "BA": 5
+    },
+    "Donut Strawberry": {
+      "Tiban": 2,
+      "GP": 2,
+      "MTC": 2,
+      "Piayu": 2,
+      "BA": 2
+    },
+    "Donut Ice Sugar": {
+      "Tiban": 1,
+      "GP": 1,
+      "MTC": 1,
+      "Piayu": 1,
+      "BA": 1
+    },
+    "Donut Cappucino": {
+      "Tiban": 4,
+      "GP": 5,
+      "MTC": 4,
+      "Piayu": 5,
+      "BA": 4
+    },
+    "Donut Classic Cerres": {
+      "Tiban": 3,
+      "GP": 3,
+      "MTC": 3,
+      "Piayu": 3,
+      "BA": 3
+    },
+    "Donut Ceres": {
+      "Tiban": 2,
+      "GP": 2,
+      "MTC": 2,
+      "Piayu": 2,
+      "BA": 2
+    },
+    "Donut Ceres Coklat": {
+      "Tiban": 3,
+      "GP": 4,
+      "MTC": 3,
+      "Piayu": 4,
+      "BA": 3
+    },
+    "Donut Coklat": {
+      "Tiban": 5,
+      "GP": 5,
+      "MTC": 5,
+      "Piayu": 5,
+      "BA": 5
+    },
+    "Donut Avocado": {
+      "Tiban": 4,
+      "GP": 3,
+      "MTC": 4,
+      "Piayu": 3,
+      "BA": 4
+    },
+    "Donut Tiramisu": {
+      "Tiban": 3,
+      "GP": 4,
+      "MTC": 3,
+      "Piayu": 4,
+      "BA": 3
+    },
+    "Donut Peanut": {
+      "Tiban": 2,
+      "GP": 3,
+      "MTC": 2,
+      "Piayu": 3,
+      "BA": 2
+    },
+    "Donut Oreo": {
+      "Tiban": 4,
+      "GP": 4,
+      "MTC": 4,
+      "Piayu": 4,
+      "BA": 4
+    },
+    "Donut Almond": {
+      "Tiban": 3,
+      "GP": 2,
+      "MTC": 3,
+      "Piayu": 2,
+      "BA": 3
+    },
+    "Donut Lotus": {
+      "Tiban": 5,
+      "GP": 5,
+      "MTC": 5,
+      "Piayu": 5,
+      "BA": 5
+    },
+    "Donut Caramel": {
+      "Tiban": 3,
+      "GP": 3,
+      "MTC": 3,
+      "Piayu": 3,
+      "BA": 3
+    },
+    "Bomboloni Avocado": {
+      "Tiban": 4,
+      "GP": 3,
+      "MTC": 4,
+      "Piayu": 3,
+      "BA": 4
+    },
+    "Bomboloni Tiramisu": {
+      "Tiban": 3,
+      "GP": 4,
+      "MTC": 3,
+      "Piayu": 4,
+      "BA": 3
+    },
+    "Bomboloni Taro": {
+      "Tiban": 2,
+      "GP": 3,
+      "MTC": 4,
+      "Piayu": 2,
+      "BA": 3
+    },
+    "Bomboloni Strawberry": {
+      "Tiban": 2,
+      "GP": 2,
+      "MTC": 2,
+      "Piayu": 2,
+      "BA": 2
+    }
   },
-  "outlets": ["Tiban", "GP", "MTC", "Piayu", "BA"],
+  "outlets": [
+    "Tiban",
+    "GP",
+    "MTC",
+    "Piayu",
+    "BA"
+  ],
   "constants": {
     "DONUTS_PER_BOX": 9,
     "DONUT_WEIGHT_PER_PCS": 30,
@@ -40,12 +207,30 @@
   "recipes": {
     "adonan_donut_simple_ground": {
       "base_weight": 1500,
-      "premix": {"amount": 1000, "unit": "grams"},
-      "ragi": {"amount": 15, "unit": "grams"},
-      "telur": {"amount": 1, "unit": "butir"},
-      "margarin": {"amount": 100, "unit": "grams"},
-      "es batu": {"amount": 100, "unit": "grams"},
-      "air": {"amount": 270, "unit": "grams"}
+      "premix": {
+        "amount": 1000,
+        "unit": "grams"
+      },
+      "ragi": {
+        "amount": 15,
+        "unit": "grams"
+      },
+      "telur": {
+        "amount": 1,
+        "unit": "butir"
+      },
+      "margarin": {
+        "amount": 100,
+        "unit": "grams"
+      },
+      "es batu": {
+        "amount": 100,
+        "unit": "grams"
+      },
+      "air": {
+        "amount": 270,
+        "unit": "grams"
+      }
     },
     "adonan_donut_simple_ground_instructions": [
       "Campurkan premix, ragi, dan telur. Aduk hingga rata.",
@@ -65,16 +250,24 @@
           "recipe_key_baked": "apple_chausson_baked",
           "recipe_key_frozen": "apple_chausson_frozen",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
           "name": "Plain Croissant",
           "recipe_key": "plain_croissant",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
@@ -82,32 +275,48 @@
           "recipe_key_baked": "smoked_beef_baker_museum_baked",
           "recipe_key_frozen": "smoked_beef_baker_museum_frozen",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
           "name": "Square Croissant",
           "recipe_key": "square_croissant",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
           "name": "Brioche",
           "recipe_key": "brioche",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
           "name": "Burger Bun",
           "recipe_key": "burger_bun",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
@@ -115,80 +324,120 @@
           "recipe_key_baked": "cinnamon_roll_baked",
           "recipe_key_frozen": "cinnamon_roll_frozen",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
           "name": "Cornet Puff",
           "recipe_key": "cornet_puff",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
           "name": "Creme Brule",
           "recipe_key": "creme_brule",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
           "name": "Croffin",
           "recipe_key": "croffin",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
           "name": "Cromboloni",
           "recipe_key": "cromboloni",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
           "name": "Danish B M",
           "recipe_key": "danish_b_m",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
           "name": "Danish Smith",
           "recipe_key": "danish_smith",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
           "name": "Eggtart Baker Museum",
           "recipe_key": "eggtart_b_m",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
           "name": "Eggtart Coffee Town",
           "recipe_key": "eggtart_c_t",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
           "name": "Half Moon Croissant",
           "recipe_key": "half_moon_croissant",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
@@ -196,8 +445,12 @@
           "recipe_key_baked": "ham_&_cheese_smith_baked",
           "recipe_key_frozen": "ham_&_cheese_smith_frozen",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
@@ -205,8 +458,12 @@
           "recipe_key_baked": "plie_au_/_peppito_baked",
           "recipe_key_frozen": "plie_au_/_peppito_frozen",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
@@ -214,8 +471,12 @@
           "recipe_key_baked": "martabak_croissant_baked",
           "recipe_key_frozen": "martabak_croissant_frozen",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
@@ -223,8 +484,12 @@
           "recipe_key_baked": "pain_au_charcoal_baked",
           "recipe_key_frozen": "pain_au_charcoal_frozen",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
@@ -232,24 +497,36 @@
           "recipe_key_baked": "pain_au_choco_baked",
           "recipe_key_frozen": "pain_au_choco_frozen",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
           "name": "Kouign Amman",
           "recipe_key": "kouign_amman",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
           "name": "Pain Au Raisin",
           "recipe_key": "pain_au_raisin",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
@@ -257,8 +534,12 @@
           "recipe_key_baked": "almond_croissant_baked",
           "recipe_key_frozen": "almond_croissant_frozen",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
@@ -266,8 +547,12 @@
           "recipe_key_baked": "choco_mousse_croissant_baked",
           "recipe_key_frozen": "choco_mousse_croissant_frozen",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
@@ -280,8 +565,12 @@
           "recipe_key_baked": "creme_au_bullion_baked",
           "recipe_key_frozen": "creme_au_bullion_frozen",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
@@ -289,8 +578,12 @@
           "recipe_key_baked": "danish_strawberry_baked",
           "recipe_key_frozen": "danish_strawberry_frozen",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
@@ -298,8 +591,12 @@
           "recipe_key_baked": "danish_suzette_baked",
           "recipe_key_frozen": "danish_suzette_frozen",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
@@ -307,8 +604,12 @@
           "recipe_key_baked": "hokkaido_eggtart_b_m_baked",
           "recipe_key_frozen": "hokkaido_eggtart_b_m_frozen",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
@@ -316,8 +617,12 @@
           "recipe_key_baked": "hokkaido_eggtart_c_t_baked",
           "recipe_key_frozen": "hokkaido_eggtart_c_t_frozen",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
@@ -325,8 +630,12 @@
           "recipe_key_baked": "portuguesse_eggtart_b_m_baked",
           "recipe_key_frozen": "portuguesse_eggtart_b_m_frozen",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
@@ -334,8 +643,12 @@
           "recipe_key_baked": "portuguesse_eggtart_c_t_baked",
           "recipe_key_frozen": "portuguesse_eggtart_c_t_frozen",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
@@ -343,8 +656,12 @@
           "recipe_key_baked": "mozzarella_melt_cheese_baked",
           "recipe_key_frozen": "mozzarella_melt_cheese_frozen",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         },
         {
@@ -352,458 +669,903 @@
           "recipe_key_baked": "mozzarella_smoked_beef_baked",
           "recipe_key_frozen": "mozzarella_smoked_beef_frozen",
           "variants": {
-            "baked": { "base_weight_factor": 1.0 },
-            "frozen": { "base_weight_factor": 1.0 }
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
           }
         }
       ]
     },
-
     "recipe_management": {
       "plain_croissant": {
         "base_weight": 65,
         "ingredients": {
-          "laminasi original": {"amount": 65, "unit": "grams"}
+          "laminasi original": {
+            "amount": 65,
+            "unit": "grams"
+          }
         }
       },
       "smoked_beef_baker_museum_baked": {
         "base_weight": 110.5,
         "ingredients": {
-          "laminasi original": {"amount": 75, "unit": "grams"},
-          "smoked beef": {"amount": 0.5, "unit": "pcs"},
-          "keju slice": {"amount": 0.5, "unit": "pcs"},
-          "saos sambal": {"amount": 2, "unit": "grams"},
-          "mayonaise": {"amount": 2, "unit": "grams"}
+          "laminasi original": {
+            "amount": 75,
+            "unit": "grams"
+          },
+          "smoked beef": {
+            "amount": 0.5,
+            "unit": "pcs"
+          },
+          "keju slice": {
+            "amount": 0.5,
+            "unit": "pcs"
+          },
+          "saos sambal": {
+            "amount": 2,
+            "unit": "grams"
+          },
+          "mayonaise": {
+            "amount": 2,
+            "unit": "grams"
+          }
         }
       },
       "smoked_beef_baker_museum_frozen": {
         "base_weight": 110.5,
         "ingredients": {
-          "laminasi original": {"amount": 75, "unit": "grams"}
+          "laminasi original": {
+            "amount": 75,
+            "unit": "grams"
+          }
         }
       },
       "square_croissant": {
         "base_weight": 75,
         "ingredients": {
-          "laminasi original": {"amount": 75, "unit": "grams"}
+          "laminasi original": {
+            "amount": 75,
+            "unit": "grams"
+          }
         }
       },
       "brioche": {
         "base_weight": 1000,
         "ingredients": {
-          "adonan brioche": {"amount": 1000, "unit": "grams"}
+          "adonan brioche": {
+            "amount": 1000,
+            "unit": "grams"
+          }
         }
       },
       "burger_bun": {
         "base_weight": 80,
         "ingredients": {
-          "adonan brioche": {"amount": 80, "unit": "grams"}
+          "adonan brioche": {
+            "amount": 80,
+            "unit": "grams"
+          }
         }
       },
       "cinnamon_roll_baked": {
         "base_weight": 2750,
         "ingredients": {
-          "laminasi original": {"amount": 2300, "unit": "grams"},
-          "sonton vanilla": {"amount": 200, "unit": "grams"},
-          "palm sugar": {"amount": 100, "unit": "grams"},
-          "bubuk cinnamon": {"amount": 50, "unit": "grams"},
-          "raisin (kismis)": {"amount": 100, "unit": "grams"}
+          "laminasi original": {
+            "amount": 2300,
+            "unit": "grams"
+          },
+          "sonton vanilla": {
+            "amount": 200,
+            "unit": "grams"
+          },
+          "palm sugar": {
+            "amount": 100,
+            "unit": "grams"
+          },
+          "bubuk cinnamon": {
+            "amount": 50,
+            "unit": "grams"
+          },
+          "raisin (kismis)": {
+            "amount": 100,
+            "unit": "grams"
+          }
         }
       },
       "cinnamon_roll_frozen": {
         "base_weight": 2300,
         "ingredients": {
-          "laminasi original": {"amount": 2300, "unit": "grams"}
+          "laminasi original": {
+            "amount": 2300,
+            "unit": "grams"
+          }
         }
       },
       "cornet_puff": {
         "base_weight": 40,
         "ingredients": {
-          "adonan puff pastry": {"amount": 40, "unit": "grams"}
+          "adonan puff pastry": {
+            "amount": 40,
+            "unit": "grams"
+          }
         }
       },
       "coffee_croissant_frozen": {
         "base_weight": 75,
         "ingredients": {
-          "laminasi original": {"amount": 65, "unit": "grams"},
-          "margarine": {"amount": 5, "unit": "grams"},
-          "gula pasir": {"amount": 5, "unit": "grams"}
+          "laminasi original": {
+            "amount": 65,
+            "unit": "grams"
+          },
+          "margarine": {
+            "amount": 5,
+            "unit": "grams"
+          },
+          "gula pasir": {
+            "amount": 5,
+            "unit": "grams"
+          }
         }
       },
       "creme_brule": {
         "base_weight": 85,
         "ingredients": {
-          "laminasi original": {"amount": 85, "unit": "grams"}
+          "laminasi original": {
+            "amount": 85,
+            "unit": "grams"
+          }
         }
       },
       "croffin": {
         "base_weight": 65,
         "ingredients": {
-          "laminasi original": {"amount": 65, "unit": "grams"}
+          "laminasi original": {
+            "amount": 65,
+            "unit": "grams"
+          }
         }
       },
       "cromboloni": {
         "base_weight": 65,
         "ingredients": {
-          "laminasi original": {"amount": 65, "unit": "grams"}
+          "laminasi original": {
+            "amount": 65,
+            "unit": "grams"
+          }
         }
       },
       "danish_b_m": {
         "base_weight": 70,
         "ingredients": {
-          "laminasi original": {"amount": 70, "unit": "grams"}
+          "laminasi original": {
+            "amount": 70,
+            "unit": "grams"
+          }
         }
       },
       "danish_smith": {
         "base_weight": 40,
         "ingredients": {
-          "laminasi original": {"amount": 40, "unit": "grams"}
+          "laminasi original": {
+            "amount": 40,
+            "unit": "grams"
+          }
         }
       },
       "eggtart_b_m": {
         "base_weight": 40,
         "ingredients": {
-          "laminasi original": {"amount": 40, "unit": "grams"}
+          "laminasi original": {
+            "amount": 40,
+            "unit": "grams"
+          }
         }
       },
       "eggtart_c_t": {
         "base_weight": 30,
         "ingredients": {
-          "laminasi original": {"amount": 30, "unit": "grams"}
+          "laminasi original": {
+            "amount": 30,
+            "unit": "grams"
+          }
         }
       },
       "half_moon_croissant": {
         "base_weight": 65,
         "ingredients": {
-          "laminasi original": {"amount": 65, "unit": "grams"}
+          "laminasi original": {
+            "amount": 65,
+            "unit": "grams"
+          }
         }
       },
       "ham_&_cheese_smith_baked": {
         "base_weight": 81,
         "ingredients": {
-          "laminasi original": {"amount": 65, "unit": "grams"},
-          "smoked beef": {"amount": 1, "unit": "pcs"},
-          "keju quick melt": {"amount": 10, "unit": "grams"},
-          "butter sheet": {"amount": 6, "unit": "grams"}
+          "laminasi original": {
+            "amount": 65,
+            "unit": "grams"
+          },
+          "smoked beef": {
+            "amount": 1,
+            "unit": "pcs"
+          },
+          "keju quick melt": {
+            "amount": 10,
+            "unit": "grams"
+          },
+          "butter sheet": {
+            "amount": 6,
+            "unit": "grams"
+          }
         }
       },
       "ham_&_cheese_smith_frozen": {
         "base_weight": 81,
         "ingredients": {
-          "laminasi original": {"amount": 65, "unit": "grams"}
+          "laminasi original": {
+            "amount": 65,
+            "unit": "grams"
+          }
         }
       },
       "plie_au_/_peppito_baked": {
         "base_weight": 2650,
         "ingredients": {
-          "laminasi original": {"amount": 2300, "unit": "grams"},
-          "sonton vanilla": {"amount": 200, "unit": "grams"},
-          "chocochip choco": {"amount": 150, "unit": "grams"}
+          "laminasi original": {
+            "amount": 2300,
+            "unit": "grams"
+          },
+          "sonton vanilla": {
+            "amount": 200,
+            "unit": "grams"
+          },
+          "chocochip choco": {
+            "amount": 150,
+            "unit": "grams"
+          }
         }
       },
       "plie_au_/_peppito_frozen": {
         "base_weight": 2650,
         "ingredients": {
-          "laminasi original": {"amount": 2300, "unit": "grams"}
+          "laminasi original": {
+            "amount": 2300,
+            "unit": "grams"
+          }
         }
       },
       "martabak_croissant_baked": {
         "base_weight": 3080,
         "ingredients": {
-          "laminasi original": {"amount": 2300, "unit": "grams"},
-          "kacang mede": {"amount": 150, "unit": "grams"},
-          "keju martabak": {"amount": 150, "unit": "grams"},
-          "ceres coklat": {"amount": 150, "unit": "grams"},
-          "skm": {"amount": 30, "unit": "grams"},
-          "sonton vanilla": {"amount": 150, "unit": "grams"},
-          "selai nutella": {"amount": 50, "unit": "grams"}
+          "laminasi original": {
+            "amount": 2300,
+            "unit": "grams"
+          },
+          "kacang mede": {
+            "amount": 150,
+            "unit": "grams"
+          },
+          "keju martabak": {
+            "amount": 150,
+            "unit": "grams"
+          },
+          "ceres coklat": {
+            "amount": 150,
+            "unit": "grams"
+          },
+          "skm": {
+            "amount": 30,
+            "unit": "grams"
+          },
+          "sonton vanilla": {
+            "amount": 150,
+            "unit": "grams"
+          },
+          "selai nutella": {
+            "amount": 50,
+            "unit": "grams"
+          }
         }
       },
       "martabak_croissant_frozen": {
         "base_weight": 3080,
         "ingredients": {
-          "laminasi original": {"amount": 2300, "unit": "grams"}
+          "laminasi original": {
+            "amount": 2300,
+            "unit": "grams"
+          }
         }
       },
       "pain_au_charcoal_baked": {
         "base_weight": 83,
         "ingredients": {
-          "laminasi charcoal": {"amount": 80, "unit": "grams"},
-          "chocolate stick": {"amount": 3, "unit": "pcs"}
+          "laminasi charcoal": {
+            "amount": 80,
+            "unit": "grams"
+          },
+          "chocolate stick": {
+            "amount": 3,
+            "unit": "pcs"
+          }
         }
       },
       "pain_au_charcoal_frozen": {
         "base_weight": 83,
         "ingredients": {
-          "laminasi charcoal": {"amount": 80, "unit": "grams"}
+          "laminasi charcoal": {
+            "amount": 80,
+            "unit": "grams"
+          }
         }
       },
       "pain_au_choco_baked": {
         "base_weight": 83,
         "ingredients": {
-          "laminasi original": {"amount": 80, "unit": "grams"},
-          "chocolate stick": {"amount": 3, "unit": "pcs"}
+          "laminasi original": {
+            "amount": 80,
+            "unit": "grams"
+          },
+          "chocolate stick": {
+            "amount": 3,
+            "unit": "pcs"
+          }
         }
       },
       "pain_au_choco_frozen": {
         "base_weight": 83,
         "ingredients": {
-          "laminasi original": {"amount": 80, "unit": "grams"}
+          "laminasi original": {
+            "amount": 80,
+            "unit": "grams"
+          }
         }
       },
       "kouign_amman": {
         "base_weight": 3000,
         "ingredients": {
-          "laminasi kouign amman": {"amount": 3000, "unit": "grams"}
+          "laminasi kouign amman": {
+            "amount": 3000,
+            "unit": "grams"
+          }
         }
       },
       "pain_au_raisin": {
         "base_weight": 75,
         "ingredients": {
-          "laminasi original": {"amount": 75, "unit": "grams"}
+          "laminasi original": {
+            "amount": 75,
+            "unit": "grams"
+          }
         }
       },
       "almond_croissant_baked": {
         "base_weight": 54,
         "ingredients": {
-          "plain croissant": {"amount": 1, "unit": "pcs"},
-          "filling almond cream": {"amount": 35, "unit": "grams"},
-          "almond slice": {"amount": 10, "unit": "grams"},
-          "gula dusting": {"amount": 8, "unit": "grams"}
+          "plain croissant": {
+            "amount": 1,
+            "unit": "pcs"
+          },
+          "filling almond cream": {
+            "amount": 35,
+            "unit": "grams"
+          },
+          "almond slice": {
+            "amount": 10,
+            "unit": "grams"
+          },
+          "gula dusting": {
+            "amount": 8,
+            "unit": "grams"
+          }
         }
       },
       "almond_croissant_frozen": {
         "base_weight": 54,
         "ingredients": {
-          "plain croissant": {"amount": 1, "unit": "pcs"}
+          "plain croissant": {
+            "amount": 1,
+            "unit": "pcs"
+          }
         }
       },
       "choco_mousse_croissant_baked": {
         "base_weight": 63,
         "ingredients": {
-          "plain croissant": {"amount": 1, "unit": "pcs"},
-          "filling choco mousse": {"amount": 30, "unit": "grams"},
-          "dark compound": {"amount": 30, "unit": "grams"},
-          "chocochip": {"amount": 3, "unit": "grams"}
+          "plain croissant": {
+            "amount": 1,
+            "unit": "pcs"
+          },
+          "filling choco mousse": {
+            "amount": 30,
+            "unit": "grams"
+          },
+          "dark compound": {
+            "amount": 30,
+            "unit": "grams"
+          },
+          "chocochip": {
+            "amount": 3,
+            "unit": "grams"
+          }
         }
       },
       "choco_mousse_croissant_frozen": {
         "base_weight": 63,
         "ingredients": {
-          "plain croissant": {"amount": 1, "unit": "pcs"}
+          "plain croissant": {
+            "amount": 1,
+            "unit": "pcs"
+          }
         }
       },
       "coffee_croissant_baked": {
         "base_weight": 105,
         "ingredients": {
-          "laminasi original": {"amount": 65, "unit": "grams"},
-          "margarine": {"amount": 5, "unit": "grams"},
-          "gula pasir": {"amount": 5, "unit": "grams"},
-          "topping coffee croissant": {"amount": 30, "unit": "grams"}
+          "laminasi original": {
+            "amount": 65,
+            "unit": "grams"
+          },
+          "margarine": {
+            "amount": 5,
+            "unit": "grams"
+          },
+          "gula pasir": {
+            "amount": 5,
+            "unit": "grams"
+          },
+          "topping coffee croissant": {
+            "amount": 30,
+            "unit": "grams"
+          }
         }
       },
       "creme_au_bullion_baked": {
         "base_weight": 203,
         "ingredients": {
-          "trimmingan baked": {"amount": 0, "unit": "grams"},
-          "filling bullion": {"amount": 200, "unit": "grams"},
-          "raisin": {"amount": 3, "unit": "grams"}
+          "trimmingan baked": {
+            "amount": 0,
+            "unit": "grams"
+          },
+          "filling bullion": {
+            "amount": 200,
+            "unit": "grams"
+          },
+          "raisin": {
+            "amount": 3,
+            "unit": "grams"
+          }
         }
       },
       "creme_au_bullion_frozen": {
         "base_weight": 203,
         "ingredients": {
-          "trimmingan baked": {"amount": 0, "unit": "grams"}
+          "trimmingan baked": {
+            "amount": 0,
+            "unit": "grams"
+          }
         }
       },
       "danish_strawberry_baked": {
         "base_weight": 61,
         "ingredients": {
-          "danish smith": {"amount": 1, "unit": "pcs"},
-          "buah strawberry": {"amount": 30, "unit": "grams"},
-          "f danish strawberry": {"amount": 30, "unit": "grams"}
+          "danish smith": {
+            "amount": 1,
+            "unit": "pcs"
+          },
+          "buah strawberry": {
+            "amount": 30,
+            "unit": "grams"
+          },
+          "f danish strawberry": {
+            "amount": 30,
+            "unit": "grams"
+          }
         }
       },
       "danish_strawberry_frozen": {
         "base_weight": 61,
         "ingredients": {
-          "danish smith": {"amount": 1, "unit": "pcs"}
+          "danish smith": {
+            "amount": 1,
+            "unit": "pcs"
+          }
         }
       },
       "danish_suzette_baked": {
         "base_weight": 69,
         "ingredients": {
-          "danish smith": {"amount": 1, "unit": "pcs"},
-          "selai nutella": {"amount": 35, "unit": "grams"},
-          "buah pisang": {"amount": 30, "unit": "grams"},
-          "gula pasir": {"amount": 3, "unit": "grams"}
+          "danish smith": {
+            "amount": 1,
+            "unit": "pcs"
+          },
+          "selai nutella": {
+            "amount": 35,
+            "unit": "grams"
+          },
+          "buah pisang": {
+            "amount": 30,
+            "unit": "grams"
+          },
+          "gula pasir": {
+            "amount": 3,
+            "unit": "grams"
+          }
         }
       },
       "danish_suzette_frozen": {
         "base_weight": 69,
         "ingredients": {
-          "danish smith": {"amount": 1, "unit": "pcs"}
+          "danish smith": {
+            "amount": 1,
+            "unit": "pcs"
+          }
         }
       },
       "hokkaido_eggtart_b_m_baked": {
         "base_weight": 51,
         "ingredients": {
-          "eggtart b m": {"amount": 1, "unit": "pcs"},
-          "filling hokkaido": {"amount": 50, "unit": "grams"}
+          "eggtart b m": {
+            "amount": 1,
+            "unit": "pcs"
+          },
+          "filling hokkaido": {
+            "amount": 50,
+            "unit": "grams"
+          }
         }
       },
       "hokkaido_eggtart_b_m_frozen": {
         "base_weight": 51,
         "ingredients": {
-          "eggtart b m": {"amount": 1, "unit": "pcs"}
+          "eggtart b m": {
+            "amount": 1,
+            "unit": "pcs"
+          }
         }
       },
       "hokkaido_eggtart_c_t_baked": {
         "base_weight": 36,
         "ingredients": {
-          "eggtart c t": {"amount": 1, "unit": "pcs"},
-          "filling hokkaido": {"amount": 35, "unit": "grams"}
+          "eggtart c t": {
+            "amount": 1,
+            "unit": "pcs"
+          },
+          "filling hokkaido": {
+            "amount": 35,
+            "unit": "grams"
+          }
         }
       },
       "hokkaido_eggtart_c_t_frozen": {
         "base_weight": 36,
         "ingredients": {
-          "eggtart c t": {"amount": 1, "unit": "pcs"}
+          "eggtart c t": {
+            "amount": 1,
+            "unit": "pcs"
+          }
         }
       },
       "portuguesse_eggtart_b_m_baked": {
         "base_weight": 46,
         "ingredients": {
-          "eggtart c t": {"amount": 1, "unit": "pcs"},
-          "filling portuguesse": {"amount": 45, "unit": "grams"}
+          "eggtart c t": {
+            "amount": 1,
+            "unit": "pcs"
+          },
+          "filling portuguesse": {
+            "amount": 45,
+            "unit": "grams"
+          }
         }
       },
       "portuguesse_eggtart_b_m_frozen": {
         "base_weight": 46,
         "ingredients": {
-          "eggtart c t": {"amount": 1, "unit": "pcs"}
+          "eggtart c t": {
+            "amount": 1,
+            "unit": "pcs"
+          }
         }
       },
       "portuguesse_eggtart_c_t_baked": {
         "base_weight": 26,
         "ingredients": {
-          "eggtart b m": {"amount": 1, "unit": "pcs"},
-          "filling portuguesse": {"amount": 25, "unit": "grams"}
+          "eggtart b m": {
+            "amount": 1,
+            "unit": "pcs"
+          },
+          "filling portuguesse": {
+            "amount": 25,
+            "unit": "grams"
+          }
         }
       },
       "portuguesse_eggtart_c_t_frozen": {
         "base_weight": 26,
         "ingredients": {
-          "eggtart b m": {"amount": 1, "unit": "pcs"}
+          "eggtart b m": {
+            "amount": 1,
+            "unit": "pcs"
+          }
         }
       },
       "mozzarella_melt_cheese_baked": {
         "base_weight": 56.5,
         "ingredients": {
-          "square croissant": {"amount": 1, "unit": "pcs"},
-          "keju slice": {"amount": 1.5, "unit": "pcs"},
-          "keju mozzarella": {"amount": 30, "unit": "grams"},
-          "mayonaise": {"amount": 25, "unit": "grams"}
+          "square croissant": {
+            "amount": 1,
+            "unit": "pcs"
+          },
+          "keju slice": {
+            "amount": 1.5,
+            "unit": "pcs"
+          },
+          "keju mozzarella": {
+            "amount": 30,
+            "unit": "grams"
+          },
+          "mayonaise": {
+            "amount": 25,
+            "unit": "grams"
+          }
         }
       },
       "mozzarella_melt_cheese_frozen": {
         "base_weight": 56.5,
         "ingredients": {
-          "square croissant": {"amount": 1, "unit": "pcs"}
+          "square croissant": {
+            "amount": 1,
+            "unit": "pcs"
+          }
         }
       },
       "mozzarella_smoked_beef_baked": {
         "base_weight": 81,
         "ingredients": {
-          "square croissant": {"amount": 1, "unit": "pcs"},
-          "keju mozzarella": {"amount": 30, "unit": "grams"},
-          "smoke beef": {"amount": 1, "unit": "pcs"},
-          "saos sambal": {"amount": 25, "unit": "grams"},
-          "daun bawang": {"amount": 0, "unit": "grams"},
-          "mayonaise": {"amount": 25, "unit": "grams"}
+          "square croissant": {
+            "amount": 1,
+            "unit": "pcs"
+          },
+          "keju mozzarella": {
+            "amount": 30,
+            "unit": "grams"
+          },
+          "smoke beef": {
+            "amount": 1,
+            "unit": "pcs"
+          },
+          "saos sambal": {
+            "amount": 25,
+            "unit": "grams"
+          },
+          "daun bawang": {
+            "amount": 0,
+            "unit": "grams"
+          },
+          "mayonaise": {
+            "amount": 25,
+            "unit": "grams"
+          }
         }
       },
       "mozzarella_smoked_beef_frozen": {
         "base_weight": 81,
         "ingredients": {
-          "square croissant": {"amount": 1, "unit": "pcs"}
+          "square croissant": {
+            "amount": 1,
+            "unit": "pcs"
+          }
         }
       },
       "apple_chausson_baked": {
         "base_weight": 100,
         "ingredients": {
-          "laminasi original": {"amount": 75, "unit": "grams"},
-          "filling apple chausson": {"amount": 25, "unit": "grams"}
+          "laminasi original": {
+            "amount": 75,
+            "unit": "grams"
+          },
+          "filling apple chausson": {
+            "amount": 25,
+            "unit": "grams"
+          }
         }
       },
       "apple_chausson_frozen": {
         "base_weight": 75,
         "ingredients": {
-          "laminasi original": {"amount": 75, "unit": "grams"}
+          "laminasi original": {
+            "amount": 75,
+            "unit": "grams"
+          },
+          "filling apple chausson": {
+            "amount": 25,
+            "unit": "grams"
+          }
         }
       },
       "laminasi_original": {
         "base_weight": 2000,
         "ingredients": {
-          "adonan original": {"amount": 1800, "unit": "grams"},
-          "butter sheet": {"amount": 200, "unit": "grams"}
+          "adonan original": {
+            "amount": 1800,
+            "unit": "grams"
+          },
+          "butter sheet": {
+            "amount": 200,
+            "unit": "grams"
+          }
         }
       },
       "adonan_original": {
         "base_weight": 1948,
         "ingredients": {
-          "tepung cakra": {"amount": 1000, "unit": "grams"},
-          "gula pasir": {"amount": 130, "unit": "grams"},
-          "garam": {"amount": 18, "unit": "grams"},
-          "pelembut": {"amount": 5, "unit": "grams"},
-          "ragi": {"amount": 25, "unit": "grams"},
-          "butter orchid": {"amount": 100, "unit": "grams"},
-          "fresh milk": {"amount": 210, "unit": "grams"},
-          "telur": {"amount": 50, "unit": "grams"},
-          "air es": {"amount": 210, "unit": "grams"},
-          "sisa trimmingan": {"amount": 200, "unit": "grams"}
+          "tepung cakra": {
+            "amount": 1000,
+            "unit": "grams"
+          },
+          "gula pasir": {
+            "amount": 130,
+            "unit": "grams"
+          },
+          "garam": {
+            "amount": 18,
+            "unit": "grams"
+          },
+          "pelembut": {
+            "amount": 5,
+            "unit": "grams"
+          },
+          "ragi": {
+            "amount": 25,
+            "unit": "grams"
+          },
+          "butter orchid": {
+            "amount": 100,
+            "unit": "grams"
+          },
+          "fresh milk": {
+            "amount": 210,
+            "unit": "grams"
+          },
+          "telur": {
+            "amount": 50,
+            "unit": "grams"
+          },
+          "air es": {
+            "amount": 210,
+            "unit": "grams"
+          },
+          "sisa trimmingan": {
+            "amount": 200,
+            "unit": "grams"
+          }
         }
       },
       "filling_apple_chausson": {
         "base_weight": 1520,
         "ingredients": {
-          "buah apple": {"amount": 1000, "unit": "grams"},
-          "butter orchid": {"amount": 100, "unit": "grams"},
-          "palm sugar": {"amount": 70, "unit": "grams"},
-          "tepung maizena": {"amount": 30, "unit": "grams"},
-          "raisin": {"amount": 100, "unit": "grams"},
-          "garam": {"amount": 6, "unit": "grams"},
-          "cinnamon powder": {"amount": 15, "unit": "grams"}
+          "buah apple": {
+            "amount": 1000,
+            "unit": "grams"
+          },
+          "butter orchid": {
+            "amount": 100,
+            "unit": "grams"
+          },
+          "palm sugar": {
+            "amount": 70,
+            "unit": "grams"
+          },
+          "tepung maizena": {
+            "amount": 30,
+            "unit": "grams"
+          },
+          "raisin": {
+            "amount": 100,
+            "unit": "grams"
+          },
+          "garam": {
+            "amount": 6,
+            "unit": "grams"
+          },
+          "cinnamon powder": {
+            "amount": 15,
+            "unit": "grams"
+          }
         }
       },
       "adonan_charcoal": {
         "base_weight": 1953,
         "ingredients": {
-          "tepung cakra": {"amount": 980, "unit": "grams"},
-          "gula pasir": {"amount": 980, "unit": "grams"},
-          "garam": {"amount": 18, "unit": "grams"},
-          "pelembut": {"amount": 5, "unit": "grams"},
-          "ragi": {"amount": 25, "unit": "grams"},
-          "butter orchid": {"amount": 100, "unit": "grams"},
-          "fresh milk": {"amount": 210, "unit": "grams"},
-          "telur": {"amount": 50, "unit": "grams"},
-          "air es": {"amount": 200, "unit": "grams"},
-          "sisa trimmingan": {"amount": 200, "unit": "grams"},
-          "bubuk charcoal": {"amount": 20, "unit": "grams"}
+          "tepung cakra": {
+            "amount": 980,
+            "unit": "grams"
+          },
+          "gula pasir": {
+            "amount": 980,
+            "unit": "grams"
+          },
+          "garam": {
+            "amount": 18,
+            "unit": "grams"
+          },
+          "pelembut": {
+            "amount": 5,
+            "unit": "grams"
+          },
+          "ragi": {
+            "amount": 25,
+            "unit": "grams"
+          },
+          "butter orchid": {
+            "amount": 100,
+            "unit": "grams"
+          },
+          "fresh milk": {
+            "amount": 210,
+            "unit": "grams"
+          },
+          "telur": {
+            "amount": 50,
+            "unit": "grams"
+          },
+          "air es": {
+            "amount": 200,
+            "unit": "grams"
+          },
+          "sisa trimmingan": {
+            "amount": 200,
+            "unit": "grams"
+          },
+          "bubuk charcoal": {
+            "amount": 20,
+            "unit": "grams"
+          }
         }
       },
       "adonan_brioche": {
         "base_weight": 1443,
         "ingredients": {
-          "kuning telur": {"amount": 150, "unit": "grams"},
-          "ragi": {"amount": 17, "unit": "grams"},
-          "gula pasir": {"amount": 65, "unit": "grams"},
-          "susu bubuk": {"amount": 20, "unit": "grams"},
-          "garam": {"amount": 11, "unit": "grams"},
-          "tepung cakra": {"amount": 600, "unit": "grams"},
-          "fresh milk": {"amount": 130, "unit": "grams"},
-          "butter orchid": {"amount": 150, "unit": "grams"},
-          "air es": {"amount": 300, "unit": "grams"}
+          "kuning telur": {
+            "amount": 150,
+            "unit": "grams"
+          },
+          "ragi": {
+            "amount": 17,
+            "unit": "grams"
+          },
+          "gula pasir": {
+            "amount": 65,
+            "unit": "grams"
+          },
+          "susu bubuk": {
+            "amount": 20,
+            "unit": "grams"
+          },
+          "garam": {
+            "amount": 11,
+            "unit": "grams"
+          },
+          "tepung cakra": {
+            "amount": 600,
+            "unit": "grams"
+          },
+          "fresh milk": {
+            "amount": 130,
+            "unit": "grams"
+          },
+          "butter orchid": {
+            "amount": 150,
+            "unit": "grams"
+          },
+          "air es": {
+            "amount": 300,
+            "unit": "grams"
+          }
         }
       },
       "adonan_brioche_instructions": [
@@ -816,11 +1578,26 @@
       "adonan_puff_pastry": {
         "base_weight": 1660,
         "ingredients": {
-          "tepung cakra": {"amount": 700, "unit": "grams"},
-          "tepung segitiga": {"amount": 300, "unit": "grams"},
-          "garam": {"amount": 20, "unit": "grams"},
-          "butter orchid": {"amount": 140, "unit": "grams"},
-          "air": {"amount": 500, "unit": "grams"}
+          "tepung cakra": {
+            "amount": 700,
+            "unit": "grams"
+          },
+          "tepung segitiga": {
+            "amount": 300,
+            "unit": "grams"
+          },
+          "garam": {
+            "amount": 20,
+            "unit": "grams"
+          },
+          "butter orchid": {
+            "amount": 140,
+            "unit": "grams"
+          },
+          "air": {
+            "amount": 500,
+            "unit": "grams"
+          }
         }
       },
       "adonan_puff_pastry_instructions": [
@@ -834,9 +1611,18 @@
       "laminasi_original_2": {
         "base_weight": 2300,
         "ingredients": {
-          "adonan original": {"amount": 1600, "unit": "grams"},
-          "butter sheet": {"amount": 500, "unit": "grams"},
-          "adonan original_2": {"amount": 200, "unit": "grams"}
+          "adonan original": {
+            "amount": 1600,
+            "unit": "grams"
+          },
+          "butter sheet": {
+            "amount": 500,
+            "unit": "grams"
+          },
+          "adonan original_2": {
+            "amount": 200,
+            "unit": "grams"
+          }
         }
       },
       "laminasi_original_2_instructions": [
@@ -845,14 +1631,23 @@
         "Pipihkan kembali adonan yang sudah terbungkus butter, kemudian lipat (single atau double fold).",
         "Istirahatkan di kulkas selama 30 menit.",
         "Ulangi proses melipat dan istirahatkan adonan sebanyak 2-3 kali.",
-        "Tambahkan sisa adonan original (trimingan) pada tahap pelipatan terakhir jika diperlukan."
+        "Tambahkan sisa adonan original (trimmingan) pada tahap pelipatan terakhir jika diperlukan."
       ],
       "laminasi_charcoal": {
         "base_weight": 2300,
         "ingredients": {
-          "adonan charcoal": {"amount": 1600, "unit": "grams"},
-          "butter sheet": {"amount": 500, "unit": "grams"},
-          "adonan charcoal_2": {"amount": 200, "unit": "grams"}
+          "adonan charcoal": {
+            "amount": 1600,
+            "unit": "grams"
+          },
+          "butter sheet": {
+            "amount": 500,
+            "unit": "grams"
+          },
+          "adonan charcoal_2": {
+            "amount": 200,
+            "unit": "grams"
+          }
         }
       },
       "laminasi_charcoal_instructions": [
@@ -861,14 +1656,23 @@
         "Pipihkan kembali adonan yang sudah terbungkus butter, kemudian lipat (single atau double fold).",
         "Istirahatkan di kulkas selama 30 menit.",
         "Ulangi proses melipat dan istirahatkan adonan sebanyak 2-3 kali.",
-        "Tambahkan sisa adonan charcoal (trimingan) pada tahap pelipatan terakhir jika diperlukan."
+        "Tambahkan sisa adonan charcoal (trimmingan) pada tahap pelipatan terakhir jika diperlukan."
       ],
       "laminasi_kouign_amman": {
         "base_weight": 3000,
         "ingredients": {
-          "adonan original": {"amount": 1800, "unit": "grams"},
-          "butter sheet": {"amount": 800, "unit": "grams"},
-          "gula pasir": {"amount": 400, "unit": "grams"}
+          "adonan original": {
+            "amount": 1800,
+            "unit": "grams"
+          },
+          "butter sheet": {
+            "amount": 800,
+            "unit": "grams"
+          },
+          "gula pasir": {
+            "amount": 400,
+            "unit": "grams"
+          }
         }
       },
       "laminasi_kouign_amman_instructions": [
@@ -881,8 +1685,14 @@
       "laminasi_puff_pastry": {
         "base_weight": 2160,
         "ingredients": {
-          "adonan puff pastry": {"amount": 1660, "unit": "grams"},
-          "butter sheet": {"amount": 500, "unit": "grams"}
+          "adonan puff pastry": {
+            "amount": 1660,
+            "unit": "grams"
+          },
+          "butter sheet": {
+            "amount": 500,
+            "unit": "grams"
+          }
         }
       },
       "laminasi_puff_pastry_instructions": [
@@ -895,11 +1705,26 @@
       "filling_creme_brulee": {
         "base_weight": 1190,
         "ingredients": {
-          "gula pasir": {"amount": 200, "unit": "grams"},
-          "kuning telur": {"amount": 16, "unit": "pcs"},
-          "cooking cream pleasure": {"amount": 500, "unit": "grams"},
-          "fresh milk": {"amount": 700, "unit": "grams"},
-          "essence vanilla": {"amount": 10, "unit": "grams"}
+          "gula pasir": {
+            "amount": 200,
+            "unit": "grams"
+          },
+          "kuning telur": {
+            "amount": 16,
+            "unit": "pcs"
+          },
+          "cooking cream pleasure": {
+            "amount": 500,
+            "unit": "grams"
+          },
+          "fresh milk": {
+            "amount": 700,
+            "unit": "grams"
+          },
+          "essence vanilla": {
+            "amount": 10,
+            "unit": "grams"
+          }
         }
       },
       "filling_creme_brulee_instructions": [
@@ -914,11 +1739,26 @@
       "filling_danish_pastry": {
         "base_weight": 320,
         "ingredients": {
-          "fresh milk": {"amount": 250, "unit": "grams"},
-          "kuning telur": {"amount": 1, "unit": "pcs"},
-          "essence vanilla": {"amount": 1, "unit": "grams"},
-          "gula pasir": {"amount": 35, "unit": "grams"},
-          "butter orchid": {"amount": 20, "unit": "grams"}
+          "fresh milk": {
+            "amount": 250,
+            "unit": "grams"
+          },
+          "kuning telur": {
+            "amount": 1,
+            "unit": "pcs"
+          },
+          "essence vanilla": {
+            "amount": 1,
+            "unit": "grams"
+          },
+          "gula pasir": {
+            "amount": 35,
+            "unit": "grams"
+          },
+          "butter orchid": {
+            "amount": 20,
+            "unit": "grams"
+          }
         }
       },
       "filling_danish_pastry_instructions": [
@@ -932,10 +1772,22 @@
       "filling_ferrero": {
         "base_weight": 850,
         "ingredients": {
-          "couverture white": {"amount": 300, "unit": "grams"},
-          "couverture chocolate": {"amount": 200, "unit": "grams"},
-          "minyak": {"amount": 175, "unit": "grams"},
-          "kacang morin": {"amount": 175, "unit": "grams"}
+          "couverture white": {
+            "amount": 300,
+            "unit": "grams"
+          },
+          "couverture chocolate": {
+            "amount": 200,
+            "unit": "grams"
+          },
+          "minyak": {
+            "amount": 175,
+            "unit": "grams"
+          },
+          "kacang morin": {
+            "amount": 175,
+            "unit": "grams"
+          }
         }
       },
       "filling_ferrero_instructions": [
@@ -948,8 +1800,14 @@
       "filling_lotus_biscoff": {
         "base_weight": 700,
         "ingredients": {
-          "millac gold": {"amount": 500, "unit": "grams"},
-          "selai lotus biscoff": {"amount": 200, "unit": "grams"}
+          "millac gold": {
+            "amount": 500,
+            "unit": "grams"
+          },
+          "selai lotus biscoff": {
+            "amount": 200,
+            "unit": "grams"
+          }
         }
       },
       "filling_lotus_biscoff_instructions": [
@@ -961,8 +1819,14 @@
       "filling_nutella": {
         "base_weight": 675,
         "ingredients": {
-          "selai nutella": {"amount": 500, "unit": "grams"},
-          "minyak": {"amount": 175, "unit": "grams"}
+          "selai nutella": {
+            "amount": 500,
+            "unit": "grams"
+          },
+          "minyak": {
+            "amount": 175,
+            "unit": "grams"
+          }
         }
       },
       "filling_nutella_instructions": [
@@ -973,12 +1837,30 @@
       "filling_pistachio_b.m": {
         "base_weight": 1110,
         "ingredients": {
-          "telur": {"amount": 1, "unit": "pcs"},
-          "kuning telur": {"amount": 100, "unit": "grams"},
-          "fresh milk": {"amount": 750, "unit": "grams"},
-          "gula pasir": {"amount": 70, "unit": "grams"},
-          "pistachio paste": {"amount": 80, "unit": "grams"},
-          "tepung maizena": {"amount": 65, "unit": "grams"}
+          "telur": {
+            "amount": 1,
+            "unit": "pcs"
+          },
+          "kuning telur": {
+            "amount": 100,
+            "unit": "grams"
+          },
+          "fresh milk": {
+            "amount": 750,
+            "unit": "grams"
+          },
+          "gula pasir": {
+            "amount": 70,
+            "unit": "grams"
+          },
+          "pistachio paste": {
+            "amount": 80,
+            "unit": "grams"
+          },
+          "tepung maizena": {
+            "amount": 65,
+            "unit": "grams"
+          }
         }
       },
       "filling_pistachio_b.m_instructions": [
@@ -991,13 +1873,34 @@
       "filling_raisin": {
         "base_weight": 390,
         "ingredients": {
-          "kuning telur": {"amount": 3, "unit": "pcs"},
-          "fresh milk": {"amount": 250, "unit": "grams"},
-          "tepung maizena": {"amount": 20, "unit": "grams"},
-          "essence vanilla": {"amount": 1, "unit": "grams"},
-          "butter orchid": {"amount": 30, "unit": "grams"},
-          "buah lemon": {"amount": 1, "unit": "pcs"},
-          "gula pasir": {"amount": 45, "unit": "grams"}
+          "kuning telur": {
+            "amount": 3,
+            "unit": "pcs"
+          },
+          "fresh milk": {
+            "amount": 250,
+            "unit": "grams"
+          },
+          "tepung maizena": {
+            "amount": 20,
+            "unit": "grams"
+          },
+          "essence vanilla": {
+            "amount": 1,
+            "unit": "grams"
+          },
+          "butter orchid": {
+            "amount": 30,
+            "unit": "grams"
+          },
+          "buah lemon": {
+            "amount": 1,
+            "unit": "pcs"
+          },
+          "gula pasir": {
+            "amount": 45,
+            "unit": "grams"
+          }
         }
       },
       "filling_raisin_instructions": [
@@ -1011,11 +1914,26 @@
       "topping_coffee_croissant": {
         "base_weight": 430,
         "ingredients": {
-          "margarine": {"amount": 100, "unit": "grams"},
-          "tepung segitiga": {"amount": 120, "unit": "grams"},
-          "gula halus": {"amount": 100, "unit": "grams"},
-          "bubuk kopi": {"amount": 15, "unit": "grams"},
-          "putih telur": {"amount": 100, "unit": "grams"}
+          "margarine": {
+            "amount": 100,
+            "unit": "grams"
+          },
+          "tepung segitiga": {
+            "amount": 120,
+            "unit": "grams"
+          },
+          "gula halus": {
+            "amount": 100,
+            "unit": "grams"
+          },
+          "bubuk kopi": {
+            "amount": 15,
+            "unit": "grams"
+          },
+          "putih telur": {
+            "amount": 100,
+            "unit": "grams"
+          }
         }
       },
       "topping_coffee_croissant_instructions": [
@@ -1027,11 +1945,26 @@
       "filling_almond_cream": {
         "base_weight": 515,
         "ingredients": {
-          "butter orchid": {"amount": 125, "unit": "grams"},
-          "almond powder": {"amount": 110, "unit": "grams"},
-          "telur": {"amount": 3, "unit": "pcs"},
-          "gula halus": {"amount": 100, "unit": "grams"},
-          "tepung segitiga": {"amount": 35, "unit": "grams"}
+          "butter orchid": {
+            "amount": 125,
+            "unit": "grams"
+          },
+          "almond powder": {
+            "amount": 110,
+            "unit": "grams"
+          },
+          "telur": {
+            "amount": 3,
+            "unit": "pcs"
+          },
+          "gula halus": {
+            "amount": 100,
+            "unit": "grams"
+          },
+          "tepung segitiga": {
+            "amount": 35,
+            "unit": "grams"
+          }
         }
       },
       "filling_almond_cream_instructions": [
@@ -1043,12 +1976,30 @@
       "filling_choco_mousse": {
         "base_weight": 1100,
         "ingredients": {
-          "cooking cream pleasure": {"amount": 240, "unit": "grams"},
-          "dark couverture": {"amount": 240, "unit": "grams"},
-          "gelatine": {"amount": 6, "unit": "grams"},
-          "air": {"amount": 36, "unit": "grams"},
-          "millac gold": {"amount": 480, "unit": "grams"},
-          "gula halus": {"amount": 120, "unit": "grams"}
+          "cooking cream pleasure": {
+            "amount": 240,
+            "unit": "grams"
+          },
+          "dark couverture": {
+            "amount": 240,
+            "unit": "grams"
+          },
+          "gelatine": {
+            "amount": 6,
+            "unit": "grams"
+          },
+          "air": {
+            "amount": 36,
+            "unit": "grams"
+          },
+          "millac gold": {
+            "amount": 480,
+            "unit": "grams"
+          },
+          "gula halus": {
+            "amount": 120,
+            "unit": "grams"
+          }
         }
       },
       "filling_choco_mousse_instructions": [
@@ -1063,9 +2014,18 @@
       "filling_cream_cheese_smith": {
         "base_weight": 790,
         "ingredients": {
-          "gula halus": {"amount": 100, "unit": "grams"},
-          "cream cheese": {"amount": 200, "unit": "grams"},
-          "millac gold": {"amount": 500, "unit": "grams"}
+          "gula halus": {
+            "amount": 100,
+            "unit": "grams"
+          },
+          "cream cheese": {
+            "amount": 200,
+            "unit": "grams"
+          },
+          "millac gold": {
+            "amount": 500,
+            "unit": "grams"
+          }
         }
       },
       "filling_cream_cheese_smith_instructions": [
@@ -1078,10 +2038,22 @@
       "topping_creme_au_bullion": {
         "base_weight": 350,
         "ingredients": {
-          "gula pasir": {"amount": 35, "unit": "grams"},
-          "kuning telur": {"amount": 4, "unit": "grams"},
-          "millac gold": {"amount": 250, "unit": "grams"},
-          "essence vanilla": {"amount": 1, "unit": "grams"}
+          "gula pasir": {
+            "amount": 35,
+            "unit": "grams"
+          },
+          "kuning telur": {
+            "amount": 4,
+            "unit": "grams"
+          },
+          "millac gold": {
+            "amount": 250,
+            "unit": "grams"
+          },
+          "essence vanilla": {
+            "amount": 1,
+            "unit": "grams"
+          }
         }
       },
       "topping_creme_au_bullion_instructions": [
@@ -1094,14 +2066,38 @@
       "filling_crokies": {
         "base_weight": 540,
         "ingredients": {
-          "butter orchid": {"amount": 120, "unit": "grams"},
-          "gula pasir": {"amount": 60, "unit": "grams"},
-          "tepung segitiga": {"amount": 150, "unit": "grams"},
-          "dark couverture": {"amount": 100, "unit": "grams"},
-          "baking powder": {"amount": 3, "unit": "grams"},
-          "soda kue": {"amount": 3, "unit": "grams"},
-          "garam": {"amount": 2, "unit": "grams"},
-          "palm sugar": {"amount": 60, "unit": "grams"}
+          "butter orchid": {
+            "amount": 120,
+            "unit": "grams"
+          },
+          "gula pasir": {
+            "amount": 60,
+            "unit": "grams"
+          },
+          "tepung segitiga": {
+            "amount": 150,
+            "unit": "grams"
+          },
+          "dark couverture": {
+            "amount": 100,
+            "unit": "grams"
+          },
+          "baking powder": {
+            "amount": 3,
+            "unit": "grams"
+          },
+          "soda kue": {
+            "amount": 3,
+            "unit": "grams"
+          },
+          "garam": {
+            "amount": 2,
+            "unit": "grams"
+          },
+          "palm sugar": {
+            "amount": 60,
+            "unit": "grams"
+          }
         }
       },
       "filling_crokies_instructions": [
@@ -1114,10 +2110,22 @@
       "filling_cromboloni_chocolate": {
         "base_weight": 640,
         "ingredients": {
-          "chocolate tulip": {"amount": 75, "unit": "grams"},
-          "gula halus": {"amount": 75, "unit": "grams"},
-          "essence vanilla": {"amount": 200, "unit": "grams"},
-          "millac gold": {"amount": 300, "unit": "grams"}
+          "chocolate tulip": {
+            "amount": 75,
+            "unit": "grams"
+          },
+          "gula halus": {
+            "amount": 75,
+            "unit": "grams"
+          },
+          "essence vanilla": {
+            "amount": 200,
+            "unit": "grams"
+          },
+          "millac gold": {
+            "amount": 300,
+            "unit": "grams"
+          }
         }
       },
       "filling_cromboloni_chocolate_instructions": [
@@ -1130,10 +2138,22 @@
       "filling_cromboloni_matcha": {
         "base_weight": 580,
         "ingredients": {
-          "matcha powder": {"amount": 25, "unit": "grams"},
-          "millac gold": {"amount": 300, "unit": "grams"},
-          "sonton vanilla": {"amount": 200, "unit": "grams"},
-          "gula halus": {"amount": 75, "unit": "grams"}
+          "matcha powder": {
+            "amount": 25,
+            "unit": "grams"
+          },
+          "millac gold": {
+            "amount": 300,
+            "unit": "grams"
+          },
+          "sonton vanilla": {
+            "amount": 200,
+            "unit": "grams"
+          },
+          "gula halus": {
+            "amount": 75,
+            "unit": "grams"
+          }
         }
       },
       "filling_cromboloni_matcha_instructions": [
@@ -1144,10 +2164,22 @@
       "filling_cromboloni_strawberry": {
         "base_weight": 575,
         "ingredients": {
-          "selai strawberry": {"amount": 75, "unit": "grams"},
-          "millac gold": {"amount": 300, "unit": "grams"},
-          "sonton vanilla": {"amount": 200, "unit": "grams"},
-          "pasta strawberry": {"amount": 5, "unit": "grams"}
+          "selai strawberry": {
+            "amount": 75,
+            "unit": "grams"
+          },
+          "millac gold": {
+            "amount": 300,
+            "unit": "grams"
+          },
+          "sonton vanilla": {
+            "amount": 200,
+            "unit": "grams"
+          },
+          "pasta strawberry": {
+            "amount": 5,
+            "unit": "grams"
+          }
         }
       },
       "filling_cromboloni_strawberry_instructions": [
@@ -1158,8 +2190,14 @@
       "filling_frosting": {
         "base_weight": 595,
         "ingredients": {
-          "gula halus": {"amount": 100, "unit": "grams"},
-          "millac gold": {"amount": 500, "unit": "grams"}
+          "gula halus": {
+            "amount": 100,
+            "unit": "grams"
+          },
+          "millac gold": {
+            "amount": 500,
+            "unit": "grams"
+          }
         }
       },
       "filling_frosting_instructions": [
@@ -1170,9 +2208,18 @@
       "filling_fruity": {
         "base_weight": 695,
         "ingredients": {
-          "cream cheese": {"amount": 100, "unit": "grams"},
-          "millac gold": {"amount": 500, "unit": "grams"},
-          "gula halus": {"amount": 100, "unit": "grams"}
+          "cream cheese": {
+            "amount": 100,
+            "unit": "grams"
+          },
+          "millac gold": {
+            "amount": 500,
+            "unit": "grams"
+          },
+          "gula halus": {
+            "amount": 100,
+            "unit": "grams"
+          }
         }
       },
       "filling_fruity_instructions": [
@@ -1185,13 +2232,34 @@
       "filling_hokkaido": {
         "base_weight": 1950,
         "ingredients": {
-          "cream cheese": {"amount": 1000, "unit": "grams"},
-          "butter orchid": {"amount": 110, "unit": "grams"},
-          "keju martabak": {"amount": 55, "unit": "grams"},
-          "keju mozzarella": {"amount": 113, "unit": "grams"},
-          "gula pasir": {"amount": 213, "unit": "grams"},
-          "yogurt": {"amount": 300, "unit": "grams"},
-          "putih telur": {"amount": 173, "unit": "grams"}
+          "cream cheese": {
+            "amount": 1000,
+            "unit": "grams"
+          },
+          "butter orchid": {
+            "amount": 110,
+            "unit": "grams"
+          },
+          "keju martabak": {
+            "amount": 55,
+            "unit": "grams"
+          },
+          "keju mozzarella": {
+            "amount": 113,
+            "unit": "grams"
+          },
+          "gula pasir": {
+            "amount": 213,
+            "unit": "grams"
+          },
+          "yogurt": {
+            "amount": 300,
+            "unit": "grams"
+          },
+          "putih telur": {
+            "amount": 173,
+            "unit": "grams"
+          }
         }
       },
       "filling_hokkaido_instructions": [
@@ -1204,11 +2272,26 @@
       "filling_portuguesse": {
         "base_weight": 1300,
         "ingredients": {
-          "telur": {"amount": 2, "unit": "pcs"},
-          "kuning telur": {"amount": 8, "unit": "pcs"},
-          "gula pasir": {"amount": 40, "unit": "grams"},
-          "susu bubuk": {"amount": 20, "unit": "grams"},
-          "millac roselle": {"amount": 1000, "unit": "grams"}
+          "telur": {
+            "amount": 2,
+            "unit": "pcs"
+          },
+          "kuning telur": {
+            "amount": 8,
+            "unit": "pcs"
+          },
+          "gula pasir": {
+            "amount": 40,
+            "unit": "grams"
+          },
+          "susu bubuk": {
+            "amount": 20,
+            "unit": "grams"
+          },
+          "millac roselle": {
+            "amount": 1000,
+            "unit": "grams"
+          }
         }
       },
       "filling_portuguesse_instructions": [
@@ -1220,11 +2303,26 @@
       "filling_danish_strawberry": {
         "base_weight": 380,
         "ingredients": {
-          "telur": {"amount": 1, "unit": "pcs"},
-          "fresh milk": {"amount": 250, "unit": "grams"},
-          "gula pasir": {"amount": 35, "unit": "grams"},
-          "butter orchid": {"amount": 20, "unit": "grams"},
-          "tepung maizena": {"amount": 30, "unit": "grams"}
+          "telur": {
+            "amount": 1,
+            "unit": "pcs"
+          },
+          "fresh milk": {
+            "amount": 250,
+            "unit": "grams"
+          },
+          "gula pasir": {
+            "amount": 35,
+            "unit": "grams"
+          },
+          "butter orchid": {
+            "amount": 20,
+            "unit": "grams"
+          },
+          "tepung maizena": {
+            "amount": 30,
+            "unit": "grams"
+          }
         }
       },
       "filling_danish_strawberry_instructions": [
@@ -1237,13 +2335,34 @@
       "filling_apple_chauson": {
         "base_weight": 1520,
         "ingredients": {
-          "buah apple": {"amount": 1000, "unit": "grams"},
-          "butter orchid": {"amount": 100, "unit": "grams"},
-          "palm sugar": {"amount": 70, "unit": "grams"},
-          "tepung maizena": {"amount": 30, "unit": "grams"},
-          "raisin": {"amount": 100, "unit": "grams"},
-          "garam": {"amount": 6, "unit": "grams"},
-          "cinnamon powder": {"amount": 15, "unit": "grams"}
+          "buah apple": {
+            "amount": 1000,
+            "unit": "grams"
+          },
+          "butter orchid": {
+            "amount": 100,
+            "unit": "grams"
+          },
+          "palm sugar": {
+            "amount": 70,
+            "unit": "grams"
+          },
+          "tepung maizena": {
+            "amount": 30,
+            "unit": "grams"
+          },
+          "raisin": {
+            "amount": 100,
+            "unit": "grams"
+          },
+          "garam": {
+            "amount": 6,
+            "unit": "grams"
+          },
+          "cinnamon powder": {
+            "amount": 15,
+            "unit": "grams"
+          }
         }
       },
       "filling_apple_chauson_instructions": [
@@ -1255,11 +2374,26 @@
       "filling_brulle_danish": {
         "base_weight": 480,
         "ingredients": {
-          "kuning telur": {"amount": 100, "unit": "grams"},
-          "tepung maizena": {"amount": 44, "unit": "grams"},
-          "gula pasir": {"amount": 100, "unit": "grams"},
-          "fresh milk": {"amount": 164, "unit": "grams"},
-          "cooking cream pleasure": {"amount": 110, "unit": "grams"}
+          "kuning telur": {
+            "amount": 100,
+            "unit": "grams"
+          },
+          "tepung maizena": {
+            "amount": 44,
+            "unit": "grams"
+          },
+          "gula pasir": {
+            "amount": 100,
+            "unit": "grams"
+          },
+          "fresh milk": {
+            "amount": 164,
+            "unit": "grams"
+          },
+          "cooking cream pleasure": {
+            "amount": 110,
+            "unit": "grams"
+          }
         }
       },
       "filling_brulle_danish_instructions": [
@@ -1271,13 +2405,34 @@
       "filling_cheese_melt": {
         "base_weight": 466,
         "ingredients": {
-          "cream cheese": {"amount": 250, "unit": "grams"},
-          "butter orchid": {"amount": 100, "unit": "grams"},
-          "gula halus": {"amount": 25, "unit": "grams"},
-          "gula pasir": {"amount": 50, "unit": "grams"},
-          "fresh milk": {"amount": 25, "unit": "grams"},
-          "garam": {"amount": 2, "unit": "grams"},
-          "essence vanilla": {"amount": 1, "unit": "grams"}
+          "cream cheese": {
+            "amount": 250,
+            "unit": "grams"
+          },
+          "butter orchid": {
+            "amount": 100,
+            "unit": "grams"
+          },
+          "gula halus": {
+            "amount": 25,
+            "unit": "grams"
+          },
+          "gula pasir": {
+            "amount": 50,
+            "unit": "grams"
+          },
+          "fresh milk": {
+            "amount": 25,
+            "unit": "grams"
+          },
+          "garam": {
+            "amount": 2,
+            "unit": "grams"
+          },
+          "essence vanilla": {
+            "amount": 1,
+            "unit": "grams"
+          }
         }
       },
       "filling_cheese_melt_instructions": [
@@ -1288,10 +2443,22 @@
       "filling_choco_cornet": {
         "base_weight": 395,
         "ingredients": {
-          "filling vanilla cornet": {"amount": 200, "unit": "grams"},
-          "millac gold": {"amount": 100, "unit": "grams"},
-          "gula halus": {"amount": 25, "unit": "grams"},
-          "selai nutella": {"amount": 80, "unit": "grams"}
+          "filling vanilla cornet": {
+            "amount": 200,
+            "unit": "grams"
+          },
+          "millac gold": {
+            "amount": 100,
+            "unit": "grams"
+          },
+          "gula halus": {
+            "amount": 25,
+            "unit": "grams"
+          },
+          "selai nutella": {
+            "amount": 80,
+            "unit": "grams"
+          }
         }
       },
       "filling_choco_cornet_instructions": [
@@ -1303,12 +2470,30 @@
       "filling_vanilla_cornet": {
         "base_weight": 230,
         "ingredients": {
-          "fresh milk": {"amount": 125, "unit": "grams"},
-          "essence vanilla": {"amount": 3, "unit": "grams"},
-          "gula pasir": {"amount": 25, "unit": "grams"},
-          "tepung maizena": {"amount": 13, "unit": "grams"},
-          "telur": {"amount": 1, "unit": "pcs"},
-          "butter orchid": {"amount": 15, "unit": "grams"}
+          "fresh milk": {
+            "amount": 125,
+            "unit": "grams"
+          },
+          "essence vanilla": {
+            "amount": 3,
+            "unit": "grams"
+          },
+          "gula pasir": {
+            "amount": 25,
+            "unit": "grams"
+          },
+          "tepung maizena": {
+            "amount": 13,
+            "unit": "grams"
+          },
+          "telur": {
+            "amount": 1,
+            "unit": "pcs"
+          },
+          "butter orchid": {
+            "amount": 15,
+            "unit": "grams"
+          }
         }
       },
       "filling_vanilla_cornet_instructions": [
