@@ -797,6 +797,22 @@
           "laminasi original": {
             "amount": 69.7,
             "unit": "grams"
+          },
+          "sonton vanilla": {
+            "amount": 6.82,
+            "unit": "grams"
+          },
+          "palm sugar": {
+            "amount": 4.55,
+            "unit": "grams"
+          },
+          "bubuk cinnamon": {
+            "amount": 1.52,
+            "unit": "grams"
+          },
+          "raisin (kismis)": {
+            "amount": 3.04,
+            "unit": "grams"
           }
         }
       },
@@ -925,6 +941,18 @@
           "laminasi original": {
             "amount": 65,
             "unit": "grams"
+          },
+          "smoked beef": {
+            "amount": 1,
+            "unit": "pcs"
+          },
+          "keju quick melt": {
+            "amount": 10,
+            "unit": "grams"
+          },
+          "butter sheet": {
+            "amount": 6,
+            "unit": "grams"
           }
         }
       },
@@ -954,6 +982,10 @@
           },
           "sonton vanilla": {
             "amount": 7.04,
+            "unit": "grams"
+          },
+          "chocochip": {
+            "amount": 6.25,
             "unit": "grams"
           }
         }
@@ -1069,6 +1101,10 @@
           "laminasi original": {
             "amount": 88.46,
             "unit": "grams"
+          },
+          "chocolate stick": {
+            "amount": 3,
+            "unit": "pcs"
           }
         }
       },
@@ -1117,6 +1153,14 @@
           "plain croissant": {
             "amount": 1,
             "unit": "pcs"
+          },
+          "filling almond cream": {
+            "amount": 35,
+            "unit": "grams"
+          },
+          "almond slice": {
+            "amount": 10,
+            "unit": "grams"
           }
         }
       },
@@ -1178,7 +1222,7 @@
             "amount": 50,
             "unit": "grams"
           },
-          "filling bullion": {
+          "filling creme au bullion": {
             "amount": 200,
             "unit": "grams"
           },
@@ -1193,6 +1237,14 @@
         "ingredients": {
           "trimmingan baked": {
             "amount": 50,
+            "unit": "grams"
+          },
+          "filling creme au bullion": {
+            "amount": 200,
+            "unit": "grams"
+          },
+          "raisin": {
+            "amount": 3,
             "unit": "grams"
           }
         }
@@ -1284,6 +1336,10 @@
           "eggtart b m": {
             "amount": 1,
             "unit": "pcs"
+          },
+          "filling hokkaido": {
+            "amount": 50,
+            "unit": "grams"
           }
         }
       },
@@ -1306,6 +1362,10 @@
           "eggtart c t": {
             "amount": 1,
             "unit": "pcs"
+          },
+          "filling hokkaido": {
+            "amount": 35,
+            "unit": "grams"
           }
         }
       },
@@ -1328,6 +1388,10 @@
           "eggtart c t": {
             "amount": 1,
             "unit": "pcs"
+          },
+          "filling portuguesse": {
+            "amount": 45,
+            "unit": "grams"
           }
         }
       },
@@ -1350,6 +1414,10 @@
           "eggtart b m": {
             "amount": 1,
             "unit": "pcs"
+          },
+          "filling portuguesse": {
+            "amount": 25,
+            "unit": "grams"
           }
         }
       },
@@ -1400,10 +1468,6 @@
           },
           "saos sambal": {
             "amount": 25,
-            "unit": "grams"
-          },
-          "daun bawang": {
-            "amount": 0,
             "unit": "grams"
           },
           "mayonaise": {
@@ -1510,7 +1574,7 @@
         }
       },
       "filling_apple_chausson": {
-        "base_weight": 1345,
+        "base_weight": 1290,
         "ingredients": {
           "buah apple": {
             "amount": 1000,
@@ -1522,10 +1586,6 @@
           },
           "palm sugar": {
             "amount": 70,
-            "unit": "grams"
-          },
-          "tepung maizena": {
-            "amount": 30,
             "unit": "grams"
           },
           "raisin": {
@@ -1899,12 +1959,8 @@
         "Gunakan sebagai isian atau topping."
       ],
       "filling_pistachio_b.m": {
-        "base_weight": 1110,
+        "base_weight": 1060,
         "ingredients": {
-          "telur": {
-            "amount": 1,
-            "unit": "pcs"
-          },
           "kuning telur": {
             "amount": 100,
             "unit": "grams"
@@ -2099,28 +2155,32 @@
         "Campurkan millac gold ke dalam adonan cream cheese secara bertahap, aduk perlahan hingga homogen.",
         "Dinginkan sebelum digunakan."
       ],
-      "topping_creme_au_bullion": {
-        "base_weight": 350,
+      "filling_creme_au_bullion": {
+        "base_weight": 840,
         "ingredients": {
           "gula pasir": {
-            "amount": 35,
+            "amount": 90,
             "unit": "grams"
           },
-          "kuning telur": {
-            "amount": 4,
+          "telur frozen": {
+            "amount": 160,
             "unit": "grams"
           },
           "millac gold": {
-            "amount": 250,
+            "amount": 420,
             "unit": "grams"
           },
           "essence vanilla": {
-            "amount": 1,
+            "amount": 5,
+            "unit": "grams"
+          },
+          "fresh milk": {
+            "amount": 180,
             "unit": "grams"
           }
         }
       },
-      "topping_creme_au_bullion_instructions": [
+      "filling_creme_au_bullion_instructions": [
         "Kocok kuning telur dan gula pasir hingga sedikit pucat.",
         "Panaskan millac gold hingga hangat, tuang sedikit demi sedikit ke adonan telur sambil terus diaduk.",
         "Masukkan kembali semua adonan ke dalam panci, masak dengan api kecil sambil terus diaduk hingga mengental.",
@@ -2137,6 +2197,10 @@
           "gula pasir": {
             "amount": 60,
             "unit": "grams"
+          },
+          "telur": {
+            "amount": 1,
+            "unit": "butir"
           },
           "tepung segitiga": {
             "amount": 150,
@@ -2334,15 +2398,11 @@
         "Dinginkan sebelum digunakan."
       ],
       "filling_portuguesse": {
-        "base_weight": 1300,
+        "base_weight": 1200,
         "ingredients": {
-          "telur": {
-            "amount": 2,
-            "unit": "pcs"
-          },
           "kuning telur": {
-            "amount": 8,
-            "unit": "pcs"
+            "amount": 150,
+            "unit": "grams"
           },
           "gula pasir": {
             "amount": 40,
