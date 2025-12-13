@@ -692,8 +692,8 @@
         },
         {
           "name": "Plie Au / Peppito SG",
-          "recipe_key_baked": "Plie_Au_/_Peppito_SG_baked",
-          "recipe_key_frozen": "Plie_Au_/_Peppito_SG_frozen",
+          "recipe_key_baked": "plie_au_/_peppito_sg_baked",
+          "recipe_key_frozen": "plie_au_/_peppito_sg_frozen",
           "variants": {
             "baked": {
               "base_weight_factor": 1.0
@@ -705,8 +705,8 @@
         },
         {
           "name": "Crovia Strawberry SG",
-          "recipe_key_baked": "Crovia_Strawberry_SG_baked",
-          "recipe_key_frozen": "Crovia_Strawberry_SG_frozen",
+          "recipe_key_baked": "crovia_strawberry_sg_baked",
+          "recipe_key_frozen": "crovia_strawberry_sg_frozen",
           "variants": {
             "baked": {
               "base_weight_factor": 1.0
@@ -718,8 +718,8 @@
         },
         {
           "name": "Melted Cheese W/ Mushroom SG",
-          "recipe_key_baked": "Melted_Cheese_W/_Mushroom_baked",
-          "recipe_key_frozen": "Melted_Cheese_W/_Mushroom_frozen",
+          "recipe_key_baked": "melted_cheese_w/_mushroom_baked",
+          "recipe_key_frozen": "melted_cheese_w/_mushroom_frozen",
           "variants": {
             "baked": {
               "base_weight_factor": 1.0
@@ -731,8 +731,8 @@
         },
         {
           "name": "Croissant Stick SG",
-          "recipe_key_baked": "Croissant_Stick_SG_baked",
-          "recipe_key_frozen": "Croissant_Stick_SG_frozen",
+          "recipe_key_baked": "croissant_stick_sg_baked",
+          "recipe_key_frozen": "croissant_stick_sg_frozen",
           "variants": {
             "baked": {
               "base_weight_factor": 1.0
@@ -744,8 +744,8 @@
         },
         {
           "name": "Croissant Cheese / Pretzel SG",
-          "recipe_key_baked": "Croissant_Cheese_/_Pretzel_SG_baked",
-          "recipe_key_frozen": "Croissant_Cheese_/_Pretzel_SG_frozen",
+          "recipe_key_baked": "croissant_cheese_/_pretzel_sg_baked",
+          "recipe_key_frozen": "croissant_cheese_/_pretzel_sg_frozen",
           "variants": {
             "baked": {
               "base_weight_factor": 1.0
@@ -757,8 +757,8 @@
         },
         {
           "name": "Melted Cheese W/ Tomato",
-          "recipe_key_baked": "Melted_Cheese_W/_Tomato_baked",
-          "recipe_key_frozen": "Melted_Cheese_W/_Tomato_frozen",
+          "recipe_key_baked": "melted_cheese_w/_tomato_baked",
+          "recipe_key_frozen": "melted_cheese_w/_tomato_frozen",
           "variants": {
             "baked": {
               "base_weight_factor": 1.0
@@ -770,8 +770,8 @@
         },
         {
           "name": "Croissant Plain SG",
-          "recipe_key_baked": "Croissant_Plain_SG_baked",
-          "recipe_key_frozen": "Croissant_Plain_SG_frozen",
+          "recipe_key_baked": "croissant_plain_sg_baked",
+          "recipe_key_frozen": "croissant_plain_sg_frozen",
           "variants": {
             "baked": {
               "base_weight_factor": 1.0
@@ -783,8 +783,8 @@
         },
         {
           "name": "Croissant Ovaltine SG",
-          "recipe_key_baked": "Croissant_Ovaltine_SG_baked",
-          "recipe_key_frozen": "Croissant_Ovaltine_SG_frozen",
+          "recipe_key_baked": "croissant_ovaltine_sg_baked",
+          "recipe_key_frozen": "croissant_ovaltine_sg_frozen",
           "variants": {
             "baked": {
               "base_weight_factor": 1.0
@@ -795,9 +795,9 @@
           }
         },
         {
-          "name": "Croissant Ovaltine SG",
-          "recipe_key_baked": "Croissant_Ovaltine_SG_baked",
-          "recipe_key_frozen": "Croissant_Ovaltine_SG_frozen",
+          "name": "Croissant Mousse SG",
+          "recipe_key_baked": "croissant_mousse_sg_baked",
+          "recipe_key_frozen": "croissant_mousse_sg_frozen",
           "variants": {
             "baked": {
               "base_weight_factor": 1.0
@@ -809,8 +809,8 @@
         },
         {
           "name": "Croissant Eggcurry SG",
-          "recipe_key_baked": "Croissant_Eggcurry_SG_baked",
-          "recipe_key_frozen": "Croissant_Eggcurry_SG_frozen",
+          "recipe_key_baked": "croissant_eggcurry_sg_baked",
+          "recipe_key_frozen": "croissant_eggcurry_sg_frozen",
           "variants": {
             "baked": {
               "base_weight_factor": 1.0
@@ -822,8 +822,8 @@
         },
         {
           "name": "Croissant Creme Brulee SG",
-          "recipe_key_baked": "Croissant_Creme_Brulee_SG_baked",
-          "recipe_key_frozen": "Croissant_Creme_Brulee_SG_frozen",
+          "recipe_key_baked": "croissant_creme_brulee_sg_baked",
+          "recipe_key_frozen": "croissant_creme_brulee_sg_frozen",
           "variants": {
             "baked": {
               "base_weight_factor": 1.0
@@ -835,8 +835,8 @@
         },
         {
           "name": "Croissant Almond SG",
-          "recipe_key_baked": "Croissant_Almond_SG_baked",
-          "recipe_key_frozen": "Croissant_Almond_SG_frozen",
+          "recipe_key_baked": "croissant_almond_sg_baked",
+          "recipe_key_frozen": "croissant_almond_sg_frozen",
           "variants": {
             "baked": {
               "base_weight_factor": 1.0
@@ -848,8 +848,20 @@
         },
         {
           "name": "Croissant Cream Cheese SG",
-          "recipe_key_baked": "Croissant_Cream_Cheese_SG_baked",
-          "recipe_key_frozen": "Croissant_Cream_Cheese_SG_frozen",
+          "recipe_key_baked": "croissant_cream_cheese_sg_baked",
+          "recipe_key_frozen": "croissant_cream_cheese_sg_frozen",
+          "variants": {
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
+          }
+        },
+        {
+          "name": "Filling Portuguesse",
+          "recipe_key": "filling_portuguesse",
           "variants": {
             "baked": {
               "base_weight_factor": 1.0
@@ -1554,7 +1566,7 @@
       "portuguesse_eggtart_b_m_baked": {
         "base_weight": 1,
         "ingredients": {
-          "eggtart c t": {
+          "eggtart b m": {
             "amount": 1,
             "unit": "pcs"
           },
@@ -1567,7 +1579,7 @@
       "portuguesse_eggtart_b_m_frozen": {
         "base_weight": 1,
         "ingredients": {
-          "eggtart c t": {
+          "eggtart b m": {
             "amount": 1,
             "unit": "pcs"
           },
@@ -1580,7 +1592,7 @@
       "portuguesse_eggtart_c_t_baked": {
         "base_weight": 1,
         "ingredients": {
-          "eggtart b m": {
+          "eggtart c t": {
             "amount": 1,
             "unit": "pcs"
           },
@@ -1593,7 +1605,7 @@
       "portuguesse_eggtart_c_t_frozen": {
         "base_weight": 1,
         "ingredients": {
-          "eggtart b m": {
+          "eggtart c t": {
             "amount": 1,
             "unit": "pcs"
           },
@@ -1697,7 +1709,7 @@
           }
         }
       },
-      "Pain_Au_Chocolate_SG_baked": {
+      "pain_au_chocolate_sg_baked": {
         "base_weight": 1,
         "ingredients": {
           "laminasi original": {
@@ -1710,7 +1722,7 @@
           }
         }
       },
-      "Pain_Au_Chocolate_SG_frozen": {
+      "pain_au_chocolate_sg_frozen": {
         "base_weight": 1,
         "ingredients": {
           "laminasi original": {
@@ -1723,7 +1735,7 @@
           }
         }
       },
-      "Plie_Au_/_Peppito_SG_baked": {
+      "plie_au_/_peppito_sg_baked": {
         "base_weight": 1,
         "ingredients": {
           "laminasi original": {
@@ -1740,7 +1752,7 @@
           }
         }
       },
-      "Plie_Au_/_Peppito_SG_frozen": {
+      "plie_au_/_peppito_sg_frozen": {
         "base_weight": 1,
         "ingredients": {
           "laminasi original": {
@@ -1757,7 +1769,7 @@
           }
         }
       },
-      "Crovia_Strawberry_SG_baked": {
+      "crovia_strawberry_sg_baked": {
         "base_weight": 1,
         "ingredients": {
           "laminasi original": {
@@ -1774,7 +1786,7 @@
           }
         }
       },
-      "Crovia_Strawberry_SG_frozen": {
+      "crovia_strawberry_sg_frozen": {
         "base_weight": 1,
         "ingredients": {
           "laminasi original": {
@@ -1791,7 +1803,7 @@
           }
         }
       },
-      "Melted_Cheese_W/_Mushroom_baked": {
+      "melted_cheese_w/_mushroom_baked": {
         "base_weight": 1,
         "ingredients": {
           "laminasi original": {
@@ -1812,7 +1824,7 @@
           }
         }
       },
-      "Melted_Cheese_W/_Mushroom_frozen": {
+      "melted_cheese_w/_mushroom_frozen": {
         "base_weight": 1,
         "ingredients": {
           "laminasi original": {
@@ -1833,7 +1845,7 @@
           }
         }
       },
-      "Croissant_Stick_SG_baked": {
+      "croissant_stick_sg_baked": {
         "base_weight": 1,
         "ingredients": {
           "laminasi original": {
@@ -1842,7 +1854,7 @@
           }
         }
       },
-      "Croissant_Stick_SG_frozen": {
+      "croissant_stick_sg_frozen": {
         "base_weight": 1,
         "ingredients": {
           "laminasi original": {
@@ -1851,7 +1863,7 @@
           }
         }
       },
-      "Croissant_Cheese_/_Pretzel_SG_baked": {
+      "croissant_cheese_/_pretzel_sg_baked": {
         "base_weight": 1,
         "ingredients": {
           "laminasi original": {
@@ -1864,7 +1876,7 @@
           }
         }
       },
-      "Croissant_Cheese_/_Pretzel_SG_frozen": {
+      "croissant_cheese_/_pretzel_sg_frozen": {
         "base_weight": 1,
         "ingredients": {
           "laminasi original": {
@@ -1877,7 +1889,7 @@
           }
         }
       },
-      "Melted_Cheese_W/_Tomato_baked": {
+      "melted_cheese_w/_tomato_baked": {
         "base_weight": 1,
         "ingredients": {
           "laminasi original": {
@@ -1898,7 +1910,7 @@
           }
         }
       },
-      "Melted_Cheese_W/_Tomato_frozen": {
+      "melted_cheese_w/_tomato_frozen": {
         "base_weight": 1,
         "ingredients": {
           "laminasi original": {
@@ -1919,7 +1931,7 @@
           }
         }
       },
-      "Croissant_Plain_SG_baked": {
+      "croissant_plain_sg_baked": {
         "base_weight": 1,
         "ingredients": {
           "laminasi original": {
@@ -1928,7 +1940,7 @@
           }
         }
       },
-      "Croissant_Plain_SG_frozen": {
+      "croissant_plain_sg_frozen": {
         "base_weight": 1,
         "ingredients": {
           "laminasi original": {
@@ -1937,7 +1949,7 @@
           }
         }
       },
-      "Croissant_Ovaltine_baked": {
+      "croissant_ovaltine_sg_baked": {
         "base_weight": 1,
         "ingredients": {
           "croissant plain sg": {
@@ -1950,7 +1962,7 @@
           }
         }
       },
-      "Croissant_Ovaltine_frozen": {
+      "croissant_ovaltine_sg_frozen": {
         "base_weight": 1,
         "ingredients": {
           "croissant plain sg": {
@@ -1963,7 +1975,7 @@
           }
         }
       },
-      "Croissant_Mousse_SG_baked": {
+      "croissant_mousse_sg_baked": {
         "base_weight": 1,
         "ingredients": {
           "croissant plain sg": {
@@ -1980,7 +1992,7 @@
           }
         }
       },
-      "Croissant_Mousse_SG_frozen": {
+      "croissant_mousse_sg_frozen": {
         "base_weight": 1,
         "ingredients": {
           "croissant plain sg": {
@@ -1997,7 +2009,7 @@
           }
         }
       },
-      "Croissant_Eggcurry_SG_baked": {
+      "croissant_eggcurry_sg_baked": {
         "base_weight": 1,
         "ingredients": {
           "laminasi original": {
@@ -2014,7 +2026,7 @@
           }
         }
       },
-      "Croissant_Eggcurry_SG_frozen": {
+      "croissant_eggcurry_sg_frozen": {
         "base_weight": 1,
         "ingredients": {
           "laminasi original": {
@@ -2031,7 +2043,7 @@
           }
         }
       },
-      "Croissant_Creme_Brulee_SG_baked": {
+      "croissant_creme_brulee_sg_baked": {
         "base_weight": 1,
         "ingredients": {
           "croissant plain sg": {
@@ -2048,7 +2060,7 @@
           }
         }
       },
-      "Croissant_Creme_Brulee_SG_frozen": {
+      "croissant_creme_brulee_sg_frozen": {
         "base_weight": 1,
         "ingredients": {
           "croissant plain sg": {
@@ -2065,7 +2077,7 @@
           }
         }
       },
-      "Croissant_Almond_SG_baked": {
+      "croissant_almond_sg_baked": {
         "base_weight": 1,
         "ingredients": {
           "croissant plain sg": {
@@ -2082,7 +2094,7 @@
           }
         }
       },
-      "Croissant_Almond_SG_frozen": {
+      "croissant_almond_sg_frozen": {
         "base_weight": 1,
         "ingredients": {
           "croissant plain sg": {
@@ -2099,7 +2111,7 @@
           }
         }
       },
-      "Croissant_Cream_Cheese_SG_baked": {
+      "croissant_cream_cheese_sg_baked": {
         "base_weight": 1,
         "ingredients": {
           "croissant plain sg": {
@@ -2116,7 +2128,7 @@
           }
         }
       },
-      "Croissant_Cream_Cheese_SG_frozen": {
+      "croissant_cream_cheese_sg_frozen": {
         "base_weight": 1,
         "ingredients": {
           "croissant plain sg": {
@@ -3019,7 +3031,11 @@
         "base_weight": 1200,
         "ingredients": {
           "kuning telur": {
-            "amount": 150,
+            "amount": 105,
+            "unit": "grams"
+          },
+          "telur": {
+            "amount": 3,
             "unit": "grams"
           },
           "gula pasir": {
@@ -3063,6 +3079,10 @@
           },
           "tepung maizena": {
             "amount": 30,
+            "unit": "grams"
+          },
+          "essence vanilla": {
+            "amount": 2,
             "unit": "grams"
           }
         }
@@ -3244,6 +3264,94 @@
         "Masukkan kembali semua adonan ke dalam panci, masak dengan api kecil sambil terus diaduk hingga mengental.",
         "Angkat dari api, tambahkan essence vanilla dan butter orchid, aduk hingga meleleh dan tercampur rata.",
         "Dinginkan sepenuhnya sebelum digunakan untuk mengisi cornet."
+      ],
+      "filling_curry": {
+        "base_weight": 640,
+        "ingredients": {
+          "wortel": {
+            "amount": 300,
+            "unit": "grams"
+          },
+          "bombay": {
+            "amount": 200,
+            "unit": "grams"
+          },
+          "lada hitam": {
+            "amount": 5,
+            "unit": "grams"
+          },
+          "bumbu penyedap rasa": {
+            "amount": 5,
+            "unit": "grams"
+          },
+          "bawang putih": {
+            "amount": 10,
+            "unit": "grams"
+          },
+          "bawang merah": {
+            "amount": 10,
+            "unit": "grams"
+          },
+          "bumbu curry": {
+            "amount": 80,
+            "unit": "grams"
+          },
+          "minyak": {
+            "amount": 30,
+            "unit": "grams"
+          }
+        }
+      },
+      "filling_curry_instruction": [
+        "test"
+      ],
+      "filling_holandaise": {
+        "base_weight": 100,
+        "ingredients": {
+          "telur": {
+            "amount": 5,
+            "unit": "butir"
+          },
+          "unsalted butter": {
+            "amount": 200,
+            "unit": "grams"
+          },
+          "bumbu penyedap rasa": {
+            "amount": 5,
+            "unit": "grams"
+          },
+          "buah lemon": {
+            "amount": 0.5,
+            "unit": "pcs"
+          }
+        }
+      },
+      "filling_holandaise_instruction": [
+        "test"
+      ],
+      "filling_mushroom": {
+        "base_weight": 100,
+        "ingredients": {
+          "jamur kaleng": {
+            "amount": 425,
+            "unit":"grams"
+          },
+          "bawang bombay": {
+            "amount": 200,
+            "unit": "grams"
+          },
+          "bumbu penyedap rasa": {
+            "amount": 10,
+            "unit": "grams"
+          },
+          "minyak": {
+            "amount": 20,
+            "unit": "grams"
+          }
+        }
+      },
+      "filling_mushroom_instrucion": [
+        "test"
       ]
     }
   }
