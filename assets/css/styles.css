@@ -1,0 +1,540 @@
+        /* Reset and Common styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* General Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #333 url('https://fastly.picsum.photos/id/431/5000/3334.jpg?hmac=T2rL_gBDyJYpcr1Xm8Kv7L6bhwvmZS8nKT5w3ok58kA') no-repeat center center / cover;
+            /* Generic background for debugging */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #fff;
+            padding-bottom: 60px;
+            font-size: 0.85em;
+            /* Approximately 15% smaller */
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(61px);
+            -webkit-backdrop-filter: blur(61px);
+            z-index: 1000;
+            padding: 20px 0;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .nav-button {
+            background: #5a3e2b;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover,
+        .nav-button.active {
+            background: #7a5a42;
+            transform: scale(1.05);
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(61px);
+            -webkit-backdrop-filter: blur(61px);
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            margin: 40px auto;
+            font-size: 12px;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 28px;
+            margin: 10px 0;
+            color: #000000;
+        }
+
+        /* Form Elements */
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* New styles for horizontal alignment of baked/frozen inputs */
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Styles for horizontal alignment of product name and input fields in Croissant Calculator */
+        .croissant-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: bold;
+            color: #f9e1c0;
+            margin-bottom: 10px;
+        }
+
+        .croissant-product-label-header {
+            flex: 2;
+            text-align: left;
+            margin-right: 10px;
+            min-width: 100px;
+        }
+
+        .croissant-input-group-header {
+            width: 30%;
+            text-align: center;
+        }
+
+        .croissant-product-input-line {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            flex-wrap: wrap;
+            /* Allow wrapping on smaller screens */
+        }
+
+        .croissant-product-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #f9e1c0;
+            /* Match product header color */
+            flex: 2;
+            /* Give more space to the label */
+            text-align: left;
+            margin-right: 10px;
+            /* Space between label and first input group */
+            min-width: 100px;
+            /* Ensure label doesn't get too small */
+        }
+
+        .croissant-input-group {
+            display: flex;
+            align-items: center;
+            width: 30%;
+            /* Allocate width for each input group */
+            justify-content: flex-end;
+            /* Align input to the right within its group */
+        }
+
+        .croissant-input-group input {
+            flex: none;
+            /* Do not let the input grow */
+            width: 60px;
+            /* Fixed width for the input field */
+            text-align: center;
+        }
+
+        /* General label style, overridden by specific classes where needed */
+        label {
+            font-size: 14px;
+            font-weight: 500;
+            flex: 2;
+            text-align: left;
+            color: #000000;
+        }
+
+        input,
+        select {
+            flex: 1;
+            padding: 6px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+            max-width: 80px;
+        }
+
+        select {
+            width: 100%;
+            max-width: none;
+            margin-bottom: 15px;
+        }
+
+        /* Specific styling for department selector */
+        .department-selector select {
+            max-width: 180px;
+            /* Adjust this value as needed */
+            display: inline-block;
+            /* Ensure width is respected */
+            vertical-align: middle;
+            /* Align with label */
+            margin-bottom: 0;
+            /* Remove extra margin */
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Button */
+        button {
+            margin-top: 15px;
+            padding: 12px;
+            background: #5a3e2b;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #7a5a42;
+            transform: scale(1.05);
+        }
+
+        /* Results Section */
+        .result,
+        #output {
+            margin-top: 15px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(61px);
+            -webkit-backdrop-filter: blur(61px);
+            border-radius: 8px;
+            font-size: 13.6px;
+            /* 15% smaller */
+            color: #000000;
+            text-align: left;
+        }
+
+        /* Toggle Switch Styles */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            /* Original width */
+            height: 24px;
+            /* Original height */
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            /* Original height */
+            width: 16px;
+            /* Original width */
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: #5a3e2b;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #5a3e2b;
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(16px);
+            /* Original translateX */
+            -ms-transform: translateX(16px);
+            transform: translateX(16px);
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 6px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            color: #000000;
+        }
+
+        /* Center align numbers in result table */
+        #result td:not(:first-child) {
+            text-align: center;
+        }
+
+        #result table {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        #result .adjustment-input {
+            width: 100%;
+            /* Adjust width as needed */
+            padding: 4px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+
+        #result .adjustment-input:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(90, 62, 43, 0.5);
+        }
+
+        th {
+            font-weight: 600;
+        }
+
+        /* Specific styling for Settings page table inputs */
+        #donut-score-inputs table {
+            table-layout: fixed;
+            /* Distribute columns evenly */
+            width: 100%;
+        }
+
+        #donut-score-inputs table th:first-child,
+        #donut-score-inputs table td:first-child {
+            width: 40%;
+            /* Allocate more width for the product name */
+        }
+
+        #donut-score-inputs table th:not(:first-child),
+        #donut-score-inputs table td:not(:first-child) {
+            width: 15%;
+            /* Distribute remaining width evenly among outlet columns */
+            text-align: center;
+        }
+
+        #donut-score-inputs input[type="number"] {
+            width: 80%;
+            /* Ensure inputs take a good portion of their cell */
+            box-sizing: border-box;
+            /* Include padding and border in the element's total width and height */
+            margin: 0 auto;
+            /* Center the input within the cell */
+            display: block;
+            /* Allow margin auto to work */
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 15px;
+            padding: 15px;
+            width: 100%;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(61px);
+            -webkit-backdrop-filter: blur(61px);
+            color: #000000;
+            font-size: 10px;
+            font-weight: 500;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            position: fixed;
+            bottom: 0;
+        }
+
+        footer a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease-in-out;
+        }
+
+        footer a:hover {
+            color: #000000;
+            text-decoration: underline;
+        }
+
+        /* Page Container */
+        .page {
+            display: none;
+            margin-top: 100px;
+            width: 100%;
+        }
+
+        .page.active {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Mobile Optimization */
+        @media screen and (max-width: 480px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 20.4px;
+                /* 15% smaller */
+            }
+
+            .form-group {
+                padding: 6px 0;
+            }
+
+            input,
+            select {
+                font-size: 14px;
+                /* 15% smaller */
+            }
+
+            button {
+                font-size: 11.9px;
+                /* 15% smaller */
+                padding: 10px;
+            }
+
+            .result,
+            #output {
+                font-size: 11.9px;
+                /* 15% smaller */
+            }
+
+            /* Adjustments for Settings page table on small screens */
+            #donut-score-inputs table th:first-child,
+            #donut-score-inputs table td:first-child {
+                width: 30%;
+                /* Reduce product name width slightly */
+            }
+
+            #donut-score-inputs table th:not(:first-child),
+            #donut-score-inputs table td:not(:first-child) {
+                width: 17.5%;
+                /* Increase outlet column width to give more space */
+            }
+
+            #donut-score-inputs input[type="number"] {
+                width: 90%;
+                /* Make inputs take more space within their cells */
+            }
+        }
+
+        /* Calculator table specific adjustments for mobile */
+        #calculator-page table th:first-child,
+        #calculator-page table td:first-child {
+            width: 20%;
+            /* Donut Product */
+        }
+
+        #calculator-page table th:nth-child(n+2):nth-child(-n+6),
+        /* Target 2nd to 6th child (5 outlets) */
+        #calculator-page table td:nth-child(n+2):nth-child(-n+6) {
+            width: 14%;
+            /* Outlets */
+        }
+
+        #calculator-page table th:last-child,
+        #calculator-page table td:last-child {
+            width: 10%;
+            /* Total (Boxes) */
+        }
+
+        #calculator-page table th {
+            padding: 6px 4px;
+            /* Adjust padding for header cells on mobile */
+            word-break: break-word;
+            /* Allow long words to break */
+        }
+
+        /* Collapsible sections styles */
+        .collapsible-header {
+            cursor: pointer;
+            user-select: none;
+            /* Prevent text selection on click */
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            /* Space between icon and text */
+            font-size: 16px;
+            color: #f9e1c0;
+            /* Match existing header colors */
+            padding: 5px 0;
+        }
+
+        .collapsible-header .fas {
+            transition: transform 0.3s ease;
+        }
+
+        .collapsible-header.collapsed .fas {
+            transform: rotate(-90deg);
+        }
+
+        .collapsible-content {
+            max-height: 20000px;
+            /* Large enough to show all content */
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            opacity: 1;
+            padding-top: 10px;
+        }
+
+        .collapsible-content.collapsed {
+            max-height: 0;
+            opacity: 0;
+            padding-top: 0;
+        }
