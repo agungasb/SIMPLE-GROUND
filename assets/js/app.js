@@ -839,6 +839,7 @@ function initializeCroissantCalculator() {
             "2bakers": "2Bakers",
             "simple ground": "Simple Ground",
             "simple ground reserve": "Simple Ground"
+            "tobys": "Tobys"
         };
 
         const addQuantity = (outlet, productName, quantity, mode) => {
