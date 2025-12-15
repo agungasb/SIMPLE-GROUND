@@ -870,6 +870,222 @@
               "base_weight_factor": 1.0
             }
           }
+        },
+        {
+          "name": "Filling Apple Chausson",
+          "recipe_key": "filling_apple_chausson",
+          "variants": {
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
+          }
+        },
+        {
+          "name": "Filling Cream Brulee",
+          "recipe_key": "filling_creme_brulee",
+          "variants": {
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
+          }
+        },
+        {
+          "name": "Filling Hokkaido",
+          "recipe_key": "filling_hokkaido",
+          "variants": {
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
+          }
+        },
+        {
+          "name": "Filling Danish Brulle",
+          "recipe_key": "filling_hokkaido",
+          "variants": {
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
+          }
+        },
+        {
+          "name": "Filling Cheese Melt",
+          "recipe_key": "filling_cheese_melt",
+          "variants": {
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
+          }
+        },
+        {
+          "name": "Filling Raisin",
+          "recipe_key": "filling_raisin",
+          "variants": {
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
+          }
+        },
+        {
+          "name": "Filling Lotus Biscoff",
+          "recipe_key": "filling_lotus_biscoff",
+          "variants": {
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
+          }
+        },
+        {
+          "name": "Filling Pistachio",
+          "recipe_key": "filling_pistachio",
+          "variants": {
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
+          }
+        },
+        {
+          "name": "Topping Coffee Croissant",
+          "recipe_key": "topping_coffee_croissant",
+          "variants": {
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
+          }
+        },
+        {
+          "name": "Filling Almond Cream",
+          "recipe_key": "filling_almond_cream",
+          "variants": {
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
+          }
+        },
+        {
+          "name": "Filling Choco Mousse",
+          "recipe_key": "filling_choco_mousse",
+          "variants": {
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
+          }
+        },
+        {
+          "name": "Filling Cream Cheese",
+          "recipe_key": "filling_cream_cheese",
+          "variants": {
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
+          }
+        },
+        {
+          "name": "Filling Crokies",
+          "recipe_key": "filling_crokies",
+          "variants": {
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
+          }
+        },
+        {
+          "name": "Filling Cromboloni Matcha",
+          "recipe_key": "filling_cromboloni_matcha",
+          "variants": {
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
+          }
+        },
+        {
+          "name": "Filling Cromboloni Strawberry",
+          "recipe_key": "filling_cromboloni_strawberry",
+          "variants": {
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
+          }
+        },
+        {
+          "name": "Filling Cromboloni Choco",
+          "recipe_key": "filling_cromboloni_choco",
+          "variants": {
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
+          }
+        },
+        {
+          "name": "Filling Cromboloni Tiramisu",
+          "recipe_key": "filling_cromboloni_tiramisu",
+          "variants": {
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
+          }
+        },
+        {
+          "name": "Filling creme Bullion",
+          "recipe_key": "filling_creme_bullion",
+          "variants": {
+            "baked": {
+              "base_weight_factor": 1.0
+            },
+            "frozen": {
+              "base_weight_factor": 1.0
+            }
+          }
         }
       ]
     },
@@ -2159,7 +2375,7 @@
         }
       },
       "adonan_original": {
-        "base_weight": 1948,
+        "base_weight": 2140,
         "ingredients": {
           "tepung cakra": {
             "amount": 1000,
@@ -2198,7 +2414,7 @@
             "unit": "grams"
           },
           "sisa trimmingan": {
-            "amount": 200,
+            "amount": 400,
             "unit": "grams"
           }
         }
