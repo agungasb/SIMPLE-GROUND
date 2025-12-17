@@ -1005,7 +1005,7 @@
         },
         {
           "name": "Filling Cream Cheese",
-          "recipe_key": "filling_cream_cheese",
+          "recipe_key": "filling_cream_cheese_smith",
           "variants": {
             "baked": {
               "base_weight_factor": 1.0
@@ -2168,7 +2168,7 @@
       "croissant_ovaltine_sg_baked": {
         "base_weight": 1,
         "ingredients": {
-          "croissant plain sg": {
+          "croissant plain sg baked": {
             "amount": 1,
             "unit": "pcs"
           },
@@ -2181,7 +2181,7 @@
       "croissant_ovaltine_sg_frozen": {
         "base_weight": 1,
         "ingredients": {
-          "croissant plain sg": {
+          "croissant plain sg baked": {
             "amount": 1,
             "unit": "pcs"
           },
@@ -2194,7 +2194,7 @@
       "croissant_mousse_sg_baked": {
         "base_weight": 1,
         "ingredients": {
-          "croissant plain sg": {
+          "croissant plain sg baked": {
             "amount": 1,
             "unit": "pcs"
           },
@@ -2211,7 +2211,7 @@
       "croissant_mousse_sg_frozen": {
         "base_weight": 1,
         "ingredients": {
-          "croissant plain sg": {
+          "croissant plain sg baked": {
             "amount": 1,
             "unit": "pcs"
           },
@@ -2262,7 +2262,7 @@
       "croissant_creme_brulee_sg_baked": {
         "base_weight": 1,
         "ingredients": {
-          "croissant plain sg": {
+          "croissant plain sg baked": {
             "amount": 1,
             "unit": "pcs"
           },
@@ -2279,7 +2279,7 @@
       "croissant_creme_brulee_sg_frozen": {
         "base_weight": 1,
         "ingredients": {
-          "croissant plain sg": {
+          "croissant plain sg baked": {
             "amount": 1,
             "unit": "pcs"
           },
@@ -2296,7 +2296,7 @@
       "croissant_almond_sg_baked": {
         "base_weight": 1,
         "ingredients": {
-          "croissant plain sg": {
+          "croissant plain sg baked": {
             "amount": 1,
             "unit": "pcs"
           },
@@ -2313,7 +2313,7 @@
       "croissant_almond_sg_frozen": {
         "base_weight": 1,
         "ingredients": {
-          "croissant plain sg": {
+          "croissant plain sg baked": {
             "amount": 1,
             "unit": "pcs"
           },
@@ -2330,7 +2330,7 @@
       "croissant_cream_cheese_sg_baked": {
         "base_weight": 1,
         "ingredients": {
-          "croissant plain sg": {
+          "croissant plain sg baked": {
             "amount": 1,
             "unit": "pcs"
           },
@@ -2347,7 +2347,7 @@
       "croissant_cream_cheese_sg_frozen": {
         "base_weight": 1,
         "ingredients": {
-          "croissant plain sg": {
+          "croissant plain sg baked": {
             "amount": 1,
             "unit": "pcs"
           },
@@ -2804,7 +2804,7 @@
         "Aduk rata hingga minyak tercampur sempurna dan tekstur nutella menjadi lebih cair dan mudah dioles.",
         "Gunakan sebagai isian atau topping."
       ],
-      "filling_pistachio_b.m": {
+      "filling_pistachio": {
         "base_weight": 1060,
         "ingredients": {
           "kuning telur": {
@@ -2829,7 +2829,7 @@
           }
         }
       },
-      "filling_pistachio_b.m_instructions": [
+      "filling_pistachio_instructions": [
         "Kocok telur, kuning telur, gula pasir, dan tepung maizena hingga rata.",
         "Panaskan fresh milk hingga hampir mendidih, lalu tuang sedikit demi sedikit ke adonan telur sambil terus diaduk.",
         "Masukkan kembali semua adonan ke dalam panci, masak dengan api kecil sambil terus diaduk hingga mengental.",
@@ -3550,7 +3550,7 @@
         "ingredients": {
           "jamur kaleng": {
             "amount": 425,
-            "unit":"grams"
+            "unit": "grams"
           },
           "bawang bombay": {
             "amount": 200,

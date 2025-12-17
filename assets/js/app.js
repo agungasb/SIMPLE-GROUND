@@ -801,7 +801,6 @@ function initializeCroissantCalculator() {
         "cheesetart": "Cheesetart", // Maybe Eggtart?
         "ovaltine croisan": "Ovaltine Croissant", // Not in list
         "lotus c": "Lotus Croissant", // Not in list
-        "egg curry c": "Egg Curry Croissant", // Not in list
         "melted chese tomat": "Mozzarella Melt Cheese", // Guess
         "melted chese mashrom": "Mozzarella Melt Cheese", // Guess
         "almond croisan": "Almond Croissant",
@@ -813,6 +812,7 @@ function initializeCroissantCalculator() {
         "cream brule": "Creme Brule",
         "chocolate mousse": "Choco Mousse Croissant",
         "ham & cheese.c": "Ham & Cheese Smith",
+        "egg curry c": "Croissant Eggcurry SG"
     };
 
     parseOrderButton.addEventListener('click', function () {
@@ -838,8 +838,8 @@ function initializeCroissantCalculator() {
             "coffee town": "Coffee Town",
             "2bakers": "2Bakers",
             "simple ground": "Simple Ground",
-            "simple ground reserve": "Simple Ground"
-            "tobys": "Tobys"
+            "simple ground reserve": "Simple Ground",
+            "tobys": "Toby's"
         };
 
         const addQuantity = (outlet, productName, quantity, mode) => {
