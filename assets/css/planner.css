@@ -1,0 +1,33 @@
+/* Production Planner Styles */
+.planner-input {
+    width: 60px !important;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 4px;
+}
+
+#planner-table th,
+#planner-table td {
+    padding: 8px 4px;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+#planner-table th {
+    background: rgba(0, 0, 0, 0.1);
+    color: #000;
+}
+
+@media screen and (max-width: 480px) {
+    .desktop-only {
+        display: none !important;
+    }
+
+    #planner-table th:nth-child(1),
+    #planner-table td:nth-child(1) {
+        /* Product Name */
+        width: 40%;
+    }
+}

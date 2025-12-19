@@ -1,0 +1,42 @@
+[
+    {
+        "id": "p1",
+        "name": "Plain Croissant",
+        "shape": "triangle",
+        "width": 10,
+        "length": 25,
+        "thickness": 2.6
+    },
+    {
+        "id": "p2",
+        "name": "Pain Au Chocolat",
+        "shape": "rectangle",
+        "width": 8,
+        "length": 12,
+        "thickness": 4
+    },
+    {
+        "id": "p3",
+        "name": "Danish Square",
+        "shape": "rectangle",
+        "width": 8,
+        "length": 8,
+        "thickness": 4
+    },
+    {
+        "id": "p4",
+        "name": "Cinnamon Roll",
+        "shape": "rectangle",
+        "width": 6,
+        "length": 20,
+        "thickness": 3.5
+    },
+    {
+        "id": "p5",
+        "name": "Apple Chausson",
+        "shape": "circle",
+        "width": 10,
+        "length": 10,
+        "thickness": 4
+    }
+]

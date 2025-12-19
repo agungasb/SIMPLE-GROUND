@@ -27,6 +27,9 @@
                     class="fas fa-calculator"></i> Production Calculator</button>
             <button class="nav-button" onclick="showPage('recipe', 'croissant')"><i class="fas fa-book-open"></i> Recipe
                 Scaler</button>
+            <button class="nav-button" onclick="showPage('planner', 'croissant')"><i
+                    class="fas fa-drafting-compass"></i> Planner</button>
+
             <!-- Add other buttons for Croissant Department here -->
         </div>
         <div class="department-selector" style="text-align: center; margin-top: 10px;">
@@ -194,6 +197,122 @@
         </div>
     </div>
 
+    <!-- Production Planner Page -->
+    <div id="planner-page" class="page">
+        <div class="container">
+            <h1>Production Planner</h1>
+            <p>Calculate efficiency based on surface area and thickness.</p>
+
+            <!-- Settings Row -->
+            <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px; flex-wrap: wrap;">
+                <div style="display: flex; flex-direction: column; width: 18%; min-width: 80px;">
+                    <label style="font-size: 10px; color: #5a3e2b; margin-bottom: 4px;">Block Weight (g)</label>
+                    <input type="number" id="setting-block-weight" value="2300"
+                        style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #ccc; text-align: center;">
+                </div>
+                <div style="display: flex; flex-direction: column; width: 18%; min-width: 80px;">
+                    <label style="font-size: 10px; color: #5a3e2b; margin-bottom: 4px;">Sheet Width (cm)</label>
+                    <input type="number" id="setting-sheet-width" value="165"
+                        style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #ccc; text-align: center;">
+                </div>
+                <div style="display: flex; flex-direction: column; width: 18%; min-width: 80px;">
+                    <label style="font-size: 10px; color: #5a3e2b; margin-bottom: 4px;">Sheet Length (cm)</label>
+                    <input type="number" id="setting-sheet-length" value="25"
+                        style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #ccc; text-align: center;">
+                </div>
+                <div style="display: flex; flex-direction: column; width: 18%; min-width: 80px;">
+                    <label style="font-size: 10px; color: #5a3e2b; margin-bottom: 4px;">Scrap Rate (%)</label>
+                    <input type="number" id="setting-scrap-rate" value="10"
+                        style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #ccc; text-align: center;">
+                </div>
+                <div style="display: flex; flex-direction: column; width: 18%; min-width: 80px;">
+                    <label style="font-size: 10px; color: #5a3e2b; margin-bottom: 4px;">Density (g/cm³)</label>
+                    <input type="number" id="setting-density" value="1.82" step="0.1"
+                        style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #ccc; text-align: center;">
+                </div>
+            </div>
+
+            <div id="planner-summary"
+                style="display: flex; justify-content: space-around; margin-bottom: 20px; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px;">
+
+
+                <div>
+                    <div style="font-size: 12px; color: #f9e1c0;">Total Area</div>
+                    <div id="planner-total-area" style="font-size: 18px; font-weight: bold;">0 cm²</div>
+                </div>
+                <div>
+                    <div style="font-size: 12px; color: #f9e1c0;">Total Weight</div>
+                    <div id="planner-total-weight" style="font-size: 18px; font-weight: bold;">0 g</div>
+                </div>
+                <div>
+                    <div style="font-size: 12px; color: #f9e1c0;">Sheets Needed</div>
+                    <div id="planner-total-blocks" style="font-size: 18px; font-weight: bold;">0.0</div>
+                </div>
+            </div>
+
+            <div style="overflow-x: auto;">
+                <table id="planner-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th style="width: 80px;">Qty</th>
+                            <th class="desktop-only">Dimensions</th>
+                            <th class="desktop-only">Thick</th>
+                            <th>Yield (pcs/sheet)</th>
+                            <th>Gross Area</th>
+                            <th>Weight</th>
+                            <th>Layout</th>
+                        </tr>
+                    </thead>
+                    <tbody id="planner-table-body">
+                        <!-- Loaded by JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <p style="margin-top: 20px; font-size: 11px; text-align: left; opacity: 0.7;">
+                * Gross Area includes scrap rate. Weight calculated from volume.
+            </p>
+        </div>
+    </div>
+
+    <!-- Layout Visualizer Modal -->
+    <div id="layout-modal" class="modal"
+        style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8);">
+        <div class="modal-content"
+            style="background-color: #fefefe; margin: 2% auto; padding: 20px; border: 1px solid #888; width: 95%; max-width: 900px; max-height: 90vh; overflow-y: auto; border-radius: 8px; position: relative;">
+            <span class="close-modal"
+                style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+            <h2 id="modal-product-title" style="color: #333; margin-top: 0;">Length Layout</h2>
+            <p id="modal-product-details" style="color: #666; font-size: 14px; margin-bottom: 20px;"></p>
+
+            <div
+                style="background: #e0e0e0; padding: 20px; border-radius: 4px; overflow: auto; text-align: center; white-space: nowrap;">
+                <canvas id="layout-canvas"
+                    style="background: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: inline-block; vertical-align: middle;"></canvas>
+            </div>
+
+            <div
+                style="margin-top: 15px; display: flex; gap: 20px; justify-content: center; font-size: 14px; color: #333;">
+                <div style="display: flex; align-items: center; gap: 5px;">
+                    <span
+                        style="width: 15px; height: 15px; background: rgba(100, 200, 100, 0.5); border: 1px solid #4CAF50; display: inline-block;"></span>
+                    Product
+                </div>
+                <div style="display: flex; align-items: center; gap: 5px;">
+                    <span
+                        style="width: 15px; height: 15px; background: rgba(255, 100, 100, 0.2); border: 1px solid #f44336; display: inline-block;"></span>
+                    Scrap
+                </div>
+                <div style="display: flex; align-items: center; gap: 5px;">
+                    <span
+                        style="width: 15px; height: 15px; background: white; border: 1px solid #000; display: inline-block;"></span>
+                    Sheet
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         Created For Coffee Town Bakery | <a href="manual_guide.html" target="_blank">About</a> | Follow me: <a
@@ -201,6 +320,7 @@
     </footer>
 
     <script src="assets/js/app.js"></script>
+    <script src="assets/js/production_planner.js"></script>
 </body>
 
 </html>

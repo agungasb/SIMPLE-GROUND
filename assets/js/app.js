@@ -91,6 +91,8 @@ function showPage(pageId, department) {
     // If navigating to the recipe scaler page, re-populate recipes and trigger a scale
     if (pageId === 'recipe') {
         refreshRecipeScalerContent();
+    } else if (pageId === 'planner' && typeof renderPlannerTable === 'function') {
+        renderPlannerTable();
     }
 }
 
