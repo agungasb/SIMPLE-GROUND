@@ -168,7 +168,7 @@ function updatePlannerCalculations() {
 
 // 3. Initialize Settings Listeners
 function initializeSettingsListeners() {
-    ['setting-block-weight', 'setting-sheet-width', 'setting-sheet-length', 'setting-scrap-rate', 'setting-density'].forEach(id => {
+    ['setting-sheet-width', 'setting-sheet-length', 'setting-scrap-rate', 'setting-density'].forEach(id => {
         const el = document.getElementById(id);
         if (el) {
             el.addEventListener('input', () => {
@@ -181,13 +181,12 @@ function initializeSettingsListeners() {
 }
 
 function updateSettingsFromInputs() {
-    const blockWeight = parseFloat(document.getElementById('setting-block-weight').value) || 4000;
     const sheetWidth = parseFloat(document.getElementById('setting-sheet-width').value) || 40;
     const sheetLength = parseFloat(document.getElementById('setting-sheet-length').value) || 60;
     const scrapRate = parseFloat(document.getElementById('setting-scrap-rate').value) || 10;
     const density = parseFloat(document.getElementById('setting-density').value) || 1.1;
 
-    plannerSettings.blockWeight = blockWeight;
+    plannerSettings.blockWeight = plannerSettings.blockWeight; // Keep existing value or default if not set elsewhere
     plannerSettings.sheetWidth = sheetWidth;
     plannerSettings.sheetLength = sheetLength;
     plannerSettings.scrapRate = scrapRate / 100; // Convert to decimal
@@ -311,10 +310,15 @@ function drawRectLayout(product, sheetW, sheetL, scale, margin, ctx) {
     }
 
     // Add text info
+    const usedArea = (useRotated ? countRot : countNormal) * (product.width * product.length);
+    const totalArea = sheetW * sheetL;
+    const actualScrap = ((totalArea - usedArea) / totalArea) * 100;
+
     ctx.fillStyle = "black";
     ctx.font = "14px Arial";
     ctx.fillText(`Best Fit: ${useRotated ? "Rotated" : "Normal"}`, margin, margin - 5);
-    ctx.fillText(`Yield: ${useRotated ? countRot : countNormal} pcs`, margin + 150, margin - 5);
+    ctx.fillText(`Yield: ${useRotated ? countRot : countNormal} pcs`, margin + 180, margin - 5);
+    ctx.fillText(`Scrap: ${actualScrap.toFixed(1)}%`, margin + 300, margin - 5);
 }
 
 function drawCircleLayout(product, sheetW, sheetL, scale, margin, ctx) {
@@ -322,6 +326,7 @@ function drawCircleLayout(product, sheetW, sheetL, scale, margin, ctx) {
     const diameter = product.width; // Assuming width is diameter
     const cols = Math.floor(sheetW / diameter);
     const rows = Math.floor(sheetL / diameter);
+    const totalCount = cols * rows;
 
     ctx.fillStyle = "rgba(100, 200, 100, 0.5)";
     ctx.strokeStyle = "#4CAF50";
@@ -338,6 +343,17 @@ function drawCircleLayout(product, sheetW, sheetL, scale, margin, ctx) {
             ctx.stroke();
         }
     }
+
+    const radius = diameter / 2;
+    const singleArea = Math.PI * radius * radius;
+    const usedArea = totalCount * singleArea;
+    const totalArea = sheetW * sheetL;
+    const actualScrap = ((totalArea - usedArea) / totalArea) * 100;
+
+    ctx.fillStyle = "black";
+    ctx.font = "14px Arial";
+    ctx.fillText(`Yield: ${totalCount} pcs`, margin, margin - 5);
+    ctx.fillText(`Scrap: ${actualScrap.toFixed(1)}%`, margin + 120, margin - 5);
 }
 
 function drawTriangleLayout(product, sheetW, sheetL, scale, margin, ctx) {
@@ -421,8 +437,14 @@ function drawTriangleLayout(product, sheetW, sheetL, scale, margin, ctx) {
         }
     }
 
+    const singleArea = 0.5 * base * height;
+    const usedArea = totalCount * singleArea;
+    const totalArea = sheetW * sheetL;
+    const actualScrap = ((totalArea - usedArea) / totalArea) * 100;
+
     ctx.fillStyle = "black";
     ctx.font = "14px Arial";
     ctx.fillText(`View: Nested Strip Layout`, margin, margin - 5);
     ctx.fillText(`Yield: ${totalCount} pcs`, margin + 200, margin - 5);
+    ctx.fillText(`Scrap: ${actualScrap.toFixed(1)}%`, margin + 320, margin - 5);
 }
