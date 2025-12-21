@@ -43,5 +43,14 @@
         "length": 10,
         "thickness": 4,
         "weight": 45
+    },
+    {
+        "id": "p6",
+        "name": "Cromboloni SG",
+        "shape": "rectangle",
+        "width": 3,
+        "length": 42,
+        "thickness": 4.2,
+        "weight": 67
     }
 ]
