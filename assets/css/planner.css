@@ -108,14 +108,28 @@
     background: #d0d0d0;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
 @media screen and (max-width: 480px) {
     .desktop-only {
         display: none !important;
     }
 
-    #planner-table th:nth-child(1),
-    #planner-table td:nth-child(1) {
-        /* Product Name */
-        width: 40%;
+    #planner-table th,
+    #planner-table td {
+        padding: 6px 3px;
+        font-size: 11px;
+        /* Slightly smaller for mobile density */
     }
 }

@@ -99,8 +99,8 @@ function initializePlannerTable() {
             <td>
                 <input type="number" id="${qtyInputId}" class="planner-input" placeholder="0" oninput="updatePlannerCalculations()">
             </td>
-            <td class="desktop-only">${product.width} x ${product.length} (${product.shape})</td>
-            <td class="desktop-only">${product.thickness} mm</td>
+            <td>${product.width} x ${product.length} (${product.shape})</td>
+            <td>${product.thickness} mm</td>
             <td id="${yieldOutputId}">0</td> <!-- New Yield Column -->
             <td id="${areaOutputId}">0 cm²</td>
             <td id="${weightOutputId}">0 g</td>
