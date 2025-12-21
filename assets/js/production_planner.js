@@ -82,92 +82,94 @@ function initializePlannerTable() {
 
     if (isPlannerInitialized && tableBody.children.length > 0) return;
 
-    // Headers are now managed in index.html to prevent duplication/misalignment
-    // const headerRow = document.querySelector('#planner-table thead tr'); ... (Removed)
-
     tableBody.innerHTML = '';
 
-    plannerProducts.forEach((product, index) => {
-        const qtyInputId = `planner-qty-${index}`;
-        const yieldOutputId = `planner-yield-${index}`; // New
-        const areaOutputId = `planner-area-${index}`;
-        const weightOutputId = `planner-weight-${index}`;
-
+    // Create exactly 3 rows
+    for (let i = 0; i < 3; i++) {
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${product.name}</td>
             <td>
-                <input type="number" id="${qtyInputId}" class="planner-input" placeholder="0" oninput="updatePlannerCalculations()">
+                <select id="planner-select-${i}" class="planner-input" onchange="updatePlannerCalculations()">
+                    <option value="">-- Select Product --</option>
+                    ${plannerProducts.map(p => `<option value="${p.id}">${p.name}</option>`).join('')}
+                </select>
             </td>
-            <td>${product.width} x ${product.length} (${product.shape})</td>
-            <td>${product.thickness} mm</td>
-            <td id="${yieldOutputId}">0</td> <!-- New Yield Column -->
-            <td id="${areaOutputId}">0 cm²</td>
-            <td id="${weightOutputId}">0 g</td>
+            <td>
+                <input type="number" id="planner-qty-${i}" class="planner-input" placeholder="0" oninput="updatePlannerCalculations()">
+            </td>
+            <td id="planner-dim-${i}">-</td>
+            <td id="planner-thick-${i}">-</td>
+            <td id="planner-yield-${i}">0</td>
+            <td id="planner-area-${i}">0 cm²</td>
+            <td id="planner-weight-${i}">0 g</td>
             <td style="text-align: center;">
-                <button onclick="openLayoutModal(${index})" style="background:none; border:none; cursor:pointer; color:#5a3e2b; font-size: 16px;" title="View Layout">
+                <button id="planner-map-btn-${i}" onclick="openLayoutModalForRow(${i})" style="background:none; border:none; cursor:pointer; color:#5a3e2b; font-size: 16px; display:none;" title="View Layout">
                     <i class="fas fa-map"></i>
                 </button>
             </td>
         `;
         tableBody.appendChild(row);
-    });
+    }
 
     isPlannerInitialized = true;
 }
 
 // 2. Update Values Only (Run on Input)
-// 2. Update Values Only (Run on Input)
 function updatePlannerCalculations() {
     let totalWeight = 0;
     let totalArea = 0;
-    let totalVolume = 0; // Track volume to calculate avg density
+    let totalVolume = 0;
 
-    // Calculate Sheet Area once
     const sheetAreaSqCm = plannerSettings.sheetWidth * plannerSettings.sheetLength;
 
-    plannerProducts.forEach((product, index) => {
-        const qtyInputId = `planner-qty-${index}`;
-        const yieldOutputId = `planner-yield-${index}`;
-        const areaOutputId = `planner-area-${index}`;
-        const weightOutputId = `planner-weight-${index}`;
-
-        const qtyInput = document.getElementById(qtyInputId);
+    for (let i = 0; i < 3; i++) {
+        const select = document.getElementById(`planner-select-${i}`);
+        const qtyInput = document.getElementById(`planner-qty-${i}`);
+        const productId = select?.value;
         const qty = parseFloat(qtyInput?.value) || 0;
 
-        // --- NEW CALCULATION LOGIC ---
-        // 1. Quantity & Area
-        const singleArea = calculateArea(product.shape, product.width, product.length);
-        const netArea = singleArea * qty;
+        const product = plannerProducts.find(p => p.id === productId);
+        const mapBtn = document.getElementById(`planner-map-btn-${i}`);
 
-        // 2. Scrap Impact
-        // Gross Area is inflated by scrap rate
-        const grossArea = netArea / (1 - plannerSettings.scrapRate);
+        if (product) {
+            // Update Row Info
+            document.getElementById(`planner-dim-${i}`).textContent = `${product.width} x ${product.length} (${product.shape})`;
+            document.getElementById(`planner-thick-${i}`).textContent = `${product.thickness} mm`;
+            if (mapBtn) mapBtn.style.display = 'inline-block';
 
-        // 3. Weight Calculation (Based on Product Spec Weight)
-        // If "weight" exists in JSON, use it. Else fall back to density calc (but now we have weights).
-        const singleWeight = product.weight || 0;
-        const netWeight = singleWeight * qty;
-        const grossWeight = netWeight / (1 - plannerSettings.scrapRate); // Inflate weight for scrap too
+            // Calculations
+            const singleArea = calculateArea(product.shape, product.width, product.length);
+            const netArea = singleArea * qty;
+            const grossArea = netArea / (1 - plannerSettings.scrapRate);
 
-        totalWeight += grossWeight;
-        totalArea += grossArea;
+            const singleWeight = product.weight || 0;
+            const netWeight = singleWeight * qty;
+            const grossWeight = netWeight / (1 - plannerSettings.scrapRate);
 
-        // 4. Volume for Density Calculation
-        const volumeCm3 = grossArea * (product.thickness / 10);
-        totalVolume += volumeCm3;
+            totalWeight += grossWeight;
+            totalArea += grossArea;
 
-        // Calculate Yield per Sheet
-        let yieldPerSheet = 0;
-        if (singleArea > 0 && sheetAreaSqCm > 0) {
-            yieldPerSheet = (sheetAreaSqCm * (1 - plannerSettings.scrapRate)) / singleArea;
+            const volumeCm3 = grossArea * (product.thickness / 10);
+            totalVolume += volumeCm3;
+
+            let yieldPerSheet = 0;
+            if (singleArea > 0 && sheetAreaSqCm > 0) {
+                yieldPerSheet = (sheetAreaSqCm * (1 - plannerSettings.scrapRate)) / singleArea;
+            }
+
+            document.getElementById(`planner-yield-${i}`).textContent = yieldPerSheet.toFixed(1);
+            document.getElementById(`planner-area-${i}`).textContent = `${Math.round(grossArea)} cm²`;
+            document.getElementById(`planner-weight-${i}`).textContent = `${Math.round(grossWeight)} g`;
+        } else {
+            // Reset Row
+            document.getElementById(`planner-dim-${i}`).textContent = "-";
+            document.getElementById(`planner-thick-${i}`).textContent = "-";
+            document.getElementById(`planner-yield-${i}`).textContent = "0";
+            document.getElementById(`planner-area-${i}`).textContent = "0 cm²";
+            document.getElementById(`planner-weight-${i}`).textContent = "0 g";
+            if (mapBtn) mapBtn.style.display = 'none';
         }
-
-        // Update row outputs
-        document.getElementById(yieldOutputId).textContent = yieldPerSheet.toFixed(1);
-        document.getElementById(areaOutputId).textContent = `${Math.round(grossArea)} cm²`;
-        document.getElementById(weightOutputId).textContent = `${Math.round(grossWeight)} g`;
-    });
+    }
 
     // Update Totals
     let totalSheets = 0;
@@ -223,9 +225,6 @@ function updateSettingsFromInputs() {
     const scrapRate = parseFloat(document.getElementById('setting-scrap-rate').value) || 10;
     const processLoss = parseFloat(document.getElementById('setting-process-loss').value) || 0;
 
-    // Density is now calculated, not read from input, but we might want to keep the read logic just in case the UI changes back
-    // plannerSettings.doughDensity = density; // Deprecated
-
     plannerSettings.blockWeight = plannerSettings.blockWeight; // Keep existing value or default if not set elsewhere
     plannerSettings.sheetWidth = sheetWidth;
     plannerSettings.sheetLength = sheetLength;
@@ -263,23 +262,201 @@ window.onclick = function (event) {
     }
 }
 
-function openLayoutModal(index) {
+function openLayoutModalForRow(rowIndex) {
+    const select = document.getElementById(`planner-select-${rowIndex}`);
+    const productId = select?.value;
+    const product = plannerProducts.find(p => p.id === productId);
+    if (!product) return;
+
     const modal = document.getElementById('layout-modal');
     const canvas = document.getElementById('layout-canvas');
     if (!modal || !canvas) return;
     const ctx = canvas.getContext('2d');
 
-    // Refresh settings before drawing
     updateSettingsFromInputs();
 
-    const product = plannerProducts[index];
     document.getElementById('modal-product-title').textContent = `${product.name} Layout`;
     document.getElementById('modal-product-details').textContent =
         `Sheet: ${plannerSettings.sheetWidth}x${plannerSettings.sheetLength}cm | Product: ${product.width}x${product.length}cm (${product.shape})`;
 
     modal.style.display = "block";
-
     drawLayout(product, canvas, ctx);
+}
+
+function openMergedLayoutModal() {
+    const activeItems = [];
+    for (let i = 0; i < 3; i++) {
+        const select = document.getElementById(`planner-select-${i}`);
+        const qtyInput = document.getElementById(`planner-qty-${i}`);
+        const productId = select?.value;
+        const qty = parseFloat(qtyInput?.value) || 0;
+        const product = plannerProducts.find(p => p.id === productId);
+        if (product && qty > 0) {
+            activeItems.push({ product, qty });
+        }
+    }
+
+    if (activeItems.length === 0) {
+        alert("Pilih produk dan masukkan jumlah terlebih dahulu!");
+        return;
+    }
+
+    const modal = document.getElementById('layout-modal');
+    const canvas = document.getElementById('layout-canvas');
+    if (!modal || !canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    updateSettingsFromInputs();
+
+    document.getElementById('modal-product-title').textContent = `Merged Production Layout`;
+    document.getElementById('modal-product-details').textContent =
+        `Sheet: ${plannerSettings.sheetWidth}x${plannerSettings.sheetLength}cm | Combined Products: ${activeItems.length}`;
+
+    modal.style.display = "block";
+    drawMergedLayout(activeItems, canvas, ctx);
+}
+
+function drawMergedLayout(activeItems, canvas, ctx) {
+    const scale = 10;
+    const margin = 20;
+    const sheetW = plannerSettings.sheetWidth;
+    const sheetL = plannerSettings.sheetLength;
+
+    canvas.width = (sheetW * scale) + (margin * 2);
+    canvas.height = (sheetL * scale) + (margin * 2);
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "white";
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 2;
+    ctx.fillRect(margin, margin, sheetW * scale, sheetL * scale);
+    ctx.strokeRect(margin, margin, sheetW * scale, sheetL * scale);
+
+    // Initial free space: the whole sheet
+    let freeRects = [{ x: 0, y: 0, w: sheetW, h: sheetL }];
+
+    let colors = ["rgba(100, 200, 100, 0.5)", "rgba(100, 150, 250, 0.5)", "rgba(250, 150, 100, 0.5)", "rgba(250, 250, 100, 0.5)"];
+    let borderColors = ["#4CAF50", "#2196F3", "#FF9800", "#FBC02D"];
+
+    let productYieldsData = activeItems.map(item => ({ name: item.product.name, yield: 0 }));
+    let totalUsedAreaSqCm = 0;
+
+    // Standard Guillotine: Sort items by height descending
+    const sortedItems = [...activeItems].sort((a, b) => b.product.length - a.product.length);
+
+    sortedItems.forEach((item) => {
+        const p = item.product;
+        const color = colors[activeItems.indexOf(item) % colors.length];
+        const borderColor = borderColors[activeItems.indexOf(item) % borderColors.length];
+        const yieldData = productYieldsData.find(d => d.name === p.name);
+
+        ctx.fillStyle = color;
+        ctx.strokeStyle = borderColor;
+
+        let piecesToPlace = item.qty;
+
+        while (piecesToPlace > 0) {
+            // Find best-fit freeRect (Best Area Fit)
+            let bestRectIdx = -1;
+            let minArea = Infinity;
+
+            for (let i = 0; i < freeRects.length; i++) {
+                const fr = freeRects[i];
+                if (fr.w >= p.width && fr.h >= p.length) {
+                    const area = fr.w * fr.h;
+                    if (area < minArea) {
+                        minArea = area;
+                        bestRectIdx = i;
+                    }
+                }
+            }
+
+            if (bestRectIdx === -1) break; // No room in any free rectangle
+
+            const rect = freeRects.splice(bestRectIdx, 1)[0];
+            let placedW = 0;
+            let placedH = p.length;
+
+            if (p.shape === 'triangle') {
+                let i = 0;
+                while (piecesToPlace > 0) {
+                    const startX = (i * p.width / 2);
+                    if (startX + p.width > rect.w) break;
+
+                    drawSingleShape(ctx, p, margin + ((rect.x + startX) * scale), margin + (rect.y * scale), p.width * scale, p.length * scale, (i % 2 === 0));
+                    piecesToPlace--;
+                    i++;
+                    placedW = startX + p.width;
+                    yieldData.yield++;
+                }
+            } else {
+                while (piecesToPlace > 0) {
+                    if (placedW + p.width > rect.w) break;
+                    drawSingleShape(ctx, p, margin + ((rect.x + placedW) * scale), margin + (rect.y * scale), p.width * scale, p.length * scale);
+                    piecesToPlace--;
+                    placedW += p.width;
+                    yieldData.yield++;
+                }
+            }
+
+            if (placedW > 0) {
+                // Split rect: Right and Bottom
+                if (rect.w - placedW > 0) {
+                    freeRects.push({
+                        x: rect.x + placedW,
+                        y: rect.y,
+                        w: rect.w - placedW,
+                        h: placedH
+                    });
+                }
+                if (rect.h - placedH > 0) {
+                    freeRects.push({
+                        x: rect.x,
+                        y: rect.y + placedH,
+                        w: rect.w,
+                        h: rect.h - placedH
+                    });
+                }
+            }
+        }
+
+        const singleArea = calculateArea(p.shape, p.width, p.length);
+        totalUsedAreaSqCm += (singleArea * yieldData.yield);
+    });
+
+    const totalSheetArea = sheetW * sheetL;
+    const scrapPercent = totalSheetArea > 0 ? ((totalSheetArea - totalUsedAreaSqCm) / totalSheetArea) * 100 : 0;
+
+    document.getElementById('modal-layout-stats').innerHTML = `
+        <div style="flex: 1; text-align: left; padding-left: 10px;">${productYieldsData.map(d => `${d.name}: ${d.yield} pcs`).join(' | ')}</div>
+        <div style="padding-right: 10px;">Total Scrap: ${scrapPercent.toFixed(1)}%</div>
+    `;
+}
+
+function drawSingleShape(ctx, p, x, y, w, h, isTriangleUp = true) {
+    if (p.shape === 'triangle') {
+        ctx.beginPath();
+        if (isTriangleUp) {
+            ctx.moveTo(x, y + h);
+            ctx.lineTo(x + w / 2, y);
+            ctx.lineTo(x + w, y + h);
+        } else {
+            ctx.moveTo(x, y);
+            ctx.lineTo(x + w / 2, y + h);
+            ctx.lineTo(x + w, y);
+        }
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+    } else if (p.shape === 'circle') {
+        ctx.beginPath();
+        ctx.arc(x + w / 2, y + h / 2, w / 2, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+    } else {
+        ctx.fillRect(x, y, w, h);
+        ctx.strokeRect(x, y, w, h);
+    }
 }
 
 function drawLayout(product, canvas, ctx) {
@@ -401,15 +578,10 @@ function drawCircleLayout(product, sheetW, sheetL, scale, margin, ctx) {
 }
 
 function drawTriangleLayout(product, sheetW, sheetL, scale, margin, ctx) {
-    // Visualization for triangles (Strip method with Nesting)
-    // We assume cutting in strips of specific height (product.length)
-    // And alternating triangles (Up/Down) along the strip.
+    const base = product.width;
+    const height = product.length;
 
-    // Dimensions
-    const base = product.width;   // Base of triangle
-    const height = product.length; // Height of triangle
-
-    const numStrips = Math.floor(sheetL / height); // Strips along width
+    const numStrips = Math.floor(sheetL / height);
 
     ctx.fillStyle = "rgba(100, 200, 100, 0.5)";
     ctx.strokeStyle = "#4CAF50";
@@ -420,52 +592,32 @@ function drawTriangleLayout(product, sheetW, sheetL, scale, margin, ctx) {
     for (let s = 0; s < numStrips; s++) {
         const yBase = margin + (s * height * scale);
 
-        // x tracks the left-most point of the current triangle's bounding box logic
-        let currentX = 0;
-
-        // Unlike rectangles, triangles nest.
-        // Triangle 1 (UP):   (0, H) -> (B/2, 0) -> (B, H)
-        // Triangle 2 (DOWN): (B/2, 0) -> (B, H) -> (1.5B, 0)
-        // Triangle 3 (UP):   (B, H) -> (1.5B, 0) -> (2B, H)
-        // Notice the pattern: Each new triangle advances by B/2.
-
         let i = 0;
         while (true) {
             const isUp = (i % 2 === 0);
-
-            // Calculate coordinates for the 3 points
-            let x1, y1, x2, y2, x3, y3;
-
-            // The "start" X for this triangle index
-            // i=0: start 0. i=1: start 0.5B. i=2: start 1.0B
             const startX = (i * base / 2);
 
-            // Check if this triangle fits in the sheet width
             if (startX + base > sheetW) break;
 
+            let x1, y1, x2, y2, x3, y3;
             if (isUp) {
-                // Point Up (Base at bottom) (Visual invert because canvas Y connects top-down)
-                // Actually: "Point Up" usually means tip at top, base at bottom.
-                // In Canvas Y: Top is 0. 
-                // Let's draw: Base at yBase + H, Tip at yBase.
                 x1 = margin + (startX * scale);
-                y1 = yBase + (height * scale); // Bottom Left
+                y1 = yBase + (height * scale);
 
                 x2 = margin + ((startX + (base / 2)) * scale);
-                y2 = yBase; // Top Tip
+                y2 = yBase;
 
                 x3 = margin + ((startX + base) * scale);
-                y3 = yBase + (height * scale); // Bottom Right
+                y3 = yBase + (height * scale);
             } else {
-                // Point Down (Tip at bottom, Base at top)
                 x1 = margin + (startX * scale);
-                y1 = yBase; // Top Left
+                y1 = yBase;
 
                 x2 = margin + ((startX + (base / 2)) * scale);
-                y2 = yBase + (height * scale); // Bottom Tip
+                y2 = yBase + (height * scale);
 
                 x3 = margin + ((startX + base) * scale);
-                y3 = yBase; // Top Right
+                y3 = yBase;
             }
 
             ctx.beginPath();
@@ -481,7 +633,6 @@ function drawTriangleLayout(product, sheetW, sheetL, scale, margin, ctx) {
         }
     }
 
-    // Update HTML Stats Bar
     const singleArea = 0.5 * base * height;
     const usedArea = totalCount * singleArea;
     const totalArea = sheetW * sheetL;
@@ -496,24 +647,27 @@ function drawTriangleLayout(product, sheetW, sheetL, scale, margin, ctx) {
 
 // Auto-Adjust Helper (Global Scope)
 window.autoAdjustDimension = function (target) {
-    // 1. Calculate Total Required Gross Area
     let totalRequiredArea = 0;
-    plannerProducts.forEach((product, index) => {
-        const qtyInput = document.getElementById(`planner-qty-${index}`);
+    for (let i = 0; i < 3; i++) {
+        const select = document.getElementById(`planner-select-${i}`);
+        const qtyInput = document.getElementById(`planner-qty-${i}`);
+        const productId = select?.value;
         const qty = parseFloat(qtyInput?.value) || 0;
+        const product = plannerProducts.find(p => p.id === productId);
 
-        const singleArea = calculateArea(product.shape, product.width, product.length);
-        const netArea = singleArea * qty;
-        const grossArea = netArea / (1 - plannerSettings.scrapRate);
-        totalRequiredArea += grossArea;
-    });
+        if (product) {
+            const singleArea = calculateArea(product.shape, product.width, product.length);
+            const netArea = singleArea * qty;
+            const grossArea = netArea / (1 - plannerSettings.scrapRate);
+            totalRequiredArea += grossArea;
+        }
+    }
 
     if (totalRequiredArea <= 0) {
-        alert("Please enter quantities first!");
+        alert("Ikuti petunjuk penggunaan yang diberikan, jika ingin mendapatkan hasil yang maksimal!");
         return;
     }
 
-    // 2. Solve for Target
     if (target === 'width') {
         const currentLength = plannerSettings.sheetLength || 1;
         const idealWidth = totalRequiredArea / currentLength;
@@ -524,7 +678,6 @@ window.autoAdjustDimension = function (target) {
         document.getElementById('setting-sheet-length').value = Math.round(idealLength);
     }
 
-    // 3. Update
     updateSettingsFromInputs();
     updatePlannerCalculations();
 }
