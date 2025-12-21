@@ -49,14 +49,15 @@
 .setting-col {
     display: flex;
     flex-direction: column;
-    width: 130px;
+    width: 100px;
+    align-items: center;
     /* Uniform width for all top-row items */
 }
 
 .setting-col-large {
     display: flex;
     flex-direction: column;
-    width: 150px;
+    width: 100px;
     /* Properly sized for dimensions */
 }
 
