@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Pacifico&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/planner.css">
 </head>
 
 <body>
@@ -204,27 +205,52 @@
             <p>Calculate efficiency based on surface area and thickness.</p>
 
             <!-- Settings Row -->
-            <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px; flex-wrap: wrap;">
-                <div style="display: flex; flex-direction: column; width: 18%; min-width: 80px;">
-                    <label style="font-size: 10px; color: #5a3e2b; margin-bottom: 4px;">Sheet Width (cm)</label>
-                    <input type="number" id="setting-sheet-width" value="165"
-                        style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #ccc; text-align: center;">
+            <!-- Settings Section -->
+            <div class="settings-container">
+
+                <!-- Row 1: General Parameters -->
+                <div class="settings-row">
+                    <div class="setting-col">
+                        <label class="setting-label">Total Batch Weight (g)</label>
+                        <input type="text" id="display-total-weight" class="setting-input" value="0" readonly>
+                    </div>
+                    <div class="setting-col">
+                        <label class="setting-label">Scrap Rate Weight (%)</label>
+                        <input type="number" id="setting-scrap-rate" class="setting-input" value="10">
+                    </div>
+                    <div class="setting-col">
+                        <label class="setting-label">Process Loss (%)</label>
+                        <input type="number" id="setting-process-loss" class="setting-input" value="0">
+                    </div>
+                    <div class="setting-col">
+                        <label class="setting-label">Avg Density (g/cm³)</label>
+                        <input type="number" id="setting-density" class="setting-input" value="0" readonly>
+                    </div>
                 </div>
-                <div style="display: flex; flex-direction: column; width: 18%; min-width: 80px;">
-                    <label style="font-size: 10px; color: #5a3e2b; margin-bottom: 4px;">Sheet Length (cm)</label>
-                    <input type="number" id="setting-sheet-length" value="25"
-                        style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #ccc; text-align: center;">
+
+                <!-- Row 2: Sheet Dimensions -->
+                <div class="settings-group-box">
+                    <div class="setting-col-large">
+                        <label class="setting-label" style="font-weight: bold;">Sheet Width (cm)</label>
+                        <div style="display: flex; flex-direction: column; gap: 4px; align-items: center;">
+                            <input type="number" id="setting-sheet-width" class="setting-input" value="165">
+                            <button onclick="autoAdjustDimension('width')" title="Auto-Calc Width" class="auto-btn">
+                                Auto <i class="fas fa-magic"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="setting-col-large">
+                        <label class="setting-label" style="font-weight: bold;">Sheet Length (cm)</label>
+                        <div style="display: flex; flex-direction: column; gap: 4px; align-items: center;">
+                            <input type="number" id="setting-sheet-length" class="setting-input" value="25">
+                            <button onclick="autoAdjustDimension('length')" title="Auto-Calc Length" class="auto-btn">
+                                Auto <i class="fas fa-magic"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div style="display: flex; flex-direction: column; width: 18%; min-width: 80px;">
-                    <label style="font-size: 10px; color: #5a3e2b; margin-bottom: 4px;">Scrap Rate Weight (%)</label>
-                    <input type="number" id="setting-scrap-rate" value="10"
-                        style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #ccc; text-align: center;">
-                </div>
-                <div style="display: flex; flex-direction: column; width: 18%; min-width: 80px;">
-                    <label style="font-size: 10px; color: #5a3e2b; margin-bottom: 4px;">Density (g/cm³)</label>
-                    <input type="number" id="setting-density" value="1.82" step="0.1"
-                        style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #ccc; text-align: center;">
-                </div>
+
             </div>
 
             <div id="planner-summary"
@@ -238,6 +264,11 @@
                 <div>
                     <div style="font-size: 12px; color: #f9e1c0;">Total Weight</div>
                     <div id="planner-total-weight" style="font-size: 18px; font-weight: bold;">0 g</div>
+                </div>
+                <div>
+                    <div style="font-size: 12px; color: #f9e1c0;">Mixer Weight (+Loss)</div>
+                    <div id="planner-recipe-weight" style="font-size: 18px; font-weight: bold; color: #ffeb3b;">0 g
+                    </div>
                 </div>
                 <div>
                     <div style="font-size: 12px; color: #f9e1c0;">Sheets Needed</div>
@@ -282,26 +313,28 @@
             <p id="modal-product-details" style="color: #666; font-size: 14px; margin-bottom: 20px;"></p>
 
             <div
-                style="background: #e0e0e0; padding: 20px; border-radius: 4px; overflow: auto; text-align: center; white-space: nowrap;">
+                style="background: #e0e0e0; padding: 20px; border-radius: 4px; overflow: auto; text-align: center; white-space: nowrap; margin-bottom: 15px;">
                 <canvas id="layout-canvas"
                     style="background: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: inline-block; vertical-align: middle;"></canvas>
             </div>
 
+            <!-- Stats Bar -->
+            <div id="modal-layout-stats"
+                style="display: flex; justify-content: space-around; background: #f8f9fa; padding: 10px; border-radius: 4px; margin-bottom: 15px; border: 1px solid #dee2e6; color: #333; font-weight: 500; font-size: 14px;">
+                <!-- Populated by JS -->
+            </div>
+
+            <!-- Legend -->
             <div
-                style="margin-top: 15px; display: flex; gap: 20px; justify-content: center; font-size: 14px; color: #333;">
+                style="display: flex; justify-content: center; gap: 20px; font-size: 14px; color: #333; margin-bottom: 10px;">
                 <div style="display: flex; align-items: center; gap: 5px;">
                     <span
-                        style="width: 15px; height: 15px; background: rgba(100, 200, 100, 0.5); border: 1px solid #4CAF50; display: inline-block;"></span>
+                        style="display: inline-block; width: 12px; height: 12px; background: rgba(100, 200, 100, 0.7); border: 1px solid #4CAF50;"></span>
                     Product
                 </div>
                 <div style="display: flex; align-items: center; gap: 5px;">
                     <span
-                        style="width: 15px; height: 15px; background: rgba(255, 100, 100, 0.2); border: 1px solid #f44336; display: inline-block;"></span>
-                    Scrap
-                </div>
-                <div style="display: flex; align-items: center; gap: 5px;">
-                    <span
-                        style="width: 15px; height: 15px; background: white; border: 1px solid #000; display: inline-block;"></span>
+                        style="display: inline-block; width: 12px; height: 12px; background: white; border: 1px solid #000;"></span>
                     Sheet
                 </div>
             </div>

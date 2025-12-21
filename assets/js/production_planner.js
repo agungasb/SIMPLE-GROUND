@@ -117,9 +117,11 @@ function initializePlannerTable() {
 }
 
 // 2. Update Values Only (Run on Input)
+// 2. Update Values Only (Run on Input)
 function updatePlannerCalculations() {
     let totalWeight = 0;
     let totalArea = 0;
+    let totalVolume = 0; // Track volume to calculate avg density
 
     // Calculate Sheet Area once
     const sheetAreaSqCm = plannerSettings.sheetWidth * plannerSettings.sheetLength;
@@ -133,42 +135,77 @@ function updatePlannerCalculations() {
         const qtyInput = document.getElementById(qtyInputId);
         const qty = parseFloat(qtyInput?.value) || 0;
 
-        const result = calculateRow(product, qty);
-        totalWeight += result.weightGrams;
-        totalArea += result.grossAreaSqCm;
+        // --- NEW CALCULATION LOGIC ---
+        // 1. Quantity & Area
+        const singleArea = calculateArea(product.shape, product.width, product.length);
+        const netArea = singleArea * qty;
+
+        // 2. Scrap Impact
+        // Gross Area is inflated by scrap rate
+        const grossArea = netArea / (1 - plannerSettings.scrapRate);
+
+        // 3. Weight Calculation (Based on Product Spec Weight)
+        // If "weight" exists in JSON, use it. Else fall back to density calc (but now we have weights).
+        const singleWeight = product.weight || 0;
+        const netWeight = singleWeight * qty;
+        const grossWeight = netWeight / (1 - plannerSettings.scrapRate); // Inflate weight for scrap too
+
+        totalWeight += grossWeight;
+        totalArea += grossArea;
+
+        // 4. Volume for Density Calculation
+        const volumeCm3 = grossArea * (product.thickness / 10);
+        totalVolume += volumeCm3;
 
         // Calculate Yield per Sheet
-        // Yield = (Sheet Area * (1 - Scrap)) / Single Product Area
-        // This is strictly simpler: How many full products fit?
-        // Actually, professional yield is usually: How many products can I cut from this sheet?
-        // Yield = (Sheet Area * (1 - ScrapRate)) / Product Area
         let yieldPerSheet = 0;
-        if (result.singleAreaSqCm > 0 && sheetAreaSqCm > 0) {
-            yieldPerSheet = (sheetAreaSqCm * (1 - plannerSettings.scrapRate)) / result.singleAreaSqCm;
+        if (singleArea > 0 && sheetAreaSqCm > 0) {
+            yieldPerSheet = (sheetAreaSqCm * (1 - plannerSettings.scrapRate)) / singleArea;
         }
 
         // Update row outputs
         document.getElementById(yieldOutputId).textContent = yieldPerSheet.toFixed(1);
-        document.getElementById(areaOutputId).textContent = `${Math.round(result.grossAreaSqCm)} cm²`;
-        document.getElementById(weightOutputId).textContent = `${Math.round(result.weightGrams)} g`;
+        document.getElementById(areaOutputId).textContent = `${Math.round(grossArea)} cm²`;
+        document.getElementById(weightOutputId).textContent = `${Math.round(grossWeight)} g`;
     });
 
     // Update Totals
-    // Total Sheets = Total Gross Area / Sheet Area
-    // (Note: This is mathematically equivalent to Weight / BlockWeight if consistency is 100%, but we calculate from Area now)
     let totalSheets = 0;
     if (sheetAreaSqCm > 0) {
         totalSheets = totalArea / sheetAreaSqCm;
     }
 
+    // Update Bottom Summary
     document.getElementById('planner-total-area').textContent = `${Math.round(totalArea)} cm²`;
     document.getElementById('planner-total-weight').textContent = `${Math.round(totalWeight)} g`;
+
+    // Calculate Recipe Weight (Table Weight + Process Loss)
+    const recipeWeight = totalWeight / (1 - plannerSettings.processLoss);
+    document.getElementById('planner-recipe-weight').textContent = `${Math.round(recipeWeight)} g`;
+
     document.getElementById('planner-total-blocks').textContent = `${totalSheets.toFixed(3)} sheets`;
+
+    // Update Top Displays (Calculated Fields)
+    const topDisplayWeight = document.getElementById('display-total-weight');
+    if (topDisplayWeight) {
+        topDisplayWeight.value = Math.round(totalWeight);
+    }
+
+    const topDisplayDensity = document.getElementById('setting-density');
+    if (topDisplayDensity) {
+        // Avg Density = Total Weight / Total Volume
+        if (totalVolume > 0) {
+            const avgDensity = totalWeight / totalVolume;
+            topDisplayDensity.value = avgDensity.toFixed(2);
+        } else {
+            topDisplayDensity.value = "0.00";
+        }
+    }
 }
 
 // 3. Initialize Settings Listeners
 function initializeSettingsListeners() {
-    ['setting-sheet-width', 'setting-sheet-length', 'setting-scrap-rate', 'setting-density'].forEach(id => {
+    ['setting-sheet-width', 'setting-sheet-length', 'setting-scrap-rate', 'setting-process-loss', 'setting-density'].forEach(id => {
         const el = document.getElementById(id);
         if (el) {
             el.addEventListener('input', () => {
@@ -184,13 +221,17 @@ function updateSettingsFromInputs() {
     const sheetWidth = parseFloat(document.getElementById('setting-sheet-width').value) || 40;
     const sheetLength = parseFloat(document.getElementById('setting-sheet-length').value) || 60;
     const scrapRate = parseFloat(document.getElementById('setting-scrap-rate').value) || 10;
-    const density = parseFloat(document.getElementById('setting-density').value) || 1.1;
+    const processLoss = parseFloat(document.getElementById('setting-process-loss').value) || 0;
+
+    // Density is now calculated, not read from input, but we might want to keep the read logic just in case the UI changes back
+    // plannerSettings.doughDensity = density; // Deprecated
 
     plannerSettings.blockWeight = plannerSettings.blockWeight; // Keep existing value or default if not set elsewhere
     plannerSettings.sheetWidth = sheetWidth;
     plannerSettings.sheetLength = sheetLength;
     plannerSettings.scrapRate = scrapRate / 100; // Convert to decimal
-    plannerSettings.doughDensity = density;
+    plannerSettings.processLoss = processLoss / 100; // Convert to decimal
+    plannerSettings.doughDensity = 0; // Will be calculated
 }
 
 // Main entry point called by app.js
@@ -309,16 +350,17 @@ function drawRectLayout(product, sheetW, sheetL, scale, margin, ctx) {
         }
     }
 
-    // Add text info
+    // Update HTML Stats Bar
     const usedArea = (useRotated ? countRot : countNormal) * (product.width * product.length);
     const totalArea = sheetW * sheetL;
     const actualScrap = ((totalArea - usedArea) / totalArea) * 100;
+    const yieldCount = useRotated ? countRot : countNormal;
 
-    ctx.fillStyle = "black";
-    ctx.font = "14px Arial";
-    ctx.fillText(`Best Fit: ${useRotated ? "Rotated" : "Normal"}`, margin, margin - 5);
-    ctx.fillText(`Yield: ${useRotated ? countRot : countNormal} pcs`, margin + 180, margin - 5);
-    ctx.fillText(`Scrap: ${actualScrap.toFixed(1)}%`, margin + 300, margin - 5);
+    document.getElementById('modal-layout-stats').innerHTML = `
+        <div>Layout: ${useRotated ? "Rotated" : "Normal"}</div>
+        <div>Yield: ${yieldCount} pcs</div>
+        <div>Yield Scrap: ${actualScrap.toFixed(1)}%</div>
+    `;
 }
 
 function drawCircleLayout(product, sheetW, sheetL, scale, margin, ctx) {
@@ -344,16 +386,18 @@ function drawCircleLayout(product, sheetW, sheetL, scale, margin, ctx) {
         }
     }
 
+    // Update HTML Stats Bar
     const radius = diameter / 2;
     const singleArea = Math.PI * radius * radius;
     const usedArea = totalCount * singleArea;
     const totalArea = sheetW * sheetL;
     const actualScrap = ((totalArea - usedArea) / totalArea) * 100;
 
-    ctx.fillStyle = "black";
-    ctx.font = "14px Arial";
-    ctx.fillText(`Yield: ${totalCount} pcs`, margin, margin - 5);
-    ctx.fillText(`Scrap: ${actualScrap.toFixed(1)}%`, margin + 120, margin - 5);
+    document.getElementById('modal-layout-stats').innerHTML = `
+        <div>Layout: Grid Packing</div>
+        <div>Yield: ${totalCount} pcs</div>
+        <div>Yield Scrap: ${actualScrap.toFixed(1)}%</div>
+    `;
 }
 
 function drawTriangleLayout(product, sheetW, sheetL, scale, margin, ctx) {
@@ -437,14 +481,50 @@ function drawTriangleLayout(product, sheetW, sheetL, scale, margin, ctx) {
         }
     }
 
+    // Update HTML Stats Bar
     const singleArea = 0.5 * base * height;
     const usedArea = totalCount * singleArea;
     const totalArea = sheetW * sheetL;
     const actualScrap = ((totalArea - usedArea) / totalArea) * 100;
 
-    ctx.fillStyle = "black";
-    ctx.font = "14px Arial";
-    ctx.fillText(`View: Nested Strip Layout`, margin, margin - 5);
-    ctx.fillText(`Yield: ${totalCount} pcs`, margin + 200, margin - 5);
-    ctx.fillText(`Scrap: ${actualScrap.toFixed(1)}%`, margin + 320, margin - 5);
+    document.getElementById('modal-layout-stats').innerHTML = `
+        <div>Layout: Nested Strip</div>
+        <div>Yield: ${totalCount} pcs</div>
+        <div>Yield Scrap: ${actualScrap.toFixed(1)}%</div>
+    `;
+}
+
+// Auto-Adjust Helper (Global Scope)
+window.autoAdjustDimension = function (target) {
+    // 1. Calculate Total Required Gross Area
+    let totalRequiredArea = 0;
+    plannerProducts.forEach((product, index) => {
+        const qtyInput = document.getElementById(`planner-qty-${index}`);
+        const qty = parseFloat(qtyInput?.value) || 0;
+
+        const singleArea = calculateArea(product.shape, product.width, product.length);
+        const netArea = singleArea * qty;
+        const grossArea = netArea / (1 - plannerSettings.scrapRate);
+        totalRequiredArea += grossArea;
+    });
+
+    if (totalRequiredArea <= 0) {
+        alert("Please enter quantities first!");
+        return;
+    }
+
+    // 2. Solve for Target
+    if (target === 'width') {
+        const currentLength = plannerSettings.sheetLength || 1;
+        const idealWidth = totalRequiredArea / currentLength;
+        document.getElementById('setting-sheet-width').value = Math.round(idealWidth);
+    } else if (target === 'length') {
+        const currentWidth = plannerSettings.sheetWidth || 1;
+        const idealLength = totalRequiredArea / currentWidth;
+        document.getElementById('setting-sheet-length').value = Math.round(idealLength);
+    }
+
+    // 3. Update
+    updateSettingsFromInputs();
+    updatePlannerCalculations();
 }
