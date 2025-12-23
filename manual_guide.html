@@ -118,10 +118,17 @@
         <h1>Panduan Penggunaan Aplikasi</h1>
 
         <h2>Tentang Aplikasi Ini</h2>
-        <p>Aplikasi <strong>Coffee Town Bakery</strong> dirancang untuk membantu Anda mengelola produksi donat dan
-            penskalaan
-            resep dengan lebih efisien. Aplikasi ini terdiri dari tiga modul utama: Kalkulator Produksi, Penskala Resep,
-            dan Pengaturan Skor Donat.</p>
+        <p>Aplikasi <strong>Coffee Town Bakery</strong> adalah platform manajemen operasional bakery yang dirancang
+            untuk meningkatkan akurasi dan efisiensi produksi. Aplikasi ini terdiri dari tiga modul profesional utama:
+        </p>
+        <ul>
+            <li><strong>Production Calculator:</strong> Otomatisasi distribusi pesanan donat (Simple Ground) dan
+                agregasi kebutuhan bahan croissant berdasarkan pesanan WhatsApp.</li>
+            <li><strong>Production Planner:</strong> Optimasi dimensi lembaran adonan (sheet) menggunakan perhitungan
+                berat-massa jenis dan visualisasi layout untuk meminimalkan waste.</li>
+            <li><strong>Recipe Scaler:</strong> Penskalaan resep multi-departemen yang akurat dengan instruksi langkah
+                demi langkah.</li>
+        </ul>
 
         <h2>Navigasi Utama</h2>
         <h3>Pemilihan Departemen</h3>
@@ -281,10 +288,17 @@
 
         <h3>Fitur Utama:</h3>
         <ul>
-            <li><strong>Density Lock (Gembok Massa Jenis):</strong>
-                Secara default, aplikasi menghitung massa jenis otomatis berdasarkan spesifikasi produk. Jika data
-                produk tidak akurat, Anda bisa menekan tombol <strong>Gembok (🔓)</strong> untuk memasukkan massa jenis
-                secara manual (misal: 1.1) agar perhitungan "Auto" tetap akurat.
+            <li><strong>Density Lock (Gembok Massa Jenis) & Quality Control:</strong>
+                Secara default, aplikasi menghitung massa jenis otomatis berdasarkan spesifikasi produk. Fitur ini
+                berfungsi sebagai alat <strong>Quality Control (QC)</strong>:
+                <ul>
+                    <li><strong>Deteksi Kesalahan Data:</strong> Saat gembok terbuka (🔓), perhatikan angka yang muncul.
+                        Jika massa jenis jauh dari standar (misal > 1.3), ini menandakan ada data produk yang tidak
+                        akurat (seperti berat yang terlalu berat untuk ukurannya).</li>
+                    <li><strong>Konsistensi Produksi:</strong> Dengan menekan tombol <strong>Gembok (🔒)</strong> dan
+                        memasukkan nilai standar manual (misal: 1.1), Anda memastikan hasil tombol "Auto" tetap akurat
+                        sesuai dengan massa adonan nyata di tangan Anda.</li>
+                </ul>
             </li>
             <li><strong>Initial Trim (%):</strong>
                 Mencakup bagian pinggiran adonan yang dibuang saat merapikan sheet menjadi persegi bersih. Nilai ini
