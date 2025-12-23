@@ -10,7 +10,8 @@ let plannerSettings = {
     sheetLength: 60,   // cm
     scrapRate: 0.10,   // 10% default
     initialTrim: 0.0,   // 0% default
-    processLoss: 0.03   // 3% default
+    processLoss: 0.03,  // 3% default
+    isDensityLocked: false
 };
 
 // Placeholder data - initially empty, will be loaded from JSON
@@ -120,6 +121,7 @@ function initializePlannerTable() {
 function updatePlannerCalculations() {
     let totalWeight = 0;
     let totalArea = 0;
+    let totalNetProductArea = 0;
     let totalVolume = 0;
 
     const sheetAreaSqCm = plannerSettings.sheetWidth * plannerSettings.sheetLength;
@@ -140,28 +142,29 @@ function updatePlannerCalculations() {
             if (mapBtn) mapBtn.style.display = 'inline-block';
 
             // Calculations
-            const singleArea = calculateArea(product.shape, product.width, product.length);
-            const netArea = singleArea * qty;
-            const grossArea = netArea / (1 - plannerSettings.scrapRate);
+            const singleNetArea = calculateArea(product.shape, product.width, product.length);
+            const netAreaTotal = singleNetArea * qty;
+            const grossAreaTotal = netAreaTotal / (1 - plannerSettings.scrapRate);
 
             const singleWeight = product.weight || 0;
-            const netWeight = singleWeight * qty;
-            const grossWeight = netWeight / (1 - plannerSettings.scrapRate);
+            const netWeightTotal = singleWeight * qty;
+            const grossWeightTotal = netWeightTotal / (1 - plannerSettings.scrapRate);
 
-            totalWeight += grossWeight;
-            totalArea += grossArea;
+            totalWeight += grossWeightTotal;
+            totalArea += grossAreaTotal;
+            totalNetProductArea += netAreaTotal;
 
-            const volumeCm3 = grossArea * (product.thickness / 10);
+            const volumeCm3 = grossAreaTotal * (product.thickness / 10);
             totalVolume += volumeCm3;
 
             let yieldPerSheet = 0;
-            if (singleArea > 0 && sheetAreaSqCm > 0) {
-                yieldPerSheet = (sheetAreaSqCm * (1 - plannerSettings.scrapRate)) / singleArea;
+            if (singleNetArea > 0 && sheetAreaSqCm > 0) {
+                yieldPerSheet = (sheetAreaSqCm * (1 - plannerSettings.scrapRate)) / singleNetArea;
             }
 
             document.getElementById(`planner-yield-${i}`).textContent = yieldPerSheet.toFixed(1);
-            document.getElementById(`planner-area-${i}`).textContent = `${Math.round(grossArea)} cm²`;
-            document.getElementById(`planner-weight-${i}`).textContent = `${Math.round(grossWeight)} g`;
+            document.getElementById(`planner-area-${i}`).textContent = `${Math.round(grossAreaTotal)} cm²`;
+            document.getElementById(`planner-weight-${i}`).textContent = `${Math.round(grossWeightTotal)} g`;
         } else {
             // Reset Row
             document.getElementById(`planner-dim-${i}`).textContent = "-";
@@ -179,12 +182,9 @@ function updatePlannerCalculations() {
         totalSheets = totalArea / sheetAreaSqCm;
     }
 
-    // NEW: Calculate Total Net Area (Gross Area decreased by Initial Trim %)
-    const totalNetArea = totalArea * (1 - plannerSettings.initialTrim);
-
     // Update Bottom Summary
     document.getElementById('planner-total-area').textContent = `${Math.round(totalArea)} cm²`;
-    document.getElementById('planner-total-net-area').textContent = `${Math.round(totalNetArea)} cm²`;
+    document.getElementById('planner-total-net-area').textContent = `${Math.round(totalNetProductArea)} cm²`;
     document.getElementById('planner-total-weight').textContent = `${Math.round(totalWeight)} g`;
 
     // Calculate Recipe Weight (Table Weight + Initial Trim + Process Loss)
@@ -200,11 +200,12 @@ function updatePlannerCalculations() {
     }
 
     const topDisplayDensity = document.getElementById('setting-density');
-    if (topDisplayDensity) {
+    if (topDisplayDensity && !plannerSettings.isDensityLocked) {
         // Avg Density = Total Weight / Total Volume
         if (totalVolume > 0) {
             const avgDensity = totalWeight / totalVolume;
             topDisplayDensity.value = avgDensity.toFixed(2);
+            plannerSettings.doughDensity = avgDensity;
         } else {
             topDisplayDensity.value = "0.00";
         }
@@ -223,6 +224,29 @@ function initializeSettingsListeners() {
             });
         }
     });
+
+    // Density Lock Listener
+    const lockBtn = document.getElementById('btn-lock-density');
+    if (lockBtn) {
+        lockBtn.addEventListener('click', () => {
+            plannerSettings.isDensityLocked = !plannerSettings.isDensityLocked;
+            const densityInput = document.getElementById('setting-density');
+            const lockIcon = document.getElementById('density-lock-icon');
+
+            if (plannerSettings.isDensityLocked) {
+                densityInput.removeAttribute('readonly');
+                densityInput.style.backgroundColor = '#fff';
+                lockIcon.classList.remove('fa-unlock');
+                lockIcon.classList.add('fa-lock');
+            } else {
+                densityInput.setAttribute('readonly', true);
+                densityInput.style.backgroundColor = ''; // Reverts to CSS default (#ffeb3b for readonly)
+                lockIcon.classList.remove('fa-lock');
+                lockIcon.classList.add('fa-unlock');
+                updatePlannerCalculations(); // Recalculate auto density
+            }
+        });
+    }
 }
 
 function updateSettingsFromInputs() {
@@ -231,6 +255,7 @@ function updateSettingsFromInputs() {
     const scrapRate = parseFloat(document.getElementById('setting-scrap-rate').value) || 10;
     const processLoss = parseFloat(document.getElementById('setting-process-loss').value) || 0;
     const initialTrim = parseFloat(document.getElementById('setting-initial-trim').value) || 0;
+    const manualDensity = parseFloat(document.getElementById('setting-density').value) || 1.1;
 
     plannerSettings.blockWeight = plannerSettings.blockWeight; // Keep existing value or default if not set elsewhere
     plannerSettings.sheetWidth = sheetWidth;
@@ -238,7 +263,10 @@ function updateSettingsFromInputs() {
     plannerSettings.scrapRate = scrapRate / 100; // Convert to decimal
     plannerSettings.processLoss = processLoss / 100; // Convert to decimal
     plannerSettings.initialTrim = initialTrim / 100; // Convert to decimal
-    plannerSettings.doughDensity = 0; // Will be calculated
+
+    if (plannerSettings.isDensityLocked) {
+        plannerSettings.doughDensity = manualDensity;
+    }
 }
 
 // Main entry point called by app.js
@@ -655,7 +683,10 @@ function drawTriangleLayout(product, sheetW, sheetL, scale, margin, ctx) {
 
 // Auto-Adjust Helper (Global Scope)
 window.autoAdjustDimension = function (target) {
+    let totalGrossWeight = 0;
     let totalGrossArea = 0;
+    let totalVolume = 0;
+
     for (let i = 0; i < 3; i++) {
         const select = document.getElementById(`planner-select-${i}`);
         const qtyInput = document.getElementById(`planner-qty-${i}`);
@@ -664,27 +695,39 @@ window.autoAdjustDimension = function (target) {
         const product = plannerProducts.find(p => p.id === productId);
 
         if (product) {
-            const singleArea = calculateArea(product.shape, product.width, product.length);
-            const netArea = singleArea * qty;
-            const grossArea = netArea / (1 - plannerSettings.scrapRate);
-            totalGrossArea += grossArea;
+            const singleNetArea = calculateArea(product.shape, product.width, product.length);
+            const netAreaTotal = singleNetArea * qty;
+            const grossAreaTotal = netAreaTotal / (1 - plannerSettings.scrapRate);
+
+            const singleWeight = product.weight || 0;
+            const netWeightTotal = singleWeight * qty;
+            const grossWeightTotal = netWeightTotal / (1 - plannerSettings.scrapRate);
+
+            totalGrossWeight += grossWeightTotal;
+            totalGrossArea += grossAreaTotal;
+            totalVolume += grossAreaTotal * (product.thickness / 10);
         }
     }
 
-    const totalNetArea = totalGrossArea * (1 - plannerSettings.initialTrim);
-
-    if (totalNetArea <= 0) {
+    if (totalGrossWeight <= 0 || totalGrossArea <= 0) {
         alert("Ikuti petunjuk penggunaan yang diberikan, jika ingin mendapatkan hasil yang maksimal!");
         return;
     }
 
+    // Get current density from setting
+    const density = parseFloat(document.getElementById('setting-density')?.value) || plannerSettings.doughDensity;
+    const avgThickness = totalVolume / totalGrossArea; // in cm
+
+    // Formula: Area = Weight / (Density * Thick)
+    const targetArea = totalGrossWeight / (density * avgThickness);
+
     if (target === 'width') {
-        const currentLength = plannerSettings.sheetLength || 1;
-        const idealWidth = totalNetArea / currentLength;
+        const currentLength = parseFloat(document.getElementById('setting-sheet-length').value) || 1;
+        const idealWidth = targetArea / currentLength;
         document.getElementById('setting-sheet-width').value = Math.round(idealWidth);
     } else if (target === 'length') {
-        const currentWidth = plannerSettings.sheetWidth || 1;
-        const idealLength = totalNetArea / currentWidth;
+        const currentWidth = parseFloat(document.getElementById('setting-sheet-width').value) || 1;
+        const idealLength = targetArea / currentWidth;
         document.getElementById('setting-sheet-length').value = Math.round(idealLength);
     }
 

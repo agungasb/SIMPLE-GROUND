@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panduan Penggunaan Aplikasi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Pacifico&display=swap"
+        rel="stylesheet">
     <style>
         /* Basic styles from simple_ground.html for consistency */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: #333 url('https://fastly.picsum.photos/id/431/5000/3334.jpg?hmac=T2rL_gBDyJYpcr1Xm8Kv7L6bhwvmZS8nKT5w3ok58kA') no-repeat center center / cover; /* Generic background for debugging */
+            background: #333 url('https://fastly.picsum.photos/id/431/5000/3334.jpg?hmac=T2rL_gBDyJYpcr1Xm8Kv7L6bhwvmZS8nKT5w3ok58kA') no-repeat center center / cover;
+            /* Generic background for debugging */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -21,6 +24,7 @@
             padding-bottom: 60px;
             font-size: 0.85em;
         }
+
         .container {
             max-width: 800px;
             width: 90%;
@@ -34,6 +38,7 @@
             margin: 20px auto;
             font-size: 12px;
         }
+
         h1 {
             font-family: 'Pacifico', cursive;
             font-size: 28px;
@@ -41,6 +46,7 @@
             color: #f9e1c0;
             text-align: center;
         }
+
         h2 {
             font-family: 'Poppins', sans-serif;
             font-size: 22px;
@@ -49,33 +55,42 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.3);
             padding-bottom: 5px;
         }
+
         h3 {
             font-family: 'Poppins', sans-serif;
             font-size: 18px;
             margin-top: 15px;
             color: #ffdd99;
         }
-        p, ul, ol {
+
+        p,
+        ul,
+        ol {
             margin-bottom: 10px;
             line-height: 1.6;
             color: #e0e0e0;
         }
+
         li {
             margin-left: 20px;
             margin-bottom: 5px;
         }
+
         strong {
             color: #ffdd99;
         }
+
         a {
             color: #ffdd99;
             text-decoration: none;
             transition: color 0.3s ease-in-out;
         }
+
         a:hover {
             color: #ffbb66;
             text-decoration: underline;
         }
+
         .back-button {
             display: inline-block;
             margin-top: 20px;
@@ -90,27 +105,35 @@
             text-decoration: none;
             text-align: center;
         }
+
         .back-button:hover {
             background: #7a5a42;
             transform: scale(1.05);
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>Panduan Penggunaan Aplikasi</h1>
-        
+
         <h2>Tentang Aplikasi Ini</h2>
-        <p>Aplikasi <strong>Simple Ground</strong> dirancang untuk membantu Anda mengelola produksi donat dan penskalaan resep dengan lebih efisien. Aplikasi ini terdiri dari tiga modul utama: Kalkulator Produksi, Penskala Resep, dan Pengaturan Skor Donat.</p>
+        <p>Aplikasi <strong>Coffee Town Bakery</strong> dirancang untuk membantu Anda mengelola produksi donat dan
+            penskalaan
+            resep dengan lebih efisien. Aplikasi ini terdiri dari tiga modul utama: Kalkulator Produksi, Penskala Resep,
+            dan Pengaturan Skor Donat.</p>
 
         <h2>Navigasi Utama</h2>
         <h3>Pemilihan Departemen</h3>
-        <p>Di bagian atas aplikasi, Anda akan menemukan dropdown <strong>"Select Department"</strong>. Gunakan ini untuk beralih antara departemen yang berbeda, seperti "Simple Ground" (untuk produk donat) dan "Department Croissant". Setiap departemen memiliki set kalkulator dan resepnya sendiri.</p>
+        <p>Di bagian atas aplikasi, Anda akan menemukan dropdown <strong>"Select Department"</strong>. Gunakan ini untuk
+            beralih antara departemen yang berbeda, seperti "Simple Ground" (untuk produk donat) dan "Department
+            Croissant". Setiap departemen memiliki set kalkulator dan resepnya sendiri.</p>
 
         <h3>Formula Perhitungan</h3>
         <h4>1. Production Calculator (Kalkulator Produksi)</h4>
         <h5>Departemen Simple Ground (Donat)</h5>
-        <p>Modul ini mendistribusikan total pesanan donat ke berbagai outlet berdasarkan skor popularitas donat yang telah diatur. Berikut adalah formula yang digunakan:</p>
+        <p>Modul ini mendistribusikan total pesanan donat ke berbagai outlet berdasarkan skor popularitas donat yang
+            telah diatur. Berikut adalah formula yang digunakan:</p>
         <ul>
             <li><strong>Proporsi Skor Donat per Outlet:</strong>
                 <br><code>Proporsi = Skor Donat Individual / Total Skor Donat untuk Outlet</code>
@@ -118,11 +141,13 @@
             </li>
             <li><strong>Jumlah Donat (PCS) yang Didistribusikan:</strong>
                 <br><code>Donat Didistribusikan (PCS) = Total Pesanan Outlet * Proporsi</code>
-                <br>Ini adalah jumlah donat dalam satuan 'pcs' yang dialokasikan untuk produk donat tertentu di outlet tersebut.
+                <br>Ini adalah jumlah donat dalam satuan 'pcs' yang dialokasikan untuk produk donat tertentu di outlet
+                tersebut.
             </li>
             <li><strong>Jumlah Donat (Box) yang Didistribusikan:</strong>
                 <br><code>Donat Didistribusikan (Box) = Ceil(Donat Didistribusikan (PCS) / Donat per Box)</code>
-                <br>Hasil PCS dikonversi ke dalam kotak, dengan pembulatan ke atas untuk memastikan semua donat terdistribusi. (<code>Donat per Box</code> adalah 9).
+                <br>Hasil PCS dikonversi ke dalam kotak, dengan pembulatan ke atas untuk memastikan semua donat
+                terdistribusi. (<code>Donat per Box</code> adalah 9).
             </li>
             <li><strong>Total Donat (PCS) per Outlet:</strong>
                 <br><code>Total PCS per Outlet = Total Kotak per Outlet * Donat per Box</code>
@@ -130,23 +155,42 @@
             </li>
             <li><strong>Total Adonan yang Dibutuhkan:</strong>
                 <br><code>Total Adonan (Resep) = (Grand Total PCS * Berat per PCS) / Berat Dasar Resep Adonan</code>
-                <br>Ini menghitung berapa banyak resep adonan dasar yang dibutuhkan berdasarkan total keseluruhan donat (PCS) yang akan diproduksi. (<code>Berat per PCS</code> adalah 45 gram, <code>Berat Dasar Resep Adonan</code> adalah 1585 gram).
+                <br>Ini menghitung berapa banyak resep adonan dasar yang dibutuhkan berdasarkan total keseluruhan donat
+                (PCS) yang akan diproduksi. (<code>Berat per PCS</code> adalah 45 gram,
+                <code>Berat Dasar Resep Adonan</code> adalah 1585 gram).
             </li>
         </ul>
 
-        <h5>Departemen Croissant</h5>
-        <p>Kalkulator untuk departemen croissant bekerja secara berbeda. Ini menghitung total resep dan bahan baku yang dibutuhkan berdasarkan jumlah produk jadi (Baked dan Frozen) yang Anda masukkan.</p>
+        <h4>2. Production Planner (Perencana Produksi)</h4>
+        <p>Modul ini digunakan untuk menghitung efisiensi penggunaan lembaran adonan (sheet) berdasarkan berat, dimensi,
+            dan ketebalan produk.</p>
         <ul>
-            <li><strong>Perhitungan Resep:</strong>
-                <br>Aplikasi secara rekursif menghitung berapa banyak "resep" dari setiap komponen (misalnya, adonan, laminasi) yang diperlukan untuk menghasilkan jumlah produk akhir yang dimasukkan.
+            <li><strong>Total Gross Weight (Berat Kotor Total):</strong>
+                <br><code>Total Gross Weight = Σ (Berat Produk * Qty) / (1 - Scrap Rate %)</code>
+                <br>Ini adalah berat total adonan dalam "Rectangle Bersih" (setelah trim awal).
             </li>
-            <li><strong>Agregasi Bahan:</strong>
-                <br>Setelah mengetahui jumlah total untuk setiap resep (termasuk resep perantara), aplikasi menjumlahkan semua bahan dasar (seperti tepung, mentega, dll.) untuk memberikan ringkasan total bahan yang dibutuhkan.
+            <li><strong>Auto-Adjust Sheet Dimension (Perhitungan Otomatis Dimensi):</strong>
+                <br><code>Target Area = Total Gross Weight / (Density * (Thickness / 10))</code>
+                <br>Menggunakan rumus massa jenis untuk menentukan luas bidang yang dibutuhkan berdasarkan berat adonan.
+            </li>
+            <li><strong>Total Net Area:</strong>
+                <br><code>Total Net Area = Σ (Luas Produk Individual * Qty)</code>
+                <br>Luas bersih produk jadi (tanpa menyertakan scrap atau trim).
+            </li>
+            <li><strong>Mixer Weight (Berat Mixer):</strong>
+                <br><code>Mixer Weight = Total Gross Weight / (1 - Initial Trim %) / (1 - Process Loss %)</code>
+                <br>Menghitung berat total adonan yang harus disiapkan di mixer untuk menutupi kehilangan saat proses
+                dan pemotongan pinggiran (trim).
+            </li>
+            <li><strong>Sheets Needed (Kebutuhan Lembar):</strong>
+                <br><code>Sheets Needed = Total Gross Area / (Sheet Width * Sheet Length)</code>
+                <br>Indikator efisiensi; jika bernilai 1.000, maka seluruh produk pas dalam satu lembar.
             </li>
         </ul>
 
-        <h4>2. Recipe Scaler (Penskala Resep)</h4>
-        <p>Modul ini menyesuaikan jumlah bahan dalam resep berdasarkan faktor skala (multiplier) yang Anda masukkan. Formula yang digunakan sangat sederhana:</p>
+        <h4>3. Recipe Scaler (Penskala Resep)</h4>
+        <p>Modul ini menyesuaikan jumlah bahan dalam resep berdasarkan faktor skala (multiplier) yang Anda masukkan.
+            Formula yang digunakan sangat sederhana:</p>
         <ul>
             <li><strong>Jumlah Bahan yang Diskalakan:</strong>
                 <br><code>Jumlah Bahan Baru = Jumlah Bahan Asli * Multiplier</code>
@@ -156,21 +200,28 @@
 
         <h2>1. Production Calculator (Kalkulator Produksi)</h2>
         <h3>Departemen Simple Ground (Donat)</h3>
-        <p>Bagian ini membantu Anda mendistribusikan donat ke berbagai outlet berdasarkan total pesanan dan skor popularitas donat yang telah Anda atur.</p>
+        <p>Bagian ini membantu Anda mendistribusikan donat ke berbagai outlet berdasarkan total pesanan dan skor
+            popularitas donat yang telah Anda atur.</p>
         <ol>
-            <li><strong>Masukkan Total Pesanan:</strong> Pada setiap kolom outlet (Tiban, GP, MTC, Piayu, BA), masukkan jumlah total donat yang dipesan untuk outlet tersebut.</li>
+            <li><strong>Masukkan Total Pesanan:</strong> Pada setiap kolom outlet (Tiban, GP, MTC, Piayu, BA), masukkan
+                jumlah total donat yang dipesan untuk outlet tersebut.</li>
             <li><strong>Klik "CALCULATE":</strong> Setelah memasukkan semua pesanan, klik tombol "CALCULATE".</li>
             <li><strong>Lihat Hasil Distribusi:</strong>
                 <ul>
-                    <li>Tabel akan menampilkan distribusi donat (per box) untuk setiap produk donat di setiap outlet.</li>
-                    <li>Anda dapat menyesuaikan hasil pehitungan secara manual pada input di tabel hasil. Perubahan akan secara otomatis memperbarui total di bawah.</li>
+                    <li>Tabel akan menampilkan distribusi donat (per box) untuk setiap produk donat di setiap outlet.
+                    </li>
+                    <li>Anda dapat menyesuaikan hasil pehitungan secara manual pada input di tabel hasil. Perubahan akan
+                        secara otomatis memperbarui total di bawah.</li>
                     <li>Bagian bawah tabel akan menunjukkan:
                         <ul>
                             <li><strong>Total Boxes:</strong> Total kotak donat per outlet.</li>
                             <li><strong>Total PCS:</strong> Total donat (dalam satuan pcs) per outlet.</li>
-                            <li><strong>Grand Total Boxes:</strong> Total keseluruhan kotak donat dari semua outlet.</li>
-                            <li><strong>Grand Total PCS:</strong> Total keseluruhan donat (dalam satuan pcs) dari semua outlet.</li>
-                            <li><strong>Total Adonan:</strong> Jumlah resep adonan yang dibutuhkan berdasarkan total PCS dan berat dasar resep.</li>
+                            <li><strong>Grand Total Boxes:</strong> Total keseluruhan kotak donat dari semua outlet.
+                            </li>
+                            <li><strong>Grand Total PCS:</strong> Total keseluruhan donat (dalam satuan pcs) dari semua
+                                outlet.</li>
+                            <li><strong>Total Adonan:</strong> Jumlah resep adonan yang dibutuhkan berdasarkan total PCS
+                                dan berat dasar resep.</li>
                         </ul>
                     </li>
                 </ul>
@@ -178,35 +229,116 @@
         </ol>
 
         <h3>Departemen Croissant</h3>
-        <p>Kalkulator ini membantu Anda merencanakan produksi croissant dengan menghitung total bahan yang dibutuhkan.</p>
+        <p>Kalkulator ini membantu Anda merencanakan produksi croissant dengan menghitung total bahan yang dibutuhkan.
+            Fitur utama di sini adalah <strong>WhatsApp Order Parser</strong> yang mempercepat proses input data.</p>
+
+        <h4>Fitur Strategis: WhatsApp Order Parser</h4>
+        <p>Anda tidak perlu memasukkan jumlah satu per satu secara manual jika pesanan datang via WhatsApp. Fitur ini
+            dirancang untuk mengenali nama produk dan jumlahnya secara otomatis.</p>
         <ol>
-            <li><strong>Masukkan Jumlah Produk:</strong> Untuk setiap produk croissant, masukkan jumlah yang ingin Anda produksi di kolom "Baked" (matang) dan "Frozen" (beku).</li>
+            <li><strong>Salin & Tempel:</strong> Salin teks pesanan dari WhatsApp dan tempel ke dalam kotak teks yang
+                tersedia.</li>
+            <li><strong>Identifikasi Outlet:</strong> Parser akan mencari baris teks yang mengandung kata "Outlet" atau
+                nama outlet yang dikenal (seperti Tiban, GP, dll.) untuk mengelompokkan pesanan.</li>
+            <li><strong>Klik "Parse & Fill":</strong> Aplikasi akan memproses teks tersebut, menjumlahkan semua produk
+                yang sama, dan mengisi kolom input secara otomatis.</li>
+            <li><strong>Recap per Outlet:</strong> Di bawah tombol Calculate, Anda akan melihat rincian pesanan yang
+                dikelompokkan berdasarkan outlet asal untuk mempermudah verifikasi.</li>
+        </ol>
+
+        <h4>Langkah Manual:</h4>
+        <ol>
+            <li><strong>Masukkan Jumlah Produk:</strong> Jika tidak menggunakan parser, masukkan jumlah produk di kolom
+                "Baked" (matang) dan "Frozen" (beku) secara manual.</li>
             <li><strong>Klik "CALCULATE":</strong> Tombol ini akan memproses semua input Anda.</li>
-            <li><strong>Lihat Hasil Perhitungan:</strong> Hasilnya akan ditampilkan dalam tiga bagian yang dapat diperluas/diciutkan:
+            <li><strong>Lihat Hasil Perhitungan:</strong> Hasilnya akan ditampilkan dalam empat bagian:
                 <ul>
-                    <li><strong>Product Input Summary:</strong> Menampilkan ringkasan jumlah produk (dalam pcs) yang Anda masukkan.</li>
-                    <li><strong>Recipe Calculation Results:</strong> Merinci jumlah "resep" yang dibutuhkan untuk setiap komponen (misalnya, adonan, laminasi, dll.).</li>
-                    <li><strong>Ingredient Summary:</strong> Memberikan daftar total semua bahan baku yang diperlukan (misalnya, tepung, mentega) untuk seluruh produksi.</li>
+                    <li><strong>Recap per Outlet:</strong> Ringkasan pesanan asli berdasarkan pengirim/outlet.</li>
+                    <li><strong>Product Input Summary:</strong> Total gabungan jumlah produk (dalam pcs).</li>
+                    <li><strong>Recipe Calculation Results:</strong> Rincian jumlah "resep" per komponen.</li>
+                    <li><strong>Ingredient Summary:</strong> Daftar total semua bahan baku yang diperlukan.</li>
                 </ul>
             </li>
         </ol>
 
-        <h2>2. Recipe Scaler (Penskala Resep)</h2>
-        <p>Bagian ini memungkinkan Anda untuk menyesuaikan jumlah bahan dalam resep berdasarkan skala (multiplier) yang Anda inginkan.</p>
+        <h2>2. Production Planner (Perencana Produksi)</h2>
+        <p>Modul khusus untuk Departemen Croissant untuk merencanakan tata letak (layout) dan dimensi lembaran adonan
+            agar efisien.</p>
+
+        <h3>Alur Kerja (Workflow):</h3>
+        <ol>
+            <li><strong>Pilih Produk & Qty:</strong> Masukkan produk dan jumlah yang akan diproduksi dalam tabel
+                planner.</li>
+            <li><strong>Atur Dimensi Awal:</strong> Masukkan salah satu dimensi sheet (Lebar atau Panjang) yang Anda
+                inginkan (misal: Lebar 40cm).</li>
+            <li><strong>Gunakan Tombol Auto:</strong> Klik tombol <strong>"Auto"</strong> pada dimensi yang kosong.
+                Aplikasi akan menghitung dimensi ideal berdasarkan berat total adonan agar pas dalam 1 lembar (Sheets
+                Needed = 1.000).</li>
+            <li><strong>Cek Visualisasi Layout:</strong> Klik tombol <strong>"Map" (ikon peta)</strong> pada baris
+                produk atau tombol <strong>"Merge Layout"</strong> untuk melihat bagaimana produk akan disusun di atas
+                lembaran adonan.</li>
+        </ol>
+
+        <h3>Fitur Utama:</h3>
+        <ul>
+            <li><strong>Density Lock (Gembok Massa Jenis):</strong>
+                Secara default, aplikasi menghitung massa jenis otomatis berdasarkan spesifikasi produk. Jika data
+                produk tidak akurat, Anda bisa menekan tombol <strong>Gembok (🔓)</strong> untuk memasukkan massa jenis
+                secara manual (misal: 1.1) agar perhitungan "Auto" tetap akurat.
+            </li>
+            <li><strong>Initial Trim (%):</strong>
+                Mencakup bagian pinggiran adonan yang dibuang saat merapikan sheet menjadi persegi bersih. Nilai ini
+                tidak mempengaruhi layout, tapi akan menambah total adonan yang harus disiapkan di mixer.
+            </li>
+            <li><strong>Scrap Rate (%):</strong>
+                Mencakup sisa adonan di sela-sela potongan produk (terutama untuk bentuk segitiga atau lingkaran). Nilai
+                ini masuk dalam perhitungan dimensi sheet.
+            </li>
+            <li><strong>Visualizer Layout:</strong>
+                Menampilkan simulasi penempatan produk di atas sheet, termasuk perhitungan sisa (scrap) visual.
+            </li>
+            <li><strong>Merge Layout (Penggabungan Tata Letak):</strong>
+                Fitur ini memungkinkan Anda menggabungkan berbagai produk berbeda ke dalam satu lembar adonan yang sama
+                untuk meminimalkan sisa (waste).
+                <br><br>
+                <strong>Algoritma yang Digunakan:</strong>
+                Aplikasi menggunakan algoritma <strong>"Guillotine Bin Packing"</strong> dengan strategi <em>Best Area
+                    Fit</em>.
+                <ul>
+                    <li><strong>Proses Sortir:</strong> Produk diurutkan berdasarkan tinggi (panjang) secara menurun
+                        untuk memastikan produk terbesar ditempatkan terlebih dahulu.</li>
+                    <li><strong>Pembagian Ruang:</strong> Setiap kali produk ditempatkan, sisa ruang kosong akan
+                        dipotong secara horizontal dan vertikal (seperti pemotong Guillotine) menjadi kotak-kotak kosong
+                        baru yang siap diisi produk lain.</li>
+                    <li><strong>Optimalisasi:</strong> Algoritma akan mencari kotak kosong yang paling pas (luasnya
+                        paling mendekati) dengan produk yang akan dimasukkan untuk mengurangi celah kosong yang tidak
+                        perlu.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h2>3. Recipe Scaler (Penskala Resep)</h2>
+        <p>Bagian ini memungkinkan Anda untuk menyesuaikan jumlah bahan dalam resep berdasarkan skala (multiplier) yang
+            Anda inginkan.</p>
         <h3>Cara Menggunakan:</h3>
         <ol>
             <li><strong>Pilih Resep:</strong> Pilih resep yang ingin Anda skala dari dropdown "Choose a recipe".</li>
-            <li><strong>Masukkan Skala (Multiplier):</strong> Masukkan angka skala (misalnya, 2 untuk menggandakan resep, 0.5 untuk setengah resep) pada kolom "Enter multiplier".</li>
+            <li><strong>Masukkan Skala (Multiplier):</strong> Masukkan angka skala (misalnya, 2 untuk menggandakan
+                resep, 0.5 untuk setengah resep) pada kolom "Enter multiplier".</li>
             <li><strong>Klik "Scale Recipe":</strong> Klik tombol ini untuk melihat bahan-bahan yang diskala.</li>
-            <li><strong>Lihat Bahan yang Diskalakan:</strong> Tabel akan menampilkan setiap bahan dengan jumlah dan unit yang telah disesuaikan.</li>
-            <li><strong>Lihat Instruksi Resep:</strong> Di bawah tabel bahan, Anda akan menemukan instruksi langkah demi langkah untuk resep yang dipilih.</li>
+            <li><strong>Lihat Bahan yang Diskalakan:</strong> Tabel akan menampilkan setiap bahan dengan jumlah dan unit
+                yang telah disesuaikan.</li>
+            <li><strong>Lihat Instruksi Resep:</strong> Di bawah tabel bahan, Anda akan menemukan instruksi langkah demi
+                langkah untuk resep yang dipilih.</li>
         </ol>
 
         <h2>3. Settings (Pengaturan)</h2>
-        <p>Bagian ini memungkinkan Anda untuk mengatur skor popularitas untuk setiap produk donat di setiap outlet, yang digunakan oleh Production Calculator untuk distribusi.</p>
+        <p>Bagian ini memungkinkan Anda untuk mengatur skor popularitas untuk setiap produk donat di setiap outlet, yang
+            digunakan oleh Production Calculator untuk distribusi.</p>
         <h3>Cara Menggunakan:</h3>
         <ol>
-            <li><strong>Atur Skor Donat:</strong> Untuk setiap produk donat dan setiap outlet, masukkan skor antara 0-5 (atau nilai fleksibel jika diaktifkan).
+            <li><strong>Atur Skor Donat:</strong> Untuk setiap produk donat dan setiap outlet, masukkan skor antara 0-5
+                (atau nilai fleksibel jika diaktifkan).
                 <ul>
                     <li><strong>Sistem Penilaian (0-5):</strong>
                         <ul>
@@ -223,15 +355,18 @@
             <li><strong>Mode Penilaian Fleksibel (0-Infinity):</strong>
                 <ul>
                     <li>Anda dapat mengaktifkan "Flexible Scoring (0-Infinity)" menggunakan tombol toggle.</li>
-                    <li>Jika diaktifkan, Anda dapat memasukkan nilai numerik positif apa pun (termasuk 0) sebagai skor.</li>
+                    <li>Jika diaktifkan, Anda dapat memasukkan nilai numerik positif apa pun (termasuk 0) sebagai skor.
+                    </li>
                     <li>Penjelasan sistem penilaian akan berubah sesuai mode yang dipilih.</li>
                 </ul>
             </li>
-            <li><strong>Klik "Save Scores":</strong> Setelah selesai mengatur skor, klik tombol ini untuk menyimpan perubahan Anda. Pesan konfirmasi akan muncul.</li>
+            <li><strong>Klik "Save Scores":</strong> Setelah selesai mengatur skor, klik tombol ini untuk menyimpan
+                perubahan Anda. Pesan konfirmasi akan muncul.</li>
         </ol>
 
         <p>Semoga panduan ini membantu Anda dalam menggunakan aplikasi Simple Ground!</p>
         <a href="index.html" class="back-button">Kembali ke Aplikasi</a>
     </div>
 </body>
+
 </html>

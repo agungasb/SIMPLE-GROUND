@@ -220,15 +220,23 @@
                     </div>
                     <div class="setting-col">
                         <label class="setting-label">Process Loss (%)</label>
-                        <input type="number" id="setting-process-loss" class="setting-input" value="3">
+                        <input type="number" id="setting-process-loss" class="setting-input" value="2">
                     </div>
                     <div class="setting-col">
                         <label class="setting-label">Initial Trim (%)</label>
-                        <input type="number" id="setting-initial-trim" class="setting-input" value="0">
+                        <input type="number" id="setting-initial-trim" class="setting-input" value="5">
                     </div>
                     <div class="setting-col">
                         <label class="setting-label">Avg Density (g/cm³)</label>
-                        <input type="number" id="setting-density" class="setting-input" value="0" readonly>
+                        <div style="display: flex; align-items: center; gap: 4px; width: 100%;">
+                            <input type="number" id="setting-density" class="setting-input" value="1.10" readonly
+                                style="flex: 1;">
+                            <button id="btn-lock-density" class="auto-btn"
+                                style="width: auto; padding: 6px 8px; height: 35px; margin-top: 0;"
+                                title="Manual/Auto Density">
+                                <i id="density-lock-icon" class="fas fa-unlock"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -271,7 +279,7 @@
                     </div>
                 </div>
                 <div>
-                    <div style="font-size: 12px; color: #f9e1c0;">Total Weight</div>
+                    <div style="font-size: 12px; color: #f9e1c0;">Total Gross Weight</div>
                     <div id="planner-total-weight" style="font-size: 15px; font-weight: bold;">0 g</div>
                 </div>
                 <div>
