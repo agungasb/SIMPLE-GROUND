@@ -8,7 +8,9 @@ let plannerSettings = {
     blockWeight: 4000, // g (defaults to input)
     sheetWidth: 40,    // cm
     sheetLength: 60,   // cm
-    scrapRate: 0.10    // 10% default
+    scrapRate: 0.10,   // 10% default
+    initialTrim: 0.0,   // 0% default
+    processLoss: 0.03   // 3% default
 };
 
 // Placeholder data - initially empty, will be loaded from JSON
@@ -177,12 +179,16 @@ function updatePlannerCalculations() {
         totalSheets = totalArea / sheetAreaSqCm;
     }
 
+    // NEW: Calculate Total Net Area (Gross Area decreased by Initial Trim %)
+    const totalNetArea = totalArea * (1 - plannerSettings.initialTrim);
+
     // Update Bottom Summary
     document.getElementById('planner-total-area').textContent = `${Math.round(totalArea)} cm²`;
+    document.getElementById('planner-total-net-area').textContent = `${Math.round(totalNetArea)} cm²`;
     document.getElementById('planner-total-weight').textContent = `${Math.round(totalWeight)} g`;
 
-    // Calculate Recipe Weight (Table Weight + Process Loss)
-    const recipeWeight = totalWeight / (1 - plannerSettings.processLoss);
+    // Calculate Recipe Weight (Table Weight + Initial Trim + Process Loss)
+    const recipeWeight = totalWeight / (1 - plannerSettings.initialTrim) / (1 - plannerSettings.processLoss);
     document.getElementById('planner-recipe-weight').textContent = `${Math.round(recipeWeight)} g`;
 
     document.getElementById('planner-total-blocks').textContent = `${totalSheets.toFixed(3)} sheets`;
@@ -207,7 +213,7 @@ function updatePlannerCalculations() {
 
 // 3. Initialize Settings Listeners
 function initializeSettingsListeners() {
-    ['setting-sheet-width', 'setting-sheet-length', 'setting-scrap-rate', 'setting-process-loss', 'setting-density'].forEach(id => {
+    ['setting-sheet-width', 'setting-sheet-length', 'setting-scrap-rate', 'setting-process-loss', 'setting-initial-trim', 'setting-density'].forEach(id => {
         const el = document.getElementById(id);
         if (el) {
             el.addEventListener('input', () => {
@@ -224,12 +230,14 @@ function updateSettingsFromInputs() {
     const sheetLength = parseFloat(document.getElementById('setting-sheet-length').value) || 60;
     const scrapRate = parseFloat(document.getElementById('setting-scrap-rate').value) || 10;
     const processLoss = parseFloat(document.getElementById('setting-process-loss').value) || 0;
+    const initialTrim = parseFloat(document.getElementById('setting-initial-trim').value) || 0;
 
     plannerSettings.blockWeight = plannerSettings.blockWeight; // Keep existing value or default if not set elsewhere
     plannerSettings.sheetWidth = sheetWidth;
     plannerSettings.sheetLength = sheetLength;
     plannerSettings.scrapRate = scrapRate / 100; // Convert to decimal
     plannerSettings.processLoss = processLoss / 100; // Convert to decimal
+    plannerSettings.initialTrim = initialTrim / 100; // Convert to decimal
     plannerSettings.doughDensity = 0; // Will be calculated
 }
 
@@ -647,7 +655,7 @@ function drawTriangleLayout(product, sheetW, sheetL, scale, margin, ctx) {
 
 // Auto-Adjust Helper (Global Scope)
 window.autoAdjustDimension = function (target) {
-    let totalRequiredArea = 0;
+    let totalGrossArea = 0;
     for (let i = 0; i < 3; i++) {
         const select = document.getElementById(`planner-select-${i}`);
         const qtyInput = document.getElementById(`planner-qty-${i}`);
@@ -659,22 +667,24 @@ window.autoAdjustDimension = function (target) {
             const singleArea = calculateArea(product.shape, product.width, product.length);
             const netArea = singleArea * qty;
             const grossArea = netArea / (1 - plannerSettings.scrapRate);
-            totalRequiredArea += grossArea;
+            totalGrossArea += grossArea;
         }
     }
 
-    if (totalRequiredArea <= 0) {
+    const totalNetArea = totalGrossArea * (1 - plannerSettings.initialTrim);
+
+    if (totalNetArea <= 0) {
         alert("Ikuti petunjuk penggunaan yang diberikan, jika ingin mendapatkan hasil yang maksimal!");
         return;
     }
 
     if (target === 'width') {
         const currentLength = plannerSettings.sheetLength || 1;
-        const idealWidth = totalRequiredArea / currentLength;
+        const idealWidth = totalNetArea / currentLength;
         document.getElementById('setting-sheet-width').value = Math.round(idealWidth);
     } else if (target === 'length') {
         const currentWidth = plannerSettings.sheetWidth || 1;
-        const idealLength = totalRequiredArea / currentWidth;
+        const idealLength = totalNetArea / currentWidth;
         document.getElementById('setting-sheet-length').value = Math.round(idealLength);
     }
 

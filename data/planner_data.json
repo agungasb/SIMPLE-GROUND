@@ -6,7 +6,7 @@
         "width": 10,
         "length": 25,
         "thickness": 2.6,
-        "weight": 71.875
+        "weight": 66
     },
     {
         "id": "p2",
@@ -23,8 +23,8 @@
         "shape": "rectangle",
         "width": 8,
         "length": 8,
-        "thickness": 4,
-        "weight": 60
+        "thickness": 2.6,
+        "weight": 49.65
     },
     {
         "id": "p4",
@@ -32,7 +32,7 @@
         "shape": "rectangle",
         "width": 6,
         "length": 20,
-        "thickness": 3.5,
+        "thickness": 2.6,
         "weight": 90
     },
     {
