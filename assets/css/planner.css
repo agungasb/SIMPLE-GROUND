@@ -186,3 +186,52 @@ input[type=number] {
         /* Slightly smaller for mobile density */
     }
 }
+
+/* Hydration Scaler Specialized Styles */
+#hydration-scaler-page .setting-label {
+    color: #f9e1c0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+#hydration-scaler-page .stat-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;
+}
+
+#hydration-scaler-page .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+#hydration-table thead th {
+    background: rgba(249, 225, 192, 0.1);
+    color: #f9e1c0;
+    padding: 12px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#hydration-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+#hydration-slider {
+    cursor: pointer;
+}
+
+#hydration-slider::-webkit-slider-runnable-track {
+    background: rgba(255, 255, 255, 0.1);
+    height: 6px;
+    border-radius: 3px;
+}
+
+#hydration-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: #f9e1c0;
+    margin-top: -6px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}

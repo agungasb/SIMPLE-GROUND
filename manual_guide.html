@@ -292,12 +292,14 @@
                 Secara default, aplikasi menghitung massa jenis otomatis berdasarkan spesifikasi produk. Fitur ini
                 berfungsi sebagai alat <strong>Quality Control (QC)</strong>:
                 <ul>
-                    <li><strong>Deteksi Kesalahan Data:</strong> Saat gembok terbuka (🔓), perhatikan angka yang muncul.
-                        Jika massa jenis jauh dari standar (misal > 1.3), ini menandakan ada data produk yang tidak
-                        akurat (seperti berat yang terlalu berat untuk ukurannya).</li>
-                    <li><strong>Konsistensi Produksi:</strong> Dengan menekan tombol <strong>Gembok (🔒)</strong> dan
-                        memasukkan nilai standar manual (misal: 1.1), Anda memastikan hasil tombol "Auto" tetap akurat
-                        sesuai dengan massa adonan nyata di tangan Anda.</li>
+                    <li><strong>Deteksi Kesalahan Data (Alert):</strong> Saat gembok terbuka (🔓), jika massa jenis yang
+                        dihitung menyimpang lebih dari 10% dari standar (default: <strong>1.15</strong>), kotak input
+                        akan berubah menjadi <strong>merah</strong> dan muncul ikon peringatan (⚠️). Ini menandakan data
+                        produk dari dapur (berat/dimensi) tidak konsisten dengan fisik adonan nyata.</li>
+                    <li><strong>Konsistensi Produksi:</strong> Dengan menekan tombol <strong>Gembok (🔒)</strong>, Anda
+                        mengunci nilai ke standar manual (default: <strong>1.15</strong>). Ini memastikan hasil tombol
+                        "Auto" tetap akurat berdasarkan massa adonan yang Anda inginkan, tanpa terpengaruh oleh data
+                        spesifikasi yang mungkin salah.</li>
                 </ul>
             </li>
             <li><strong>Initial Trim (%):</strong>

@@ -93,6 +93,8 @@ function showPage(pageId, department) {
         refreshRecipeScalerContent();
     } else if (pageId === 'planner' && typeof renderPlannerTable === 'function') {
         renderPlannerTable();
+    } else if (pageId === 'hydration-scaler' && typeof initHydrationOptions === 'function') {
+        initHydrationOptions();
     }
 }
 
@@ -159,6 +161,10 @@ async function initializeApp() {
         initializeRecipeScaler();
         initializeSettings();
         initializeCroissantCalculator(); // Initialize the croissant calculator
+
+        if (typeof initHydrationOptions === 'function') {
+            initHydrationOptions();
+        }
 
         // Set default department and page after initializations
         selectDepartment('simple-ground');

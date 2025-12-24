@@ -6,7 +6,7 @@
         "width": 10,
         "length": 25,
         "thickness": 2.6,
-        "weight": 74.74
+        "weight": 71
     },
     {
         "id": "p2",
@@ -15,7 +15,7 @@
         "width": 8,
         "length": 12,
         "thickness": 4,
-        "weight": 44.156
+        "weight": 48.77
     },
     {
         "id": "p3",
@@ -24,7 +24,7 @@
         "width": 8,
         "length": 8,
         "thickness": 2.6,
-        "weight": 19.13
+        "weight": 21.13
     },
     {
         "id": "p4",
@@ -33,7 +33,7 @@
         "width": 6,
         "length": 20,
         "thickness": 2.6,
-        "weight": 90
+        "weight": 39.62
     },
     {
         "id": "p5",
@@ -42,15 +42,15 @@
         "width": 10,
         "length": 10,
         "thickness": 4,
-        "weight": 45
+        "weight": 39.90
     },
     {
         "id": "p6",
         "name": "Cromboloni SG",
-        "shape": "rectangle",
+        "shape": "triangle",
         "width": 3,
         "length": 42,
         "thickness": 4.2,
-        "weight": 67
+        "weight": 33.60
     }
 ]

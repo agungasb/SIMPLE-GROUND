@@ -4,13 +4,14 @@
 
 // Global state for parameters
 let plannerSettings = {
-    doughDensity: 1.1, // g/cm3
-    blockWeight: 4000, // g (defaults to input)
-    sheetWidth: 40,    // cm
-    sheetLength: 60,   // cm
-    scrapRate: 0.10,   // 10% default
-    initialTrim: 0.0,   // 0% default
-    processLoss: 0.03,  // 3% default
+    doughDensity: 1.10, // g/cm3 (Current active density)
+    manualDensity: 1.27, // Stored manual preference
+    blockWeight: 4000,   // g (defaults to input)
+    sheetWidth: 40,      // cm
+    sheetLength: 60,     // cm
+    scrapRate: 0.10,     // 10% default
+    initialTrim: 0.05,   // 5% default
+    processLoss: 0.02,    // 2% default
     isDensityLocked: false
 };
 
@@ -200,14 +201,43 @@ function updatePlannerCalculations() {
     }
 
     const topDisplayDensity = document.getElementById('setting-density');
-    if (topDisplayDensity && !plannerSettings.isDensityLocked) {
-        // Avg Density = Total Weight / Total Volume
-        if (totalVolume > 0) {
-            const avgDensity = totalWeight / totalVolume;
-            topDisplayDensity.value = avgDensity.toFixed(2);
-            plannerSettings.doughDensity = avgDensity;
+    if (topDisplayDensity) {
+        if (plannerSettings.isDensityLocked) {
+            topDisplayDensity.value = plannerSettings.manualDensity.toFixed(2);
+            plannerSettings.doughDensity = plannerSettings.manualDensity;
+
+            // Locked Mode: Clear alerts since user is manually overriding
+            const warningIcon = document.getElementById('density-warning-icon');
+            if (warningIcon) warningIcon.style.display = "none";
+            topDisplayDensity.style.border = "";
+            topDisplayDensity.style.backgroundColor = "";
         } else {
-            topDisplayDensity.value = "0.00";
+            // Avg Density = Total Weight / Total Volume
+            if (totalVolume > 0) {
+                const avgDensity = totalWeight / totalVolume;
+                topDisplayDensity.value = avgDensity.toFixed(2);
+                plannerSettings.doughDensity = avgDensity;
+
+                // CD: Data Inconsistency Alert
+                const warningIcon = document.getElementById('density-warning-icon');
+                const deviation = Math.abs(avgDensity - plannerSettings.manualDensity) / plannerSettings.manualDensity;
+
+                if (deviation > 0.2) {
+                    topDisplayDensity.style.border = "2px solid #d32f2f";
+                    topDisplayDensity.style.backgroundColor = "#ffebee";
+                    if (warningIcon) warningIcon.style.display = "block";
+                } else {
+                    topDisplayDensity.style.border = "";
+                    topDisplayDensity.style.backgroundColor = "";
+                    if (warningIcon) warningIcon.style.display = "none";
+                }
+            } else {
+                topDisplayDensity.value = "0.00";
+                const warningIcon = document.getElementById('density-warning-icon');
+                if (warningIcon) warningIcon.style.display = "none";
+                topDisplayDensity.style.border = "";
+                topDisplayDensity.style.backgroundColor = "";
+            }
         }
     }
 }
@@ -236,14 +266,15 @@ function initializeSettingsListeners() {
             if (plannerSettings.isDensityLocked) {
                 densityInput.removeAttribute('readonly');
                 densityInput.style.backgroundColor = '#fff';
+                densityInput.value = plannerSettings.manualDensity.toFixed(2); // Show the stored manual value
                 lockIcon.classList.remove('fa-unlock');
                 lockIcon.classList.add('fa-lock');
             } else {
                 densityInput.setAttribute('readonly', true);
-                densityInput.style.backgroundColor = ''; // Reverts to CSS default (#ffeb3b for readonly)
+                densityInput.style.backgroundColor = '';
                 lockIcon.classList.remove('fa-lock');
                 lockIcon.classList.add('fa-unlock');
-                updatePlannerCalculations(); // Recalculate auto density
+                updatePlannerCalculations(); // Return to auto density display
             }
         });
     }
@@ -265,6 +296,7 @@ function updateSettingsFromInputs() {
     plannerSettings.initialTrim = initialTrim / 100; // Convert to decimal
 
     if (plannerSettings.isDensityLocked) {
+        plannerSettings.manualDensity = manualDensity;
         plannerSettings.doughDensity = manualDensity;
     }
 }
@@ -461,11 +493,19 @@ function drawMergedLayout(activeItems, canvas, ctx) {
     });
 
     const totalSheetArea = sheetW * sheetL;
-    const scrapPercent = totalSheetArea > 0 ? ((totalSheetArea - totalUsedAreaSqCm) / totalSheetArea) * 100 : 0;
+    const layoutScrapPercent = totalSheetArea > 0 ? ((totalSheetArea - totalUsedAreaSqCm) / totalSheetArea) * 100 : 0;
+    const trimPercent = plannerSettings.initialTrim * 100;
+
+    // Total Waste = (1 - (Net Area / Target Area)) * 100
+    // Target Area = Total Sheet Area / (1 - initialTrim)
+    const netAreaRatio = totalUsedAreaSqCm / (totalSheetArea / (1 - plannerSettings.initialTrim));
+    const totalWastePercent = (1 - netAreaRatio) * 100;
 
     document.getElementById('modal-layout-stats').innerHTML = `
-        <div style="flex: 1; text-align: left; padding-left: 10px;">${productYieldsData.map(d => `${d.name}: ${d.yield} pcs`).join(' | ')}</div>
-        <div style="padding-right: 10px;">Total Scrap: ${scrapPercent.toFixed(1)}%</div>
+        <div style="flex: 2; text-align: left; padding-left: 10px; font-size: 12px;">${productYieldsData.map(d => `${d.name}: ${d.yield} pcs`).join(' | ')}</div>
+        <div style="flex: 1;">Layout Scrap: ${layoutScrapPercent.toFixed(1)}%</div>
+        <div style="flex: 1;">Trim: ${trimPercent.toFixed(1)}%</div>
+        <div style="flex: 1; color: #d32f2f;">Total Waste: ${totalWastePercent.toFixed(1)}%</div>
     `;
 }
 
@@ -565,14 +605,19 @@ function drawRectLayout(product, sheetW, sheetL, scale, margin, ctx) {
 
     // Update HTML Stats Bar
     const usedArea = (useRotated ? countRot : countNormal) * (product.width * product.length);
-    const totalArea = sheetW * sheetL;
-    const actualScrap = ((totalArea - usedArea) / totalArea) * 100;
+    const totalSheetArea = sheetW * sheetL;
+    const layoutScrap = ((totalSheetArea - usedArea) / totalSheetArea) * 100;
     const yieldCount = useRotated ? countRot : countNormal;
+    const trimPercent = plannerSettings.initialTrim * 100;
+
+    const netAreaRatio = usedArea / (totalSheetArea / (1 - plannerSettings.initialTrim));
+    const totalWaste = (1 - netAreaRatio) * 100;
 
     document.getElementById('modal-layout-stats').innerHTML = `
-        <div>Layout: ${useRotated ? "Rotated" : "Normal"}</div>
         <div>Yield: ${yieldCount} pcs</div>
-        <div>Yield Scrap: ${actualScrap.toFixed(1)}%</div>
+        <div>Layout Scrap: ${layoutScrap.toFixed(1)}%</div>
+        <div>Trim: ${trimPercent.toFixed(1)}%</div>
+        <div style="color: #d32f2f;">Total Waste: ${totalWaste.toFixed(1)}%</div>
     `;
 }
 
@@ -603,13 +648,18 @@ function drawCircleLayout(product, sheetW, sheetL, scale, margin, ctx) {
     const radius = diameter / 2;
     const singleArea = Math.PI * radius * radius;
     const usedArea = totalCount * singleArea;
-    const totalArea = sheetW * sheetL;
-    const actualScrap = ((totalArea - usedArea) / totalArea) * 100;
+    const totalSheetArea = sheetW * sheetL;
+    const layoutScrap = ((totalSheetArea - usedArea) / totalSheetArea) * 100;
+    const trimPercent = plannerSettings.initialTrim * 100;
+
+    const netAreaRatio = usedArea / (totalSheetArea / (1 - plannerSettings.initialTrim));
+    const totalWaste = (1 - netAreaRatio) * 100;
 
     document.getElementById('modal-layout-stats').innerHTML = `
-        <div>Layout: Grid Packing</div>
         <div>Yield: ${totalCount} pcs</div>
-        <div>Yield Scrap: ${actualScrap.toFixed(1)}%</div>
+        <div>Layout Scrap: ${layoutScrap.toFixed(1)}%</div>
+        <div>Trim: ${trimPercent.toFixed(1)}%</div>
+        <div style="color: #d32f2f;">Total Waste: ${totalWaste.toFixed(1)}%</div>
     `;
 }
 
@@ -671,13 +721,18 @@ function drawTriangleLayout(product, sheetW, sheetL, scale, margin, ctx) {
 
     const singleArea = 0.5 * base * height;
     const usedArea = totalCount * singleArea;
-    const totalArea = sheetW * sheetL;
-    const actualScrap = ((totalArea - usedArea) / totalArea) * 100;
+    const totalSheetArea = sheetW * sheetL;
+    const layoutScrap = ((totalSheetArea - usedArea) / totalSheetArea) * 100;
+    const trimPercent = plannerSettings.initialTrim * 100;
+
+    const netAreaRatio = usedArea / (totalSheetArea / (1 - plannerSettings.initialTrim));
+    const totalWaste = (1 - netAreaRatio) * 100;
 
     document.getElementById('modal-layout-stats').innerHTML = `
-        <div>Layout: Nested Strip</div>
         <div>Yield: ${totalCount} pcs</div>
-        <div>Yield Scrap: ${actualScrap.toFixed(1)}%</div>
+        <div>Layout Scrap: ${layoutScrap.toFixed(1)}%</div>
+        <div>Trim: ${trimPercent.toFixed(1)}%</div>
+        <div style="color: #d32f2f;">Total Waste: ${totalWaste.toFixed(1)}%</div>
     `;
 }
 
@@ -721,13 +776,34 @@ window.autoAdjustDimension = function (target) {
     // Formula: Area = Weight / (Density * Thick)
     const targetArea = totalGrossWeight / (density * avgThickness);
 
+    // Physical constraint: Width/Length must fit at least one piece of the largest product
+    let maxProductWidth = 0;
+    let maxProductLength = 0;
+    for (let i = 0; i < 3; i++) {
+        const select = document.getElementById(`planner-select-${i}`);
+        const productId = select?.value;
+        const product = plannerProducts.find(p => p.id === productId);
+        if (product) {
+            maxProductWidth = Math.max(maxProductWidth, product.width);
+            maxProductLength = Math.max(maxProductLength, product.length);
+        }
+    }
+
     if (target === 'width') {
         const currentLength = parseFloat(document.getElementById('setting-sheet-length').value) || 1;
-        const idealWidth = targetArea / currentLength;
+        let idealWidth = targetArea / currentLength;
+
+        // Ensure width is at least the largest product dimension if only one piece
+        idealWidth = Math.max(idealWidth, maxProductWidth);
+
         document.getElementById('setting-sheet-width').value = Math.round(idealWidth);
     } else if (target === 'length') {
         const currentWidth = parseFloat(document.getElementById('setting-sheet-width').value) || 1;
-        const idealLength = targetArea / currentWidth;
+        let idealLength = targetArea / currentWidth;
+
+        // Ensure length is at least the largest product dimension if only one piece
+        idealLength = Math.max(idealLength, maxProductLength);
+
         document.getElementById('setting-sheet-length').value = Math.round(idealLength);
     }
 

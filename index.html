@@ -30,6 +30,8 @@
                 Scaler</button>
             <button class="nav-button" onclick="showPage('planner', 'croissant')"><i
                     class="fas fa-drafting-compass"></i> Planner</button>
+            <button class="nav-button" onclick="showPage('hydration-scaler', 'croissant')"><i class="fas fa-water"></i>
+                Hydration Scaler</button>
 
             <!-- Add other buttons for Croissant Department here -->
         </div>
@@ -228,9 +230,14 @@
                     </div>
                     <div class="setting-col">
                         <label class="setting-label">Avg Density (g/cm³)</label>
-                        <div style="display: flex; align-items: center; gap: 4px; width: 100%;">
-                            <input type="number" id="setting-density" class="setting-input" value="1.10" readonly
-                                style="flex: 1;">
+                        <div style="display: flex; align-items: center; gap: 4px; width: 100%; position: relative;">
+                            <input type="number" id="setting-density" class="setting-input" value="1.27" readonly
+                                style="flex: 1; transition: all 0.3s ease;">
+                            <div id="density-warning-icon"
+                                style="display: none; color: #d32f2f; margin-left: -25px; z-index: 10; cursor: help;"
+                                title="Data Inconsistency: Calculated density differs significantly from standard dough. Check product weight/dimensions.">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
                             <button id="btn-lock-density" class="auto-btn"
                                 style="width: auto; padding: 6px 8px; height: 35px; margin-top: 0;"
                                 title="Manual/Auto Density">
@@ -328,6 +335,106 @@
         </div>
     </div>
 
+    <!-- Hydration Scaler Page -->
+    <div id="hydration-scaler-page" class="page">
+        <div class="container" style="max-width: 800px;">
+            <div class="header">
+                <h1>Hydration Scaler</h1>
+                <p>Precise Liquid & Texture Control</p>
+            </div>
+
+            <!-- Controls Section -->
+            <div class="settings-container">
+                <div class="settings-row">
+                    <div class="setting-col-large" style="flex: 2;">
+                        <label class="setting-label"><i class="fas fa-bread-slice"></i> Recipe Baseline</label>
+                        <select id="hydration-recipe-select" class="setting-input" onchange="initHydrationScaler()"
+                            style="width: 100%;">
+                            <option value="">-- Choose Recipe --</option>
+                        </select>
+                    </div>
+                    <div class="setting-col" style="flex: 1;">
+                        <label class="setting-label">Scale Factor</label>
+                        <input type="number" id="hydration-multiplier" class="setting-input" value="1" step="0.1"
+                            oninput="calculateHydrationScaling()" style="width: 100%;">
+                    </div>
+                </div>
+
+                <div class="settings-row" style="margin-top: 15px;">
+                    <div class="setting-col-large" style="flex: 3;">
+                        <label class="setting-label">
+                            Target Hydration (%)
+                            <span id="hydration-baseline-display"
+                                style="float: right; font-size: 11px; opacity: 0.7;">Baseline: 0%</span>
+                        </label>
+                        <input type="range" id="hydration-slider" min="40" max="85" step="0.5" value="50"
+                            style="width: 100%; margin-top: 10px;" oninput="syncHydrationInput()">
+                        <div
+                            style="display: flex; justify-content: space-between; font-size: 10px; margin-top: 4px; opacity: 0.8;">
+                            <span>Stiff (40%)</span>
+                            <span>Soft (85%)</span>
+                        </div>
+                    </div>
+                    <div class="setting-col" style="flex: 0 0 100px;">
+                        <label class="setting-label">&nbsp;</label>
+                        <input type="number" id="hydration-target-input" class="setting-input" value="50" step="0.1"
+                            oninput="syncHydrationSlider()" style="width: 100%;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard / Summary -->
+            <div id="planner-summary"
+                style="display: flex; justify-content: space-around; margin-bottom: 20px; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; margin-top: 20px;">
+                <div class="stat-card" style="text-align: center;">
+                    <div class="label" style="font-size: 12px; color: #f9e1c0;">Total Flour</div>
+                    <div id="stat-total-flour" class="value" style="font-size: 18px; font-weight: bold;">0g</div>
+                </div>
+                <div class="stat-card" style="text-align: center;">
+                    <div class="label" style="font-size: 12px; color: #f9e1c0;">Total Liquids</div>
+                    <div id="stat-total-liquids" class="value"
+                        style="font-size: 18px; font-weight: bold; color: #00d2ff;">0g</div>
+                </div>
+                <div class="stat-card" style="text-align: center;">
+                    <div class="label" style="font-size: 12px; color: #f9e1c0;">Final Weight</div>
+                    <div id="stat-final-weight" class="value"
+                        style="font-size: 18px; font-weight: bold; color: #ffeb3b;">
+                        0g</div>
+                </div>
+            </div>
+
+            <!-- Table View -->
+            <div class="hide-scrollbar" style="margin-top: 20px; overflow-x: auto;">
+                <table id="hydration-table" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th style="padding: 10px; text-align: left; background: rgba(0,0,0,0.2); color: #f9e1c0;">
+                                Ingredient</th>
+                            <th style="padding: 10px; text-align: right; background: rgba(0,0,0,0.2); color: #f9e1c0;">
+                                Standard (g)</th>
+                            <th
+                                style="padding: 10px; text-align: center; background: rgba(249,225,192,0.1); color: #f9e1c0;">
+                                Adjusted (g)</th>
+                            <th style="padding: 10px; text-align: right; background: rgba(0,0,0,0.2); color: #f9e1c0;">
+                                Diff</th>
+                        </tr>
+                    </thead>
+                    <tbody id="hydration-table-body">
+                        <!-- Dynamic Rows -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="hydration-instructions" class="result"
+                style="margin-top: 25px; display: none; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border-left: 4px solid #f9e1c0;">
+                <h3 style="color: #f9e1c0; font-size: 14px; margin-top: 0;"><i class="fas fa-info-circle"></i> Scaling
+                    Guidelines</h3>
+                <ul id="hydration-guidance-list"
+                    style="font-size: 12px; line-height: 1.6; color: #f9e1c0; padding-left: 20px;"></ul>
+            </div>
+        </div>
+    </div>
+
     <!-- Layout Visualizer Modal -->
     <div id="layout-modal" class="modal"
         style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8);">
@@ -375,6 +482,7 @@
 
     <script src="assets/js/app.js"></script>
     <script src="assets/js/production_planner.js"></script>
+    <script src="assets/js/hydration_scaler.js"></script>
 </body>
 
 </html>
