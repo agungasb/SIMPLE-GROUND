@@ -177,13 +177,13 @@ function appendRow(tbody, name, standard, adjusted, type) {
     const row = document.createElement('tr');
     const diff = adjusted - standard;
     const diffText = diff === 0 ? '-' : (diff > 0 ? '+' : '') + diff.toFixed(0) + 'g';
-    const diffColor = diff === 0 ? '#aaa' : (diff > 0 ? '#4caf50' : '#f44336');
+    const diffColor = diff === 0 ? '#aaa' : (diff > 0 ? '#00ff08ff' : '#ff1100ff');
 
     row.innerHTML = `
         <td style="padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); color: ${type === 'liquid' ? '#00d2ff' : (type === 'flour' ? '#f9e1c0' : '#ddd')}">
             ${name.replace(/_/g, ' ')}
         </td>
-        <td style="text-align: right; color: #888;">${standard.toFixed(0)}g</td>
+        <td style="text-align: right; color: #f8f8f8ff;">${standard.toFixed(0)}g</td>
         <td style="text-align: center; font-weight: bold; background: rgba(255,255,255,0.02);">${adjusted.toFixed(0)}g</td>
         <td style="text-align: right; color: ${diffColor}; font-size: 11px;">${diffText}</td>
     `;

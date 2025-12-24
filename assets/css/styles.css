@@ -538,3 +538,192 @@
             opacity: 0;
             padding-top: 0;
         }
+
+        /* --- Recipe Scaler Redesign --- */
+        .recipe-scaler-container {
+            max-width: 800px !important;
+            width: 100% !important;
+            padding: 30px !important;
+            background: rgba(255, 255, 255, 0.2) !important;
+            /* Lighter glass matching main container */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-sizing: border-box !important;
+        }
+
+        .recipe-scaler-fields {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .field-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #000000;
+            /* Dark text for labels matching Production Calculator */
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .premium-select,
+        .premium-input {
+            width: 100% !important;
+            max-width: none !important;
+            background: rgba(255, 255, 255, 0.8) !important;
+            /* Lighter input background */
+            border: 1px solid rgba(0, 0, 0, 0.1) !important;
+            border-radius: 12px !important;
+            padding: 14px 18px !important;
+            color: #000000 !important;
+            /* Dark text for inputs */
+            font-size: 15px !important;
+            text-align: left !important;
+            appearance: none;
+            outline: none;
+            transition: all 0.3s ease;
+            box-sizing: border-box !important;
+            height: 52px !important;
+            /* Fixed height for perfect alignment */
+        }
+
+        .premium-select:focus,
+        .premium-input:focus {
+            background: rgba(255, 255, 255, 1.0) !important;
+            border-color: rgba(90, 62, 43, 0.5) !important;
+            box-shadow: 0 0 15px rgba(90, 62, 43, 0.2) !important;
+        }
+
+        .select-wrapper,
+        .input-wrapper,
+        .slider-container {
+            width: 100% !important;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box !important;
+        }
+
+        .select-icon {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .premium-scale-button {
+            background: #5a3e2b !important;
+            /* Standard brown button color */
+            color: white !important;
+            padding: 16px !important;
+            border-radius: 14px !important;
+            font-weight: 600 !important;
+            font-size: 16px !important;
+            margin-top: 10px !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: none !important;
+        }
+
+        .premium-scale-button:hover {
+            background: #7a5a42 !important;
+            /* Standard hover color */
+            transform: translateY(-2px);
+        }
+
+        .recipe-result-area {
+            border: 2px dashed rgba(0, 0, 0, 0.15) !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+            padding: 20px !important;
+            min-height: 200px;
+            margin-top: 20px !important;
+            color: #000000 !important;
+        }
+
+        /* --- Hydration Scaler Refinements --- */
+        .hydration-scaler-container {
+            max-width: 800px !important;
+            width: 100% !important;
+            padding: 30px !important;
+            background: rgba(255, 255, 255, 0.2) !important;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-sizing: border-box !important;
+        }
+
+        .hydration-scaler-fields {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        /* Range Slider Styling */
+        .slider-container {
+            padding: 10px 18px !important;
+            background: rgba(255, 255, 255, 0.4) !important;
+            /* Lighter container background */
+            border: 1px solid rgba(0, 0, 0, 0.1) !important;
+            border-radius: 12px !important;
+            min-height: 52px;
+            justify-content: center;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100% !important;
+            max-width: none !important;
+            /* Overriding global restriction */
+            height: 6px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            outline: none;
+            margin: 5px 0;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #5a3e2b;
+            /* Standard brown for thumb */
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            background: #7a5a42;
+        }
+
+        /* Stat Card Refinements inside Hydration Scaler */
+        .hydration-scaler-container .stat-card {
+            background: rgba(0, 0, 0, 0.3) !important;
+            padding: 15px !important;
+            border-radius: 12px !important;
+            transition: transform 0.3s ease;
+        }
+
+        .hydration-scaler-container .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(0, 0, 0, 0.4) !important;
+        }

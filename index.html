@@ -10,7 +10,10 @@
         rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/planner.css">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
 </head>
+
+
 
 <body>
     <!-- Navigation -->
@@ -110,34 +113,42 @@
 
     <!-- Recipe Scaler Page -->
     <div id="recipe-page" class="page">
-        <div class="container">
+        <div class="container recipe-scaler-container">
             <h1>Recipe Scaler</h1>
-            <div id="recipe-select">
-                <label for="recipes"
-                    style="font-size: 14px; font-weight: 500; color: #f9e1c0; flex: 2; text-align: left;">
-                    <i class="fas fa-book"></i> Choose Recipe:
-                </label>
-                <select id="recipes"
-                    style="flex: 1; padding: 6px; border: none; border-radius: 6px; font-size: 14px; text-align: center; background: rgba(255, 255, 255, 0.8); transition: all 0.3s ease; max-width: none; margin-bottom: 15px;">
-                    <option value="">Select a recipe</option>
-                </select>
+
+            <div class="recipe-scaler-fields">
+                <div class="field-group">
+                    <label for="recipes" class="field-label">
+                        <i class="fas fa-book-open"></i> Choose Recipe:
+                    </label>
+                    <div class="select-wrapper">
+                        <select id="recipes" class="premium-select">
+                            <option value="">Select a recipe</option>
+                        </select>
+                        <i class="fas fa-chevron-down select-icon"></i>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label for="multiplier" class="field-label">
+                        <i class="fas fa-times"></i> Scale Factor:
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="number" id="multiplier" min="0.1" value="1" placeholder="e.g. 1.5"
+                            class="premium-input">
+                    </div>
+                </div>
+
+                <button id="scale-button" class="premium-scale-button">
+                    <i class="fas fa-balance-scale"></i> Scale Recipe
+                </button>
             </div>
-            <div id="multiplier-input">
-                <label for="multiplier"
-                    style="font-size: 14px; font-weight: 500; color: #f9e1c0; flex: 2; text-align: left;">
-                    <i class="fas fa-magnifying-glass-chart"></i> Scale Factor:
-                </label>
-                <input type="number" id="multiplier" min="0.1" value="1" placeholder="e.g. 1.5"
-                    style="flex: 1; padding: 6px; border: none; border-radius: 6px; font-size: 14px; text-align: center; background: rgba(255, 255, 255, 0.8); transition: all 0.3s ease; max-width: 80px;">
-            </div>
-            <button id="scale-button"
-                style="margin-top: 15px; padding: 12px; background: #5a3e2b; color: white; border: none; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s ease; width: 100%;">
-                ⚖ Scale Recipe
-            </button>
-            <div id="output" class="result">
-                <p id="initial-output-message" style="font-style: italic; color: #f9e1c0;">Select a recipe and click
-                    'Scale' to see results.</p>
-                <h2 id="recipe-name" style="color: #f9e1c0;"></h2>
+
+            <div id="output" class="result recipe-result-area">
+                <p id="initial-output-message" style="font-style: italic; color: #f9e1c0; text-align: center;">Select a
+                    recipe and click 'Scale' to see results.</p>
+                <h2 id="recipe-name" style="color: #f9e1c0; text-align: center;"></h2>
+
                 <table id="ingredients-table" style="display: none;">
                     <thead>
                         <tr>
@@ -337,51 +348,58 @@
 
     <!-- Hydration Scaler Page -->
     <div id="hydration-scaler-page" class="page">
-        <div class="container" style="max-width: 800px;">
+        <div class="container hydration-scaler-container">
             <div class="header">
                 <h1>Hydration Scaler</h1>
                 <p>Precise Liquid & Texture Control</p>
             </div>
 
             <!-- Controls Section -->
-            <div class="settings-container">
-                <div class="settings-row">
-                    <div class="setting-col-large" style="flex: 2;">
-                        <label class="setting-label"><i class="fas fa-bread-slice"></i> Recipe Baseline</label>
-                        <select id="hydration-recipe-select" class="setting-input" onchange="initHydrationScaler()"
-                            style="width: 100%;">
+            <div class="hydration-scaler-fields">
+                <div class="field-group">
+                    <label for="hydration-recipe-select" class="field-label">
+                        <i class="fas fa-bread-slice"></i> Recipe Baseline
+                    </label>
+                    <div class="select-wrapper">
+                        <select id="hydration-recipe-select" class="premium-select" onchange="initHydrationScaler()">
                             <option value="">-- Choose Recipe --</option>
                         </select>
-                    </div>
-                    <div class="setting-col" style="flex: 1;">
-                        <label class="setting-label">Scale Factor</label>
-                        <input type="number" id="hydration-multiplier" class="setting-input" value="1" step="0.1"
-                            oninput="calculateHydrationScaling()" style="width: 100%;">
+                        <i class="fas fa-chevron-down select-icon"></i>
                     </div>
                 </div>
 
-                <div class="settings-row" style="margin-top: 15px;">
-                    <div class="setting-col-large" style="flex: 3;">
-                        <label class="setting-label">
-                            Target Hydration (%)
-                            <span id="hydration-baseline-display"
-                                style="float: right; font-size: 11px; opacity: 0.7;">Baseline: 0%</span>
-                        </label>
+                <div class="field-group">
+                    <label for="hydration-multiplier" class="field-label">
+                        <i class="fas fa-times"></i> Scale Factor
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="number" id="hydration-multiplier" class="premium-input" value="1" step="0.1"
+                            oninput="calculateHydrationScaling()">
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">
+                        <i class="fas fa-water"></i> Target Hydration (%)
+                        <span id="hydration-baseline-display"
+                            style="margin-left: auto; font-size: 11px; opacity: 0.7;">Baseline: 0%</span>
+                    </label>
+                    <div class="slider-container">
                         <input type="range" id="hydration-slider" min="40" max="85" step="0.5" value="50"
-                            style="width: 100%; margin-top: 10px;" oninput="syncHydrationInput()">
+                            style="width: 100%;" oninput="syncHydrationInput()">
                         <div
-                            style="display: flex; justify-content: space-between; font-size: 10px; margin-top: 4px; opacity: 0.8;">
+                            style="display: flex; justify-content: space-between; font-size: 10px; margin-top: 8px; opacity: 0.8; color: #f9e1c0;">
                             <span>Stiff (40%)</span>
                             <span>Soft (85%)</span>
                         </div>
                     </div>
-                    <div class="setting-col" style="flex: 0 0 100px;">
-                        <label class="setting-label">&nbsp;</label>
-                        <input type="number" id="hydration-target-input" class="setting-input" value="50" step="0.1"
-                            oninput="syncHydrationSlider()" style="width: 100%;">
+                    <div class="input-wrapper" style="margin-top: 10px;">
+                        <input type="number" id="hydration-target-input" class="premium-input" value="50" step="0.1"
+                            oninput="syncHydrationSlider()">
                     </div>
                 </div>
             </div>
+
 
             <!-- Dashboard / Summary -->
             <div id="planner-summary"
