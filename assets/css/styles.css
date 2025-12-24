@@ -541,7 +541,7 @@
 
         /* --- Recipe Scaler Redesign --- */
         .recipe-scaler-container {
-            max-width: 800px !important;
+            max-width: 450px !important;
             width: 100% !important;
             padding: 30px !important;
             background: rgba(255, 255, 255, 0.2) !important;
@@ -585,7 +585,7 @@
             padding: 14px 18px !important;
             color: #000000 !important;
             /* Dark text for inputs */
-            font-size: 15px !important;
+            font-size: 14px !important;
             text-align: left !important;
             appearance: none;
             outline: none;
@@ -656,7 +656,7 @@
 
         /* --- Hydration Scaler Refinements --- */
         .hydration-scaler-container {
-            max-width: 800px !important;
+            max-width: 450px !important;
             width: 100% !important;
             padding: 30px !important;
             background: rgba(255, 255, 255, 0.2) !important;
