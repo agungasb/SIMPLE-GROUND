@@ -106,6 +106,7 @@ function initializePlannerTable() {
             <td id="planner-yield-${i}">0</td>
             <td id="planner-area-${i}">0 cm²</td>
             <td id="planner-weight-${i}">0 g</td>
+            <td id="planner-net-weight-${i}">0 g</td>
             <td style="text-align: center;">
                 <button id="planner-map-btn-${i}" onclick="openLayoutModalForRow(${i})" style="background:none; border:none; cursor:pointer; color:#5a3e2b; font-size: 16px; display:none;" title="View Layout">
                     <i class="fas fa-map"></i>
@@ -166,6 +167,7 @@ function updatePlannerCalculations() {
             document.getElementById(`planner-yield-${i}`).textContent = yieldPerSheet.toFixed(1);
             document.getElementById(`planner-area-${i}`).textContent = `${Math.round(grossAreaTotal)} cm²`;
             document.getElementById(`planner-weight-${i}`).textContent = `${Math.round(grossWeightTotal)} g`;
+            document.getElementById(`planner-net-weight-${i}`).textContent = `${Math.round(netWeightTotal)} g`;
         } else {
             // Reset Row
             document.getElementById(`planner-dim-${i}`).textContent = "-";
@@ -173,6 +175,7 @@ function updatePlannerCalculations() {
             document.getElementById(`planner-yield-${i}`).textContent = "0";
             document.getElementById(`planner-area-${i}`).textContent = "0 cm²";
             document.getElementById(`planner-weight-${i}`).textContent = "0 g";
+            document.getElementById(`planner-net-weight-${i}`).textContent = "0 g";
             if (mapBtn) mapBtn.style.display = 'none';
         }
     }
