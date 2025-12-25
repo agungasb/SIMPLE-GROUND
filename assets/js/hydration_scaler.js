@@ -119,6 +119,8 @@ function syncHydrationSlider() {
     calculateHydrationScaling();
 }
 
+const ADJUSTABLE_WATER_KEYWORDS = ['air', 'ice', 'es batu', 'air es'];
+
 /**
  * Perform the scaling calculation
  */
@@ -130,10 +132,18 @@ function calculateHydrationScaling() {
     const targetHydration = parseFloat(document.getElementById('hydration-target-input').value) || 0;
 
     let totalFlour = baseFlours.reduce((sum, f) => sum + f.amount, 0);
-    let currentLiquid = baseLiquids.reduce((sum, l) => sum + l.amount, 0);
+    const targetTotalLiquidScaled = (totalFlour * multiplier) * (targetHydration / 100);
 
-    const targetLiquidWeight = totalFlour * (targetHydration / 100);
-    const liquidAdjustmentMultiplier = currentLiquid > 0 ? (targetLiquidWeight / currentLiquid) : 0;
+    // Identify adjustable liquids (water/ice) and fixed liquids (milk/eggs/etc)
+    const adjustableLiquids = baseLiquids.filter(l =>
+        ADJUSTABLE_WATER_KEYWORDS.some(k => l.name.toLowerCase().includes(k))
+    );
+    const fixedLiquids = baseLiquids.filter(l =>
+        !ADJUSTABLE_WATER_KEYWORDS.some(k => l.name.toLowerCase().includes(k))
+    );
+
+    const fixedLiquidTotalScaled = fixedLiquids.reduce((sum, l) => sum + (l.amount * multiplier), 0);
+    const neededWaterTotalScaled = targetTotalLiquidScaled - fixedLiquidTotalScaled;
 
     const tbody = document.getElementById('hydration-table-body');
     tbody.innerHTML = '';
@@ -149,13 +159,37 @@ function calculateHydrationScaling() {
         appendRow(tbody, f.name, f.amount * multiplier, adjusted, 'flour');
     });
 
-    // Render Liquids
-    baseLiquids.forEach(l => {
-        const standard = l.amount * multiplier;
-        const adjusted = l.amount * multiplier * liquidAdjustmentMultiplier;
-        finalLiquidsTotal += adjusted;
-        appendRow(tbody, l.name, standard, adjusted, 'liquid');
-    });
+    // If no adjustable liquids exist, fallback to scaling all liquids (original behavior)
+    // Otherwise, scale only adjustable ones.
+    if (adjustableLiquids.length === 0) {
+        const currentLiquidTotal = baseLiquids.reduce((sum, l) => sum + l.amount, 0);
+        const liquidAdjustmentMultiplier = currentLiquidTotal > 0 ? (targetTotalLiquidScaled / (currentLiquidTotal * multiplier)) : 0;
+
+        baseLiquids.forEach(l => {
+            const standard = l.amount * multiplier;
+            const adjusted = standard * liquidAdjustmentMultiplier;
+            finalLiquidsTotal += adjusted;
+            appendRow(tbody, l.name, standard, adjusted, 'liquid');
+        });
+    } else {
+        const currentAdjustableTotal = adjustableLiquids.reduce((sum, l) => sum + l.amount, 0);
+        const waterAdjustmentFactor = currentAdjustableTotal > 0 ? (Math.max(0, neededWaterTotalScaled) / (currentAdjustableTotal * multiplier)) : 0;
+
+        // Render Fixed Liquids
+        fixedLiquids.forEach(l => {
+            const standard = l.amount * multiplier;
+            finalLiquidsTotal += standard;
+            appendRow(tbody, l.name, standard, standard, 'liquid');
+        });
+
+        // Render Adjustable Liquids
+        adjustableLiquids.forEach(l => {
+            const standard = l.amount * multiplier;
+            const adjusted = standard * waterAdjustmentFactor;
+            finalLiquidsTotal += adjusted;
+            appendRow(tbody, l.name, standard, adjusted, 'liquid');
+        });
+    }
 
     // Render Others
     otherIngredients.forEach(o => {
@@ -183,7 +217,7 @@ function appendRow(tbody, name, standard, adjusted, type) {
         <td style="padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); color: ${type === 'liquid' ? '#00d2ff' : (type === 'flour' ? '#f9e1c0' : '#ddd')}">
             ${name.replace(/_/g, ' ')}
         </td>
-        <td style="text-align: right; color: #f8f8f8ff;">${standard.toFixed(0)}g</td>
+        <td style="text-align: right; color: #000000;">${standard.toFixed(0)}g</td>
         <td style="text-align: center; font-weight: bold; background: rgba(255,255,255,0.02);">${adjusted.toFixed(0)}g</td>
         <td style="text-align: right; color: ${diffColor}; font-size: 11px;">${diffText}</td>
     `;
@@ -197,12 +231,12 @@ function updateHydrationGuidelines(hydration) {
     box.style.display = 'block';
 
     if (hydration < 45) {
-        list.innerHTML += '<li>⚠️ <strong>Low Hydration:</strong> Dough will be stiff. Requires longer mixing and potentially warmer water to activate gluten.</li>';
+        list.innerHTML += '<li>⚠️ <strong>Hidrasi Rendah:</strong> Adonan akan terasa kaku. Membutuhkan waktu mixing lebih lama dan air yang lebih hangat untuk mengaktifkan gluten.</li>';
     } else if (hydration > 65) {
-        list.innerHTML += '<li>⚠️ <strong>High Hydration:</strong> Dough will be sticky. Use "Autolyse" method (rest 30m before salt) for better handling.</li>';
+        list.innerHTML += '<li>⚠️ <strong>Hidrasi Tinggi:</strong> Adonan akan terasa lengket. Gunakan metode "Autolyse" (istirahatkan 30 menit sebelum garam dimasukkan) agar lebih mudah ditangani.</li>';
     }
-    list.innerHTML += '<li>💧 Always add liquid gradually to ensure even absorption.</li>';
-    list.innerHTML += '<li>❄️ For target hydration over 50%, ensure liquids are below 4°C to prevent premature fermentation.</li>';
+    list.innerHTML += '<li>💧 Selalu tambahkan cairan secara bertahap untuk memastikan penyerapan yang merata.</li>';
+    list.innerHTML += '<li>❄️ Untuk target hidrasi di atas 50%, pastikan suhu cairan di bawah 4°C untuk mencegah fermentasi dini.</li>';
 }
 
 function resetHydrationUI() {

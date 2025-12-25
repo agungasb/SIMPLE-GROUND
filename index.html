@@ -114,7 +114,10 @@
     <!-- Recipe Scaler Page -->
     <div id="recipe-page" class="page">
         <div class="container recipe-scaler-container">
-            <h1>Recipe Scaler</h1>
+            <div class="header">
+                <h1>Recipe Scaler</h1>
+                <p>Quick Scaling & Conversion</p>
+            </div>
 
             <div class="recipe-scaler-fields">
                 <div class="field-group">
@@ -173,9 +176,11 @@
 
     <!-- Settings Page -->
     <div id="settings-page" class="page">
-        <div class="container">
-            <h1>Donut Scores Settings</h1>
-            <p>Assign a score (0-5 or flexible) for each donut product per outlet.</p>
+        <div class="container settings-container-main">
+            <div class="header">
+                <h1>Donut Scores Settings</h1>
+                <p>Assign a score (0-5 or flexible) for each donut product per outlet.</p>
+            </div>
             <div style="display: flex; justify-content: flex-end; width: 100%;">
                 <div class="form-group" style="border-bottom: none; align-items: center; padding: 0;">
                     <label for="score-mode-toggle"
@@ -213,9 +218,11 @@
 
     <!-- Production Planner Page -->
     <div id="planner-page" class="page">
-        <div class="container">
-            <h1>Production Planner</h1>
-            <p>Calculate efficiency based on surface area and thickness.</p>
+        <div class="container planner-container-main">
+            <div class="header">
+                <h1>Production Planner</h1>
+                <p>Calculate efficiency based on surface area and thickness.</p>
+            </div>
 
             <!-- Settings Row -->
             <!-- Settings Section -->
@@ -378,22 +385,28 @@
                     </div>
                 </div>
 
-                <div class="field-group">
+                <div class="field-group" style="width: 100%;">
                     <label class="field-label">
-                        <i class="fas fa-water"></i> Target Hydration (%)
+                        <i class="fas fa-water"></i> Hydration Control
                         <span id="hydration-baseline-display"
                             style="margin-left: auto; font-size: 11px; opacity: 0.7;">Baseline: 0%</span>
                     </label>
-                    <div class="slider-container">
+                    <div class="slider-container" style="width: 100%; margin: 10px 0;">
                         <input type="range" id="hydration-slider" min="40" max="85" step="0.5" value="50"
-                            style="width: 100%;" oninput="syncHydrationInput()">
+                            style="width: 100%; cursor: pointer;" oninput="syncHydrationInput()">
                         <div
-                            style="display: flex; justify-content: space-between; font-size: 10px; margin-top: 8px; opacity: 0.8; color: #f9e1c0;">
+                            style="display: flex; justify-content: space-between; font-size: 10px; margin-top: 8px; opacity: 0.8; color: #5a3e2b;">
                             <span>Stiff (40%)</span>
                             <span>Soft (85%)</span>
                         </div>
                     </div>
-                    <div class="input-wrapper" style="margin-top: 10px;">
+                </div>
+
+                <div class="field-group">
+                    <label for="hydration-target-input" class="field-label">
+                        <i class="fas fa-bullseye"></i> Target Hydration (%)
+                    </label>
+                    <div class="input-wrapper">
                         <input type="number" id="hydration-target-input" class="premium-input" value="50" step="0.1"
                             oninput="syncHydrationSlider()">
                     </div>
@@ -445,8 +458,8 @@
 
             <div id="hydration-instructions" class="result"
                 style="margin-top: 25px; display: none; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border-left: 4px solid #f9e1c0;">
-                <h3 style="color: #f9e1c0; font-size: 14px; margin-top: 0;"><i class="fas fa-info-circle"></i> Scaling
-                    Guidelines</h3>
+                <h3 style="color: #f9e1c0; font-size: 14px; margin-top: 0;"><i class="fas fa-info-circle"></i> Panduan
+                    Penyesuaian</h3>
                 <ul id="hydration-guidance-list"
                     style="font-size: 12px; line-height: 1.6; color: #f9e1c0; padding-left: 20px;"></ul>
             </div>
