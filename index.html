@@ -10,6 +10,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/planner.css">
+    <link rel="stylesheet" href="assets/css/qc_auditor.css">
     <link rel="icon" type="image/png" href="assets/favicon.png">
 </head>
 
@@ -33,6 +34,8 @@
                 Scaler</button>
             <button class="nav-button" onclick="showPage('planner', 'croissant')"><i
                     class="fas fa-drafting-compass"></i> Planner</button>
+            <button class="nav-button" onclick="showPage('auditor', 'croissant')"><i class="fas fa-microscope"></i>
+                Auditor</button>
             <button class="nav-button" onclick="showPage('hydration-scaler', 'croissant')"><i class="fas fa-water"></i>
                 Hydration Scaler</button>
 
@@ -467,6 +470,164 @@
         </div>
     </div>
 
+    <!-- Auditor Page -->
+    <div id="auditor-page" class="page">
+        <div class="container auditor-container-main">
+            <div class="header">
+                <h1>QC Density Auditor</h1>
+                <p>Verify precision at every stage of production.</p>
+            </div>
+
+            <div class="auditor-grid">
+                <!-- Section 1: Mixing & Bulk Audit (STAGE 1) -->
+                <div class="auditor-card">
+                    <div class="card-header">
+                        <i class="fas fa-blender"></i>
+                        <h2>Mixing & Bulk Audit</h2>
+                    </div>
+                    <p class="card-desc">Verify dough temperature and bulk density (Stage 1).</p>
+
+                    <div class="auditor-fields">
+                        <div class="field-group">
+                            <label>Dough Temp (°C)</label>
+                            <input type="number" id="audit-mix-temp" class="premium-input" placeholder="e.g. 23.5"
+                                oninput="calculateMixingAudit()">
+                        </div>
+                        <div class="field-group">
+                            <label>Sample Weight (g)</label>
+                            <input type="number" id="audit-mix-weight" class="premium-input" placeholder="e.g. 500"
+                                oninput="calculateMixingAudit()">
+                        </div>
+                        <div class="field-group">
+                            <label>Sample Width (cm)</label>
+                            <input type="number" id="audit-mix-width" class="premium-input" placeholder="e.g. 10"
+                                oninput="calculateMixingAudit()">
+                        </div>
+                        <div class="field-group">
+                            <label>Sample Length (cm)</label>
+                            <input type="number" id="audit-mix-length" class="premium-input" placeholder="e.g. 10"
+                                oninput="calculateMixingAudit()">
+                        </div>
+                        <div class="field-group">
+                            <label>Sample Thick (cm)</label>
+                            <input type="number" id="audit-mix-thick" class="premium-input" placeholder="e.g. 4"
+                                oninput="calculateMixingAudit()">
+                        </div>
+                    </div>
+
+                    <div id="audit-mix-results" class="audit-result-box">
+                        <div class="result-row">
+                            <div class="result-item">
+                                <span class="result-mini-label">Temp Status</span>
+                                <span id="res-mix-temp-val" class="result-mini-value">--</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-mini-label">Bulk Density</span>
+                                <span id="res-mix-density" class="result-mini-value">0.00</span>
+                                <span class="result-mini-unit">g/cm³</span>
+                            </div>
+                        </div>
+                        <div id="res-mix-status" class="result-badge status-neutral">Waiting for Input</div>
+                        <p id="res-mix-advice" class="result-advice">Cek suhu dan densitas adonan awal.</p>
+                    </div>
+                </div>
+
+                <!-- Section 2: Sheeter Auditor -->
+                <div class="auditor-card">
+                    <div class="card-header">
+                        <i class="fas fa-layer-group"></i>
+                        <h2>Sheeter Audit</h2>
+                    </div>
+                    <p class="card-desc">Verify live dough density from the sheeter (Stage 2).</p>
+
+                    <div class="auditor-fields">
+                        <div class="field-group">
+                            <label>Sample Weight (g)</label>
+                            <input type="number" id="audit-sheet-weight" class="premium-input" placeholder="e.g. 33.0"
+                                oninput="calculateSheeterAudit()">
+                        </div>
+                        <div class="field-group">
+                            <label>Sample Width (cm)</label>
+                            <input type="number" id="audit-sheet-width" class="premium-input" value="10"
+                                oninput="calculateSheeterAudit()">
+                        </div>
+                        <div class="field-group">
+                            <label>Sample Length (cm)</label>
+                            <input type="number" id="audit-sheet-length" class="premium-input" value="10"
+                                oninput="calculateSheeterAudit()">
+                        </div>
+                        <div class="field-group">
+                            <label>Sheeter Thick (mm)</label>
+                            <input type="number" id="audit-sheet-thick" class="premium-input" step="0.1"
+                                placeholder="e.g. 2.6" oninput="calculateSheeterAudit()">
+                        </div>
+                    </div>
+
+                    <div id="audit-sheet-results" class="audit-result-box">
+                        <div class="result-main">
+                            <span class="result-label">Live Density</span>
+                            <span id="res-sheet-density" class="result-value">0.00</span>
+                            <span class="result-unit">g/cm³</span>
+                        </div>
+                        <div id="res-sheet-status" class="result-badge status-neutral">Waiting for Input</div>
+                        <p id="res-sheet-advice" class="result-advice">Masukkan data sample trim untuk audit.</p>
+                    </div>
+                </div>
+
+                <!-- Section 2: Baked Auditor -->
+                <div class="auditor-card">
+                    <div class="card-header">
+                        <i class="fas fa-bread-slice"></i>
+                        <h2>Baked Audit</h2>
+                    </div>
+                    <p class="card-desc">Quality assessment of finished product (Stage 3).</p>
+
+                    <div class="auditor-fields">
+                        <div class="field-group">
+                            <label>Raw Weight (g)</label>
+                            <input type="number" id="audit-baked-raw" class="premium-input" placeholder="e.g. 41.0"
+                                oninput="calculateBakedAudit()">
+                        </div>
+                        <div class="field-group">
+                            <label>Baked Weight (g)</label>
+                            <input type="number" id="audit-baked-finish" class="premium-input" placeholder="e.g. 34.5"
+                                oninput="calculateBakedAudit()">
+                        </div>
+                        <div class="field-group">
+                            <label>Vol. Displace (cm³)</label>
+                            <input type="number" id="audit-baked-vol" class="premium-input" placeholder="e.g. 180"
+                                oninput="calculateBakedAudit()">
+                        </div>
+                    </div>
+
+                    <div id="audit-baked-results" class="audit-result-box">
+                        <div class="result-row">
+                            <div class="result-item">
+                                <span class="result-mini-label">Spec. Volume</span>
+                                <span id="res-baked-specvol" class="result-mini-value">0.0</span>
+                                <span class="result-mini-unit">cm³/g</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-mini-label">Moist. Loss</span>
+                                <span id="res-baked-loss" class="result-mini-value">0.0</span>
+                                <span class="result-mini-unit">%</span>
+                            </div>
+                        </div>
+                        <div id="res-baked-status" class="result-badge status-neutral">Waiting for Input</div>
+                        <p id="res-baked-advice" class="result-advice">Input data kematangan produk.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="manual-guide-link" style="margin-top: 20px; text-align: center;">
+                <a href="manual_guide.html#auditor-guide" target="_blank"
+                    style="color: #f9e1c0; font-size: 12px; opacity: 0.8;">
+                    <i class="fas fa-question-circle"></i> View Auditor Logic Documentation
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Layout Visualizer Modal -->
     <div id="layout-modal" class="modal"
         style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8);">
@@ -515,6 +676,7 @@
     <script src="assets/js/app.js"></script>
     <script src="assets/js/production_planner.js"></script>
     <script src="assets/js/hydration_scaler.js"></script>
+    <script src="assets/js/qc_auditor.js"></script>
 </body>
 
 </html>

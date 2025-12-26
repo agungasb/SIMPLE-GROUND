@@ -341,7 +341,71 @@
             </li>
         </ul>
 
-        <h2>3. Recipe Scaler (Penskala Resep)</h2>
+        <h2 id="auditor-guide">3. QC Density Auditor (Audit Kualitas)</h2>
+        <p>Modul ini digunakan untuk melakukan verifikasi presisi pada dua titik kritis dalam lini produksi.</p>
+
+        <div class="auditor-guide-section">
+            <h4>A. Mixing & Bulk Audit (Tahap Mixing - STAGE 1)</h4>
+            <p><strong>Tujuan:</strong> Memastikan adonan memiliki suhu dan hidrasi yang tepat segera setelah keluar
+                dari mixer.</p>
+            <ul>
+                <li><strong>DDT (Desired Dough Temperature):</strong> Suhu adonan akhir harus berada di rentang
+                    <strong>22°C - 24.5°C</strong>. Jika suhu >26°C, adonan harus segera didinginkan untuk mencegah
+                    <em>butter leakage</em> saat lamination.</li>
+                <li><strong>Bulk Density:</strong> Mengukur kepadatan blok adonan sebelum masuk ke tahap
+                    pendinginan/sheeting.</li>
+                <li><strong>Interpretasi:</strong>
+                    <ul>
+                        <li><strong>PASSED:</strong> Suhu dan densitas aman. Lanjutkan ke tahap pendinginan block.</li>
+                        <li><strong>REJECT / COOL DOWN:</strong> Suhu terlalu tinggi. Masukkan ke freezer segera atau
+                            evaluasi suhu air/ruangan.</li>
+                        <li><strong>ADJUST HYDRATION:</strong> Densitas melenceng jauh. Periksa kalibrasi timbangan atau
+                            takaran bahan cair.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>B. Sheeter Audit (Tahap Sheeting - STAGE 2)</h4>
+            <p><strong>Tujuan:</strong> Memastikan mesin sheeter terkalibrasi dengan benar sebelum pemotongan massal
+                dilakukan.</p>
+            <ul>
+                <li><strong>Metode:</strong> Ambil sampel adonan <em>trim</em> (sisa pinggiran) setelah lembaran adonan
+                    mencapai ketebalan final. Potong menjadi bidang persegi (contoh: <strong>Width 10cm x Length
+                        10cm</strong>).</li>
+                <li><strong>Logika Perhitungan:</strong>
+                    <br><code>Live Density = Berat Sampel / ((Width * Length) * (Ketebalan Mesin / 10))</code>
+                </li>
+                <li><strong>Interpretasi:</strong>
+                    <ul>
+                        <li><strong>PASSED (1.21 - 1.33):</strong> Kalibrasi mesin akurat. Lanjutkan pemotongan.</li>
+                        <li><strong>MARGINAL (Deviasi 6-15%):</strong> Lakukan pengecekan manual pada setelan mesin
+                            sheeter atau cek suhu adonan.</li>
+                        <li><strong>REJECT/ADJUST:</strong> Deviasi terlalu tinggi. Jangan memotong produk sebelum
+                            masalah dikoreksi (produk akan terlalu berat/ringan).</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>C. Baked Audit (Tahap Hasil Akhir)</h4>
+            <p><strong>Tujuan:</strong> Mengukur kualitas kematangan dan "lightness" produk setelah keluar dari oven.
+            </p>
+            <ul>
+                <li><strong>Metode Volume:</strong> Menggunakan metode <em>Volume Displacement</em> (perpindahan
+                    volume). Masukkan produk ke dalam wadah berisi bijian kecil (seperti biji sesawi/rapeseed) untuk
+                    mengukur total volume ruang produk dalam cm³.</li>
+                <li><strong>Specific Volume (cm³/g):</strong>
+                    <br><code>Spec. Volume = Volume Produk / Berat Panggang</code>
+                    <br>Target premium: <strong>4.0 - 6.0 cm³/g</strong>. Jika di bawah 4.0, produk terlalu padat
+                    (dense).
+                </li>
+                <li><strong>Moisture Loss (%):</strong>
+                    <br><code>Moist. Loss = ((Berat Mentah - Berat Panggang) / Berat Mentah) * 100</code>
+                    <br>Target ideal: <strong>15% - 20%</strong>. Jika di atas 20%, produk terlalu kering (overbaked).
+                </li>
+            </ul>
+        </div>
+
+        <h2>4. Recipe Scaler (Penskala Resep)</h2>
         <p>Bagian ini memungkinkan Anda untuk menyesuaikan jumlah bahan dalam resep berdasarkan skala (multiplier) yang
             Anda inginkan.</p>
         <h3>Cara Menggunakan:</h3>

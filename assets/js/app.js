@@ -95,6 +95,8 @@ function showPage(pageId, department) {
         renderPlannerTable();
     } else if (pageId === 'hydration-scaler' && typeof initHydrationOptions === 'function') {
         initHydrationOptions();
+    } else if (pageId === 'auditor') {
+        // Reset or init auditor page if needed in future
     }
 }
 

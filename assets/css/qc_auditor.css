@@ -1,0 +1,178 @@
+/* QC Auditor Specific Styles */
+
+.auditor-container-main {
+    max-width: 900px !important;
+}
+
+.auditor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.auditor-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 5px;
+}
+
+.card-header i {
+    font-size: 1.5rem;
+    color: #f9e1c0;
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: #f9e1c0;
+}
+
+.card-desc {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin: 0;
+}
+
+.auditor-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.field-group label {
+    font-size: 0.8rem;
+    color: #f9e1c0;
+    font-weight: 500;
+}
+
+.audit-result-box {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.result-main {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 6px;
+}
+
+.result-label {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.result-value {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #00d2ff;
+    line-height: 1;
+}
+
+.result-unit {
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.result-row {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.result-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.result-mini-label {
+    font-size: 0.7rem;
+    opacity: 0.7;
+}
+
+.result-mini-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffeb3b;
+}
+
+.result-mini-unit {
+    font-size: 0.65rem;
+    opacity: 0.7;
+}
+
+.result-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.status-neutral {
+    background: #6c757d;
+    color: white;
+}
+
+.status-good {
+    background: #28a745;
+    color: white;
+}
+
+.status-warning {
+    background: #ffc107;
+    color: #333;
+}
+
+.status-danger {
+    background: #dc3545;
+    color: white;
+}
+
+.result-advice {
+    font-size: 0.8rem;
+    font-style: italic;
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+    .auditor-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .result-value {
+        font-size: 1.8rem;
+    }
+}
