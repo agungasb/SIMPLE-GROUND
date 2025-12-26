@@ -4,12 +4,12 @@
 
 // Global state for parameters
 let plannerSettings = {
-    doughDensity: 1.10, // g/cm3 (Current active density)
+    doughDensity: 1.27, // g/cm3 (Current active density)
     manualDensity: 1.27, // Stored manual preference
-    blockWeight: 4000,   // g (defaults to input)
-    sheetWidth: 40,      // cm
-    sheetLength: 60,     // cm
-    scrapRate: 0.10,     // 10% default
+    blockWeight: 2300,   // g (defaults to input)
+    sheetWidth: 166,      // cm
+    sheetLength: 42,     // cm
+    scrapRate: 0.02,     // 10% default
     initialTrim: 0.05,   // 5% default
     processLoss: 0.02,    // 2% default
     isDensityLocked: false

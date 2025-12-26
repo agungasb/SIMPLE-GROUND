@@ -199,22 +199,112 @@
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            h2 {
-                font-size: 1.8rem;
+            .slide {
+                padding: 10px;
             }
 
             .slide-content {
-                padding: 30px;
-                width: 90%;
+                padding: 15px 10px;
+                width: 98%;
+                border-radius: 15px;
+                max-height: 90vh;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+                margin-bottom: 8px;
+            }
+
+            h2 {
+                font-size: 1.1rem;
+                margin-bottom: 8px;
+            }
+
+            p {
+                font-size: 0.8rem;
+                margin-bottom: 10px;
+                line-height: 1.4;
+            }
+
+            li {
+                font-size: 0.8rem !important;
+                margin-bottom: 8px !important;
+                gap: 10px !important;
+            }
+
+            .feature-grid {
+                gap: 8px;
+                margin-top: 10px;
+            }
+
+            .feature-item {
+                padding: 10px;
+            }
+
+            .feature-icon {
+                font-size: 1.25rem;
+                margin-bottom: 5px;
+            }
+
+            .feature-item h3 {
+                font-size: 0.9rem;
+                margin-bottom: 3px;
+            }
+
+            .feature-item p {
+                font-size: 0.75rem;
+            }
+
+            .alert-box {
+                padding: 8px;
+                gap: 8px;
+                font-size: 0.75rem;
+                margin-top: 10px;
+            }
+
+            .alert-box i {
+                font-size: 1rem;
             }
 
             .controls {
-                bottom: 20px;
-                right: 20px;
+                bottom: 10px;
+                right: 10px;
+                gap: 8px;
+            }
+
+            .nav-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+
+            .logo {
+                top: 10px;
+                left: 10px;
+                font-size: 1rem;
+            }
+
+            /* Additional specific adjustments for notes and examples */
+            .slide-content div[style*="font-size: 0.85rem"],
+            .slide-content div[style*="font-size: 0.9rem"] {
+                font-size: 0.7rem !important;
+                margin-top: 10px !important;
+                padding-top: 8px !important;
+            }
+
+            .slide-content p[style*="margin-bottom: 10px"] {
+                margin-bottom: 5px !important;
+            }
+
+            span[style*="font-size: 1.2rem"] {
+                font-size: 1rem !important;
+                margin: 5px 0 !important;
+            }
+
+            .slide-content div[style*="margin-top: 40px"] {
+                margin-top: 15px !important;
+                padding: 8px !important;
+                font-size: 0.7rem !important;
             }
         }
     </style>
@@ -306,6 +396,15 @@
                     <p>Formula cerdas menghitung <strong>Width/Length</strong> ideal agar seluruh adonan pas dalam satu
                         lembar tanpa waste yang tidak perlu.</p>
                 </div>
+                <div class="feature-item"
+                    style="max-width: 500px; margin: 20px auto; border-color: var(--accent); background: rgba(255, 221, 153, 0.05);">
+                    <p style="font-size: 0.9rem; margin: 0; color: #ccc;"><strong>NOTE:</strong> Jika targetnya 1
+                        laminasi, maka
+                        set angka dengan font kuning hingga <span style="color: #ffdd99; font-weight: bold;">2300
+                            grams</span>
+                        atau mendekati, hitung 1 sisi saja, sisanya akan dikalkulasi otomatis dengan cara menekan tombol
+                        auto.</p>
+                </div>
             </div>
         </section>
 
@@ -336,6 +435,24 @@
                         input berat atau dimensi produk!
                     </div>
                 </div>
+
+                <div
+                    style="text-align: left; margin-top: 25px; font-size: 0.85rem; color: #aaa; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
+                    <p style="margin-bottom: 10px;">• Dari data yang dikumpulkan dihitung masa jenisnya. Jika massa
+                        jenisnya
+                        10% di atas adonan croissant pada umumnya, kemungkinan data yang diberikan tidak sesuai realita
+                        di
+                        lapangan. Kita bisa cek di Google untuk massa jenis rata-rata croissant.</p>
+                    <p>• Density 1.27 ini saya dasarkan pada data product contoh yang saya ambil dari kitchen, dengan
+                        formula:<br>
+                        <span
+                            style="font-family: serif; font-size: 1.2rem; color: var(--accent); display: block; margin: 10px 0; text-align: center;">ρ
+                            = m / V</span>
+                        Dimana <strong>ρ</strong> adalah density, <strong>m</strong> adalah massa, dan
+                        <strong>V</strong>
+                        adalah volume.
+                    </p>
+                </div>
             </div>
         </section>
 
@@ -354,6 +471,20 @@
                         <p>Satukan Plain, Pain au Chocolat, dan Danish dalam satu sheet dengan waste minimal.</p>
                     </div>
                 </div>
+
+                <div
+                    style="text-align: left; margin-top: 25px; font-size: 0.85rem; color: #aaa; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
+                    <p style="margin-bottom: 10px;">• Jika scrap layout persen lebih besar dari <em>expected scrap rate
+                            +
+                            process loss</em>, maka kelebihan ini masih bisa dijadikan produk. Silahkan dikurangi dan
+                        jangan lupa klik lagi tombol <strong>Auto</strong>.</p>
+                    <p style="margin-bottom: 10px;">• <strong>Contoh Kasus:</strong> Produk 10x25 (segitiga), tebal
+                        2.6mm,
+                        berat 41g, initial trim 5% → Layout optimal menghasilkan 50 pcs dengan total trimming 7.9%.</p>
+                    <p style="font-style: italic;">• Penjelasan lengkap tentang alat dan formula tersedia di link
+                        <strong>"About"</strong> di bawah halaman utama.
+                    </p>
+                </div>
             </div>
         </section>
 
@@ -366,6 +497,11 @@
                     <i class="fas fa-chart-line"></i>
                 </div>
                 <p>Coffee Town Bakery: Excellence in every slice.</p>
+                <div
+                    style="margin-top: 40px; padding: 15px; border: 1px dashed rgba(255,221,153,0.3); border-radius: 10px; font-size: 0.8rem; color: var(--accent);">
+                    <strong>NOTE:</strong> Data yang dipakai di sini belum lengkap dan memang diperuntukkan untuk test
+                    saja.
+                </div>
             </div>
         </section>
     </div>
