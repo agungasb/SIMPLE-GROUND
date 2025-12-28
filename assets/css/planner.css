@@ -106,7 +106,7 @@ input[type=number] {
 .setting-col {
     display: flex;
     flex-direction: column;
-    width: 100px;
+    width: 130px;
     align-items: center;
     /* Uniform width for all top-row items */
 }
@@ -114,23 +114,28 @@ input[type=number] {
 .setting-col-large {
     display: flex;
     flex-direction: column;
-    width: 100px;
+    width: 140px;
     /* Properly sized for dimensions */
 }
 
 .setting-label {
-    font-size: 10px;
+    font-size: 11px;
     color: #000000;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
     text-align: center;
+    min-height: 32px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    line-height: 1.2;
     /* Center labels for balanced form look */
 }
 
 .setting-input {
     width: 100%;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
+    height: 35px !important;
+    min-height: 35px !important;
+    max-height: 35px !important;
     flex: none !important;
     padding: 4px 8px;
     border-radius: 4px;

@@ -59,23 +59,7 @@ function calculateArea(shape, width, length) {
     return 0;
 }
 
-function calculateRow(product, qty) {
-    const areaSqCm = calculateArea(product.shape, product.width, product.length);
-    const totalNetAreaSqCm = areaSqCm * qty;
 
-    // Apply scrap rate
-    const grossAreaSqCm = totalNetAreaSqCm / (1 - plannerSettings.scrapRate);
-
-    // Weight calculation
-    const volumeCm3 = grossAreaSqCm * (product.thickness / 10);
-    const weightGrams = volumeCm3 * plannerSettings.doughDensity;
-
-    return {
-        grossAreaSqCm,
-        weightGrams,
-        singleAreaSqCm: areaSqCm
-    };
-}
 
 let isPlannerInitialized = false;
 
@@ -121,53 +105,81 @@ function initializePlannerTable() {
 
 // 2. Update Values Only (Run on Input)
 function updatePlannerCalculations() {
-    let totalWeight = 0;
-    let totalArea = 0;
+    let totalNetWeight = 0;
+    let totalGrossWeight = 0;
+    let totalGrossArea = 0;
     let totalNetProductArea = 0;
-    let totalVolume = 0;
 
-    const sheetAreaSqCm = plannerSettings.sheetWidth * plannerSettings.sheetLength;
+    // Track consistency
+    let activeThickness = null;
 
+    // 1. Calculate Basis: Geometry & JSON Weights
+    // First Pass: Get active thickness for QC context
     for (let i = 0; i < 3; i++) {
         const select = document.getElementById(`planner-select-${i}`);
         const qtyInput = document.getElementById(`planner-qty-${i}`);
         const productId = select?.value;
         const qty = parseFloat(qtyInput?.value) || 0;
-
         const product = plannerProducts.find(p => p.id === productId);
+
+        if (product && qty > 0) {
+            if (activeThickness === null) activeThickness = product.thickness;
+        }
+    }
+    // Default thickness if none active (avoid div by zero)
+    if (activeThickness === null && plannerProducts.length > 0) activeThickness = 0;
+
+    // Constants
+    const sheetAreaSqCm = plannerSettings.sheetWidth * plannerSettings.sheetLength;
+
+    // 2. Iterate Rows for Calculation
+    for (let i = 0; i < 3; i++) {
+        const select = document.getElementById(`planner-select-${i}`);
+        const qtyInput = document.getElementById(`planner-qty-${i}`);
         const mapBtn = document.getElementById(`planner-map-btn-${i}`);
+        const productId = select?.value;
+        const qty = parseFloat(qtyInput?.value) || 0;
+        const product = plannerProducts.find(p => p.id === productId);
 
         if (product) {
-            // Update Row Info
+            // Display Info
             document.getElementById(`planner-dim-${i}`).textContent = `${product.width} x ${product.length} (${product.shape})`;
             document.getElementById(`planner-thick-${i}`).textContent = `${product.thickness} mm`;
             if (mapBtn) mapBtn.style.display = 'inline-block';
 
-            // Calculations
+            // Area Math
             const singleNetArea = calculateArea(product.shape, product.width, product.length);
-            const netAreaTotal = singleNetArea * qty;
-            const grossAreaTotal = netAreaTotal / (1 - plannerSettings.scrapRate);
+            const rowNetArea = singleNetArea * qty;
+            const rowGrossArea = rowNetArea / (1 - plannerSettings.scrapRate);
 
-            const singleWeight = product.weight || 0;
-            const netWeightTotal = singleWeight * qty;
-            const grossWeightTotal = netWeightTotal / (1 - plannerSettings.scrapRate);
+            // Weight Math (Source: Product JSON)
+            const singleNetWeight = product.weight || 0;
+            const rowNetWeight = singleNetWeight * qty;
 
-            totalWeight += grossWeightTotal;
-            totalArea += grossAreaTotal;
-            totalNetProductArea += netAreaTotal;
+            // Gross Weight = Net Weight / (1 - Scrap)
+            // Assumes scrap dough has same density as product dough
+            const rowGrossWeight = rowNetWeight / (1 - plannerSettings.scrapRate);
 
-            const volumeCm3 = grossAreaTotal * (product.thickness / 10);
-            totalVolume += volumeCm3;
+            // Accumulate
+            totalNetProductArea += rowNetArea;
+            totalGrossArea += rowGrossArea;
+            totalNetWeight += rowNetWeight;
+            totalGrossWeight += rowGrossWeight;
 
+            // Yield
             let yieldPerSheet = 0;
             if (singleNetArea > 0 && sheetAreaSqCm > 0) {
                 yieldPerSheet = (sheetAreaSqCm * (1 - plannerSettings.scrapRate)) / singleNetArea;
             }
 
+            // Update Columns
             document.getElementById(`planner-yield-${i}`).textContent = yieldPerSheet.toFixed(1);
-            document.getElementById(`planner-area-${i}`).textContent = `${Math.round(grossAreaTotal)} cm²`;
-            document.getElementById(`planner-weight-${i}`).textContent = `${Math.round(grossWeightTotal)} g`;
-            document.getElementById(`planner-net-weight-${i}`).textContent = `${Math.round(netWeightTotal)} g`;
+            document.getElementById(`planner-area-${i}`).textContent = `${Math.round(rowGrossArea)} cm²`;
+            // Gross Weight Column (Input for Mixer)
+            document.getElementById(`planner-weight-${i}`).textContent = `${Math.round(rowGrossWeight)} g`;
+            // Net Weight Column (Theoretical Output)
+            document.getElementById(`planner-net-weight-${i}`).textContent = `${Math.round(rowNetWeight)} g`;
+
         } else {
             // Reset Row
             document.getElementById(`planner-dim-${i}`).textContent = "-";
@@ -180,67 +192,71 @@ function updatePlannerCalculations() {
         }
     }
 
-    // Update Totals
-    let totalSheets = 0;
-    if (sheetAreaSqCm > 0) {
-        totalSheets = totalArea / sheetAreaSqCm;
+    // 3. Derived Metrics (Grammage & Density) from Totals
+    // Net Grammage = Total Net Weight / Total Net Area
+    // (Should be identical to Gross Weight / Gross Area)
+    let impliedGrammage = 0;
+    if (totalNetProductArea > 0) {
+        impliedGrammage = totalNetWeight / totalNetProductArea;
     }
 
-    // Update Bottom Summary
-    document.getElementById('planner-total-area').textContent = `${Math.round(totalArea)} cm²`;
+    // Update Grammage Display
+    const grammageInput = document.getElementById('display-grammage');
+    if (grammageInput) {
+        grammageInput.value = impliedGrammage.toFixed(3);
+    }
+
+    // 4. Update Summary Totals
+    let totalSheets = 0;
+    if (sheetAreaSqCm > 0) {
+        totalSheets = totalGrossArea / sheetAreaSqCm;
+    }
+
+    // Update Totals DOM
+    document.getElementById('planner-total-area').textContent = `${Math.round(totalGrossArea)} cm²`;
     document.getElementById('planner-total-net-area').textContent = `${Math.round(totalNetProductArea)} cm²`;
-    document.getElementById('planner-total-weight').textContent = `${Math.round(totalWeight)} g`;
+    document.getElementById('planner-total-weight').textContent = `${Math.round(totalGrossWeight)} g`;
 
     // Calculate Recipe Weight (Table Weight + Initial Trim + Process Loss)
-    const recipeWeight = totalWeight / (1 - plannerSettings.initialTrim) / (1 - plannerSettings.processLoss);
+    const recipeWeight = totalGrossWeight / (1 - plannerSettings.initialTrim) / (1 - plannerSettings.processLoss);
     document.getElementById('planner-recipe-weight').textContent = `${Math.round(recipeWeight)} g`;
 
     document.getElementById('planner-total-blocks').textContent = `${totalSheets.toFixed(3)} sheets`;
 
-    // Update Top Displays (Calculated Fields)
+    // 5. Update Top Fields
     const topDisplayWeight = document.getElementById('display-total-weight');
     if (topDisplayWeight) {
-        topDisplayWeight.value = Math.round(totalWeight);
+        topDisplayWeight.value = Math.round(totalGrossWeight);
     }
 
+    // 6. QC Logic: Density Deviation
     const topDisplayDensity = document.getElementById('setting-density');
     if (topDisplayDensity) {
-        if (plannerSettings.isDensityLocked) {
-            topDisplayDensity.value = plannerSettings.manualDensity.toFixed(2);
-            plannerSettings.doughDensity = plannerSettings.manualDensity;
+        // "Standard Density" is what the user typed (reference)
+        // "Implied Density" is what we calculated
+        const standardDensity = parseFloat(topDisplayDensity.value) || plannerSettings.manualDensity;
 
-            // Locked Mode: Clear alerts since user is manually overriding
-            const warningIcon = document.getElementById('density-warning-icon');
-            if (warningIcon) warningIcon.style.display = "none";
+        let impliedDensity = 0;
+        if (activeThickness > 0) {
+            impliedDensity = impliedGrammage / (activeThickness / 10);
+        }
+
+        // Alert logic: Compare Implied vs Standard
+        const warningIcon = document.getElementById('density-warning-icon');
+        const deviation = standardDensity > 0 ? Math.abs(impliedDensity - standardDensity) / standardDensity : 0;
+
+        // Threshold: 10%
+        if (impliedDensity > 0 && deviation > 0.10) {
+            topDisplayDensity.style.border = "2px solid #d32f2f";
+            topDisplayDensity.style.backgroundColor = "#ffebee";
+            if (warningIcon) {
+                warningIcon.style.display = "block";
+                warningIcon.title = `QC Alert: Actual product density (${impliedDensity.toFixed(2)}) deviates >10% from standard (${standardDensity}). Check JSON weight or dimensions.`;
+            }
+        } else {
             topDisplayDensity.style.border = "";
             topDisplayDensity.style.backgroundColor = "";
-        } else {
-            // Avg Density = Total Weight / Total Volume
-            if (totalVolume > 0) {
-                const avgDensity = totalWeight / totalVolume;
-                topDisplayDensity.value = avgDensity.toFixed(2);
-                plannerSettings.doughDensity = avgDensity;
-
-                // CD: Data Inconsistency Alert
-                const warningIcon = document.getElementById('density-warning-icon');
-                const deviation = Math.abs(avgDensity - plannerSettings.manualDensity) / plannerSettings.manualDensity;
-
-                if (deviation > 0.2) {
-                    topDisplayDensity.style.border = "2px solid #d32f2f";
-                    topDisplayDensity.style.backgroundColor = "#ffebee";
-                    if (warningIcon) warningIcon.style.display = "block";
-                } else {
-                    topDisplayDensity.style.border = "";
-                    topDisplayDensity.style.backgroundColor = "";
-                    if (warningIcon) warningIcon.style.display = "none";
-                }
-            } else {
-                topDisplayDensity.value = "0.00";
-                const warningIcon = document.getElementById('density-warning-icon');
-                if (warningIcon) warningIcon.style.display = "none";
-                topDisplayDensity.style.border = "";
-                topDisplayDensity.style.backgroundColor = "";
-            }
+            if (warningIcon) warningIcon.style.display = "none";
         }
     }
 }
@@ -302,6 +318,12 @@ function updateSettingsFromInputs() {
         plannerSettings.manualDensity = manualDensity;
         plannerSettings.doughDensity = manualDensity;
     }
+
+    // Calculate Areal Density (Grammage)
+    // Note: Thickness is product-dependent, but we assume uniform thickness for the active batch.
+    // We will update this dynamically in the calculation loop or fetch the first active product's thickness.
+    // For now, we initialize it, but the real calculation happens in updatePlannerCalculations
+
 }
 
 // Main entry point called by app.js
@@ -369,6 +391,13 @@ function openMergedLayoutModal() {
 
     if (activeItems.length === 0) {
         alert("Pilih produk dan masukkan jumlah terlebih dahulu!");
+        return;
+    }
+
+    // Validation: Thickness Consistency
+    const uniqueThicknesses = new Set(activeItems.map(item => item.product.thickness));
+    if (uniqueThicknesses.size > 1) {
+        alert("Action Aborted: Cannot merge products with different thicknesses!");
         return;
     }
 
@@ -741,9 +770,9 @@ function drawTriangleLayout(product, sheetW, sheetL, scale, margin, ctx) {
 
 // Auto-Adjust Helper (Global Scope)
 window.autoAdjustDimension = function (target) {
-    let totalGrossWeight = 0;
     let totalGrossArea = 0;
-    let totalVolume = 0;
+    let uniqueThicknesses = new Set();
+    let maxProductWidth = 0;
 
     for (let i = 0; i < 3; i++) {
         const select = document.getElementById(`planner-select-${i}`);
@@ -752,64 +781,51 @@ window.autoAdjustDimension = function (target) {
         const qty = parseFloat(qtyInput?.value) || 0;
         const product = plannerProducts.find(p => p.id === productId);
 
-        if (product) {
+        if (product && qty > 0) {
+            uniqueThicknesses.add(product.thickness);
+            maxProductWidth = Math.max(maxProductWidth, product.width);
+
             const singleNetArea = calculateArea(product.shape, product.width, product.length);
             const netAreaTotal = singleNetArea * qty;
             const grossAreaTotal = netAreaTotal / (1 - plannerSettings.scrapRate);
 
-            const singleWeight = product.weight || 0;
-            const netWeightTotal = singleWeight * qty;
-            const grossWeightTotal = netWeightTotal / (1 - plannerSettings.scrapRate);
-
-            totalGrossWeight += grossWeightTotal;
             totalGrossArea += grossAreaTotal;
-            totalVolume += grossAreaTotal * (product.thickness / 10);
         }
     }
 
-    if (totalGrossWeight <= 0 || totalGrossArea <= 0) {
-        alert("Ikuti petunjuk penggunaan yang diberikan, jika ingin mendapatkan hasil yang maksimal!");
+    // 1. Validation: Thickness Consistency
+    if (uniqueThicknesses.size > 1) {
+        alert("Action Aborted: Cannot plan layout for products with different thicknesses!");
         return;
     }
 
-    // Get current density from setting
-    const density = parseFloat(document.getElementById('setting-density')?.value) || plannerSettings.doughDensity;
-    const avgThickness = totalVolume / totalGrossArea; // in cm
-
-    // Formula: Area = Weight / (Density * Thick)
-    const targetArea = totalGrossWeight / (density * avgThickness);
-
-    // Physical constraint: Width/Length must fit at least one piece of the largest product
-    let maxProductWidth = 0;
-    let maxProductLength = 0;
-    for (let i = 0; i < 3; i++) {
-        const select = document.getElementById(`planner-select-${i}`);
-        const productId = select?.value;
-        const product = plannerProducts.find(p => p.id === productId);
-        if (product) {
-            maxProductWidth = Math.max(maxProductWidth, product.width);
-            maxProductLength = Math.max(maxProductLength, product.length);
-        }
+    if (totalGrossArea <= 0) {
+        alert("Please select products and quantity first.");
+        return;
     }
+
+    // 2. Logic: Geometry-First (Density removed from dimensioning decision)
+    // Target Area is simply the Total Gross Area needed by the shapes (+ scrap)
+    const targetArea = totalGrossArea;
 
     if (target === 'width') {
         const currentLength = parseFloat(document.getElementById('setting-sheet-length').value) || 1;
         let idealWidth = targetArea / currentLength;
 
-        // Ensure width is at least the largest product dimension if only one piece
+        // Physical Constraint: Must fit at least the widest product
         idealWidth = Math.max(idealWidth, maxProductWidth);
 
-        document.getElementById('setting-sheet-width').value = Math.round(idealWidth);
+        document.getElementById('setting-sheet-width').value = idealWidth.toFixed(1);
+        // Trigger update to recalculate weight/density outputs
+        updateSettingsFromInputs();
+        updatePlannerCalculations();
     } else if (target === 'length') {
         const currentWidth = parseFloat(document.getElementById('setting-sheet-width').value) || 1;
         let idealLength = targetArea / currentWidth;
 
-        // Ensure length is at least the largest product dimension if only one piece
-        idealLength = Math.max(idealLength, maxProductLength);
-
-        document.getElementById('setting-sheet-length').value = Math.round(idealLength);
+        document.getElementById('setting-sheet-length').value = idealLength.toFixed(1);
+        // Trigger update to recalculate weight/density outputs
+        updateSettingsFromInputs();
+        updatePlannerCalculations();
     }
-
-    updateSettingsFromInputs();
-    updatePlannerCalculations();
-}
+};

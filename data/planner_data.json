@@ -4,9 +4,9 @@
         "name": "Plain Croissant",
         "shape": "triangle",
         "width": 10,
-        "length": 25,
+        "length": 30,
         "thickness": 2.6,
-        "weight": 41.28
+        "weight": 66
     },
     {
         "id": "p2",

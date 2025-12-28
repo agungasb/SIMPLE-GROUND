@@ -40,8 +40,8 @@ Fitur ini memastikan data yang dimasukkan konsisten dengan realita fisik adonan 
 
 *   **Density Baseline:** Standar massa jenis adonan croissant Coffee Town adalah **1.27 g/cm³**.
 *   **Indikator Peringatan (Alert):** Jika kotak **Avg Density** berubah menjadi **MERAH** atau muncul ikon ⚠️, artinya data berat/dimensi produk di sistem menyimpang lebih dari 10% dari standar.
-*   **Tindakan:** Cek kembali input berat produk atau dimensi manual produk tersebut di data master.
-*   **Density Lock (🔒):** Gunakan tombol gembok untuk mengunci nilai ke standar manual jika ingin melompati perhitungan otomatis.
+*   **Grammage Check:** Perhatikan kolom **Grammage (g/cm²)**. Pastikan nilainya masuk akal (sekitar 0.3 - 0.4 untuk ketebalan standar).
+*   **Density Lock (🔒):** Gunakan tombol gembok untuk melihat/mengunci nilai standar manual sebagai pembanding visual.
 
 ---
 

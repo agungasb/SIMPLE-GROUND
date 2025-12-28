@@ -169,29 +169,30 @@
         </ul>
 
         <h4>2. Production Planner (Perencana Produksi)</h4>
-        <p>Modul ini digunakan untuk menghitung efisiensi penggunaan lembaran adonan (sheet) berdasarkan berat, dimensi,
-            dan ketebalan produk.</p>
+        <p>Modul ini menggunakan pendekatan <strong>Geometry-First</strong> untuk menjamin presisi potongan adonan yang
+            konsisten.</p>
         <ul>
             <li><strong>Total Gross Weight (Berat Kotor Total):</strong>
-                <br><code>Total Gross Weight = Σ (Berat Produk * Qty) / (1 - Scrap Rate %)</code>
-                <br>Ini adalah berat total adonan dalam "Rectangle Bersih" (setelah trim awal).
+                <br><code>Total Gross Weight = Σ (Area Gross * Grammage)</code>
+                <br>Dihitung dari Grammage (g/cm²) yang diturunkan dari berat standar JSON, memastikan berat sesuai
+                dengan spesifikasi produk.
             </li>
             <li><strong>Auto-Adjust Sheet Dimension (Perhitungan Otomatis Dimensi):</strong>
-                <br><code>Target Area = Total Gross Weight / (Density * (Thickness / 10))</code>
-                <br>Menggunakan rumus massa jenis untuk menentukan luas bidang yang dibutuhkan berdasarkan berat adonan.
+                <br><code>Target Area = Total Gross Area Produk (+Scrap)</code>
+                <br>Aplikasi menghitung area fisik yang dibutuhkan produk. Massa jenis <strong>TIDAK</strong> lagi
+                mempengaruhi dimensi sheet, melainkan hanya digunakan sebagai referensi kualitas.
             </li>
-            <li><strong>Total Net Area:</strong>
-                <br><code>Total Net Area = Σ (Luas Produk Individual * Qty)</code>
-                <br>Luas bersih produk jadi (tanpa menyertakan scrap atau trim).
+            <li><strong>Grammage (Areal Density - g/cm²):</strong>
+                <br><code>Grammage = Berat Standar / Net Area Standar</code>
+                <br>Menunjukkan berapa gram adonan per cm². Ini adalah nilai fisik yang menjaga konsistensi ketebalan.
+            </li>
+            <li><strong>QC Density Alert (Kontrol Kualitas):</strong>
+                <br>Jika input berat/dimensi produk menghasilkan massa jenis yang menyimpang >10% dari standar (1.27
+                g/cm³), sistem akan memberi peringatan MERAH. Ini mencegah kesalahan data input.
             </li>
             <li><strong>Mixer Weight (Berat Mixer):</strong>
                 <br><code>Mixer Weight = Total Gross Weight / (1 - Initial Trim %) / (1 - Process Loss %)</code>
-                <br>Menghitung berat total adonan yang harus disiapkan di mixer untuk menutupi kehilangan saat proses
-                dan pemotongan pinggiran (trim).
-            </li>
-            <li><strong>Sheets Needed (Kebutuhan Lembar):</strong>
-                <br><code>Sheets Needed = Total Gross Area / (Sheet Width * Sheet Length)</code>
-                <br>Indikator efisiensi; jika bernilai 1.000, maka seluruh produk pas dalam satu lembar.
+                <br>Menghitung berat total adonan di mixer yang dibutuhkan.
             </li>
         </ul>
 
@@ -275,9 +276,14 @@
         <h3>Alur Kerja (Workflow):</h3>
         <ol>
             <li><strong>Pilih Produk & Qty:</strong> Masukkan produk dan jumlah yang akan diproduksi dalam tabel
-                planner.</li>
+                planner. <br><em>(Tips: Untuk 1 batch laminasi, sesuaikan Qty hingga <strong>Mixer Weight</strong>
+                    mendekati 2300g).</em></li>
+            <li><strong>Cek Parameter Formulasi:</strong> Di bagian atas, pastikan 6 parameter utama sudah sesuai (Total
+                Weight, Scrap, Process Loss, Initial Trim, Density, dan **Grammage**).
+                <br><em>Nilai Grammage akan muncul otomatis berdasarkan produk yang dipilih.</em>
+            </li>
             <li><strong>Atur Dimensi Awal:</strong> Masukkan salah satu dimensi sheet (Lebar atau Panjang) yang Anda
-                inginkan (misal: Lebar 40cm).</li>
+                inginkan (misal: Lebar 166cm).</li>
             <li><strong>Gunakan Tombol Auto:</strong> Klik tombol <strong>"Auto"</strong> pada dimensi yang kosong.
                 Aplikasi akan menghitung dimensi ideal berdasarkan berat total adonan agar pas dalam 1 lembar (Sheets
                 Needed = 1.000).</li>
@@ -288,18 +294,16 @@
 
         <h3>Fitur Utama:</h3>
         <ul>
-            <li><strong>Density Lock (Gembok Massa Jenis) & Quality Control:</strong>
-                Secara default, aplikasi menghitung massa jenis otomatis berdasarkan spesifikasi produk. Fitur ini
-                berfungsi sebagai alat <strong>Quality Control (QC)</strong>:
+            <li><strong>Density Lock (Gembok Massa Jenis) & QC Reference:</strong>
+                Massa jenis kini berfungsi sebagai <strong>Standard Reference</strong> (Nilai Acuan), bukan penggerak
+                perhitungan dimensi.
                 <ul>
-                    <li><strong>Deteksi Kesalahan Data (Alert):</strong> Saat gembok terbuka (🔓), jika massa jenis yang
-                        dihitung menyimpang lebih dari 10% dari standar (default: <strong>1.15</strong>), kotak input
-                        akan berubah menjadi <strong>merah</strong> dan muncul ikon peringatan (⚠️). Ini menandakan data
-                        produk dari dapur (berat/dimensi) tidak konsisten dengan fisik adonan nyata.</li>
-                    <li><strong>Konsistensi Produksi:</strong> Dengan menekan tombol <strong>Gembok (🔒)</strong>, Anda
-                        mengunci nilai ke standar manual (default: <strong>1.15</strong>). Ini memastikan hasil tombol
-                        "Auto" tetap akurat berdasarkan massa adonan yang Anda inginkan, tanpa terpengaruh oleh data
-                        spesifikasi yang mungkin salah.</li>
+                    <li><strong>Deteksi Data Inconsistency (QC Alert):</strong> Jika spesifikasi produk (Berat/Dimensi)
+                        menghasilkan massa jenis fisik yang aneh (menyimpang >10% dari standar 1.27), kotak akan berubah
+                        menjadi <strong>MERAH</strong> dengan ikon peringatan (⚠️).</li>
+                    <li><strong>Grammage Display:</strong> Tepat di sebelahnya, kolom <strong>Grammage</strong>
+                        menampilkan kepadatan area (g/cm²) yang dihitung dari bobot fisik produk. Ini adalah indikator
+                        ketebalan adonan yang sebenarnya.</li>
                 </ul>
             </li>
             <li><strong>Initial Trim (%):</strong>
@@ -313,9 +317,10 @@
             <li><strong>Gross Weight vs Net Weight:</strong>
                 Tabel per produk kini menampilkan dua jenis berat:
                 <ul>
-                    <li><strong>Gross Weight:</strong> Berat total adonan yang dibutuhkan untuk memotong produk tersebut
-                        (termasuk sisa scrap sesuai pengaturan %).</li>
-                    <li><strong>Net Weight:</strong> Berat bersih fisik produk akhir (Base Weight × Quantity).</li>
+                    <li><strong>Gross Weight:</strong> Berat adonan basah yang dibutuhkan (Area * Grammage * Scrap
+                        Factor). Angka ini yang ditimbang di Mixer.</li>
+                    <li><strong>Net Weight:</strong> Berat teoretis produk akhir sesuai spesifikasi Database (JSON
+                        Source of Truth).</li>
                 </ul>
             </li>
             <li><strong>Visualizer Layout:</strong>
@@ -351,7 +356,8 @@
             <ul>
                 <li><strong>DDT (Desired Dough Temperature):</strong> Suhu adonan akhir harus berada di rentang
                     <strong>22°C - 24.5°C</strong>. Jika suhu >26°C, adonan harus segera didinginkan untuk mencegah
-                    <em>butter leakage</em> saat lamination.</li>
+                    <em>butter leakage</em> saat lamination.
+                </li>
                 <li><strong>Bulk Density:</strong> Mengukur kepadatan blok adonan sebelum masuk ke tahap
                     pendinginan/sheeting.</li>
                 <li><strong>Interpretasi:</strong>
