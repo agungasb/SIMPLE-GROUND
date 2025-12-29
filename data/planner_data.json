@@ -92,7 +92,7 @@
     {
         "id": "p11",
         "name": "Egg Tart bm",
-        "shape": "not define",
+        "shape": "circle",
         "width": 3,
         "length": 42,
         "thickness": 4.2,
@@ -101,7 +101,7 @@
     {
         "id": "p12",
         "name": "Egg Tart ct",
-        "shape": "not define",
+        "shape": "circle",
         "width": 3,
         "length": 42,
         "thickness": 4.2,
@@ -186,7 +186,7 @@
         "width": 3.5,
         "length": 25,
         "thickness": 2.6,
-        "weight": Not define
+        "weight": 100
     },
     {
         "id": "p22",
