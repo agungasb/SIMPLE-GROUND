@@ -232,14 +232,20 @@ function updatePlannerCalculations() {
     // 6. QC Logic: Density Deviation
     const topDisplayDensity = document.getElementById('setting-density');
     if (topDisplayDensity) {
-        // "Standard Density" is what the user typed (reference)
-        // "Implied Density" is what we calculated
-        const standardDensity = parseFloat(topDisplayDensity.value) || plannerSettings.manualDensity;
-
         let impliedDensity = 0;
         if (activeThickness > 0) {
             impliedDensity = impliedGrammage / (activeThickness / 10);
         }
+
+        // If in auto-mode (unlocked), update the display to show what's actually happening physics-wise
+        if (!plannerSettings.isDensityLocked) {
+            topDisplayDensity.value = impliedDensity > 0 ? impliedDensity.toFixed(2) : plannerSettings.manualDensity.toFixed(2);
+        }
+
+        // Benchmark for comparison (Manual Setting or Default 1.27)
+        // If density is locked, we compare against what the user typed.
+        // If density is unlocked, we compare implied vs the standard baseline.
+        const standardDensity = plannerSettings.manualDensity;
 
         // Alert logic: Compare Implied vs Standard
         const warningIcon = document.getElementById('density-warning-icon');
@@ -318,6 +324,9 @@ function updateSettingsFromInputs() {
         plannerSettings.manualDensity = manualDensity;
         plannerSettings.doughDensity = manualDensity;
     }
+    // Note: When unlocked, we intentionally do NOT update plannerSettings.manualDensity
+    // from the input field value, because the input field value in unlocked mode
+    // might be showing the "Implied Density" for alerting purposes.
 
     // Calculate Areal Density (Grammage)
     // Note: Thickness is product-dependent, but we assume uniform thickness for the active batch.
