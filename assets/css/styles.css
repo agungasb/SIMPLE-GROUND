@@ -580,9 +580,8 @@
 
         .field-group {
             display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            align-items: flex-start;
             padding: 5px 0;
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
@@ -591,16 +590,36 @@
             font-size: 13px;
             font-weight: 500;
             color: #000000;
-            flex: 2;
+            width: 100%;
             display: flex;
             align-items: center;
             gap: 6px;
+            text-align: left;
+            margin-bottom: 4px;
         }
 
-        .premium-select,
+        .premium-select {
+            width: 100% !important;
+            max-width: none !important;
+            height: 30px !important;
+            min-height: 30px !important;
+            max-height: 30px !important;
+            flex: none !important;
+            background: rgba(255, 255, 255, 0.8) !important;
+            border: none !important;
+            border-radius: 6px !important;
+            padding: 6px 10px !important;
+            color: #333 !important;
+            font-size: 14px !important;
+            text-align: left !important;
+            outline: none;
+            transition: all 0.3s ease;
+            box-sizing: border-box !important;
+        }
+
         .premium-input {
-            width: auto !important;
-            max-width: 140px !important;
+            width: 100% !important;
+            max-width: none !important;
             height: 30px !important;
             min-height: 30px !important;
             max-height: 30px !important;
@@ -612,13 +631,17 @@
             color: #000000 !important;
             font-size: 12px !important;
             text-align: center !important;
-            appearance: none;
             outline: none;
             transition: all 0.3s ease;
             box-sizing: border-box !important;
         }
 
-        .premium-select:focus,
+        .premium-select:focus {
+            background: rgba(255, 255, 255, 1.0) !important;
+            outline: 2px solid rgba(90, 62, 43, 0.5) !important;
+            outline-offset: -2px !important;
+        }
+
         .premium-input:focus {
             background: rgba(255, 255, 255, 1.0) !important;
             border-color: rgba(90, 62, 43, 0.5) !important;
@@ -627,9 +650,8 @@
 
         .select-wrapper,
         .input-wrapper {
-            flex: 1;
+            width: 100%;
             display: flex;
-            justify-content: flex-end;
             position: relative;
         }
 
@@ -641,16 +663,7 @@
             box-sizing: border-box !important;
         }
 
-        .select-icon {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #666;
-            pointer-events: none;
-            z-index: 10;
-            font-size: 10px;
-        }
+
 
         .premium-scale-button {
             background: #5a3e2b !important;
@@ -667,6 +680,7 @@
             justify-content: center;
             gap: 10px;
             border: none !important;
+            width: 100% !important;
         }
 
         .premium-scale-button:hover {
