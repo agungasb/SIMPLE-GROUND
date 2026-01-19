@@ -337,7 +337,9 @@ function initializeCalculator() {
                     </table>
                 `;
 
-        document.getElementById("result").innerHTML = resultHTML;
+        const resultContainer = document.getElementById("result");
+        document.getElementById("output").innerHTML = resultHTML;
+        resultContainer.style.display = "block";
 
         // Initial calculation of Total Adonan, Loyang, and Trolley for calculator
         const initialGrandTotalPcs = grandTotalDonuts * DONUTS_PER_BOX; // Re-added this line
@@ -1513,4 +1515,77 @@ function toggleCollapse(headerElement) {
             icon.classList.add('fa-chevron-down');
         }
     }
+}
+
+async function downloadResultAsImage() {
+    const resultDiv = document.getElementById('result');
+    const outputDiv = document.getElementById('output');
+    const table = outputDiv.querySelector('table');
+    const shareActions = resultDiv.querySelector('.share-actions');
+
+    if (!table) return;
+
+    // Temporarily hide share actions for the screenshot
+    shareActions.style.visibility = 'hidden';
+
+    try {
+        // Use the table's actual scroll width to ensure every column is captured
+        const canvas = await html2canvas(table, {
+            backgroundColor: '#ffffff',
+            scale: 2,
+            useCORS: true,
+            scrollX: 0,
+            scrollY: 0,
+            width: table.scrollWidth,
+            height: table.scrollHeight,
+            onclone: (clonedDoc) => {
+                // Ensure the cloned table is fully visible in the phantom DOM
+                const clonedTable = clonedDoc.querySelector('#output table');
+                if (clonedTable) {
+                    clonedTable.style.width = table.scrollWidth + 'px';
+                    clonedTable.style.minWidth = 'auto'; // Allow it to follow the width we set
+                }
+            }
+        });
+
+        const image = canvas.toDataURL("image/png");
+        const link = document.createElement('a');
+        link.download = `simple-ground-results-${new Date().getTime()}.png`;
+        link.href = image;
+        link.click();
+    } catch (err) {
+        console.error("Screenshot failed:", err);
+        alert("Gagal menyimpan gambar. Mohon gunakan screenshot manual.");
+    } finally {
+        shareActions.style.visibility = 'visible';
+    }
+}
+
+function copyResultToClipboard() {
+    const table = document.querySelector('#output table');
+    if (!table) return;
+
+    let text = "*Calculation Results - Simple Ground*\n\n";
+    const rows = table.querySelectorAll('tr');
+
+    rows.forEach((row, index) => {
+        const cells = row.querySelectorAll('th, td');
+        let rowText = "";
+        cells.forEach((cell, i) => {
+            let content = cell.innerText.trim();
+            if (index === 0) content = `*${content}*`; // Bold header
+            rowText += content + (i === cells.length - 1 ? "" : " | ");
+        });
+        text += rowText + "\n";
+    });
+
+    navigator.clipboard.writeText(text).then(() => {
+        const copyBtn = document.querySelector('.share-btn.copy');
+        const originalText = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => { copyBtn.innerHTML = originalText; }, 2000);
+    }).catch(err => {
+        console.error("Copy failed:", err);
+        alert("Gagal menyalin teks.");
+    });
 }
