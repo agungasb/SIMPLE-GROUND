@@ -251,6 +251,33 @@
             /* 15% smaller */
             color: #000000;
             text-align: left;
+            overflow-x: auto;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .result::-webkit-scrollbar,
+        #output::-webkit-scrollbar {
+            display: none;
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Hide scrollbar utility */
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+            /* Chrome, Safari and Opera */
         }
 
         /* Toggle Switch Styles */
@@ -332,8 +359,21 @@
         }
 
         #result table {
-            table-layout: fixed;
             width: 100%;
+            min-width: 800px;
+            table-layout: fixed;
+        }
+
+        #result th:first-child,
+        #result td:first-child {
+            width: 75px;
+            text-align: left;
+        }
+
+        #result th:not(:first-child),
+        #result td:not(:first-child) {
+            width: 25px;
+            text-align: center;
         }
 
         #result .adjustment-input {
@@ -357,22 +397,25 @@
         }
 
         /* Specific styling for Settings page table inputs */
+        #donut-score-inputs {
+            overflow-x: auto;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
         #donut-score-inputs table {
-            table-layout: fixed;
-            /* Distribute columns evenly */
             width: 100%;
         }
 
         #donut-score-inputs table th:first-child,
         #donut-score-inputs table td:first-child {
-            width: 40%;
-            /* Allocate more width for the product name */
+            width: 150px;
+            text-align: left;
         }
 
         #donut-score-inputs table th:not(:first-child),
         #donut-score-inputs table td:not(:first-child) {
-            width: 15%;
-            /* Distribute remaining width evenly among outlet columns */
+            width: 50px;
             text-align: center;
         }
 
@@ -581,67 +624,45 @@
         .field-group {
             display: flex;
             flex-direction: column;
+            justify-content: flex-start;
             align-items: flex-start;
-            padding: 5px 0;
+            padding: 10px 0;
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            gap: 8px;
         }
 
         .field-label {
             font-size: 13px;
-            font-weight: 500;
+            font-weight: 600;
             color: #000000;
             width: 100%;
             display: flex;
             align-items: center;
             gap: 6px;
             text-align: left;
-            margin-bottom: 4px;
         }
 
-        .premium-select {
-            width: 100% !important;
-            max-width: none !important;
-            height: 30px !important;
-            min-height: 30px !important;
-            max-height: 30px !important;
-            flex: none !important;
-            background: rgba(255, 255, 255, 0.8) !important;
-            border: none !important;
-            border-radius: 6px !important;
-            padding: 6px 10px !important;
-            color: #333 !important;
-            font-size: 14px !important;
-            text-align: left !important;
-            outline: none;
-            transition: all 0.3s ease;
-            box-sizing: border-box !important;
-        }
-
+        .premium-select,
         .premium-input {
             width: 100% !important;
-            max-width: none !important;
-            height: 30px !important;
-            min-height: 30px !important;
-            max-height: 30px !important;
-            flex: none !important;
+            height: 35px !important;
+            min-height: 35px !important;
+            max-height: 35px !important;
             background: rgba(255, 255, 255, 0.8) !important;
             border: 1px solid rgba(0, 0, 0, 0.1) !important;
             border-radius: 6px !important;
-            padding: 4px 8px !important;
-            color: #000000 !important;
-            font-size: 12px !important;
-            text-align: center !important;
+            padding: 6px 12px !important;
+            color: #333 !important;
+            font-size: 14px !important;
+            text-align: left !important;
+            appearance: auto;
+            /* Show default browser arrow */
             outline: none;
             transition: all 0.3s ease;
             box-sizing: border-box !important;
         }
 
-        .premium-select:focus {
-            background: rgba(255, 255, 255, 1.0) !important;
-            outline: 2px solid rgba(90, 62, 43, 0.5) !important;
-            outline-offset: -2px !important;
-        }
-
+        .premium-select:focus,
         .premium-input:focus {
             background: rgba(255, 255, 255, 1.0) !important;
             border-color: rgba(90, 62, 43, 0.5) !important;
@@ -652,6 +673,7 @@
         .input-wrapper {
             width: 100%;
             display: flex;
+            justify-content: flex-start;
             position: relative;
         }
 
@@ -663,7 +685,7 @@
             box-sizing: border-box !important;
         }
 
-
+        /* Removed select-icon styles as they are no longer needed */
 
         .premium-scale-button {
             background: #5a3e2b !important;
@@ -680,7 +702,6 @@
             justify-content: center;
             gap: 10px;
             border: none !important;
-            width: 100% !important;
         }
 
         .premium-scale-button:hover {

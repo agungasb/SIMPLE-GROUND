@@ -29,173 +29,269 @@
   ],
   "defaultDonutScores": {
     "Donut Taro Coklat": {
-      "Tiban": 3,
+      "Tiban Petra": 3,
+      "Tiban Vitka": 3,
       "GP": 4,
       "MTC": 2,
       "Piayu": 3,
-      "BA": 5
+      "BA": 5,
+      "Panbil": 4,
+      "BCS": 3,
+      "DC": 2
     },
     "Donut Taro Putih": {
-      "Tiban": 2,
+      "Tiban Petra": 2,
+      "Tiban Vitka": 2,
       "GP": 3,
       "MTC": 4,
       "Piayu": 2,
-      "BA": 3
+      "BA": 3,
+      "Panbil": 2,
+      "BCS": 3,
+      "DC": 4
     },
     "Donut Greentea Coklat": {
-      "Tiban": 4,
+      "Tiban Petra": 4,
+      "Tiban Vitka": 4,
       "GP": 2,
       "MTC": 3,
       "Piayu": 4,
-      "BA": 2
+      "BA": 2,
+      "Panbil": 3,
+      "BCS": 4,
+      "DC": 5
     },
     "Donut Greentea Batang": {
-      "Tiban": 3,
+      "Tiban Petra": 3,
+      "Tiban Vitka": 3,
       "GP": 3,
       "MTC": 3,
       "Piayu": 3,
-      "BA": 3
+      "BA": 3,
+      "Panbil": 2,
+      "BCS": 3,
+      "DC": 4
     },
     "Donut Ovaltine": {
-      "Tiban": 5,
+      "Tiban Petra": 5,
+      "Tiban Vitka": 5,
       "GP": 4,
       "MTC": 5,
       "Piayu": 4,
-      "BA": 5
+      "BA": 5,
+      "Panbil": 4,
+      "BCS": 3,
+      "DC": 2
     },
     "Donut Strawberry": {
-      "Tiban": 2,
+      "Tiban Petra": 2,
+      "Tiban Vitka": 2,
       "GP": 2,
       "MTC": 2,
       "Piayu": 2,
-      "BA": 2
+      "BA": 2,
+      "Panbil": 2,
+      "BCS": 3,
+      "DC": 4
     },
     "Donut Ice Sugar": {
-      "Tiban": 1,
+      "Tiban Petra": 1,
+      "Tiban Vitka": 1,
       "GP": 1,
       "MTC": 1,
       "Piayu": 1,
-      "BA": 1
+      "BA": 1,
+      "Panbil": 2,
+      "BCS": 3,
+      "DC": 4
     },
     "Donut Cappucino": {
-      "Tiban": 4,
+      "Tiban Petra": 4,
+      "Tiban Vitka": 4,
       "GP": 5,
       "MTC": 4,
       "Piayu": 5,
-      "BA": 4
+      "BA": 4,
+      "Panbil": 3,
+      "BCS": 4,
+      "DC": 5
     },
     "Donut Classic Cerres": {
-      "Tiban": 3,
+      "Tiban Petra": 3,
+      "Tiban Vitka": 3,
       "GP": 3,
       "MTC": 3,
       "Piayu": 3,
-      "BA": 3
+      "BA": 3,
+      "Panbil": 2,
+      "BCS": 3,
+      "DC": 4
     },
     "Donut Ceres": {
-      "Tiban": 2,
+      "Tiban Petra": 2,
+      "Tiban Vitka": 2,
       "GP": 2,
       "MTC": 2,
       "Piayu": 2,
-      "BA": 2
+      "BA": 2,
+      "Panbil": 2,
+      "BCS": 3,
+      "DC": 4
     },
     "Donut Ceres Coklat": {
-      "Tiban": 3,
+      "Tiban Petra": 3,
+      "Tiban Vitka": 3,
       "GP": 4,
       "MTC": 3,
       "Piayu": 4,
-      "BA": 3
+      "BA": 3,
+      "Panbil": 2,
+      "BCS": 3,
+      "DC": 4
     },
     "Donut Coklat": {
-      "Tiban": 5,
+      "Tiban Petra": 5,
+      "Tiban Vitka": 5,
       "GP": 5,
       "MTC": 5,
       "Piayu": 5,
-      "BA": 5
+      "BA": 5,
+      "Panbil": 4,
+      "BCS": 3,
+      "DC": 2
     },
     "Donut Avocado": {
-      "Tiban": 4,
+      "Tiban Petra": 4,
+      "Tiban Vitka": 4,
       "GP": 3,
       "MTC": 4,
       "Piayu": 3,
-      "BA": 4
+      "BA": 4,
+      "Panbil": 3,
+      "BCS": 4,
+      "DC": 5
     },
     "Donut Tiramisu": {
-      "Tiban": 3,
+      "Tiban Petra": 3,
+      "Tiban Vitka": 3,
       "GP": 4,
       "MTC": 3,
       "Piayu": 4,
-      "BA": 3
+      "BA": 3,
+      "Panbil": 2,
+      "BCS": 3,
+      "DC": 4
     },
     "Donut Peanut": {
-      "Tiban": 2,
+      "Tiban Petra": 2,
+      "Tiban Vitka": 2,
       "GP": 3,
       "MTC": 2,
       "Piayu": 3,
-      "BA": 2
+      "BA": 2,
+      "Panbil": 2,
+      "BCS": 3,
+      "DC": 4
     },
     "Donut Oreo": {
-      "Tiban": 4,
+      "Tiban Petra": 4,
+      "Tiban Vitka": 4,
       "GP": 4,
       "MTC": 4,
       "Piayu": 4,
-      "BA": 4
+      "BA": 4,
+      "Panbil": 3,
+      "BCS": 4,
+      "DC": 5
     },
     "Donut Almond": {
-      "Tiban": 3,
+      "Tiban Petra": 3,
+      "Tiban Vitka": 3,
       "GP": 2,
       "MTC": 3,
       "Piayu": 2,
-      "BA": 3
+      "BA": 3,
+      "Panbil": 2,
+      "BCS": 3,
+      "DC": 4
     },
     "Donut Lotus": {
-      "Tiban": 5,
+      "Tiban Petra": 5,
+      "Tiban Vitka": 5,
       "GP": 5,
       "MTC": 5,
       "Piayu": 5,
-      "BA": 5
+      "BA": 5,
+      "Panbil": 4,
+      "BCS": 3,
+      "DC": 2
     },
     "Donut Caramel": {
-      "Tiban": 3,
+      "Tiban Petra": 3,
+      "Tiban Vitka": 3,
       "GP": 3,
       "MTC": 3,
       "Piayu": 3,
-      "BA": 3
+      "BA": 3,
+      "Panbil": 2,
+      "BCS": 3,
+      "DC": 4
     },
     "Bomboloni Avocado": {
-      "Tiban": 4,
+      "Tiban Petra": 4,
+      "Tiban Vitka": 4,
       "GP": 3,
       "MTC": 4,
       "Piayu": 3,
-      "BA": 4
+      "BA": 4,
+      "Panbil": 3,
+      "BCS": 4,
+      "DC": 5
     },
     "Bomboloni Tiramisu": {
-      "Tiban": 3,
+      "Tiban Petra": 3,
+      "Tiban Vitka": 3,
       "GP": 4,
       "MTC": 3,
       "Piayu": 4,
-      "BA": 3
+      "BA": 3,
+      "Panbil": 2,
+      "BCS": 3,
+      "DC": 4
     },
     "Bomboloni Taro": {
-      "Tiban": 2,
+      "Tiban Petra": 2,
+      "Tiban Vitka": 2,
       "GP": 3,
       "MTC": 4,
       "Piayu": 2,
-      "BA": 3
+      "BA": 3,
+      "Panbil": 2,
+      "BCS": 3,
+      "DC": 4
     },
     "Bomboloni Strawberry": {
-      "Tiban": 2,
+      "Tiban Petra": 2,
+      "Tiban Vitka": 2,
       "GP": 2,
       "MTC": 2,
       "Piayu": 2,
-      "BA": 2
+      "BA": 2,
+      "Panbil": 2,
+      "BCS": 3,
+      "DC": 4
     }
   },
   "outlets": [
-    "Tiban",
+    "Tiban Petra",
+    "Tiban Vitka",
     "GP",
     "MTC",
     "Piayu",
-    "BA"
+    "BA",
+    "Panbil",
+    "BCS",
+    "DC"
   ],
   "constants": {
     "DONUTS_PER_BOX": 9,

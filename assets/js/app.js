@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Calculator Page Script
 function initializeCalculator() {
     const items = [
-        "Tiban", "GP", "MTC", "Piayu", "BA"
+        "Tiban Petra", "Tiban Vitka", "GP", "MTC", "Piayu", "BA", "Panbil", "BCS", "DC"
     ];
 
     const inputFields = document.getElementById("inputFields");
