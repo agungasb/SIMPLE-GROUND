@@ -388,8 +388,91 @@
         }
 
         #result .adjustment-input:focus {
-            outline: none;
-            box-shadow: 0 0 5px rgba(90, 62, 43, 0.5);
+            outline: 2px solid #f9e1c0;
+            box-shadow: 0 0 5px rgba(249, 225, 192, 0.5);
+        }
+
+        .mode-indicator {
+            font-size: 12px;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        /* Compact Refined Display Toggle Switch */
+        .display-toggle-switch {
+            position: relative;
+            display: inline-flex;
+            width: 100px;
+            height: 28px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 14px;
+            padding: 2px;
+            cursor: pointer;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+            align-items: center;
+        }
+
+        .display-toggle-switch input {
+            display: none;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 47px;
+            height: 24px;
+            background: #f9e1c0;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        input:checked+.toggle-slider {
+            transform: translateX(49px);
+            background: #5a3e2b;
+        }
+
+        .toggle-option {
+            flex: 1;
+            text-align: center;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            z-index: 2;
+            color: #5a3e2b;
+            transition: color 0.3s ease;
+            pointer-events: none;
+        }
+
+        input:checked~.toggle-option.left {
+            color: #5a3e2b;
+        }
+
+        input:not(:checked)~.toggle-option.right {
+            color: #5a3e2b;
+        }
+
+        /* Active option colors */
+        input:not(:checked)~.toggle-option.left {
+            color: #333;
+        }
+
+        input:checked~.toggle-option.right {
+            color: #f9e1c0;
+        }
+
+        input:checked~.toggle-slider {
+            background: #5a3e2b;
+        }
+
+        .toggle-container span {
+            font-family: 'Poppins', sans-serif;
+            opacity: 0.8;
         }
 
         th {

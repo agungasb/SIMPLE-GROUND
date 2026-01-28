@@ -18,6 +18,60 @@ let rawCroissantProducts = []; // Global variable for raw croissant products
 // Global variable to keep track of the active department
 let activeDepartment = 'simple-ground'; // Default active department
 
+// Global variable to keep track of display mode (false = boxes, true = PCS)
+let displayModePCS = false;
+
+// Function to set display mode and update UI (global scope)
+function setDisplayMode(isPCS) {
+    displayModePCS = isPCS;
+    updateDisplayMode();
+}
+
+// Function to update display mode UI (global scope)
+function updateDisplayMode() {
+    // Only run if result table exists
+    if (!document.getElementById('result') || document.getElementById('result').style.display === 'none') {
+        return;
+    }
+
+    // Update all input field values based on current display mode
+    if (donutProducts && outlets) {
+        donutProducts.forEach(product => {
+            outlets.forEach(outlet => {
+                const inputElement = document.querySelector(`.adjustment-input[data-product="${product}"][data-outlet="${outlet}"]`);
+                if (inputElement && product !== BOMBOLONI_KARAKTER_PRODUCT_NAME) {
+                    // Get current value in boxes from internal calculation
+                    const currentBoxes = parseFloat(inputElement.getAttribute('data-boxes')) || 0;
+                    const newValue = displayModePCS ? (currentBoxes * DONUTS_PER_BOX).toFixed(0) : currentBoxes.toFixed(0);
+                    inputElement.value = newValue;
+                }
+            });
+        });
+
+        // Update mode indicator in table header
+        document.querySelectorAll('.mode-indicator').forEach(el => {
+            el.remove();
+        });
+
+        // Add mode indicator to table header
+        const tableHeader = document.querySelector('#result table thead tr');
+        if (tableHeader) {
+            // Remove existing mode indicator if present
+            const existingIndicator = tableHeader.querySelector('.mode-indicator');
+            if (existingIndicator) {
+                existingIndicator.remove();
+            }
+
+            const modeIndicator = document.createElement('span');
+            modeIndicator.className = 'mode-indicator';
+            modeIndicator.textContent = displayModePCS ? ' (PCS)' : ' (Boxes)';
+            tableHeader.querySelector('th:last-child').appendChild(modeIndicator);
+        }
+
+
+    }
+}
+
 // Department Selection Function
 function selectDepartment(departmentId) {
     activeDepartment = departmentId;
@@ -268,13 +322,14 @@ function initializeCalculator() {
 
         // Display results
         let resultHTML = `<h2>Donut Distribution</h2>`;
+
         resultHTML += `
                     <table>
                         <thead>
                             <tr>
                                 <th>Donut Product</th>
                                 ${outlets.map(outlet => `<th>${outlet}</th>`).join("")}
-                                <th>Ttl</th>
+                                <th>Ttl<span class="mode-indicator">${displayModePCS ? ' (PCS)' : ' (Boxes)'}</span></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -286,12 +341,13 @@ function initializeCalculator() {
             outlets.forEach(outlet => {
                 const value = distributionResults[outlet][product] || 0;
                 let inputHtml = '';
+                const displayValue = getInputValue(value, product, outlet);
+
                 if (product === BOMBOLONI_KARAKTER_PRODUCT_NAME) {
-                    // Display Bomboloni Karakter in pieces
-                    const fixedPcs = (value * DONUTS_PER_BOX).toFixed(0);
-                    inputHtml = `<input type="number" class="adjustment-input" data-product="${product}" data-outlet="${outlet}" value="${fixedPcs}" min="0" disabled>`;
+                    // Bomboloni Karakter is always disabled and shows in PCS
+                    inputHtml = `<input type="number" class="adjustment-input" data-product="${product}" data-outlet="${outlet}" value="${displayValue}" min="0" disabled data-boxes="${value}">`;
                 } else {
-                    inputHtml = `<input type="number" class="adjustment-input" data-product="${product}" data-outlet="${outlet}" value="${value.toFixed(0)}" min="0">`;
+                    inputHtml = `<input type="number" class="adjustment-input" data-product="${product}" data-outlet="${outlet}" value="${displayValue}" min="0" data-boxes="${value}">`;
                 }
                 resultHTML += `<td>${inputHtml}</td>`;
                 productTotalBoxes += value;
@@ -375,10 +431,90 @@ function initializeCalculator() {
         document.getElementById("total-trolley-calculator").textContent = `${initialTotalTrolley.toFixed(1)} trolley`;
 
 
+        // Initialize state of static display mode toggle
+        const staticToggle = document.getElementById('displayModeToggle');
+        if (staticToggle) {
+            staticToggle.checked = displayModePCS;
+
+            // Only add the listener once (outside the click handler is better, but this works for now if we ensure no double-binding)
+            // Actually, we should probably set up the listener in a more global init, 
+            // but let's just make sure we don't duplicate it.
+            if (!staticToggle.dataset.listener) {
+                staticToggle.addEventListener('change', function () {
+                    displayModePCS = this.checked;
+                    updateDisplayMode();
+                    updateTotals();
+                });
+                staticToggle.dataset.listener = 'true';
+            }
+        }
+
         // Add event listeners for dynamic adjustments
         document.querySelectorAll('.adjustment-input').forEach(input => {
             input.addEventListener('input', updateTotals);
+
+            // Add input validation for minimum values
+            input.addEventListener('change', function () {
+                const value = parseFloat(this.value) || 0;
+                const minValue = 0;
+
+                if (value < minValue) {
+                    this.value = minValue;
+                    updateTotals();
+                } else {
+                    // Ensure value is rounded appropriately based on mode
+                    if (displayModePCS) {
+                        // PCS mode - round to whole numbers
+                        this.value = Math.round(value);
+                    } else {
+                        // Boxes mode - allow decimal places
+                        this.value = Math.max(0, parseFloat(value) || 0);
+                    }
+                    updateTotals();
+                }
+            });
         });
+
+
+
+        // Helper function to get display value based on mode
+        function getDisplayValue(boxes, product, outlet) {
+            if (displayModePCS) {
+                if (product === BOMBOLONI_KARAKTER_PRODUCT_NAME) {
+                    // Bomboloni Karakter always shows in PCS
+                    const bomboloniKarakterFixedAmounts = JSON.parse(localStorage.getItem('bomboloniKarakterFixedAmounts')) || {};
+                    return (bomboloniKarakterFixedAmounts[outlet] || 0).toFixed(0);
+                } else {
+                    return (boxes * DONUTS_PER_BOX).toFixed(0);
+                }
+            } else {
+                // Boxes mode
+                if (product === BOMBOLONI_KARAKTER_PRODUCT_NAME) {
+                    // Bomboloni Karakter shows in PCS even in boxes mode
+                    const bomboloniKarakterFixedAmounts = JSON.parse(localStorage.getItem('bomboloniKarakterFixedAmounts')) || {};
+                    return (bomboloniKarakterFixedAmounts[outlet] || 0).toFixed(0);
+                } else {
+                    return boxes.toFixed(0);
+                }
+            }
+        }
+
+        // Helper function to get input value based on mode
+        function getInputValue(boxes, product, outlet) {
+            if (product === BOMBOLONI_KARAKTER_PRODUCT_NAME) {
+                // Bomboloni Karakter always shows in PCS
+                const bomboloniKarakterFixedAmounts = JSON.parse(localStorage.getItem('bomboloniKarakterFixedAmounts')) || {};
+                return (bomboloniKarakterFixedAmounts[outlet] || 0).toFixed(0);
+            } else {
+                if (displayModePCS) {
+                    return (boxes * DONUTS_PER_BOX).toFixed(0);
+                } else {
+                    return boxes.toFixed(0);
+                }
+            }
+        }
+
+
 
         function updateTotals() {
             let newTotalBoxesPerOutlet = {};
@@ -405,8 +541,18 @@ function initializeCalculator() {
                         const bomboloniKarakterFixedAmounts = JSON.parse(localStorage.getItem('bomboloniKarakterFixedAmounts')) || {};
                         adjustedBoxes = (bomboloniKarakterFixedAmounts[outlet] || 0) / DONUTS_PER_BOX; // NO rounding here
                     } else {
-                        adjustedBoxes = parseFloat(inputElement.value) || 0;
+                        // Convert input value to boxes based on display mode
+                        const inputValue = parseFloat(inputElement.value) || 0;
+                        if (displayModePCS) {
+                            // Input is in PCS, convert to boxes
+                            adjustedBoxes = inputValue / DONUTS_PER_BOX;
+                        } else {
+                            // Input is already in boxes
+                            adjustedBoxes = inputValue;
+                        }
                     }
+                    // Store the box value in data attribute
+                    inputElement.setAttribute('data-boxes', adjustedBoxes);
                     newTotalBoxesPerOutlet[outlet] += Math.max(0, adjustedBoxes);
                     newTotalPcsPerOutlet[outlet] += Math.max(0, adjustedBoxes) * DONUTS_PER_BOX;
                 });
@@ -429,11 +575,14 @@ function initializeCalculator() {
                         const bomboloniKarakterFixedAmounts = JSON.parse(localStorage.getItem('bomboloniKarakterFixedAmounts')) || {};
                         value = (bomboloniKarakterFixedAmounts[outlet] || 0) / DONUTS_PER_BOX; // NO rounding here
                     } else {
-                        value = parseFloat(inputElement.value) || 0;
+                        // Use the stored box value from data attribute
+                        value = parseFloat(inputElement.getAttribute('data-boxes')) || 0;
                     }
                     productTotalBoxes += value;
                 });
-                document.querySelector(`.product-total-boxes[data-product="${product}"]`).textContent = productTotalBoxes.toFixed(0);
+                // Display total in current mode
+                const displayTotal = displayModePCS ? (productTotalBoxes * DONUTS_PER_BOX).toFixed(0) : productTotalBoxes.toFixed(0);
+                document.querySelector(`.product-total-boxes[data-product="${product}"]`).textContent = displayTotal;
             });
 
             // Calculate and update Total Adonan dynamically
@@ -449,7 +598,8 @@ function initializeCalculator() {
                         const bomboloniKarakterFixedAmounts = JSON.parse(localStorage.getItem('bomboloniKarakterFixedAmounts')) || {};
                         boxes = (bomboloniKarakterFixedAmounts[outlet] || 0) / DONUTS_PER_BOX; // NO rounding here
                     } else {
-                        boxes = parseFloat(inputElement.value) || 0;
+                        // Use the stored box value from data attribute
+                        boxes = parseFloat(inputElement.getAttribute('data-boxes')) || 0;
                     }
                     const pcs = boxes * DONUTS_PER_BOX;
                     if (product === BOMBOLONI_KARAKTER_PRODUCT_NAME) {
@@ -468,17 +618,21 @@ function initializeCalculator() {
                 newTotalAdonan = currentGrandTotalWeight / baseWeightCalculator;
             }
 
-            // Update displayed totals for boxes
+            // Update displayed totals based on current mode
             outlets.forEach(outlet => {
-                document.querySelector(`.total-donuts-outlet[data-outlet="${outlet}"]`).textContent = newTotalBoxesPerOutlet[outlet].toFixed(1);
+                const boxValue = newTotalBoxesPerOutlet[outlet].toFixed(1);
+                const pcsValue = Math.round(newTotalPcsPerOutlet[outlet]).toFixed(0);
+                document.querySelector(`.total-donuts-outlet[data-outlet="${outlet}"]`).textContent = displayModePCS ? pcsValue : boxValue;
             });
-            document.getElementById("grand-total-donuts").textContent = newGrandTotalBoxes.toFixed(1);
+            document.getElementById("grand-total-donuts").textContent = displayModePCS ? Math.round(newGrandTotalPcs).toFixed(0) : newGrandTotalBoxes.toFixed(1);
 
             // Update displayed totals for pcs
             outlets.forEach(outlet => {
-                document.querySelector(`.total-pcs-outlet[data-outlet="${outlet}"]`).textContent = Math.round(newTotalPcsPerOutlet[outlet]).toFixed(0);
+                const pcsValue = Math.round(newTotalPcsPerOutlet[outlet]).toFixed(0);
+                const boxValue = newTotalBoxesPerOutlet[outlet].toFixed(1);
+                document.querySelector(`.total-pcs-outlet[data-outlet="${outlet}"]`).textContent = displayModePCS ? boxValue : pcsValue;
             });
-            document.getElementById("grand-total-pcs").textContent = Math.round(newGrandTotalPcs).toFixed(0);
+            document.getElementById("grand-total-pcs").textContent = displayModePCS ? newGrandTotalBoxes.toFixed(1) : Math.round(newGrandTotalPcs).toFixed(0);
 
             // Update displayed Total Adonan
             document.getElementById("total-adonan-calculator").textContent = `${newTotalAdonan.toFixed(1)} resep`;

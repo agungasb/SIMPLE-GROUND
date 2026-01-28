@@ -64,14 +64,27 @@
             <button id="calculate">CALCULATE</button>
             <div class="result" id="result" style="display: none;">
                 <div class="share-actions"
-                    style="display: flex; gap: 8px; margin-bottom: 12px; justify-content: flex-end;">
-                    <button onclick="copyResultToClipboard()" class="share-btn copy" title="Copy as Text for WhatsApp">
-                        <i class="fas fa-copy"></i> Copy
-                    </button>
-                    <button onclick="downloadResultAsImage()" class="share-btn download"
-                        title="Save as Image for Gallery">
-                        <i class="fas fa-image"></i> Save
-                    </button>
+                    style="display: flex; gap: 8px; margin-bottom: 12px; justify-content: space-between; align-items: center;">
+                    <div class="toggle-container" style="display: flex; align-items: center; gap: 10px;">
+                        <span
+                            style="font-size: 11px; font-weight: 600; color: #333; text-transform: uppercase; letter-spacing: 0.5px;">Display:</span>
+                        <label class="display-toggle-switch">
+                            <input type="checkbox" id="displayModeToggle">
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-option left">Boxes</span>
+                            <span class="toggle-option right">PCS</span>
+                        </label>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <button onclick="copyResultToClipboard()" class="share-btn copy"
+                            title="Copy as Text for WhatsApp">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                        <button onclick="downloadResultAsImage()" class="share-btn download"
+                            title="Save as Image for Gallery">
+                            <i class="fas fa-image"></i> Save
+                        </button>
+                    </div>
                 </div>
                 <div id="output"></div>
             </div>
