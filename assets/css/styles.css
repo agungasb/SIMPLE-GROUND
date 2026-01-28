@@ -366,7 +366,7 @@
 
         #result th:first-child,
         #result td:first-child {
-            width: 101px;
+            width: 80px;
             /* Reduced for better proportion */
             text-align: left;
             position: sticky;
